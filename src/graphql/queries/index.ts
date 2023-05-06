@@ -45,6 +45,9 @@ export const LOGIN_MUTATION = gql`
        password: $password
     }) {
       token
+      email
+      firstName
+      lastName
     }
   }
 `;

@@ -9,7 +9,7 @@ export enum SelectedPage {
   NotFound = "notfound",
 }
 
-export interface BenefitType {
+export interface PackageType {
   icon: JSX.Element;
   title: string;
   description: string;
@@ -19,6 +19,13 @@ export interface ClassType {
   name: string;
   description?: string;
   url: string;
+}
+
+export interface UserType {
+  email: string
+  token: string
+  firstName: string
+  lastName: string
 }
 
 

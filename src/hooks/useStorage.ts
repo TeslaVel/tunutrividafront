@@ -1,7 +1,13 @@
 import { useState } from 'react';
+interface User {
+  email: string
+  token: string
+  first_name: string
+  last_name: string
+}
 
 export function useStorage (key: string, initialValue: null){
-  const getStorage = (): string | null => {
+  const getStorage = (): User | null => {
     // console.log('buscando token del storage')
     let val = null;
     try {
@@ -14,16 +20,17 @@ export function useStorage (key: string, initialValue: null){
     }
     return val
   }
-  const [token, setToken] = useState<string | null>(() => getStorage());
+  const [userData, setUser] = useState<User | null>(() => getStorage());
 
-  const setStorage = (newValue: string | null): void => {
+  const setStorage = (newValue: User | null): void => {
+    console.log('guardando', newValue)
     try {
-        window.localStorage.setItem(key, JSON.stringify(newValue))
-      setToken(newValue);
+      window.localStorage.setItem(key, JSON.stringify(newValue))
+      setUser(newValue);
     } catch (e) {
-      setToken(initialValue);
+      setUser(initialValue);
     }
   }
 
-  return {token, setStorage};
+  return {userData, setStorage};
 }

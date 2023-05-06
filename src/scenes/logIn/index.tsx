@@ -18,7 +18,7 @@ const LogIn = ({ setSelectedPage }: Props) => {
   useEffect(() =>{
     if ( data && data?.createAuth ) {
       console.log('createAuth si hay data', data.createAuth.token);
-      storeToken(data.createAuth.token);
+      storeToken(data.createAuth);
     }
   }, [data?.createAuth]);
 

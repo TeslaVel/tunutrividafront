@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AuthProvider } from '@/AuthProviderManager';
 import AppRoutes from "@/AppRoutes";
 import { SelectedPage } from "@/shared/types";

@@ -14,7 +14,7 @@ type Props = {
   setSelectedPage: (value: SelectedPage) => void;
 };
 
-const Benefit = ({ icon, title, description, setSelectedPage }: Props) => {
+const Package = ({ icon, title, description, setSelectedPage }: Props) => {
   return (
     <motion.div
       variants={childVariant}
@@ -39,4 +39,4 @@ const Benefit = ({ icon, title, description, setSelectedPage }: Props) => {
   );
 };
 
-export default Benefit;
+export default Package;

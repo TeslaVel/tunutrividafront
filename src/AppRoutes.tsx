@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect, Suspense } from 'react';
-import Navbar from "@/scenes/navbar";
+import Menu from "@/components/menu";
 import ProtectedRoute from '@/ProtectedRoute';
 import Profile from '@/pages/Profile';
 import NotFound from '@/pages/NotFound';
@@ -35,33 +35,38 @@ export const AppRoutes = ({ selectedPage, setSelectedPage }: Props) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const isLogged = !(userToken == null || userToken.length < 1)
+  const isLogged = !(userToken == null || userToken.token.length < 1)
 
   return (
     <>
       <Suspense fallback={<div />}>
         <BrowserRouter>
-          <Navbar
-            isLogged={isLogged}
-            isTopOfPage={isTopOfPage}
-            selectedPage={selectedPage}
-            setSelectedPage={setSelectedPage}
-          />
-          <Routes>
-            <Route element={<ProtectedRoute isLogged={isLogged} redirectPath="/profile" />}>
-              <Route index path="/" element={
-                <Landing selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
-              }/>
-            </Route>
+          <div className={`${isLogged ? 'flex h-full' : ''}`}>
+            <Menu
+              isLogged={isLogged}
+              isTopOfPage={isTopOfPage}
+              selectedPage={selectedPage}
+              setSelectedPage={setSelectedPage}
+            />
 
-            <Route element={<ProtectedRoute isLogged={!isLogged} redirectPath="/" />}>
-              <Route path="/profile" element={<Profile  setSelectedPage={setSelectedPage} />} />
-            </Route>
+            <div className={`${isLogged ? 'flex-1' : ''}`}>
+              <Routes>
+                <Route element={<ProtectedRoute isLogged={isLogged} redirectPath="/profile" />}>
+                  <Route index path="/" element={
+                    <Landing selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
+                  }/>
+                </Route>
 
-            <Route element={<ProtectedRoute isLogged={!isLogged} redirectPath="/" />}>
-              <Route path='*' element={<NotFound setSelectedPage={setSelectedPage} />} />
-            </Route>
-          </Routes>
+                <Route element={<ProtectedRoute isLogged={!isLogged} redirectPath="/" />}>
+                  <Route path="/profile" element={<Profile  setSelectedPage={setSelectedPage} />} />
+                </Route>
+
+                <Route element={<ProtectedRoute isLogged={!isLogged} redirectPath="/" />}>
+                  <Route path='*' element={<NotFound setSelectedPage={setSelectedPage} />} />
+                </Route>
+              </Routes>
+            </div>
+          </div>
         </BrowserRouter >
       </Suspense>
     </>

@@ -36,7 +36,7 @@ export const CONTACT_US_MUTATION = gql`
 `;
 
 export const LOGIN_MUTATION = gql`
-  mutation Auth(
+  mutation AuthMutation(
   $email: String!,
   $password: String!
   ) {

@@ -8,7 +8,18 @@ import { NavLink } from "react-router-dom";
 import { Colors } from '@/shared/types'
 import { AuthContext } from '@/AuthProviderManager';
 
-const Sidebar = () => {
+type Props = {
+  selectedPage: SelectedPage;
+}
+
+
+const optionsForSidebar = [
+  {label: 'Dashboard', value: 'dashboard'},
+  {label: 'Appointments', value: 'appointments'},
+  {label: 'Chat', value: 'chat'}
+];
+
+const Sidebar = ({selectedPage}: Props) => {
   const [expanded, setExpanded] = useState<boolean>(true);
   const [elementVisible, setElementVisible] = useState<boolean>(true);
   const { userToken, deleteToken } = useContext(AuthContext);
@@ -21,7 +32,6 @@ const Sidebar = () => {
   const mostrarElementos = () => {
     if (expanded) setElementVisible(true)
   }
-
 
   return (
     <div
@@ -39,21 +49,18 @@ const Sidebar = () => {
         }
       </div>
       <div className={`flex-1 flex flex-col justify-start ${ expanded ? 'px-4 py-3 ' : 'px-1 py-3 items-center'}`}>
-        <NavLink
-          to="/dashboard"
-          className={`h-8 mt-3 flex items-center rounded-lg hover:bg-primary-500 ${expanded ? 'px-4' : 'px-1'}`}
-        >
-          <Calendar />
-          { elementVisible && <span className="ml-2">Dashboard</span> }
-        </NavLink>
 
-        <NavLink
-          to="/calendar"
-          className={`h-8 mt-3 flex items-center rounded-lg hover:bg-primary-500 ${expanded ? 'px-4' : 'px-1'}`}
-        >
-          <Calendar />
-          { elementVisible && <span className="ml-2">Entries</span> }
-        </NavLink>
+        {optionsForSidebar.map((opt: { label: string; value: string }, index: number) => (
+          <NavLink
+            key={`sidebar-option-${index}`}
+            to={`/${opt.value}`}
+            className={`h-8 mt-3 flex items-center rounded-lg hover:bg-primary-500 ${expanded ? 'px-4' : 'px-1'}
+            ${selectedPage === opt.value ? 'bg-primary-500' : ''}`}
+          >
+            <Calendar />
+            {elementVisible && <span className="ml-2">{opt.label}</span>}
+          </NavLink>
+        ))}
 
         <span className={`h-8 mt-3 flex items-center rounded-lg hover:bg-primary-500 cursor-pointer ${expanded ? 'px-4' : 'px-1'}`}>
           <button className="flex" onClick={() => deleteToken()}>

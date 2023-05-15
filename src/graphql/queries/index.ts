@@ -48,6 +48,7 @@ export const LOGIN_MUTATION = gql`
       email
       firstName
       lastName
+      dietitianId
     }
   }
 `;

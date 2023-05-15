@@ -5,8 +5,9 @@ export enum SelectedPage {
   Contactanos = "contactanos",
   LogIn = "login",
   Landing = "landing",
-  Profile = "profile",
+  Dashboard = "dashboard",
   NotFound = "notfound",
+  Appointments = "appointments",
 }
 
 export interface PackageType {

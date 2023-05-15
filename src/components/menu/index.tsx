@@ -12,7 +12,7 @@ type Props = {
 const Menu = ({isLogged, isTopOfPage, selectedPage, setSelectedPage}: Props) => {
   return (
     isLogged
-    ? <Sidebar />
+    ? <Sidebar selectedPage={selectedPage} />
     : <Navbar
       isLogged={isLogged}
       isTopOfPage={isTopOfPage}

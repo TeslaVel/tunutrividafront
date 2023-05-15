@@ -1,7 +1,8 @@
 import { useContext, useState, useEffect, Suspense } from 'react';
 import Menu from "@/components/menu";
 import ProtectedRoute from '@/ProtectedRoute';
-import Profile from '@/pages/Profile';
+import Dashboard from '@/pages/Dashboard';
+import Appointments from '@/pages/Appointments';
 import NotFound from '@/pages/NotFound';
 
 import {
@@ -27,7 +28,6 @@ export const AppRoutes = ({ selectedPage, setSelectedPage }: Props) => {
     const handleScroll = () => {
       if (window.scrollY === 0) {
         setIsTopOfPage(true);
-        setSelectedPage(SelectedPage.Landing);
       }
       if (window.scrollY !== 0) setIsTopOfPage(false);
     };
@@ -51,14 +51,23 @@ export const AppRoutes = ({ selectedPage, setSelectedPage }: Props) => {
 
             <div className={`${isLogged ? 'flex-1' : ''}`}>
               <Routes>
-                <Route element={<ProtectedRoute isLogged={isLogged} redirectPath="/profile" />}>
+                <Route element={<ProtectedRoute isLogged={isLogged} redirectPath="/dashboard" />}>
                   <Route index path="/" element={
                     <Landing selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
                   }/>
                 </Route>
 
                 <Route element={<ProtectedRoute isLogged={!isLogged} redirectPath="/" />}>
-                  <Route path="/profile" element={<Profile  setSelectedPage={setSelectedPage} />} />
+                  <Route path="/dashboard" element={
+                    <Dashboard
+                      selectedPage={selectedPage}
+                      setSelectedPage={setSelectedPage}
+                      dietitian_id={userToken?.dietitianId} />
+                  }/>
+
+                  <Route path="/appointments" element={
+                    <Appointments setSelectedPage={setSelectedPage}/>
+                  }/>
                 </Route>
 
                 <Route element={<ProtectedRoute isLogged={!isLogged} redirectPath="/" />}>

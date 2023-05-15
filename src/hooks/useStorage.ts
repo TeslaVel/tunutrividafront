@@ -4,6 +4,7 @@ interface User {
   token: string
   first_name: string
   last_name: string
+  dietitian_id: string
 }
 
 export function useStorage (key: string, initialValue: null){

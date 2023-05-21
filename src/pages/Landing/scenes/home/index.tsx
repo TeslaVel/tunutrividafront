@@ -66,7 +66,7 @@ const Home = ({ setSelectedPage }: Props) => {
               Join Now
             </ActionButton>
             <AnchorLink
-              className="text-sm font-bold text-primary-500 underline hover:text-secondary-500"
+              className="text-sm font-bold text-primary-500 underline hover:text-primary-300"
               onClick={() => setSelectedPage(SelectedPage.Contactanos)}
               href={`#${SelectedPage.Contactanos}`}
             >
@@ -86,7 +86,7 @@ const Home = ({ setSelectedPage }: Props) => {
 
       {/* SPONSORS */}
       {isAboveMediumScreens && (
-        <div className="h-[150px] w-full bg-primary-100 py-10">
+        <div className="h-[150px] w-full bg-primary-50 py-10">
           <div className="mx-auto w-5/6">
             <div className="flex w-3/5 items-center justify-between gap-8">
               <img alt="redbull-sponsor" src={SponsorRedBull} />

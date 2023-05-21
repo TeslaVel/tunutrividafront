@@ -29,7 +29,7 @@ const Package = ({ icon, title, description, setSelectedPage }: Props) => {
       <h4 className="font-bold">{title}</h4>
       <p className="my-3">{description}</p>
       <AnchorLink
-        className="text-sm font-bold text-primary-500 underline hover:text-secondary-500"
+        className="text-sm font-bold text-primary-500 underline hover:text-primary-300"
         onClick={() => setSelectedPage(SelectedPage.Contactanos)}
         href={`#${SelectedPage.Contactanos}`}
       >

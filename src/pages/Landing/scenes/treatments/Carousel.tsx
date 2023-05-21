@@ -8,12 +8,12 @@ interface CarouselProps {
 
 const Carousel: React.FC<CarouselProps> = ({ images }) => {
   useEffect(() => {
-    const intervalo = setInterval(() => {
-      goToNextSlide()
-    }, 4000);
+    // const intervalo = setInterval(() => {
+    //   goToNextSlide()
+    // }, 4000);
 
-    // Limpia el intervalo al desmontar el componente
-    return () => clearInterval(intervalo);
+    // // Limpia el intervalo al desmontar el componente
+    // return () => clearInterval(intervalo);
   });
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -44,26 +44,27 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
   const slideWidth = () => {
     const sld = document.querySelector(".slide")
     if (sld) {
-      return sld.clientWidth + 20;
+      return sld.clientWidth + 22;
     }
 
     return 0
   };
 
+  const arrowClases = 'carousel-control hover:bg-primary-300 h-[3rem] rounded-full px-1'
   return (
-    <div className="carousel w-full flex ">
-      <button className={`carousel-control prev px-1 hover:bg-primary-300 h-[300px]`}
+    <div className="carousel w-full flex items-center ">
+      <button className={`prev ${arrowClases}`}
           onClick={goToPrevSlide}
         >
-        <span className="sr-only" style={{position: 'relative'}}>
+        <span style={{position: 'relative'}}>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
             <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75" />
           </svg>
         </span>
-        <span className="carousel-control-prev-icon" aria-hidden="true" />
+        
       </button>
       <div className="px-3 mx-0 flex w-full overflow-hidden">
-        <div className="mx-0 px-0 items-center justify-between gap-5 md:flex"
+        <div className="mx-0 px-0 items-center justify-between gap-5 flex"
           style={{
             transform: `translateX(${translateValue}px)`,
             transition: "transform ease-out 0.45s",
@@ -81,15 +82,15 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
         </div>
       </div>
       <button
-        className={`carousel-control next px-1 hover:bg-primary-300 h-[300px]`}
+        className={`next ${arrowClases}`}
         onClick={goToNextSlide}
       >
-        <span className="sr-only " style={{position: 'relative'}}>
+        <span style={{position: 'relative'}}>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
             <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
           </svg>
         </span>
-        <span className="carousel-control-next-icon" aria-hidden="true" />
+ 
       </button>
     </div>
   );

@@ -1,14 +1,8 @@
 import { useState } from 'react';
-interface User {
-  email: string
-  token: string
-  first_name: string
-  last_name: string
-  dietitian_id: string
-}
+import { UserType} from "@/shared/types";
 
 export function useStorage (key: string, initialValue: null){
-  const getStorage = (): User | null => {
+  const getStorage = (): UserType | null => {
     // console.log('buscando token del storage')
     let val = null;
     try {
@@ -21,9 +15,9 @@ export function useStorage (key: string, initialValue: null){
     }
     return val
   }
-  const [userData, setUser] = useState<User | null>(() => getStorage());
+  const [userData, setUser] = useState<UserType | null>(() => getStorage());
 
-  const setStorage = (newValue: User | null): void => {
+  const setStorage = (newValue: UserType | null): void => {
     console.log('guardando', newValue)
     try {
       window.localStorage.setItem(key, JSON.stringify(newValue))

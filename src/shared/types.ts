@@ -1,7 +1,7 @@
 export enum SelectedPage {
   Home = "home",
   Packages = "packages",
-  NuestrosTratamientos = "nuestrostratamientos",
+  NuestrosTratamientos = "tratamientos",
   Contactanos = "contactanos",
   LogIn = "login",
   Landing = "landing",
@@ -23,10 +23,20 @@ export interface ClassType {
 }
 
 export interface UserType {
+  id: string
   email: string
   token: string
   firstName: string
   lastName: string
+  dietitianId: string
+}
+
+export interface User {
+  id: string
+  firstName: string
+  fullName: string
+  firstNameInitial: string
+  initials: string
 }
 
 
@@ -39,5 +49,47 @@ export enum Colors {
   GRAY100="#DFCCCC",
   GRAY500="#5E0000",
   SECONDARY400="#FFCD5B",
-  SECONDARY500="#FFA6A3"
+  SECONDARY500="#FFA6A3",
+  NONE="none"
 }
+
+
+/* FOR QUERIES */
+
+export interface EntryType {
+  id: string;
+  description:  string;
+  entryType: string;
+  imageUrl: string;
+  path:  string;
+  createdAt:  string;
+  comments: CommentType[]
+  user: User
+}
+
+// export interface EntriesQueryData {
+//   entries: EntryType[] | [];
+// };
+
+// export interface Entries {
+//   entries: EntryType[] | [];
+// };
+
+// export interface EntriyVariables {
+//   entryId: number | undefined | null;
+// };
+
+export interface CommentType {
+  id: string;
+  message: string;
+  createdAt: string;
+  user: User
+}
+
+// export interface CommentMutationType {
+//   comment: Comment;
+// };
+// export interface CommentVariables {
+//   message: string;
+//   entryId: string;
+// };

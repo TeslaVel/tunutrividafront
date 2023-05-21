@@ -1,18 +1,5 @@
 import { gql } from '@apollo/client'
 
-// export const GET_PHOTOS = gql`
-//   query getPhotos($categoryId: ID) {
-//     photos(categoryId: $categoryId) {
-//       id
-//       categoryId
-//       src
-//       likes
-//       userId
-//       liked
-//     }
-//   }
-// `
-
 // MUTATIONS
 export const CONTACT_US_MUTATION = gql`
   mutation CreateContactUs(
@@ -27,10 +14,49 @@ export const CONTACT_US_MUTATION = gql`
        lastName: $last_name,
        message: $message
     }) {
-      firstName
-      lastName
-      email
+      id
+    }
+  }
+`;
+
+export const COMMENT_MUTATION = gql`
+  mutation CreateComment(
+    $entry_id: String!,
+    $message: String!
+  ) {
+    createComment(input: {
+       entryId: $entry_id,
+       message: $message
+    }) {
+      id
       message
+      createdAt
+      user {
+        id
+        fullName
+        initials
+      }
+    }
+  }
+`;
+
+export const ENTRY_MUTATION = gql`
+  mutation CreateEntry(
+    $entry_type: String!,
+    $description: String!
+  ) {
+    createEntry(input: {
+       entryType: $entry_type,
+       description: $description
+    }) {
+      id
+      description
+      createdAt
+      user {
+        id
+        fullName
+        initials
+      }
     }
   }
 `;
@@ -44,6 +70,7 @@ export const LOGIN_MUTATION = gql`
        email: $email,
        password: $password
     }) {
+      id
       token
       email
       firstName
@@ -52,3 +79,32 @@ export const LOGIN_MUTATION = gql`
     }
   }
 `;
+
+// Gets
+
+export const GET_ENTRIES = gql`
+  query entries {
+    entries {
+      id
+      description
+      entryType
+      imageUrl
+      createdAt
+      user {
+        id
+        fullName
+        initials
+      }
+      comments {
+        id
+        message
+        createdAt
+        user {
+        id
+        fullName
+        initials
+        }
+      }
+    }
+  }
+`

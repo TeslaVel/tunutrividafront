@@ -2,7 +2,8 @@ import { useEffect, useContext } from 'react';
 import { useForm } from "react-hook-form";
 import { SelectedPage } from "@/shared/types";
 import { motion } from "framer-motion";
-import ContactUsPageGraphic from "@/assets/ContactUsPageGraphic.png";
+// import ContactUsPageGraphic from "@/assets/ContactUsPageGraphic.png";
+import Scale1 from "@/assets/ntv/scale1.png";
 import HText from "@/shared/HText";
 import { AuthContext } from '@/AuthProviderManager';
 import { useMutationLogin } from '@/hooks/graph/useMutationLogin';
@@ -12,21 +13,21 @@ type Props = {
 };
 
 const LogIn = ({ setSelectedPage }: Props) => {
-  const { storeToken } = useContext(AuthContext);
+  const { storeUser } = useContext(AuthContext);
   const { Login, data, loading, error, reset } = useMutationLogin();
 
   useEffect(() =>{
     if ( data && data?.createAuth ) {
       console.log('createAuth si hay data', data.createAuth.token);
       if (data.createAuth.token !== null) {
-        storeToken(data.createAuth);
+        storeUser(data.createAuth);
       } else {
         alert('credentials invalid')
       }
     }
   }, [data?.createAuth]);
 
-  const inputStyles = `mb-5 w-full rounded-lg bg-primary-300
+  const inputStyles = `mb-5 w-full rounded-lg bg-primary-200
   px-5 py-3 placeholder-white`;
 
   const {
@@ -44,34 +45,36 @@ const LogIn = ({ setSelectedPage }: Props) => {
   };
 
   return (
-    <section id="login" className="mx-auto w-5/6 pt-24 pb-32">
+    <section id="login" className="mx-auto w-5/6 pt-[8rem] pb-[17rem]">
       <motion.div
         onViewportEnter={() => setSelectedPage(SelectedPage.LogIn)}
+        className='justify-between gap-8 md:flex'
       >
-        {/* HEADER */}
-        <motion.div
-          className="md:w-3/5"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.5 }}
-          variants={{
-            hidden: { opacity: 0, x: -50 },
-            visible: { opacity: 1, x: 0 },
-          }}
-        >
-          <HText>
-            <span className="text-primary-500">LOGIN</span>
-          </HText>
-          <p className="my-5">
-            Ingresa con energía y siente la transformación en tu cuerpo - ¡Bienvenido a nuestro portal de salud nutricional!
-          </p>
-        </motion.div>
 
         {/* FORM AND IMAGE */}
-        <div className="mt-10 justify-between gap-8 md:flex">
+        <div>
+          {/* HEADER */}
           <motion.div
-            className="mt-10 basis-3/5 md:mt-0"
+            className="md:w-3/5"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.5 }}
+            variants={{
+              hidden: { opacity: 0, x: -50 },
+              visible: { opacity: 1, x: 0 },
+            }}
+          >
+            <HText>
+              <span className="text-primary-500">LOGIN</span>
+            </HText>
+            <p className="my-5">
+              Ingresa con energía y siente la transformación en tu cuerpo - ¡Bienvenido a nuestro portal de salud nutricional!
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="basis-3/5 md:mt-0"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.5 }}
@@ -124,21 +127,22 @@ const LogIn = ({ setSelectedPage }: Props) => {
 
               <button
                 type="submit"
-                className="mt-5 rounded-lg bg-secondary-500 px-20 py-3 transition duration-500 hover:text-white"
+                className="mt-5 rounded-lg bg-primary-200 hover:bg-primary-400 px-20 py-3 transition duration-500 hover:text-white"
               >
                 Login
               </button>
 
-              <a className="ml-4 mt-5 rounded-lg bg-secondary-500 px-20 py-3 transition duration-500 hover:text-white"
+              <a className="ml-4 mt-5 rounded-lg bg-primary-200 hover:bg-primary-400 px-20 py-3 transition duration-500 hover:text-white"
                 onClick={() => setSelectedPage(SelectedPage.Contactanos)}
                 href={`#${SelectedPage.Contactanos}`} >
                 Become a Member
               </a>
             </form>
           </motion.div>
+        </div>
 
-          <motion.div
-            className="relative mt-16 basis-2/5 md:mt-0"
+        <motion.div
+            className="relative mt-16 basis-3/5 md:mt-0"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.5 }}
@@ -148,15 +152,14 @@ const LogIn = ({ setSelectedPage }: Props) => {
               visible: { opacity: 1, y: 0 },
             }}
           >
-            <div className="w-full before:absolute before:-bottom-20 before:-right-10 before:z-[-1] md:before:content-evolvetext">
+            <div className="w-full before:absolute before:-bottom-20 before:-right-10 before:z-[-1]">
               <img
                 className="w-full"
-                alt="contact-us-page-graphic"
-                src={ContactUsPageGraphic}
+                alt="contact-us"
+                src={Scale1}
               />
             </div>
           </motion.div>
-        </div>
       </motion.div>
     </section>
   );

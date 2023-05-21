@@ -1,7 +1,7 @@
 import React from 'react';
 
 type Props = {
-  setOptionSelected: () => void;
+  setOptionSelected: (value: string) => void;
   optionSelected: string;
 };
 

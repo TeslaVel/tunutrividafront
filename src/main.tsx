@@ -1,10 +1,14 @@
-import React, { useState, useEffect} from 'react'
+import React, { useState, useEffect, useContext} from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
+// import { AuthContext } from '@/AuthProviderManager'
+import { useStorage } from '@/hooks/useStorage';
 import './index.css'
 
 import { ApolloClient, InMemoryCache, HttpLink, from, ApolloProvider } from '@apollo/client'
 import { onError } from "@apollo/client/link/error";
+
+const BASE_URL = 'http://localhost:3001/graphql';
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)
@@ -16,7 +20,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 
   if (networkError) {
     console.log(`[Network error]: ${networkError}`);
-    deleteAndRedirect();
+    // deleteAndRedirect();
   };
 });
 
@@ -26,42 +30,35 @@ const deleteAndRedirect = () => {
 }
 
 const AppWrapper = () => {
-  const [token, setToken] = useState<string | null>(null);
+  const { userData } = useStorage('pgus-tk', null)
   const [client, setClient] = useState(() => {
-    const auth = token ? {authorization: `Bearer ${token}`} : {authorization: ''};
+    const auth = userData?.token ? {authorization: `Bearer ${userData?.token}`} : {authorization: ''};
+    console.log('auth new', auth)
     return new ApolloClient({
       cache: new InMemoryCache(),
       link: from([errorLink, new HttpLink({
-        uri: 'http://localhost:3000/graphql',
+        uri: BASE_URL,
         headers: auth
       })])
     });
   });
 
   useEffect(() => {
-    const auth = token ? {authorization: `Bearer ${token}`} : {authorization: ''};
+    const auth = userData?.token ? {authorization: `Bearer ${userData?.token}`} : {authorization: ''};
+    console.log('auth useEffect', auth)
     setClient(new ApolloClient({
       cache: new InMemoryCache(),
       link: from([errorLink, new HttpLink({
-        uri: 'http://localhost:3000/graphql',
+        uri: BASE_URL,
         headers: auth
       })])
     }));
-  }, [token]);
-
-  const handleLogin = (newToken: string) => {
-    console.log('desde el main handleLogin', newToken)
-    setToken(newToken);
-  };
-
-  const handleLogout = () => {
-    setToken(null);
-  };
+  }, [userData?.token]);
 
   return (
     <React.StrictMode>
       <ApolloProvider client={client}>
-        <App setMainToken={handleLogin} removeMainToken={handleLogout}/>
+        <App/>
       </ApolloProvider>
     </React.StrictMode>
   );

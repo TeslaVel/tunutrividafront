@@ -3,43 +3,37 @@ import { useStorage } from '@/hooks/useStorage';
 import { UserType} from "@/shared/types";
 
 const initialState: {
-  userToken: UserType | null;
-  storeToken: (value: UserType) => void;
-  deleteToken: () => void;
+  userStored: UserType | null;
+  storeUser: (value: UserType) => void;
+  deleteUserStored: () => void;
 } = {
-  userToken: null,
-  storeToken: (value: UserType) => {},
-  deleteToken: () => {}
+  userStored: null,
+  storeUser: (value: UserType) => {},
+  deleteUserStored: () => {}
 };
 
 type IProps = {
-  setMainToken: (value: string) => void;
-  removeMainToken: () => void;
 };
 
 // used as hook params
 export const AuthContext = createContext(initialState);
 
 // used on routes
-export const AuthProvider = ({setMainToken , removeMainToken, children}: PropsWithChildren<IProps>) => {
+export const AuthProvider = ({children}: PropsWithChildren<IProps>) => {
   const {userData, setStorage} = useStorage('pgus-tk', null)
 
-   const setUserToken = (user: {token: string, email: string, first_name: string, last_name: string}) => {
-    console.log('desde el authprovider setUserToken')
-    setMainToken(user.token)
+  const setUserToken = (user: UserType) => {
     setStorage(user)
   }
 
   const deleteUserToken = () => {
-    console.log('desde el authprovider deleteUserToken')
-    removeMainToken()
     setStorage(null)
   }
 
   const value = {
-    userToken: userData || null,
-    storeToken: (user: UserType) => setUserToken(user),
-    deleteToken: () => deleteUserToken()
+    userStored: userData || null,
+    storeUser: (user: UserType) => setUserToken(user),
+    deleteUserStored: () => deleteUserToken()
   };
   // console.log('AuthProvider recover token', value);
   return <AuthContext.Provider value={value}>

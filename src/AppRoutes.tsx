@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect, Suspense } from 'react';
-import Menu from "@/components/menu";
+import Menu from "@/components/Menu";
 import ProtectedRoute from '@/ProtectedRoute';
 import Dashboard from '@/pages/Dashboard';
 import Appointments from '@/pages/Appointments';
@@ -20,7 +20,7 @@ type Props = {
 };
 
 export const AppRoutes = ({ selectedPage, setSelectedPage }: Props) => {
-  const { userToken } = useContext(AuthContext);
+  const { userStored } = useContext(AuthContext);
 
   const [isTopOfPage, setIsTopOfPage] = useState<boolean>(true);
 
@@ -35,13 +35,13 @@ export const AppRoutes = ({ selectedPage, setSelectedPage }: Props) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const isLogged = !(userToken == null || userToken.token.length < 1)
+  const isLogged = !(userStored == null || userStored.token.length < 1)
 
   return (
     <>
       <Suspense fallback={<div />}>
         <BrowserRouter>
-          <div className={`${isLogged ? 'flex h-full' : ''}`}>
+          <div className={`${isLogged ? 'flex min-h-screen' : ''}`}>
             <Menu
               isLogged={isLogged}
               isTopOfPage={isTopOfPage}
@@ -62,7 +62,7 @@ export const AppRoutes = ({ selectedPage, setSelectedPage }: Props) => {
                     <Dashboard
                       selectedPage={selectedPage}
                       setSelectedPage={setSelectedPage}
-                      dietitian_id={userToken?.dietitianId} />
+                      dietitian_id={userStored?.dietitianId} />
                   }/>
 
                   <Route path="/appointments" element={

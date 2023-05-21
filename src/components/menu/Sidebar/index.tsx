@@ -1,17 +1,18 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import logo from "@/assets/ntv/logo_1.png";
 import Calendar from "@/assets/icons/calendar"
 import Logout from "@/assets/icons/logout"
 import ArrowRight from "@/assets/icons/arrowright"
 import ArrowLeft from "@/assets/icons/arrowleft"
 import { NavLink } from "react-router-dom";
-import { Colors } from '@/shared/types'
-import { AuthContext } from '@/AuthProviderManager';
+import { UserType } from '@/shared/types'
+import { SelectedPage } from "@/shared/types";
 
 type Props = {
   selectedPage: SelectedPage;
+  userStored: UserType | null;
+  deleteUserStored:  () => void;
 }
-
 
 const optionsForSidebar = [
   {label: 'Dashboard', value: 'dashboard'},
@@ -19,10 +20,9 @@ const optionsForSidebar = [
   {label: 'Chat', value: 'chat'}
 ];
 
-const Sidebar = ({selectedPage}: Props) => {
+const Sidebar = ({selectedPage, userStored, deleteUserStored}: Props) => {
   const [expanded, setExpanded] = useState<boolean>(true);
   const [elementVisible, setElementVisible] = useState<boolean>(true);
-  const { userToken, deleteToken } = useContext(AuthContext);
 
   const toggleExpand = () => {
     setExpanded(!expanded);
@@ -33,18 +33,23 @@ const Sidebar = ({selectedPage}: Props) => {
     if (expanded) setElementVisible(true)
   }
 
+  const  injectedStyle = {
+    background: 'linear-gradient(50deg, #FF9C99 0%, #FFB0AD 100%)'
+  }
+
   return (
     <div
-      className={`left-0 bottom-0 z-40 h-full bg-primary-300 text-white flex flex-col transition-width duration-200 ease-in-out ${
+      style={injectedStyle}
+      className={`min-h-screen left-0 bottom-0 z-40 bg-primary-300 text-white flex flex-col transition-width duration-200 ease-in-out ${
         expanded ? "w-[200px]" : "w-[55px] min-w-[55px]"
-      }`}
+      }` }
       onTransitionEnd={() => mostrarElementos()}
     >
       <div className="h-25 border-b border-gray-700 px-4 py-4">
         { expanded &&
           <div className="flex flex-col items-center pb-3">
             <img src={logo} alt="Logo" className="h-8 w-8 mr-2" />
-            <h1 className="text-lg font-bold">{userToken?.firstName} {userToken?.lastName}</h1>
+            <h1 className="text-lg font-bold">{userStored?.firstName} {userStored?.lastName}</h1>
           </div>
         }
       </div>
@@ -63,8 +68,8 @@ const Sidebar = ({selectedPage}: Props) => {
         ))}
 
         <span className={`h-8 mt-3 flex items-center rounded-lg hover:bg-primary-500 cursor-pointer ${expanded ? 'px-4' : 'px-1'}`}>
-          <button className="flex" onClick={() => deleteToken()}>
-            <Logout color={Colors.PRIMARY300} />
+          <button className="flex" onClick={() => deleteUserStored()}>
+            <Logout />
             { elementVisible && <span className="ml-2">Log Out</span> }
           </button>
         </span>
@@ -73,8 +78,8 @@ const Sidebar = ({selectedPage}: Props) => {
       <div className="h-16 border-t border-gray-700 px-4 flex items-center justify-center">
         <button onClick={toggleExpand}>
           {expanded
-            ? <ArrowLeft width={25} height={25} color={Colors.PRIMARY300}  />
-            : <ArrowRight width={25} height={25} color={Colors.PRIMARY300}  />
+            ? <ArrowLeft width={25} height={25} />
+            : <ArrowRight width={25} height={25} />
           }
         </button>
       </div>

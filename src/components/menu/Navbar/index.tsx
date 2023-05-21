@@ -1,7 +1,8 @@
 import { useState, useContext } from "react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
-import Logo from "@/assets/Logo.png";
-import LinkAnchor from "./LinkAnchor";
+// import Logo from "@/assets/Logo.png";
+import Logo from "@/assets/ntv/logo_3.png";
+import LinkAnchor from "../LinkAnchor";
 // import Sidebar from "@/scenes/sidebar";
 import { SelectedPage } from "@/shared/types";
 import useMediaQuery from "@/hooks/useMediaQuery";
@@ -10,18 +11,16 @@ import { AuthContext } from '@/AuthProviderManager';
 import { Link } from "react-router-dom";
 
 type Props = {
-  isLogged: boolean;
   isTopOfPage: boolean;
   selectedPage: SelectedPage;
   setSelectedPage: (value: SelectedPage) => void;
 };
 
-const Navbar = ({ isLogged, isTopOfPage, selectedPage, setSelectedPage }: Props) => {
-  const { deleteToken } = useContext(AuthContext);
+const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
   const flexBetween = "flex items-center justify-between";
   const [isMenuToggled, setIsMenuToggled] = useState<boolean>(false);
   const isAboveMediumScreens = useMediaQuery("(min-width: 1060px)");
-  const navbarBackground = isTopOfPage ? "" : "bg-primary-100 drop-shadow";
+  const navbarBackground = isTopOfPage ? "" : "bg-primary-50 drop-shadow";
 
   const landingOptions = () => {
     return (
@@ -37,7 +36,7 @@ const Navbar = ({ isLogged, isTopOfPage, selectedPage, setSelectedPage }: Props)
           setSelectedPage={setSelectedPage}
         />
         <LinkAnchor
-          page="Nuestros Tratamientos"
+          page="Tratamientos"
           selectedPage={selectedPage}
           setSelectedPage={setSelectedPage}
         />
@@ -76,10 +75,10 @@ const Navbar = ({ isLogged, isTopOfPage, selectedPage, setSelectedPage }: Props)
         className={`${navbarBackground} ${flexBetween} fixed top-0 z-30 w-full py-6`}
       >
         <div className={`${flexBetween} mx-auto w-5/6`}>
-          <div className={`${flexBetween} w-full gap-16`}>
+          <div className={`${flexBetween} w-full gap-10`}>
             {/* LEFT SIDE */}
             <Link to='/'>
-              <img alt="logo" src={Logo} />
+              <img alt="logo" src={Logo} style={{width: '200px', height: '51px'}} />
             </Link>
 
             {/* RIGHT SIDE */}
@@ -89,7 +88,7 @@ const Navbar = ({ isLogged, isTopOfPage, selectedPage, setSelectedPage }: Props)
               </div>
             ) : (
               <button
-                className="rounded-full bg-secondary-500 p-2"
+                className="rounded-full bg-primary-300 p-2"
                 onClick={() => setIsMenuToggled(!isMenuToggled)}
               >
                 <Bars3Icon className="h-6 w-6 text-white" />
@@ -101,7 +100,7 @@ const Navbar = ({ isLogged, isTopOfPage, selectedPage, setSelectedPage }: Props)
 
       {/* MOBILE MENU MODAL */}
       {!isAboveMediumScreens && isMenuToggled &&
-        <div className="fixed right-0 bottom-0 z-40 h-full w-[300px] bg-primary-100 drop-shadow-xl">
+        <div className="fixed right-0 bottom-0 z-40 h-full w-[300px] bg-primary-50 drop-shadow-xl">
           {/* CLOSE ICON */}
           <div className="flex justify-end p-12">
             <button onClick={() => setIsMenuToggled(!isMenuToggled)}>

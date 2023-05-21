@@ -67,9 +67,9 @@ type Props = {
   setSelectedPage: (value: SelectedPage) => void;
 };
 
-const Tratamientos = ({ setSelectedPage }: Props) => {
+const Treatments = ({ setSelectedPage }: Props) => {
   return (
-    <section id="nuestrostratamientos" className="w-full min-h-full bg-primary-100 py-40">
+    <section id="treatments" className="w-full min-h-full bg-primary-50 py-40">
       <motion.div
         onViewportEnter={() => setSelectedPage(SelectedPage.NuestrosTratamientos)}
       >
@@ -85,13 +85,13 @@ const Tratamientos = ({ setSelectedPage }: Props) => {
           }}
         >
           <div className="md:w-3/5">
-            <HText>Nuestras Tratamientos</HText>
+            <HText>Nuestros Tratamientos</HText>
             <p className="py-5">
               Explicar algo aqui sobre vacumterapia, radio etc.
             </p>
           </div>
         </motion.div>
-        <div className="mt-10 h-[400px] mx-auto w-[88%]">
+        <div className="mt-10 h-[400px] mx-auto md:w-[88%] sm:w-[100%]">
           <Carousel images={classes} />
         </div>
       </motion.div>
@@ -99,4 +99,4 @@ const Tratamientos = ({ setSelectedPage }: Props) => {
   );
 };
 
-export default Tratamientos;
+export default Treatments;

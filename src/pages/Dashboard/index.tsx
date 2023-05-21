@@ -1,25 +1,25 @@
 import { useEffect, useState } from "react";
-import { SelectedPage } from "@/shared/types";
+import { SelectedPage, UserType } from "@/shared/types";
 import actioncable from 'actioncable';
+import DashboardSections from './DashboardSections';
 import TopBar from './TopBar';
-import SectionWrapper from './SectionWrapper';
+
 type Props = {
   selectedPage: SelectedPage
   setSelectedPage: (value: SelectedPage) => void;
-  dietitian_id: string;
-  optionSelected: string;
+  dietitian_id?: string;
 };
 
-const cable = actioncable.createConsumer('ws://localhost:3000/cable');
+const cable = actioncable.createConsumer('ws://localhost:3001/cable');
 
-export const Dashboard = ({ selectedPage, setSelectedPage, dietitian_id }: Props) => {
+export const Dashboard = ({setSelectedPage, dietitian_id }: Props) => {
   const [optionSelected, setOptionSelected] = useState<string>('Dashboard')
 
   useEffect(() => {
     setSelectedPage(SelectedPage.Dashboard)
 
     const channel = cable.subscriptions.create({ channel: 'GlobalEvents', dietitian_id: dietitian_id }, {
-      received: (data) => {
+      received: (data: any) => {
        console.log(data)
       }
     });
@@ -28,15 +28,13 @@ export const Dashboard = ({ selectedPage, setSelectedPage, dietitian_id }: Props
       channel.unsubscribe();
     };
 
-     
   }, []);
 
   const handleCableAction = () => {
     const message = { text: 'Este es un mensaje desde el front!' };
     console.log('cable', cable)
-    cable.subscriptions.subscriptions[0].send({ message });
+    // cable.subscriptions.subscriptions[0].send({ message });
   };
-
 
   return (
     <>
@@ -48,7 +46,7 @@ export const Dashboard = ({ selectedPage, setSelectedPage, dietitian_id }: Props
              />
           </div>
           <div className="pt-12 md:h-5/6" >
-           <SectionWrapper
+           <DashboardSections
             optionSelected={optionSelected}
             handleCableAction={handleCableAction}
            />

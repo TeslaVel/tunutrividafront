@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { SelectedPage, UserType } from "@/shared/types";
 import actioncable from 'actioncable';
 import DashboardSections from './DashboardSections';
 import TopBar from './TopBar';
 
+// types
+import { SelectedPage } from "@/shared/types";
 type Props = {
   selectedPage: SelectedPage
   setSelectedPage: (value: SelectedPage) => void;
@@ -13,21 +14,19 @@ type Props = {
 const cable = actioncable.createConsumer('ws://localhost:3001/cable');
 
 export const Dashboard = ({setSelectedPage, dietitian_id }: Props) => {
-  const [optionSelected, setOptionSelected] = useState<string>('Dashboard')
+  const [optionSelected, setOptionSelected] = useState<string>('dashboard')
 
   useEffect(() => {
     setSelectedPage(SelectedPage.Dashboard)
 
     const channel = cable.subscriptions.create({ channel: 'GlobalEvents', dietitian_id: dietitian_id }, {
       received: (data: any) => {
-       console.log(data)
       }
     });
 
     return () => {
       channel.unsubscribe();
     };
-
   }, []);
 
   const handleCableAction = () => {
@@ -38,18 +37,20 @@ export const Dashboard = ({setSelectedPage, dietitian_id }: Props) => {
 
   return (
     <>
-      <section id="profile" className="bg-gray-20 py-3 px-3 md:h-full md:pb-0">
+      <section id="profile" className="py-3 px-3 md:h-full md:pb-0">
           <div className="topbar topbar gap-5 flex mb-5 fixed">
             <TopBar
               optionSelected={optionSelected}
               setOptionSelected={setOptionSelected}
              />
           </div>
-          <div className="pt-12 md:h-5/6" >
-           <DashboardSections
-            optionSelected={optionSelected}
-            handleCableAction={handleCableAction}
-           />
+          <div className="pt-12 entry-list-content w-full flex flex-col items-center overflow-hidden" >
+            <div className='flex mt-5 entry-list-scroller w-full flex overflow-y-scroll ' style={{height: '90vh'}}>
+              <DashboardSections
+                optionSelected={optionSelected}
+                handleCableAction={handleCableAction}
+              />
+            </div>
           </div>
       </section>
     </>

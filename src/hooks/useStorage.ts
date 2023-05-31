@@ -27,5 +27,5 @@ export function useStorage (key: string, initialValue: null){
     }
   }
 
-  return {userData, setStorage};
+  return {userData, setStorage, getStorage};
 }

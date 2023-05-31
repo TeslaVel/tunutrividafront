@@ -6,9 +6,9 @@ type Props = {
 };
 
 const tapOptions = [
-  'Dashboard',
-  'Entries',
-  'Goals',
+  { label: 'Dashboard', value: 'dashboard' },
+  { label: 'Entradas', value: 'entries' },
+  { label: 'Metas', value: 'goals' }
 ];
 
 const TopBar = ({ setOptionSelected, optionSelected }: Props) => {
@@ -17,13 +17,12 @@ const TopBar = ({ setOptionSelected, optionSelected }: Props) => {
   return (
     <>
       {
-        tapOptions.map( (opt: string, index: number) => {
+        tapOptions.map( (opt: {[key: string]: string}, index: number) => {
           return <span key={`${index}-${opt}`}
-                    className={`cursor-pointer p-2 hover:border-b border-transparent hover:border-gray-500 hover:text-gray-500 ${opt === optionSelected ? classSelected : '' } `}
-                    onClick={() => setOptionSelected(opt)}
+                    className={`cursor-pointer p-2 hover:border-b hover:border-gray-500 hover:text-gray-500 ${opt.value === optionSelected ? classSelected : '' } `}
+                    onClick={() => setOptionSelected(opt.value)}
                   >
-
-                    {opt}
+                    {opt.label}
                   </span>
         })
       }

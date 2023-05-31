@@ -1,17 +1,18 @@
 import { Navigate, Outlet } from 'react-router-dom';
 
 type Props = {
-  isLogged: boolean,
+  isNotLogged: boolean,
   redirectPath?: string,
   children?: JSX.Element,
 };
 
 const ProtectedRoute = ({
-isLogged,
+isNotLogged,
 redirectPath,
 children }: Props
 ) => {
-  if (isLogged && redirectPath) return <Navigate to={redirectPath} replace />;
+  if (isNotLogged && !redirectPath) return <Navigate to={"/"} replace />;
+  if (isNotLogged && redirectPath) return <Navigate to={redirectPath} replace />;
 
   return children ? children : <Outlet />;
 };

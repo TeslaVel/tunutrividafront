@@ -8,18 +8,25 @@ export enum SelectedPage {
   Dashboard = "dashboard",
   NotFound = "notfound",
   Appointments = "appointments",
+  Sessions = "sessions",
+  Chat = "chat",
 }
 
 export interface PackageType {
-  icon: JSX.Element;
-  title: string;
-  description: string;
+  icon: JSX.Element
+  title: string
+  description: string
+}
+
+export interface GeneralOptions {
+  label: string
+  value: string
 }
 
 export interface ClassType {
-  name: string;
-  description?: string;
-  url: string;
+  name: string
+  description?: string
+  url: string
 }
 
 export interface UserType {
@@ -29,6 +36,10 @@ export interface UserType {
   firstName: string
   lastName: string
   dietitianId: string
+  height: string
+  weight: string
+  imc: string
+  age: string
 }
 
 export interface User {
@@ -67,6 +78,43 @@ export interface EntryType {
   user: User
 }
 
+export interface AppointmentType {
+  id: string
+  title: string
+  startDate: string
+  timeStart: string
+  timeEnd: string
+  createdAt: string
+  appointmentType: string
+  status: string
+  dietitian: User
+}
+
+export interface SessionType {
+  id: string
+  height: string
+  weight: string
+  waist: string
+  hip: string
+  highAbdomen: string
+  lowAbdomen: string
+  imc: string
+  idealWeight: string
+  bodyGrease: string
+  visceralGrease: string
+  muscleMass: string
+  boneMass: string,
+  waterPercentage: string,
+  bmr: string
+  metabolicAge: string
+  physicalComplexion: string
+  date: string
+  activityFactor: {
+    id: string
+    name: string
+    description: string
+  }
+}
 // export interface EntriesQueryData {
 //   entries: EntryType[] | [];
 // };

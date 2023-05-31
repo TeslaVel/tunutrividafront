@@ -1,6 +1,6 @@
 import React, { createContext, PropsWithChildren } from 'react';
 import { useStorage } from '@/hooks/useStorage';
-import { UserType} from "@/shared/types";
+import { UserType } from "@/shared/types";
 
 const initialState: {
   userStored: UserType | null;
@@ -12,18 +12,20 @@ const initialState: {
   deleteUserStored: () => {}
 };
 
-type IProps = {
-};
+interface IProps {
+  updateMainStatusLogin: () => void
+}
 
 // used as hook params
 export const AuthContext = createContext(initialState);
 
 // used on routes
-export const AuthProvider = ({children}: PropsWithChildren<IProps>) => {
+export const AuthProvider = ({children, updateMainStatusLogin}: PropsWithChildren<IProps>) => {
   const {userData, setStorage} = useStorage('pgus-tk', null)
 
   const setUserToken = (user: UserType) => {
     setStorage(user)
+    updateMainStatusLogin()
   }
 
   const deleteUserToken = () => {

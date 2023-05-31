@@ -1,12 +1,14 @@
 import { useForm } from "react-hook-form";
 import { useEffect, useState, useContext } from 'react'
-import { useGetUserEntries } from '@/hooks/useGetUserEntries'
-import { EntryType } from '@/shared/types'
+import { AuthContext } from '@/AuthProviderManager';
 import { Entry } from './Entry'
 import EntryWrapper from './EntryWrapper'
-import { AuthContext } from '@/AuthProviderManager';
 import Aside from '@/components/Aside'
-import { useMutationCreateEntry } from '@/hooks/graph/useMutationCreateEntry';
+import { useGetUserEntries } from '@/hooks/useGetUserEntries'
+import { useMutationCreateEntry } from '@/hooks/graph/useMutationCreateEntry'
+
+// types
+import { EntryType } from '@/shared/types'
 
 export const Entries = () => {
     const { userStored } = useContext(AuthContext);

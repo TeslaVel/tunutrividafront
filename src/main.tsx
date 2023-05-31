@@ -30,7 +30,7 @@ const deleteAndRedirect = () => {
 }
 
 const AppWrapper = () => {
-  const { userData } = useStorage('pgus-tk', null)
+  const { userData, getStorage } = useStorage('pgus-tk', null)
   const [client, setClient] = useState(() => {
     const auth = userData?.token ? {authorization: `Bearer ${userData?.token}`} : {authorization: ''};
     console.log('auth new', auth)
@@ -43,8 +43,9 @@ const AppWrapper = () => {
     });
   });
 
-  useEffect(() => {
-    const auth = userData?.token ? {authorization: `Bearer ${userData?.token}`} : {authorization: ''};
+  const asignClientAfterLogin = () => {
+    const userTokenData = getStorage()
+    const auth = userTokenData?.token ? {authorization: `Bearer ${userTokenData?.token}`} : {authorization: ''};
     console.log('auth useEffect', auth)
     setClient(new ApolloClient({
       cache: new InMemoryCache(),
@@ -53,12 +54,20 @@ const AppWrapper = () => {
         headers: auth
       })])
     }));
+  }
+
+  useEffect(() => {
+    asignClientAfterLogin()
   }, [userData?.token]);
+
+  const updateMainStatusLogin = () => {
+    asignClientAfterLogin()
+  };
 
   return (
     <React.StrictMode>
       <ApolloProvider client={client}>
-        <App/>
+        <App updateMainStatusLogin={updateMainStatusLogin}/>
       </ApolloProvider>
     </React.StrictMode>
   );

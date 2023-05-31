@@ -65,7 +65,7 @@ export const LOGIN_MUTATION = gql`
   mutation AuthMutation(
   $email: String!,
   $password: String!
-  ) {
+) {
     createAuth(input: {
        email: $email,
        password: $password
@@ -76,6 +76,17 @@ export const LOGIN_MUTATION = gql`
       firstName
       lastName
       dietitianId
+      height
+      weight
+      imc
+      age
+    }
+  }
+`;
+export const LOGOUT_MUTATION = gql`
+  mutation LogoutMuation {
+    logout(input: {}) {
+      success
     }
   }
 `;
@@ -104,6 +115,79 @@ export const GET_ENTRIES = gql`
         fullName
         initials
         }
+      }
+    }
+  }
+`
+
+export const GET_APPOINTMENTS = gql`
+  query appointments($filter: FilterInput) {
+    appointments(filter: $filter) {
+      id
+      title
+      createdAt
+      timeEnd
+      timeStart
+      startDate
+      appointmentType
+      status
+      dietitian {
+          id
+          firstName
+          lastName
+          fullName
+          initials
+      }
+    }
+}
+`
+export const GET_CURRENT_APPOINTMENTS = gql`
+  query currentAppointments {
+    currentAppointments {
+      id
+      title
+      createdAt
+      timeEnd
+      timeStart
+      startDate
+      appointmentType
+      status
+      dietitian {
+          id
+          firstName
+          lastName
+          fullName
+          initials
+      }
+    }
+}
+`
+
+export const GET_SESSIONS = gql`
+  query sessions {
+    sessions {
+      id
+      height
+      weight
+      waist
+      hip
+      highAbdomen
+      lowAbdomen
+      imc
+      idealWeight
+      bodyGrease
+      visceralGrease
+      muscleMass
+      boneMass
+      waterPercentage
+      bmr
+      metabolicAge
+      physicalComplexion
+      date
+      activityFactor {
+          id
+          name
+          description
       }
     }
   }

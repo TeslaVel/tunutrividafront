@@ -127,12 +127,12 @@ const LogIn = ({ setSelectedPage }: Props) => {
 
               <button
                 type="submit"
-                className="mt-5 rounded-lg bg-primary-200 hover:bg-primary-400 px-20 py-3 transition duration-500 hover:text-white"
+                className="sm:w-[100px] mt-5 rounded-lg bg-primary-200 hover:bg-primary-400 px-20 py-3 transition duration-500 hover:text-white"
               >
                 Login
               </button>
 
-              <a className="ml-4 mt-5 rounded-lg bg-primary-200 hover:bg-primary-400 px-20 py-3 transition duration-500 hover:text-white"
+              <a className="m:w-[100px]  ml-4 mt-5 rounded-lg bg-primary-200 hover:bg-primary-400 px-20 py-3 transition duration-500 hover:text-white"
                 onClick={() => setSelectedPage(SelectedPage.Contactanos)}
                 href={`#${SelectedPage.Contactanos}`} >
                 Become a Member

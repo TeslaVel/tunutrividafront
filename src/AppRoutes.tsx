@@ -2,7 +2,9 @@ import { useContext, useState, useEffect, Suspense } from 'react';
 import Menu from "@/components/Menu";
 import ProtectedRoute from '@/ProtectedRoute';
 import Dashboard from '@/pages/Dashboard';
+import Sessions from '@/pages/Sessions';
 import Appointments from '@/pages/Appointments';
+import Chat from '@/pages/Chat';
 import NotFound from '@/pages/NotFound';
 
 import {
@@ -35,7 +37,7 @@ export const AppRoutes = ({ selectedPage, setSelectedPage }: Props) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const isLogged = !(userStored == null || userStored.token.length < 1)
+  const isLogged = !(userStored == undefined || userStored == null || userStored?.token?.length < 1 && userStored.dietitianId)
 
   return (
     <>
@@ -49,15 +51,15 @@ export const AppRoutes = ({ selectedPage, setSelectedPage }: Props) => {
               setSelectedPage={setSelectedPage}
             />
 
-            <div className={`${isLogged ? 'flex-1' : ''}`}>
+            <div className={`${isLogged ? 'flex-1 bg-primary-50 ' : ''}`}>
               <Routes>
-                <Route element={<ProtectedRoute isLogged={isLogged} redirectPath="/dashboard" />}>
+                <Route element={<ProtectedRoute isNotLogged={isLogged} redirectPath="/dashboard" />}>
                   <Route index path="/" element={
                     <Landing selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
                   }/>
                 </Route>
 
-                <Route element={<ProtectedRoute isLogged={!isLogged} redirectPath="/" />}>
+                <Route element={<ProtectedRoute isNotLogged={!isLogged} redirectPath="/" />}>
                   <Route path="/dashboard" element={
                     <Dashboard
                       selectedPage={selectedPage}
@@ -65,12 +67,21 @@ export const AppRoutes = ({ selectedPage, setSelectedPage }: Props) => {
                       dietitian_id={userStored?.dietitianId} />
                   }/>
 
+                  <Route path="/sessions" element={
+                    <Sessions
+                      setSelectedPage={setSelectedPage}/>
+                  }/>
+                  <Route path="/chat" element={
+                    <Chat
+                      setSelectedPage={setSelectedPage}/>
+                  }/>
+
                   <Route path="/appointments" element={
                     <Appointments setSelectedPage={setSelectedPage}/>
                   }/>
                 </Route>
 
-                <Route element={<ProtectedRoute isLogged={!isLogged} redirectPath="/" />}>
+                <Route element={<ProtectedRoute isNotLogged={!isLogged} redirectPath="/" />}>
                   <Route path='*' element={<NotFound setSelectedPage={setSelectedPage} />} />
                 </Route>
               </Routes>

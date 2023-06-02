@@ -14,7 +14,7 @@ type Props = {
 
 
 export const Entry = ({ entry, isList, setAction, showComments, userStored }: Props) => {
-    const klasses = `entries relative flex flex-col flex-wrap bg-primary-20 mb-8 ${isList ? 'min-w-[300px] w-[350px] ' : 'xss:w-6/6 xs:w-6/6 sm:w-5/6 md:w-5/6 lg:w-3/6'}`
+    const klasses = `entries relative flex flex-col flex-wrap bg-primary-20 mb-8 ${isList ? 'min-w-[300px] w-[350px] ' : 'xxs:w-6/6 xs:w-6/6 sm:w-5/6 md:w-5/6 lg:w-3/6'}`
     const [commentList, setCommentList] = useState<CommentType[]>(entry.comments);
     const { CreateComment, data, loading, error, reset } = useMutationCreateComment();
     if (error) {

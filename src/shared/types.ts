@@ -33,6 +33,7 @@ export interface UserType {
   id: string
   email: string
   token: string
+  gender: 'female' | 'male'
   firstName: string
   lastName: string
   dietitianId: string

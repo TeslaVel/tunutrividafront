@@ -73,6 +73,7 @@ export const LOGIN_MUTATION = gql`
       id
       token
       email
+      gender
       firstName
       lastName
       dietitianId

@@ -1,0 +1,64 @@
+import { useState, useEffect } from 'react'
+import BmFemaleRange0 from "@/assets/ntv/bmi/bm_female_range_0.png"
+import BmFemaleRange1 from "@/assets/ntv/bmi/bm_female_range_1.png"
+import BmFemaleRange2 from "@/assets/ntv/bmi/bm_female_range_2.png"
+import BmFemaleRange3 from "@/assets/ntv/bmi/bm_female_range_3.png"
+import BmFemaleRange4 from "@/assets/ntv/bmi/bm_female_range_4.png"
+import BmFemaleRange5 from "@/assets/ntv/bmi/bm_female_range_5.png"
+
+import BmMaleRange0 from "@/assets/ntv/bmi/bm_male_range_0.png"
+import BmMaleRange1 from "@/assets/ntv/bmi/bm_male_range_1.png"
+import BmMaleRange2 from "@/assets/ntv/bmi/bm_male_range_2.png"
+import BmMaleRange3 from "@/assets/ntv/bmi/bm_male_range_3.png"
+import BmMaleRange4 from "@/assets/ntv/bmi/bm_male_range_4.png"
+import BmMaleRange5 from "@/assets/ntv/bmi/bm_male_range_5.png"
+
+type Props = {
+  gender: 'female' | 'male' | null
+  bmi?: string
+}
+
+const BmiRanges = ({ bmi, gender = 'female' }: Props) => {
+  if (!bmi) return null
+  if (!gender) return null
+
+  const ranges = {
+    'female': [
+      {min: 0, max: 18.4, image: BmFemaleRange0, title: 'Bajo peso'},
+      {min: 18.41, max: 24.9, image: BmFemaleRange1, title: 'Normo peso'},
+      {min: 25.0, max: 29.9, image: BmFemaleRange2, title: 'Sobre Peso'},
+      {min: 30.0, max: 34.9, image: BmFemaleRange3, title: 'Obesidad I'},
+      {min: 35.0, max: 39.9, image: BmFemaleRange4, title: 'Obesidad II'},
+      {min: 40.0, max: 999, image: BmFemaleRange5, title: 'Obesidad morbida'},
+    ],
+    'male': [
+      {min: 0, max: 18.4, image: BmMaleRange0, title: 'Bajo peso'},
+      {min: 18.41, max: 24.9, image: BmMaleRange1, title: 'Normo peso'},
+      {min: 25.0, max: 29.9, image: BmMaleRange2, title: 'Sobre Peso'},
+      {min: 30.0, max: 34.9, image: BmMaleRange3, title: 'Obesidad I'},
+      {min: 35.0, max: 39.9, image: BmMaleRange4, title: 'Obesidad II'},
+      {min: 40.0, max: 999, image: BmMaleRange5, title: 'Obesidad morbida'},
+    ]
+  };
+
+  const bmiFloat = parseFloat(bmi)
+  return (
+    <div className="flex flex-row ">
+      {ranges[gender].map((range, index) => (
+        <div key={index} className="flex flex-col items-center p-3"
+          style={ bmiFloat > range.min && bmiFloat <= range.max
+          ? {background: 'rgb(253, 185, 198)', borderRadius: '25px' }
+          : {}}
+       >
+          <img src={range.image} alt={`Imagen ${index}`} className="sm:w-12 sm:h-20 md:w-24 md:h-32" />
+          <div className="flex flex-col">
+            <span className="text-center"> {`<= ${range.max}`}</span>
+            <span className="text-center">{range.title}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+export default BmiRanges;

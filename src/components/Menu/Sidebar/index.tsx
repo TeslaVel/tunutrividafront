@@ -1,35 +1,55 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import NoImage from "@/assets/ntv/no-image.png";
 import Calendar from "@/assets/icons/calendar"
+import HomeIcon from "@/assets/icons/homeIcon"
+import SessionIcon from "@/assets/icons/sessionIcon"
+import ChatIcon from "@/assets/icons/chatIcon"
 import Logout from "@/assets/icons/logout"
 import ArrowRight from "@/assets/icons/arrowright"
 import ArrowLeft from "@/assets/icons/arrowleft"
-import { NavLink } from "react-router-dom";
 import { UserType } from '@/shared/types'
+import { NavLink } from "react-router-dom";
+import useMediaQuery from "@/hooks/useMediaQuery";
+
+// types
 import { SelectedPage } from "@/shared/types";
 
 type Props = {
   selectedPage: SelectedPage;
   userStored: UserType | null;
-  deleteUserStored:  () => void;
+  deleteUserStored: () => void;
 }
 
 const optionsForSidebar = [
-  {label: 'Dashboard', value: 'dashboard', icon: 'calendar'},
+  {label: 'Dashboard', value: 'dashboard', icon: 'home'},
   {label: 'Calendario', value: 'appointments', icon: 'calendar'},
-  {label: 'Sessiones', value: 'sessions', icon: 'calendar'},
-  {label: 'Chat', value: 'chat', icon: 'calendar'}
+  {label: 'Sessiones', value: 'sessions', icon: 'session'},
+  {label: 'Chat', value: 'chat', icon: 'chat'}
 ];
 
 const showIcon = (key: string) => {
   if (key === 'calendar') return <Calendar />
+  if (key === 'home') return <HomeIcon />
+  if (key === 'session') return <SessionIcon />
+  if (key === 'chat') return <ChatIcon />
 
   return null
 };
 
 const Sidebar = ({selectedPage, userStored, deleteUserStored}: Props) => {
+  const isAboveMediumScreens = useMediaQuery("(min-width: 940px)");
   const [expanded, setExpanded] = useState<boolean>(true);
   const [elementVisible, setElementVisible] = useState<boolean>(true);
+
+  useEffect(() => {
+    if (isAboveMediumScreens) {
+      setExpanded(true)
+      setElementVisible(true)
+    } else {
+      setExpanded(false)
+      setElementVisible(false)
+    }
+  }, [isAboveMediumScreens]);
 
   const toggleExpand = () => {
     setExpanded(!expanded);
@@ -40,7 +60,7 @@ const Sidebar = ({selectedPage, userStored, deleteUserStored}: Props) => {
     if (expanded) setElementVisible(true)
   }
 
-  const  injectedStyle = {
+  const injectedStyle = {
     background: 'linear-gradient(50deg, #FF9C99 0%, #FFB0AD 100%)'
   }
 
@@ -94,7 +114,7 @@ const Sidebar = ({selectedPage, userStored, deleteUserStored}: Props) => {
             </NavLink>
           ))}
 
-          <span className={`h-8 mt-3 flex items-center rounded-lg hover:bg-primary-500 cursor-pointer ${expanded ? 'px-4' : 'px-1'}`}>
+          <span className={`h-8 mt-10 flex items-center rounded-lg hover:bg-primary-500 cursor-pointer ${expanded ? 'px-4' : 'px-1'}`}>
             <button className="flex" onClick={() => deleteUserStored()}>
               <Logout />
               { elementVisible && <span className="ml-2">Log Out</span> }

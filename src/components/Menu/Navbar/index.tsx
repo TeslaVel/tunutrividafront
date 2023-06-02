@@ -7,7 +7,6 @@ import LinkAnchor from "../LinkAnchor";
 import { SelectedPage } from "@/shared/types";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import ActionButton from "@/shared/ActionButton";
-import { AuthContext } from '@/AuthProviderManager';
 import { Link } from "react-router-dom";
 
 type Props = {

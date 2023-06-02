@@ -12,8 +12,8 @@ interface IProps {
 
 const IconHandler = ({ name, width, height, color} : IProps) => {
   if (name === 'in_person') return <UserIcon width={width} height={height} color={color}/>
-  if (name === 'phone_call') return <PhoneIcon  width={width} height={height} color={color}/>
-  if (name === 'video_call') return <CameraIcon  width={width} height={height} color={color}/>
+  if (name === 'phone_call') return <PhoneIcon width={width} height={height} color={color}/>
+  if (name === 'video_call') return <CameraIcon width={width} height={height} color={color}/>
 
   return null
 };

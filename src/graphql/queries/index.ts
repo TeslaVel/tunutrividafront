@@ -43,11 +43,13 @@ export const COMMENT_MUTATION = gql`
 export const ENTRY_MUTATION = gql`
   mutation CreateEntry(
     $entry_type: String!,
-    $description: String!
+    $description: String!,
+    $image: Upload
   ) {
     createEntry(input: {
-       entryType: $entry_type,
-       description: $description
+      entryType: $entry_type,
+      description: $description,
+      image: $image
     }) {
       id
       description
@@ -60,6 +62,7 @@ export const ENTRY_MUTATION = gql`
     }
   }
 `;
+
 
 export const LOGIN_MUTATION = gql`
   mutation AuthMutation(
@@ -95,8 +98,8 @@ export const LOGOUT_MUTATION = gql`
 // Gets
 
 export const GET_ENTRIES = gql`
-  query entries {
-    entries {
+  query entries($order: String) {
+    entries(order: $order) {
       id
       description
       entryType
@@ -168,6 +171,7 @@ export const GET_SESSIONS = gql`
   query sessions {
     sessions {
       id
+      age
       height
       weight
       waist

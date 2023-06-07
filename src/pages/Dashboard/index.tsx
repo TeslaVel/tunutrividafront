@@ -6,15 +6,17 @@ import { AuthContext } from '@/AuthProviderManager';
 
 // types
 import { SelectedPage } from "@/shared/types";
+
 type Props = {
   selectedPage: SelectedPage
   setSelectedPage: (value: SelectedPage) => void;
+  asignCLientForUploadImage: () => void;
   dietitian_id?: string;
 };
 
 const cable = actioncable.createConsumer('ws://localhost:3001/cable');
 
-export const Dashboard = ({setSelectedPage, dietitian_id }: Props) => {
+export const Dashboard = ({setSelectedPage, dietitian_id, asignCLientForUploadImage}: Props) => {
   const { userStored } = useContext(AuthContext);
   const [optionSelected, setOptionSelected] = useState<string>('dashboard')
 
@@ -47,8 +49,9 @@ export const Dashboard = ({setSelectedPage, dietitian_id }: Props) => {
              />
           </div>
           <div className="pt-12 entry-list-content w-full flex flex-col items-center overflow-hidden" >
-            <div className='flex mt-5 entry-list-scroller w-full flex overflow-y-scroll ' style={{height: '90vh'}}>
+            <div className='flex mt-5 dashboard-scroller w-full flex overflow-y-scroll' id='dashboard-scroller' style={{height: '90vh'}}>
               <DashboardSections
+                asignCLientForUploadImage={asignCLientForUploadImage}
                 userStored={userStored}
                 optionSelected={optionSelected}
                 handleCableAction={handleCableAction}

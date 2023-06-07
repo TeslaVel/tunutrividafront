@@ -1,14 +1,17 @@
-import React, { useState, useEffect, useContext} from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom/client'
+
 import App from './App'
-// import { AuthContext } from '@/AuthProviderManager'
 import { useStorage } from '@/hooks/useStorage';
 import './index.css'
 
 import { ApolloClient, InMemoryCache, HttpLink, from, ApolloProvider } from '@apollo/client'
+import { createUploadLink } from 'apollo-upload-client';
 import { onError } from "@apollo/client/link/error";
 
-const BASE_URL = 'http://localhost:3001/graphql';
+const VITE_GRAPHQ_URL= 'http://localhost:3001/graphql'
+
+const deleteUploadCookie = () => window.localStorage.removeItem('upldtkTnvD');
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)
@@ -22,6 +25,8 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
     console.log(`[Network error]: ${networkError}`);
     // deleteAndRedirect();
   };
+
+  deleteUploadCookie();
 });
 
 const deleteAndRedirect = () => {
@@ -30,16 +35,16 @@ const deleteAndRedirect = () => {
 }
 
 const AppWrapper = () => {
+  const item = window.localStorage.getItem('upldtkTnvD');
+  const isSetted = item !== null ? JSON.parse(item) : null;
+  console.log('isSetted', isSetted);
   const { userData, getStorage } = useStorage('pgus-tk', null)
   const [client, setClient] = useState(() => {
     const auth = userData?.token ? {authorization: `Bearer ${userData?.token}`} : {authorization: ''};
     console.log('auth new', auth)
     return new ApolloClient({
       cache: new InMemoryCache(),
-      link: from([errorLink, new HttpLink({
-        uri: BASE_URL,
-        headers: auth
-      })])
+      link: from([errorLink, new HttpLink({ uri: VITE_GRAPHQ_URL, headers: auth })])
     });
   });
 
@@ -49,11 +54,29 @@ const AppWrapper = () => {
     console.log('auth useEffect', auth)
     setClient(new ApolloClient({
       cache: new InMemoryCache(),
-      link: from([errorLink, new HttpLink({
-        uri: BASE_URL,
-        headers: auth
-      })])
+      link: from([errorLink, new HttpLink({ uri: VITE_GRAPHQ_URL, headers: auth })])
     }));
+  }
+
+  const asignCLientForUploadImage = () => {
+    if (isSetted) {
+      const userTokenData = getStorage()
+      const auth = userTokenData?.token ? {authorization: `Bearer ${userTokenData?.token}`} : {authorization: ''};
+      console.log('UploadImage useEffect', auth)
+      const link = createUploadLink({
+        uri: VITE_GRAPHQ_URL,
+        headers: auth,
+        credentials: 'include'
+      })
+
+      setClient(new ApolloClient({
+        cache: new InMemoryCache(),
+        link: from([errorLink, link])
+      }));
+    } else {
+      deleteUploadCookie()
+      asignClientAfterLogin()
+    }
   }
 
   useEffect(() => {
@@ -67,7 +90,9 @@ const AppWrapper = () => {
   return (
     <React.StrictMode>
       <ApolloProvider client={client}>
-        <App updateMainStatusLogin={updateMainStatusLogin}/>
+        <App
+          updateMainStatusLogin={updateMainStatusLogin}
+          asignCLientForUploadImage={asignCLientForUploadImage}/>
       </ApolloProvider>
     </React.StrictMode>
   );

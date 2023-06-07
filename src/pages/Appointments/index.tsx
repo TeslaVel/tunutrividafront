@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { useGetAppointments } from '@/hooks/useGetAppointments'
-import IconHandler from '@/components/IconHandler'
-import { customDateFormat } from '@/components/utils/TimeUtils'
 import { useLocation } from 'react-router-dom';
+import { useGetAppointments } from '@/hooks/useGetAppointments'
+import { customDateFormat } from '@/components/utils/TimeUtils'
+import CollapsibleSection from '@/components/CollapsibleSection'
+import IconHandler from '@/components/IconHandler'
 import { GeneralFilter } from '@/components/Filter'
 
 // types
@@ -15,9 +16,16 @@ interface IProps {
 const optionFilter = [
   {label: 'Todos', value: ''},
   {label: 'Pendientes', value: 'pending'},
-  {label: 'Ocurridos', value: 'ocurred'},
+  {label: 'Finalizada', value: 'ocurred'},
   {label: 'Cancelados', value: 'cancelled'},
 ]
+
+const stNames = {
+  'pending': 'Pendiente',
+  'ocurred': 'Finalizada',
+  'happening': 'En Proceso',
+  'cancelled': 'Cancelado',
+}
 
 export const Appointments = ({ setSelectedPage }: IProps) => {
   const [filterBy, setFilterBy] = useState<string>('pending')
@@ -37,6 +45,12 @@ export const Appointments = ({ setSelectedPage }: IProps) => {
   if (!data?.appointments) return null
   const { appointments } = data
 
+  const statusName = (status_name: 'pending' | 'ocurred' | 'happening' | 'cancelled' = 'pending') => {
+    if (!status_name) return ''
+
+    return stNames[status_name]
+  }
+
   return (
     <>
       { loading &&
@@ -54,9 +68,18 @@ export const Appointments = ({ setSelectedPage }: IProps) => {
 
           <div className=" pt-10">
             { appointments?.map((apt: AppointmentType, index: number) => (
-              <div key={`appointment-${index}`} className="flex mt-2 px-3 py-2 bg-gray-20" style={{borderRadius: '20px'}}>
-              <IconHandler name={apt.appointmentType}/> &nbsp; [{apt.status}] Fecha: {customDateFormat(apt.startDate, 'DD/MM/YY')}  {customDateFormat(apt.timeStart, 'HH:mm a')} - {customDateFormat(apt.timeEnd, 'HH:mm a')} 
-              </div>
+              <CollapsibleSection
+                key={`appointment_${index}_${apt.id}`}
+                headerName={
+                  <>
+                    <IconHandler name={apt.appointmentType}/> &nbsp;[{statusName(apt.status)}] Fecha: {customDateFormat(apt.startDate, 'DD/MM/YY')}
+                  </>
+                }>
+                  <div>
+                    <div><strong>Cita con:</strong> {apt.dietitian.fullName}</div>
+                    <div><strong>Inicia:</strong> {customDateFormat(apt.timeStart, 'HH:mm a')} <strong>- </strong>{customDateFormat(apt.timeEnd, 'HH:mm a')}</div>
+                  </div>
+              </CollapsibleSection>
             ))}
           </div>
         </div>

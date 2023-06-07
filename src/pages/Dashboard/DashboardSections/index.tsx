@@ -13,9 +13,10 @@ type Props = {
   userStored: UserType | null;
   optionSelected: string;
   handleCableAction: () => void;
+  asignCLientForUploadImage: () => void;
 };
 
-const DashboardSections = ({optionSelected, handleCableAction, userStored }: Props) => {
+const DashboardSections = ({optionSelected, handleCableAction, userStored, asignCLientForUploadImage}: Props) => {
   const { loading, data, refetch } = useGetCurrentAppointments()
 
   useEffect(() => {
@@ -24,7 +25,7 @@ const DashboardSections = ({optionSelected, handleCableAction, userStored }: Pro
 
   if (optionSelected === 'entries') {
     return (
-      <Entries />
+      <Entries asignCLientForUploadImage={asignCLientForUploadImage}/>
     )
   }
 

@@ -5,9 +5,10 @@ import { SelectedPage } from "@/shared/types";
 
 interface IProps {
   updateMainStatusLogin: () => void
+  asignCLientForUploadImage: () => void
 }
 
-function App({updateMainStatusLogin}: IProps) {
+function App({updateMainStatusLogin, asignCLientForUploadImage}: IProps) {
   const [selectedPage, setSelectedPage] = useState<SelectedPage>(
     SelectedPage.Landing
   );
@@ -15,7 +16,10 @@ function App({updateMainStatusLogin}: IProps) {
   return (
     <div className="app bg-gray-20">
       <AuthProvider updateMainStatusLogin={updateMainStatusLogin}>
-        <AppRoutes selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
+        <AppRoutes
+          asignCLientForUploadImage={asignCLientForUploadImage}
+          selectedPage={selectedPage}
+          setSelectedPage={setSelectedPage} />
       </AuthProvider>
     </div>
   );

@@ -19,9 +19,10 @@ import { AuthContext } from '@/AuthProviderManager';
 type Props = {
   selectedPage: SelectedPage
   setSelectedPage: (value: SelectedPage) => void;
+  asignCLientForUploadImage: () => void;
 };
 
-export const AppRoutes = ({ selectedPage, setSelectedPage }: Props) => {
+export const AppRoutes = ({ selectedPage, setSelectedPage, asignCLientForUploadImage}: Props) => {
   const { userStored } = useContext(AuthContext);
 
   const [isTopOfPage, setIsTopOfPage] = useState<boolean>(true);
@@ -62,6 +63,7 @@ export const AppRoutes = ({ selectedPage, setSelectedPage }: Props) => {
                 <Route element={<ProtectedRoute isNotLogged={!isLogged} redirectPath="/" />}>
                   <Route path="/dashboard" element={
                     <Dashboard
+                      asignCLientForUploadImage={asignCLientForUploadImage}
                       selectedPage={selectedPage}
                       setSelectedPage={setSelectedPage}
                       dietitian_id={userStored?.dietitianId} />

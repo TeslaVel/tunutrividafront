@@ -87,12 +87,13 @@ export interface AppointmentType {
   timeEnd: string
   createdAt: string
   appointmentType: string
-  status: string
+  status: 'pending' | 'ocurred' | 'happening' | 'cancelled'
   dietitian: User
 }
 
 export interface SessionType {
   id: string
+  age: string
   height: string
   weight: string
   waist: string

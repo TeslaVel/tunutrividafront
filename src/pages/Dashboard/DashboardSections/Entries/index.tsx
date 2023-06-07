@@ -1,27 +1,24 @@
-import { useForm } from "react-hook-form";
-import { useEffect, useState, useContext } from 'react'
+import { useEffect, useState, useContext, ChangeEvent } from 'react'
 import { AuthContext } from '@/AuthProviderManager';
+import { useGetUserEntries } from '@/hooks/useGetUserEntries'
 import { Entry } from './Entry'
 import EntryWrapper from './EntryWrapper'
-import Aside from '@/components/Aside'
-import { useGetUserEntries } from '@/hooks/useGetUserEntries'
-import { useMutationCreateEntry } from '@/hooks/graph/useMutationCreateEntry'
+import { CreateEntryForm } from './CreateEntryForm'
 
 // types
 import { EntryType } from '@/shared/types'
 
-export const Entries = () => {
+type Props = {
+  asignCLientForUploadImage: () => void;
+};
+
+
+export const Entries = ({asignCLientForUploadImage}: Props) => {
+    const [orderBy] = useState<string>('created_at_desc')
     const { userStored } = useContext(AuthContext);
-    const { CreateEntry, data, loading, error, reset } = useMutationCreateEntry();
-    const { loading: loadingEntries, data: dataEntries, refetch } = useGetUserEntries()
+    const { loading: loadingEntries, data: dataEntries, refetch } = useGetUserEntries(orderBy)
     const [selectedEntry, setSelectedEntry] = useState<EntryType | null>(null)
     const [isOpenAside, setIsOpenAside] = useState<boolean>(false)
-
-    const {
-      register,
-      getValues,
-      formState: { errors },
-    } = useForm();
 
     useEffect(() => {
       refetch();
@@ -39,30 +36,21 @@ export const Entries = () => {
     const openAside = (value: boolean) => {
       console.log('abre aside', value)
       setIsOpenAside(value)
+
+      if (value) {
+        // const expirationDate = new Date();
+        // expirationDate.setTime(expirationDate.getTime() + (60 * 60 * 1000)); // Agrega una hora en milisegundos
+        window.localStorage.setItem('upldtkTnvD', JSON.stringify(true));
+        // document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+      } else {
+        window.localStorage.removeItem('upldtkTnvD');
+        // document.cookie = `upld=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+      }
     }
 
-    const createEntry = async (e: React.SyntheticEvent): Promise<void> => {
-      e.preventDefault();
-      const values = getValues()
-      console.log('values', values)
-      const { data } = await CreateEntry({ variables: values }) || {};
-      if (error) {
-        console.log(error)
-      }
-      else if (data && data.createEntry) {
-        refetch()
-        setIsOpenAside(false)
-        const descriptionField = document.getElementById('description') as HTMLInputElement;
-        descriptionField.value=''
-
-        const myDiv = document.getElementById('entry-list-scroller')
-        if (myDiv) {
-          setTimeout(() => {
-            myDiv.scrollTop = myDiv.scrollHeight;
-          }, 2);
-        }
-      }
-    };
+    const refetchEntries = () => {
+      refetch()
+    }
 
     return (
       <>
@@ -100,53 +88,12 @@ export const Entries = () => {
           </>
         }
 
-        <Aside
-          isOpen={isOpenAside}
-          close={() => openAside(false)}
-          title="Nueva Entrada"
-        >
-          <>
-          <form
-            target="_blank"
-            onSubmit={createEntry}
-            method="POST"
-            id="form-create-entry"
-          >
-            <input type="hidden" id="entry_id"
-              {...register("user_id")}
-            />
-            <div className="py-2">
-              <label htmlFor="description">
-                Descripcion
-                <textarea  id="description" className="w-full"autoComplete='off'
-                  {...register("description", {
-                    required: true,
-                    minLength: 1,
-                  })}
-                />
-              </label>
-            </div>
-            <div className="py-2">
-              <select id="entry_type" className="w-full px-2 py-1"
-                {...register("entry_type", {
-                  required: true,
-                })}
-              >
-                <option value="FoodEntry">Comida</option>
-                <option value="MetricEntry">Metricas</option>
-                <option value="WorkoutEntry">Ejercicio </option>
-                <option value="NoteEntry">Notas</option>
-                <option value="OtherEntry">Otros</option>
-              </select>
-            </div>
-            <div>
-              <button type="submit" className="px-3 py-1 w-full bg-primary-400 hover:bg-primary-500 text-white rounded-lg">
-                Crear
-              </button>
-            </div>
-          </form>
-          </>
-        </Aside>
+        <CreateEntryForm
+          refetch={refetchEntries}
+          asignCLientForUploadImage={asignCLientForUploadImage}
+          isOpenAside={isOpenAside}
+          setIsOpenAside={setIsOpenAside}
+        />
       </>
     )
 };

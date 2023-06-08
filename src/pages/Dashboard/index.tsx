@@ -3,6 +3,7 @@ import actioncable from 'actioncable';
 import DashboardSections from './DashboardSections';
 import TopBar from './TopBar';
 import { AuthContext } from '@/AuthProviderManager';
+import Scroller from '@/components/Scroller'
 
 // types
 import { SelectedPage } from "@/shared/types";
@@ -41,24 +42,24 @@ export const Dashboard = ({setSelectedPage, dietitian_id, asignCLientForUploadIm
 
   return (
     <>
-      <section id="profile" className="py-3 px-3 md:h-full md:pb-0">
-          <div className="topbar topbar gap-5 flex mb-5 fixed">
-            <TopBar
-              optionSelected={optionSelected}
-              setOptionSelected={setOptionSelected}
-             />
-          </div>
-          <div className="pt-12 entry-list-content w-full flex flex-col items-center overflow-hidden" >
-            <div className='flex mt-5 dashboard-scroller w-full flex overflow-y-scroll' id='dashboard-scroller' style={{height: '90vh'}}>
-              <DashboardSections
-                asignCLientForUploadImage={asignCLientForUploadImage}
-                userStored={userStored}
-                optionSelected={optionSelected}
-                handleCableAction={handleCableAction}
-              />
-            </div>
-          </div>
-      </section>
+      <Scroller
+        scrollerName='profile'
+        header={
+          <TopBar
+            optionSelected={optionSelected}
+            setOptionSelected={setOptionSelected}
+            />
+        }
+      >
+        <section id="profile" className="py-3 px-5 w-full" >
+          <DashboardSections
+            asignCLientForUploadImage={asignCLientForUploadImage}
+            userStored={userStored}
+            optionSelected={optionSelected}
+            handleCableAction={handleCableAction}
+          />
+        </section>
+      </Scroller>
     </>
   );
 }

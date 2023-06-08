@@ -19,7 +19,7 @@ const TopBar = ({ setOptionSelected, optionSelected }: Props) => {
       {
         tapOptions.map( (opt: {[key: string]: string}, index: number) => {
           return <span key={`${index}-${opt}`}
-                    className={`cursor-pointer p-2 hover:border-b hover:border-gray-500 hover:text-gray-500 ${opt.value === optionSelected ? classSelected : '' } `}
+                    className={`h-[30px] cursor-pointer p-2 hover:border-b hover:border-gray-500 hover:text-gray-500 ${opt.value === optionSelected ? classSelected : '' } `}
                     onClick={() => setOptionSelected(opt.value)}
                   >
                     {opt.label}

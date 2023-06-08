@@ -25,7 +25,7 @@ const Aside = ({children, isOpen, close, title}: Props) => {
   return (
     <div  className="absolute min-h-screen top-0 right-0 w-[250px]">
       <div  className="p-3 min-h-screen bg-primary-200">
-        <div className="flex items-center">
+        <div className="flex items-center justify-between">
           <span className="">{title}</span>
           <span className="cursor-pointer" onClick={() => closeAside()}>X</span>
         </div>

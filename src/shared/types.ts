@@ -136,6 +136,20 @@ export interface CommentType {
   user: User
 }
 
+export interface NoteType {
+  id: string;
+  message: string;
+  createdAt: string;
+  conversationId: string;
+  user: User
+}
+
+export interface ConversationType {
+  id: string;
+  dietitian_id: string;
+  patient_id: string;
+  notes: NoteType[]
+}
 // export interface CommentMutationType {
 //   comment: Comment;
 // };

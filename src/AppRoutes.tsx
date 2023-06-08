@@ -2,9 +2,9 @@ import { useContext, useState, useEffect, Suspense } from 'react';
 import Menu from "@/components/Menu";
 import ProtectedRoute from '@/ProtectedRoute';
 import Dashboard from '@/pages/Dashboard';
-import Sessions from '@/pages/Sessions';
-import Appointments from '@/pages/Appointments';
-import Chat from '@/pages/Chat';
+import Sessions from '@/pages/Dashboard/Sessions';
+import Appointments from '@/pages/Dashboard/Appointments';
+import Chat from '@/pages/Dashboard/Chat';
 import NotFound from '@/pages/NotFound';
 
 import {
@@ -52,7 +52,7 @@ export const AppRoutes = ({ selectedPage, setSelectedPage, asignCLientForUploadI
               setSelectedPage={setSelectedPage}
             />
 
-            <div className={`${isLogged ? 'flex-1 bg-primary-50 ' : ''}`}>
+            <div className={`${isLogged ? 'flex-1 bg-primary-50 h-[100%] bg-primary-50' : ''}`}>
               <Routes>
                 <Route element={<ProtectedRoute isNotLogged={isLogged} redirectPath="/dashboard" />}>
                   <Route index path="/" element={

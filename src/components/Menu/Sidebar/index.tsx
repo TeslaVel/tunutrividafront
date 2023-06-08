@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import NoImage from "@/assets/ntv/no-image.png";
+import NoImage from "@/assets/ntv/noimage.png";
 import Calendar from "@/assets/icons/calendar"
 import HomeIcon from "@/assets/icons/homeIcon"
 import SessionIcon from "@/assets/icons/sessionIcon"

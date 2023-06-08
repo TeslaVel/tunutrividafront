@@ -32,7 +32,7 @@ export const Comments = ({sentComments, entry_id, comments, userStored, loading}
     };
 
     return (
-      <div  id='content-comments' className="flex flex-col h-[auto] w-full flex flex-col overflow-hidden h-[300px]" style={{borderRadius: '0 0 20px 20px'}}>
+      <div  id='content-comments' className="flex flex-col w-full overflow-hidden h-[40vh]" style={{borderRadius: '0 0 20px 20px'}}>
         <div  id='content-comments-scroll'  className="overflow-y-scroll bg-primary-100  px-2" style={{borderRadius: '20px 20px 0 0 '}}>
           {comments?.map((comment: CommentType, index: number) => (
             (comment.user.id === userStored.id

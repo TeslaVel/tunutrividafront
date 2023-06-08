@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext, ChangeEvent } from 'react'
 import { AuthContext } from '@/AuthProviderManager';
 import { useGetUserEntries } from '@/hooks/useGetUserEntries'
+import Scroller from '@/components/Scroller'
 import { Entry } from './Entry'
 import EntryWrapper from './EntryWrapper'
 import { CreateEntryForm } from './CreateEntryForm'
@@ -54,39 +55,40 @@ export const Entries = ({asignCLientForUploadImage}: Props) => {
 
     return (
       <>
-        { !isList &&
-          <EntryWrapper
-            setAction={() => setSelectedEntry(null)}
-            isList={isList}
-          >
-            <Entry
-              key={`entry_key_${selectedEntry.id}`}
-              userStored={userStored}
-              entry={selectedEntry}
-              isList={isList}
-              showComments={true} />
-          </EntryWrapper>
+        <div className="w-full entry-wrapper-content">
+          { !isList &&
+              <>
+                <span style={{cursor: 'pointer'}} onClick={() => setSelectedEntry(null)}>back</span>
+                <EntryWrapper
+                >
+                  <Entry
+                    key={`entry_key_${selectedEntry.id}`}
+                    userStored={userStored}
+                    entry={selectedEntry}
+                    isList={isList}
+                    showComments={true} />
+                </EntryWrapper>
+              </>
 
-        }
-        { isList &&
-          <>
-            <EntryWrapper
-              isList={isList}
-              setIsOpenAside={openAside}
-            >
-            { entries?.map((entry: EntryType, index: number) => (
-                <Entry
-                  key={`entry_key_${entry.id}`}
-                  isList={isList}
-                  setAction={setSelectedEntry}
-                  userStored={userStored}
-                  entry={entry}
-                  showComments={false}
-                />
-                ))}
-            </EntryWrapper>
-          </>
-        }
+          }
+          { isList &&
+            <>
+              <span style={{cursor: 'pointer'}} onClick={() => setIsOpenAside && setIsOpenAside(true)}>Nueva Entrada</span>
+              <EntryWrapper>
+              { entries?.map((entry: EntryType, index: number) => (
+                  <Entry
+                    key={`entry_key_${entry.id}`}
+                    isList={isList}
+                    setAction={setSelectedEntry}
+                    userStored={userStored}
+                    entry={entry}
+                    showComments={false}
+                  />
+                  ))}
+              </EntryWrapper>
+            </>
+          }
+        </div>
 
         <CreateEntryForm
           refetch={refetchEntries}

@@ -123,6 +123,34 @@ export const GET_ENTRIES = gql`
     }
   }
 `
+export const GET_CONVERSATION = gql`
+  query conversation {
+    conversation {
+      id
+      dietitian {
+            id
+            fullName
+            initials
+        }
+      patient {
+            id
+            fullName
+            initials
+        }
+      notes {
+        id
+        message
+        createdAt
+        conversationId
+        user {
+          id
+          fullName
+          initials
+        }
+      }
+    }
+  }
+`
 
 export const GET_APPOINTMENTS = gql`
   query appointments($filter: FilterInput) {

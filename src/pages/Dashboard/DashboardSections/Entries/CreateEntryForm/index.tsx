@@ -27,7 +27,7 @@ export const CreateEntryForm = ({refetch, isOpenAside, setIsOpenAside}: Props) =
 
   const watchImage: HTMLImageElement = watch('image');
 
-  const createEntry = async (e: React.SyntheticEvent): Promise<void> => {
+  const createAction = async (e: React.SyntheticEvent): Promise<void> => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -98,7 +98,7 @@ export const CreateEntryForm = ({refetch, isOpenAside, setIsOpenAside}: Props) =
       <>
         <form
           target="_blank"
-          onSubmit={createEntry}
+          onSubmit={createAction}
           method="POST"
           id="form-create-entry"
           encType="multipart/form-data"

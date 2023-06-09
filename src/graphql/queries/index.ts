@@ -40,6 +40,42 @@ export const COMMENT_MUTATION = gql`
   }
 `;
 
+export const NOTE_MUTATION = gql`
+  mutation CreateNote(
+    $conversation_id: String!,
+    $message: String!
+  ) {
+    createNote(input: {
+       conversationId: $conversation_id,
+       message: $message
+    }) {
+      id
+      message
+      createdAt
+      user {
+        id
+        fullName
+        initials
+      }
+    }
+  }
+`;
+
+export const CONVERSATION_MUTATION = gql`
+  mutation CreateConversation(
+    $dietitian_id: String!
+    $message: String
+  ) {
+    createConversation(input: {
+       dietitianId: $dietitian_id,
+       message: $message
+    }) {
+      id
+    }
+  }
+`;
+
+
 export const ENTRY_MUTATION = gql`
   mutation CreateEntry(
     $entry_type: String!,

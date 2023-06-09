@@ -1,8 +1,9 @@
-import { useEffect, useContext } from "react";
-import Scroller from '@/components/Scroller'
-import ChatForm from './ChatForm'
+import { useEffect, useState, useContext } from "react";
 import { AuthContext } from '@/AuthProviderManager';
 import { UseGetConversation } from '@/hooks/useGetConversation'
+import Scroller from '@/components/Scroller'
+import ChatForm from './ChatForm'
+import { CreateConversationForm } from './CreateConversationForm'
 // types
 import { SelectedPage, CommentType } from "@/shared/types";
 
@@ -11,52 +12,58 @@ type Props = {
 };
 
 
-const comments: CommentType[] = [
-  {
-    id: '1',
-    message: 'Hola que tal',
-    createdAt: '17/03/2023 10:50 am',
-    user: {
-      id: '1',
-      firstName: 'Juan Perez',
-      firstNameInitial: 'Juan P',
-      fullName: 'Juan',
-      initials: 'JP'
-    }
-  },
-  {
-    id: '2',
-    message: 'Muy bien como te va ',
-    createdAt: '17/03/2023 10:50 am',
-    user: {
-      id: '10',
-      firstName: 'Tesla Vel',
-      firstNameInitial: 'Tesla V',
-      fullName: 'Tesla',
-      initials: 'TV'
-    }
-  }
-]
-
 export const Chat = ({setSelectedPage }: Props) => {
   const { userStored } = useContext(AuthContext);
   const { loading, data, refetch } = UseGetConversation()
+  const [isOpenAside, setIsOpenAside] = useState<boolean>(false)
 
   useEffect(() => {
     setSelectedPage(SelectedPage.Chat)
+    refetch()
   }, []);
+
+
+  const refetchConversation = () => {
+    refetch()
+  }
 
   const conversation = data?.conversation
 
   return (
-    <Scroller scrollerName='sessions'>
-      <section id="chat" className="py-3 px-5 w-full">
-        <ChatForm
-          conversation={conversation}
-          userStored={userStored}
-        />
-      </section>
-    </Scroller>
+    <>
+      <Scroller scrollerName='sessions'>
+        <section id="chat" className="py-3 px-5 w-full">
+          <>
+          { loading
+            ? <div>Cargando...</div>
+            : <>
+              { conversation &&
+                <ChatForm
+                  refetchConversation={refetchConversation}
+                  conversation={conversation}
+                  userStored={userStored}
+                />
+              }
+
+              { !conversation &&
+                <div className="flex justify-center p-[70px]">
+                  <button onClick={() => setIsOpenAside(true)}>
+                    Crear Nueva Conversación
+                  </button>
+                </div>
+              }
+            </>
+          }
+          </>
+        </section>
+      </Scroller>
+      <CreateConversationForm
+        userStored={userStored}
+        isOpenAside={isOpenAside}
+        setIsOpenAside={setIsOpenAside}
+        refetchConversation={refetchConversation}
+      />
+    </>
   );
 }
 

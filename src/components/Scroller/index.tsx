@@ -6,7 +6,7 @@ type Props = {
   classNames?: string
 }
 
-const headerHeight = '40'
+
 
 const Scroller = ({
   children,
@@ -14,7 +14,16 @@ const Scroller = ({
   scrollerName = 'component',
   classNames = '',
 }: Props) => {
+  const headerHeight = '40'
   const withTopNav = header !== null
+  const ztyle = withTopNav
+    ? {
+      height: `calc(100vh - ${headerHeight}px)`,
+      marginTop: `${headerHeight}px`
+    }
+    : {
+      height: '100vh'
+    }
 
   return (
     <>
@@ -24,8 +33,8 @@ const Scroller = ({
         </div>
       }
       <div
-        className={`${withTopNav ? `mt-[${headerHeight}px]` : ''} w-full flex flex-col items-center overflow-hidden scroller-content-${scrollerName} ${classNames}`}
-        style={{height: withTopNav ? `calc(100vh - ${headerHeight}px)` : '100vh'}}>
+        className={`w-full flex flex-col items-center overflow-hidden scroller-content-${scrollerName} ${classNames}`}
+        style={ztyle}>
         <div
           className={`flex w-full scroller-section-${scrollerName} flex overflow-y-scroll`}
           id={`scroller-section-${scrollerName}`}

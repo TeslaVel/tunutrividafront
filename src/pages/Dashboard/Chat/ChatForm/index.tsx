@@ -1,28 +1,85 @@
-// types
+import { useEffect } from "react";
+
 import { UserType, ConversationType, CommentType } from "@/shared/types";
+import { useMutationCreateNote } from '@/hooks/graph/useMutationCreateNote'
+import { useForm } from "react-hook-form"
 
 interface Props {
+  refetchConversation: () => void
   conversation: ConversationType
   userStored: UserType | null;
 }
 
-export const ChatForm = ({userStored, conversation}: Props) => {
-  const inserEmoji = (emoji: string) => {
-    const inputField = document.getElementById('messageInput') as HTMLInputElement;
+export const ChatForm = ({userStored, conversation, refetchConversation}: Props) => {
+  const notes = conversation?.notes
 
-    if (inputField !== null) {
-      inputField.value += ` ${emoji}`;
+  useEffect(() => {
+    scrollDiv()
+  }, []);
+
+  useEffect(() => {
+    scrollDiv()
+  }, [notes]);
+
+  const { CreateNote, data, loading, error } = useMutationCreateNote();
+  const {
+    register,
+    getValues,
+    setValue,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  const scrollDiv = () => {
+    const myDiv = document.getElementById('content-note-scroll')
+    if (myDiv) {
+      setTimeout(() => {
+        myDiv.scrollTop = myDiv.scrollHeight;
+      }, 2);
     }
   }
 
-  const notes = conversation?.notes
+  const inserEmoji = (emoji: string) => {
+    const values = getValues()
+    let message = values.message
+    const inputField = document.getElementById('message') as HTMLInputElement;
+    if (message !== null) {
+      message += ` ${emoji}`;
+    }
+    if (inputField !== null) {
+      inputField.value = message;
+    }
+
+    setValue('message', message);
+  }
+
+
+  const createAction = async (e: React.SyntheticEvent): Promise<void> => {
+    e.preventDefault();
+    const values = {
+      conversation_id: conversation.id,
+      ...getValues()
+    }
+    console.log('values', values)
+
+    const { data } = await CreateNote({ variables: values }) || {};
+    if (error) {
+      console.log(error)
+    }
+    else if (data && data.createNote) {
+      refetchConversation();
+      reset()
+      // const messageField = document.getElementById('message') as HTMLInputElement;
+      // messageField.value=''
+    }
+  };
 
   return (
     <div className="flex flex-col mx-[5rem] mt-[5rem]" >
       <div
         className="flex flex-col w-full overflow-hidden h-[50vh] bg-primary-100"
         style={{borderRadius: '20px 20px 0 0 '}}>
-        <div  id='content-comments-scroll'  className="overflow-y-scroll px-2">
+        <div  id='content-note-scroll'  className="overflow-y-scroll px-2">
           {notes?.map((comment: CommentType, index: number) => (
             (userStored && userStored.id === comment.user.id
               ? <div className="w-full flex items-center justify-end py-2 " key={`comment_${comment.id}-${index}`}>
@@ -44,24 +101,35 @@ export const ChatForm = ({userStored, conversation}: Props) => {
         </div>
       </div>
 
-      <div className="flex justify-between items-center pb-3 pt-8 px-3 bg-primary-200">
-        <div className="flex flex-grow flex-col" >
-          <div id="emojiPanel" className="flex ml-1 pb-1 gap-3 emoji-panel">
-            <button type="button" className="emoji" onClick={() => inserEmoji('👍')}>👍</button>
-            <button type="button" className="emoji" onClick={() => inserEmoji('👏')}>👏</button>
-            <button type="button" className="emoji" onClick={() => inserEmoji('☺️')}>☺️</button>
-            <button type="button" className="emoji" onClick={() => inserEmoji('🎉')}>🎉</button>
-            <button type="button" className="emoji" onClick={() => inserEmoji('🤔')}>🤔</button>
-            <button type="button" className="emoji" onClick={() => inserEmoji('😎')}>😎</button>
+      <form
+        target="_blank"
+        onSubmit={createAction}
+        method="POST"
+        id="form-create-note"
+      >
+        <div className="flex justify-between items-center pb-3 pt-8 px-3 bg-primary-200">
+          <div className="flex flex-grow flex-col" >
+            <div id="emojiPanel" className="flex ml-1 pb-1 gap-3 emoji-panel">
+              <button type="button" className="emoji" onClick={() => inserEmoji('👍')}>👍</button>
+              <button type="button" className="emoji" onClick={() => inserEmoji('👏')}>👏</button>
+              <button type="button" className="emoji" onClick={() => inserEmoji('☺️')}>☺️</button>
+              <button type="button" className="emoji" onClick={() => inserEmoji('🎉')}>🎉</button>
+              <button type="button" className="emoji" onClick={() => inserEmoji('🤔')}>🤔</button>
+              <button type="button" className="emoji" onClick={() => inserEmoji('😎')}>😎</button>
+            </div>
+            <input
+              {...register("message", {
+                required: true,
+                minLength: 1,
+              })}
+              id='message'
+              type="text"
+              placeholder="Escribe tu mensaje..."
+              className="mr-4 p-1 border rounded-lg focus:outline-none" />
           </div>
-          <input
-            id="messageInput"
-            type="text"
-            placeholder="Escribe tu mensaje..."
-            className="mr-4 p-1 border rounded-lg focus:outline-none" />
+          <button className="px-4 py-1 bg-blue-500 text-white rounded-lg" style={{alignSelf: 'end'}}>Enviar</button>
         </div>
-        <button className="px-4 py-1 bg-blue-500 text-white rounded-lg" style={{alignSelf: 'end'}}>Enviar</button>
-      </div>
+      </form>
     </div>
   );
 }

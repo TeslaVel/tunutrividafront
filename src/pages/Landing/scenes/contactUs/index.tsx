@@ -14,7 +14,7 @@ type Props = {
 const ContactUs = ({ setSelectedPage }: Props) => {
   const { CreateContactUs, data, loading, error, reset } = useMutationContactUs();
 
-  const inputStyles = `mb-5 w-full rounded-lg bg-primary-200
+  const inputStyles = `mb-5 w-full rounded-lg bg-purple-15
   px-5 py-3 placeholder-white`;
 
   const {
@@ -36,9 +36,9 @@ const ContactUs = ({ setSelectedPage }: Props) => {
   };
 
   return (
-    <section id="contactanos" className="mx-auto w-5/6 pt-[10em] pb-32">
+    <section id="contactus" className="mx-auto w-5/6 pt-[10em] pb-32">
       <motion.div
-        onViewportEnter={() => setSelectedPage(SelectedPage.Contactanos)}
+        onViewportEnter={() => setSelectedPage(SelectedPage.Contactus)}
         className="justify-between gap-8 md:flex"
       >
         {/* FORM AND IMAGE */}
@@ -56,7 +56,7 @@ const ContactUs = ({ setSelectedPage }: Props) => {
             }}
           >
             <HText>
-              <span className="text-primary-500">ÚNETE AHORA</span> PARA MOLDEAR TU MEJOR VERSION
+              <span className="text-purple-100">ÚNETE AHORA</span> PARA MOLDEAR TU MEJOR VERSION
             </HText>
             <p className="my-5">
               Felicidades por tomar la decisión de mejorar tu salud y transformar tu cuerpo!
@@ -153,9 +153,9 @@ const ContactUs = ({ setSelectedPage }: Props) => {
 
               <button
                 type="submit"
-                className="mt-5 rounded-lg bg-primary-200 hover:bg-primary-400 px-20 py-3 transition duration-500 hover:text-white"
+                className="mt-5 rounded-lg bg-purple-15 hover:bg-purple-50 px-20 py-3 transition duration-500 hover:text-white"
               >
-                SUBMIT
+                ENVIAR
               </button>
             </form>
           </motion.div>

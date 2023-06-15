@@ -42,15 +42,17 @@ const BmiRanges = ({ bmi, gender = 'female' }: Props) => {
   };
 
   const bmiFloat = parseFloat(bmi)
+  const resKlas = 'xxxs:mr-2 lg:text-[14px] md:text-[12px] xs:text-[11px] xxs:text-[10px] xxxs:text-[9px] \
+    w-[120px] md:w-[100px] sm:w-[80px] xs:w-[60px] xxs:w-[40px] xxxs:w-[35px]'
   return (
     <div className="flex flex-row ">
       {ranges[gender].map((range, index) => (
-        <div key={index} className="flex flex-col items-center p-3"
+        <div key={index} className={`flex flex-col items-center justify-between px-3 py-3 h-auto ${resKlas}`}
           style={ bmiFloat > range.min && bmiFloat <= range.max
           ? {background: 'rgb(253, 185, 198)', borderRadius: '25px' }
           : {}}
        >
-          <img src={range.image} alt={`Imagen ${index}`} className="sm:w-12 sm:h-20 md:w-24 md:h-32" />
+          <img src={range.image} alt={`Imagen ${index}`} className="w-fill" />
           <div className="flex flex-col">
             <span className="text-center"> {`<= ${range.max}`}</span>
             <span className="text-center">{range.title}</span>

@@ -78,7 +78,7 @@ const Sidebar = ({selectedPage, userStored, deleteUserStored}: Props) => {
           { expanded &&
             <>
               <div className="flex flex-col items-center pb-3">
-                <img src={NoImage} alt="Logo" className="h-[6rem] w-[6rem] mr-2" />
+                <img src={NoImage} alt="Logo" className="h-[6rem] w-[6rem]" />
                 <h1 className="text-lg font-bold mt-2">{userStored?.firstName} {userStored?.lastName}</h1>
               </div>
               <div>

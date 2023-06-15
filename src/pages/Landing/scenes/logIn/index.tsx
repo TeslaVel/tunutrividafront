@@ -27,7 +27,7 @@ const LogIn = ({ setSelectedPage }: Props) => {
     }
   }, [data?.createAuth]);
 
-  const inputStyles = `mb-5 w-full rounded-lg bg-primary-200
+  const inputStyles = `mb-5 w-full rounded-lg bg-purple-15
   px-5 py-3 placeholder-white`;
 
   const {
@@ -125,18 +125,20 @@ const LogIn = ({ setSelectedPage }: Props) => {
               )}
 
 
-              <button
-                type="submit"
-                className="sm:w-[100px] mt-5 rounded-lg bg-primary-200 hover:bg-primary-400 px-20 py-3 transition duration-500 hover:text-white"
-              >
-                Login
-              </button>
+              <div className="flex sm:gap-4 sm:flex-col lg:flex-row lg:justify-between mt-5">
+                <button
+                  type="submit"
+                  className="sm:px-15 px-20 text-center w-auto rounded-lg bg-purple-15 hover:bg-purple-50 py-3 transition duration-500 hover:text-white"
+                >
+                  Logear
+                </button>
 
-              <a className="m:w-[100px]  ml-4 mt-5 rounded-lg bg-primary-200 hover:bg-primary-400 px-20 py-3 transition duration-500 hover:text-white"
-                onClick={() => setSelectedPage(SelectedPage.Contactanos)}
-                href={`#${SelectedPage.Contactanos}`} >
-                Become a Member
-              </a>
+                <a className="sm:px-16 px-20 text-center w-auto rounded-lg bg-purple-15 hover:bg-purple-50 px-20 py-3 transition duration-500 hover:text-white"
+                  onClick={() => setSelectedPage(SelectedPage.Contactus)}
+                  href={`#${SelectedPage.Contactus}`} >
+                  Únete a Nosotors
+                </a>
+              </div>
             </form>
           </motion.div>
         </div>

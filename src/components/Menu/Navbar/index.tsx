@@ -19,28 +19,32 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
   const flexBetween = "flex items-center justify-between";
   const [isMenuToggled, setIsMenuToggled] = useState<boolean>(false);
   const isAboveMediumScreens = useMediaQuery("(min-width: 1060px)");
-  const navbarBackground = isTopOfPage ? "" : "bg-primary-50 drop-shadow";
+  const navbarBackground = isTopOfPage ? "" : "bg-purple-10 drop-shadow";
 
   const landingOptions = () => {
     return (
       <>
         <LinkAnchor
           page="Home"
+          url="home"
           selectedPage={selectedPage}
           setSelectedPage={setSelectedPage}
         />
         <LinkAnchor
           page="Paquetes"
+          url="packages"
           selectedPage={selectedPage}
           setSelectedPage={setSelectedPage}
         />
         <LinkAnchor
           page="Tratamientos"
+          url="treatments"
           selectedPage={selectedPage}
           setSelectedPage={setSelectedPage}
         />
         <LinkAnchor
           page="Contactanos"
+          url="contactus"
           selectedPage={selectedPage}
           setSelectedPage={setSelectedPage}
         />
@@ -56,10 +60,10 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
         </div>
         <div className={`${flexBetween} gap-8`}>
           <ActionButton setSelectedPage={setSelectedPage} selectedPage={SelectedPage.LogIn}>
-            Sign In
+            Logear
           </ActionButton>
-          <ActionButton setSelectedPage={setSelectedPage} selectedPage={SelectedPage.Contactanos}>
-            Become a Member
+          <ActionButton setSelectedPage={setSelectedPage} selectedPage={SelectedPage.Contactus}>
+            Únete a Nosotors
           </ActionButton>
         </div>
       </>
@@ -87,7 +91,7 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
               </div>
             ) : (
               <button
-                className="rounded-full bg-primary-300 p-2"
+                className="rounded-full bg-purple-20 p-2"
                 onClick={() => setIsMenuToggled(!isMenuToggled)}
               >
                 <Bars3Icon className="h-6 w-6 text-white" />
@@ -99,7 +103,7 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
 
       {/* MOBILE MENU MODAL */}
       {!isAboveMediumScreens && isMenuToggled &&
-        <div className="fixed right-0 bottom-0 z-40 h-full w-[300px] bg-primary-50 drop-shadow-xl">
+        <div className="fixed right-0 bottom-0 z-40 h-full w-[300px] bg-purple-10 drop-shadow-xl">
           {/* CLOSE ICON */}
           <div className="flex justify-end p-12">
             <button onClick={() => setIsMenuToggled(!isMenuToggled)}>

@@ -7,6 +7,14 @@ export const capitalizeEach = (str?: string): string => {
   return str.replace(/\b\w/g, l => l.toUpperCase())
 }
 
+export const lowerizeEach = (str?: string): string => {
+  if (!str) {
+    return ''
+  }
+
+  return str.replace(/\b\w/g, l => l.toLowerCase())
+}
+
 export const capitalize = (str?: string): string => {
   if (!str) {
     return ''

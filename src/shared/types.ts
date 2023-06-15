@@ -1,8 +1,8 @@
 export enum SelectedPage {
   Home = "home",
   Packages = "packages",
-  NuestrosTratamientos = "tratamientos",
-  Contactanos = "contactanos",
+  Treatments = "treatments",
+  Contactus = "contactus",
   LogIn = "login",
   Landing = "landing",
   Dashboard = "dashboard",

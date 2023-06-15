@@ -44,7 +44,7 @@ export const AppRoutes = ({ selectedPage, setSelectedPage, asignCLientForUploadI
     <>
       <Suspense fallback={<div />}>
         <BrowserRouter>
-          <div className={`${isLogged ? 'flex min-h-screen' : ''}`}>
+          <div className={`${isLogged ? 'flex min-h-screen' : 'gray-purple-20'}`}>
             <Menu
               isLogged={isLogged}
               isTopOfPage={isTopOfPage}

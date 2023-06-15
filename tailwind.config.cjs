@@ -26,9 +26,15 @@ module.exports = {
         "purple-500": "#8b1f95",
         "purple-400": "#AE26BA",
         "purple-300": "#C834D5",
-        "purple-200": "#D156DC",
-        "purple-100": "#DA78E3",
-        "purple-50": "#CD45D9",
+        "purple-200": "#CD45D9",
+        "purple-100": "#D156DC",
+        "purple-50": "#DA78E3",
+        "purple-30": "#dc85e3",
+        "purple-20": "#ef91f7",
+        "purple-15": "#f8b4ff",
+        "purple-10": "#f4c5f9",
+        "purple-05": "#edd3f0",
+        "gray-purple-20": "#faeefb",
       },
       backgroundImage: (theme) => ({
         "gradient-yellowred":

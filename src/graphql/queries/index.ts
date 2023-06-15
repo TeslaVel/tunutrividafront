@@ -261,3 +261,15 @@ export const GET_SESSIONS = gql`
     }
   }
 `
+
+export const GET_SESSIONS_DATA_CHART = gql`
+  query sessionDataChart {
+    sessionDataChart {
+      days
+      imc
+      weight
+      bodyGrease
+      muscleMass
+    }
+  }
+`

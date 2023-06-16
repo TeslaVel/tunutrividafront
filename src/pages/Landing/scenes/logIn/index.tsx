@@ -109,7 +109,7 @@ const LogIn = ({ setSelectedPage }: Props) => {
 
               <input
                 className={inputStyles}
-                type="text"
+                type="password"
                 placeholder="Password"
                 {...register("password", {
                   required: true,

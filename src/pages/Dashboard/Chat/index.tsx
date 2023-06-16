@@ -47,7 +47,7 @@ export const Chat = ({setSelectedPage }: Props) => {
 
               { !conversation &&
                 <div className="flex justify-center p-[70px]">
-                  <button onClick={() => setIsOpenAside(true)}>
+                  <button onClick={() => setIsOpenAside(true)} className="px-3 py-1 bg-purple-30 hover:bg-purple-100 text-white rounded-lg">
                     Crear Nueva Conversación
                   </button>
                 </div>

@@ -36,7 +36,7 @@ const ContactUs = ({ setSelectedPage }: Props) => {
   };
 
   return (
-    <section id="contactus" className="mx-auto w-5/6 pt-[10em] pb-32">
+    <section id="contactus" className="mx-auto w-5/6 pt-[7rem] pb-32">
       <motion.div
         onViewportEnter={() => setSelectedPage(SelectedPage.Contactus)}
         className="justify-between gap-8 md:flex"

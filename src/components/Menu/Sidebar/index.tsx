@@ -61,13 +61,13 @@ const Sidebar = ({selectedPage, userStored, deleteUserStored}: Props) => {
   }
 
   const injectedStyle = {
-    background: 'linear-gradient(50deg, #FF9C99 0%, #FFB0AD 100%)'
+    background: 'linear-gradient(50deg, #f8b4ff 0%, #ef91f7 100%)'
   }
 
   return (
     <div
       style={injectedStyle}
-      className={`min-h-screen left-0 bottom-0 z-40 bg-primary-300 text-white flex flex-col transition-width duration-200 ease-in-out overflow-hidden ${
+      className={`min-h-screen left-0 bottom-0 z-40 text-white flex flex-col transition-width duration-200 ease-in-out overflow-hidden ${
         expanded ? "w-[250px]" : "w-[55px] min-w-[55px]"
       }` }
       onTransitionEnd={() => mostrarElementos()}
@@ -106,15 +106,15 @@ const Sidebar = ({selectedPage, userStored, deleteUserStored}: Props) => {
             <NavLink
               key={`sidebar-option-${index}`}
               to={`/${opt.value}`}
-              className={`h-8 mt-3 flex items-center rounded-lg hover:bg-primary-500 ${expanded ? 'px-4' : 'px-1'}
-              ${selectedPage === opt.value ? 'bg-primary-500' : ''}`}
+              className={`h-8 mt-3 flex items-center rounded-lg hover:bg-purple-50 ${expanded ? 'px-4' : 'px-1'}
+              ${selectedPage === opt.value ? 'bg-purple-50' : ''}`}
             >
               {showIcon(opt.icon)}
               {elementVisible && <span className="ml-2">{opt.label}</span>}
             </NavLink>
           ))}
 
-          <span className={`h-8 mt-10 flex items-center rounded-lg hover:bg-primary-500 cursor-pointer ${expanded ? 'px-4' : 'px-1'}`}>
+          <span className={`h-8 mt-10 flex items-center rounded-lg hover:bg-purple-50 cursor-pointer ${expanded ? 'px-4' : 'px-1'}`}>
             <button className="flex" onClick={() => deleteUserStored()}>
               <Logout />
               { elementVisible && <span className="ml-2">Log Out</span> }

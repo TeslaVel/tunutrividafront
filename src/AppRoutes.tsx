@@ -52,7 +52,7 @@ export const AppRoutes = ({ selectedPage, setSelectedPage, asignCLientForUploadI
               setSelectedPage={setSelectedPage}
             />
 
-            <div className={`${isLogged ? 'flex-1 bg-primary-50 h-[100%] bg-primary-50' : ''}`}>
+            <div className={`${isLogged ? 'flex-1 bg-purple-05 h-[100%] bg-primary-50' : ''}`}>
               <Routes>
                 <Route element={<ProtectedRoute isNotLogged={isLogged} redirectPath="/dashboard" />}>
                   <Route index path="/" element={

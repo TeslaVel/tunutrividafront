@@ -95,7 +95,7 @@ export const CreateConversationForm = ({refetchConversation, isOpenAside, setIsO
             </label>
           </div>
           <div>
-            <button type="submit" className="px-3 py-1 w-full bg-primary-400 hover:bg-primary-500 text-white rounded-lg">
+            <button type="submit" className="px-3 py-1 w-full bg-purple-50 hover:bg-purple-100 text-white rounded-lg">
               Crear
             </button>
           </div>

@@ -49,7 +49,7 @@ const BmiRanges = ({ bmi, gender = 'female' }: Props) => {
       {ranges[gender].map((range, index) => (
         <div key={index} className={`flex flex-col items-center justify-between px-3 py-3 h-auto ${resKlas}`}
           style={ bmiFloat > range.min && bmiFloat <= range.max
-          ? {background: 'rgb(253, 185, 198)', borderRadius: '25px' }
+          ? {background: 'rgb(253, 185, 219)', borderRadius: '25px' }
           : {}}
        >
           <img src={range.image} alt={`Imagen ${index}`} className="w-fill" />

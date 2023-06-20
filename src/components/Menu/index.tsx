@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
-import { SelectedPage } from "@/shared/types";
+import { SelectedPage } from "@/types";
 import { AuthContext } from '@/AuthProviderManager';
 
 type Props = {

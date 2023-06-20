@@ -2,11 +2,10 @@ import { useState, useContext } from "react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 // import Logo from "@/assets/Logo.png";
 import Logo from "@/assets/ntv/logo_3.png";
-import LinkAnchor from "../LinkAnchor";
-// import Sidebar from "@/scenes/sidebar";
-import { SelectedPage } from "@/shared/types";
+import LinkAnchor from "@/components/Compound/Links/LinkAnchor";
+import { SelectedPage } from "@/types";
 import useMediaQuery from "@/hooks/useMediaQuery";
-import ActionButton from "@/shared/ActionButton";
+import ActionButton from "@/components/Compound/Buttons/ActionButton";
 import { Link } from "react-router-dom";
 
 type Props = {
@@ -19,9 +18,12 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
   const flexBetween = "flex items-center justify-between";
   const [isMenuToggled, setIsMenuToggled] = useState<boolean>(false);
   const isAboveMediumScreens = useMediaQuery("(min-width: 1060px)");
-  const navbarBackground = isTopOfPage ? "" : "bg-purple-10 drop-shadow";
+  const sameColor = 'bg-dark-purple-300'
+  const navbarBackground = isTopOfPage ? "" : `${sameColor}`;
 
   const landingOptions = () => {
+    const anchorBaseColor = isTopOfPage ? 'text-pink-100 hover:text-pink-400' : 'text-white hover:text-pink-30'
+    const selectePageColor ='text-pink-30 hover:pink-50'
     return (
       <>
         <LinkAnchor
@@ -29,40 +31,58 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
           url="home"
           selectedPage={selectedPage}
           setSelectedPage={setSelectedPage}
+          baseColor={anchorBaseColor}
+          selectePageColor={selectePageColor}
         />
         <LinkAnchor
           page="Paquetes"
           url="packages"
           selectedPage={selectedPage}
           setSelectedPage={setSelectedPage}
+          baseColor={anchorBaseColor}
+          selectePageColor={selectePageColor}
         />
         <LinkAnchor
           page="Tratamientos"
           url="treatments"
           selectedPage={selectedPage}
           setSelectedPage={setSelectedPage}
+          baseColor={anchorBaseColor}
+          selectePageColor={selectePageColor}
         />
         <LinkAnchor
           page="Contactanos"
           url="contactus"
           selectedPage={selectedPage}
           setSelectedPage={setSelectedPage}
+          baseColor={anchorBaseColor}
+          selectePageColor={selectePageColor}
         />
       </>
     )
   }
 
   const landingMenu = () => {
+    const buttonBaseColor = isTopOfPage
+      ?`${sameColor} hover:bg-dark-purple-30 text-white`
+      :'bg-dark-purple-05 hover:bg-dark-purple-500 text-white'
+
     return (
       <>
         <div className={`${flexBetween} gap-8 text-sm`}>
           { landingOptions() }
         </div>
         <div className={`${flexBetween} gap-8`}>
-          <ActionButton setSelectedPage={setSelectedPage} selectedPage={SelectedPage.LogIn}>
+          <ActionButton
+            baseColor={buttonBaseColor}
+            setSelectedPage={setSelectedPage}
+            selectedPage={SelectedPage.LogIn}>
             Logear
           </ActionButton>
-          <ActionButton setSelectedPage={setSelectedPage} selectedPage={SelectedPage.Contactus}>
+          <ActionButton
+            baseColor={buttonBaseColor}
+            setSelectedPage={setSelectedPage}
+            selectedPage={SelectedPage.Contactus}>
             Únete a Nosotors
           </ActionButton>
         </div>
@@ -103,7 +123,7 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
 
       {/* MOBILE MENU MODAL */}
       {!isAboveMediumScreens && isMenuToggled &&
-        <div className="fixed right-0 bottom-0 z-40 h-full w-[300px] bg-purple-10 drop-shadow-xl">
+        <div className={`${sameColor} fixed right-0 bottom-0 z-40 h-full w-[300px] drop-shadow-xl`}>
           {/* CLOSE ICON */}
           <div className="flex justify-end p-12">
             <button onClick={() => setIsMenuToggled(!isMenuToggled)}>

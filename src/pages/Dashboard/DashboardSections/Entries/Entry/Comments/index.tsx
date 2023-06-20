@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { UserType, CommentType } from '@/shared/types'
+import { UserType, CommentType } from '@/types'
 
 interface IProps {
   userStored: UserType

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ImageSlide from "./ImageSlide";
-import { ClassType } from "@/shared/types";
+import { ClassType } from "@/types";
 
 interface CarouselProps {
   images: ClassType[];
@@ -50,7 +50,8 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
     return 0
   };
 
-  const arrowClases = 'carousel-control hover:bg-primary-300 h-[3rem] rounded-full px-1'
+  const arrowClases = 'carousel-control hover:bg-purple-15 h-[3rem] rounded-full px-1'
+
   return (
     <div className="carousel w-full flex items-center ">
       <button className={`prev ${arrowClases}`}
@@ -61,7 +62,7 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
             <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75" />
           </svg>
         </span>
-        
+
       </button>
       <div className="px-3 mx-0 flex w-full overflow-hidden">
         <div className="mx-0 px-0 items-center justify-between gap-5 flex"
@@ -90,7 +91,6 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
             <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
           </svg>
         </span>
- 
       </button>
     </div>
   );

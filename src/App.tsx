@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AuthProvider } from '@/AuthProviderManager';
 import AppRoutes from "@/AppRoutes";
-import { SelectedPage } from "@/shared/types";
+import { SelectedPage } from "@/types";
 
 interface IProps {
   updateMainStatusLogin: () => void

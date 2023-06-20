@@ -2,7 +2,7 @@ import Entries from '@/pages/Dashboard/DashboardSections/Entries'
 import UserHome from './Home/UserHome'
 
 // types
-import { UserType } from "@/shared/types";
+import { UserType } from "@/types";
 
 type Props = {
   userStored: UserType | null;

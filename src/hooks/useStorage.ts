@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { UserType} from "@/shared/types";
+import { UserType } from "@/types";
 
 export function useStorage (key: string, initialValue: null){
   const getStorage = (): UserType | null => {

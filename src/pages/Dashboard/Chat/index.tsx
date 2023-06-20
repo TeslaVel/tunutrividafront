@@ -5,7 +5,7 @@ import Scroller from '@/components/Scroller'
 import ChatForm from './ChatForm'
 import { CreateConversationForm } from './CreateConversationForm'
 // types
-import { SelectedPage, CommentType } from "@/shared/types";
+import { SelectedPage, CommentType } from "@/types";
 
 type Props = {
   setSelectedPage: (value: SelectedPage) => void;

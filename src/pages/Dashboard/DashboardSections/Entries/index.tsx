@@ -7,7 +7,7 @@ import EntryWrapper from './EntryWrapper'
 import { CreateEntryForm } from './CreateEntryForm'
 
 // types
-import { EntryType } from '@/shared/types'
+import { EntryType } from '@/types'
 
 type Props = {
   asignCLientForUploadImage: () => void;

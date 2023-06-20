@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { EntryType, UserType, CommentType } from '@/shared/types'
+import { EntryType, UserType, CommentType } from '@/types'
 import { Comments } from './Comments'
 import { useMutationCreateComment } from '@/hooks/graph/useMutationCreateComment';
 import { customDateFormat } from '@/components/utils/TimeUtils'

@@ -1,6 +1,6 @@
-import ActionButton from "@/shared/ActionButton";
-import HText from "@/shared/HText";
-import { PackageType, SelectedPage } from "@/shared/types";
+import ActionButton from "@/components/Compound/Buttons/ActionButton";
+import HText from "@/components/Compound/Title/HText";
+import { PackageType, SelectedPage } from "@/types";
 import {
   HomeModernIcon,
   UserGroupIcon,
@@ -149,7 +149,7 @@ const Packages = ({ setSelectedPage }: Props) => {
             {/* BUTTON */}
             <div className="relative mt-16">
               <div className="before:absolute before:-bottom-20 before:right-40 before:z-[-1] before:content-sparkles">
-                <ActionButton setSelectedPage={setSelectedPage} selectedPage={SelectedPage.Contactanos}>
+                <ActionButton setSelectedPage={setSelectedPage} selectedPage={SelectedPage.Contactus}>
                   Join Now
                 </ActionButton>
               </div>

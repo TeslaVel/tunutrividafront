@@ -4,7 +4,7 @@ import Scroller from '@/components/Scroller'
 import CollapsibleSection from '@/components/CollapsibleSection'
 import { customDateFormat } from '@/components/utils/TimeUtils'
 // types
-import { SelectedPage, SessionType } from "@/shared/types";
+import { SelectedPage, SessionType } from "@/types";
 
 interface IProps {
   setSelectedPage: (value: SelectedPage) => void;

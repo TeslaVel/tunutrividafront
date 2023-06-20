@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useGetSessionDataChart } from '@/hooks/useGetSessionDataChart'
 import BmiRanges from '@/components/BmiRanges'
-import { UserType } from "@/shared/types";
+import { UserType } from "@/types";
 import LineBar from "@/components/Chart/LineBar";
 
 // types

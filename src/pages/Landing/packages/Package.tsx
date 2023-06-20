@@ -1,4 +1,4 @@
-import { SelectedPage } from "@/shared/types";
+import { SelectedPage } from "@/types";
 import { motion } from "framer-motion";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 
@@ -30,8 +30,8 @@ const Package = ({ icon, title, description, setSelectedPage }: Props) => {
       <p className="my-3">{description}</p>
       <AnchorLink
         className="text-sm font-bold text-primary-500 underline hover:text-primary-300"
-        onClick={() => setSelectedPage(SelectedPage.Contactanos)}
-        href={`#${SelectedPage.Contactanos}`}
+        onClick={() => setSelectedPage(SelectedPage.Contactus)}
+        href={`#${SelectedPage.Contactus}`}
       >
         <p>Learn More</p>
       </AnchorLink>

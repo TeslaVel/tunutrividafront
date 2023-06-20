@@ -1,8 +1,6 @@
 import { useState } from 'react'
-import ChevronUp from '@/assets/icons/chevronUp'
-import ChevronDown from '@/assets/icons/chevronDown'
 import IconHandler from '@/components/IconHandler'
-import { Colors } from '@/shared/types'
+import { Colors } from '@/types'
 
 interface IProps {
   headerName: JSX.Element | string

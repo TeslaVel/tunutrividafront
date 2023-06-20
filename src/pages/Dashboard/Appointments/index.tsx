@@ -8,7 +8,7 @@ import { customDateFormat } from '@/components/utils/TimeUtils'
 import { GeneralFilter } from '@/components/Filter'
 
 // types
-import { SelectedPage, AppointmentType } from '@/shared/types'
+import { SelectedPage, AppointmentType } from '@/types'
 
 interface IProps {
   setSelectedPage: (value: SelectedPage) => void;

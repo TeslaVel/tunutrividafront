@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { UserType, ConversationType, CommentType } from "@/shared/types";
+import { UserType, ConversationType, CommentType } from "@/types";
 import { useMutationCreateNote } from '@/hooks/graph/useMutationCreateNote'
 import { useForm } from "react-hook-form"
 

@@ -13,7 +13,7 @@ import {
   BrowserRouter
 } from 'react-router-dom';
 import Landing from "@/pages/Landing";
-import { SelectedPage } from "@/shared/types";
+import { SelectedPage } from "@/types";
 import { AuthContext } from '@/AuthProviderManager';
 
 type Props = {
@@ -44,7 +44,7 @@ export const AppRoutes = ({ selectedPage, setSelectedPage, asignCLientForUploadI
     <>
       <Suspense fallback={<div />}>
         <BrowserRouter>
-          <div className={`${isLogged ? 'flex min-h-screen' : 'gray-purple-20'}`}>
+          <div className={`${isLogged ? 'flex min-h-screen' : ''}`}>
             <Menu
               isLogged={isLogged}
               isTopOfPage={isTopOfPage}
@@ -52,7 +52,7 @@ export const AppRoutes = ({ selectedPage, setSelectedPage, asignCLientForUploadI
               setSelectedPage={setSelectedPage}
             />
 
-            <div className={`${isLogged ? 'flex-1 bg-purple-05 h-[100%] bg-primary-50' : ''}`}>
+            <div className={`${isLogged ? 'flex-1 bg-purple-10 h-[100%]' : 'bg-gray-purple-10'}`}>
               <Routes>
                 <Route element={<ProtectedRoute isNotLogged={isLogged} redirectPath="/dashboard" />}>
                   <Route index path="/" element={

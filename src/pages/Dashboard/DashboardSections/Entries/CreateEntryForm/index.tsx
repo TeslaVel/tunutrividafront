@@ -4,9 +4,6 @@ import Aside from '@/components/Aside'
 // import { useMutationCreateEntry } from '@/hooks/graph/useMutationCreateEntry'
 import { CreateEntry } from '@/api/actions'
 
-// types
-import { UserType } from '@/shared/types'
-
 type Props = {
   refetch: () => void
   asignCLientForUploadImage: () => void;

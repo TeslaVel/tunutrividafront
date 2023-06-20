@@ -1,4 +1,4 @@
-import { GeneralOptions } from '@/shared/types'
+import { GeneralOptions } from '@/types'
 
 interface IProps {
   options: Array<GeneralOptions>

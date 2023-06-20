@@ -1,17 +1,17 @@
-import { SelectedPage, ClassType } from "@/shared/types";
+import { SelectedPage, ClassType } from "@/types";
 import cavitation from "@/assets/ntv/cavitation1.png";
 import radiofrecuencia from "@/assets/ntv/radiofrecuencia1.png";
 import vacumterapia from "@/assets/ntv/vacumterapia1.png";
 import lipolaser from "@/assets/ntv/lipolaser1.png";
 import auriculoterapia from "@/assets/ntv/auriculoterapia.png";
-import image1 from "@/assets/image1.png";
-import image2 from "@/assets/image2.png";
-import image3 from "@/assets/image3.png";
-import image4 from "@/assets/image4.png";
-import image5 from "@/assets/image5.png";
-import image6 from "@/assets/image6.png";
+// import image1 from "@/assets/image1.png";
+// import image2 from "@/assets/image2.png";
+// import image3 from "@/assets/image3.png";
+// import image4 from "@/assets/image4.png";
+// import image5 from "@/assets/image5.png";
+// import image6 from "@/assets/image6.png";
 import { motion } from "framer-motion";
-import HText from "@/shared/HText";
+import HText from "@/components/Compound/Title/HText";
 // import Class from "./Class";
 import Carousel from "./Carousel";
 
@@ -19,7 +19,7 @@ const classes: Array<ClassType> = [
   {
     name: "Auriculoterapia",
     description:
-      "La auriculoterapia es una.........",
+      "La auriculoterapia es una Lorem ipsum dolor sit amet, consectet",
     url: auriculoterapia,
   },
   {
@@ -35,6 +35,8 @@ const classes: Array<ClassType> = [
   },
   {
     name: "Radiofrecuencia",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     url: radiofrecuencia,
   },
   {
@@ -42,24 +44,6 @@ const classes: Array<ClassType> = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     url: lipolaser,
-  },
-  {
-    name: "Img 1",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    url: image1,
-  },
-  {
-    name: "Img 2",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    url: image2,
-  },
-  {
-    name: "Img 3",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    url: image3,
   }
 ];
 
@@ -69,7 +53,7 @@ type Props = {
 
 const Treatments = ({ setSelectedPage }: Props) => {
   return (
-    <section id="treatments" className="w-full min-h-full bg-purple-10 py-[7rem]">
+    <section id="treatments" className="w-full min-h-full bg-purple-05 py-[7rem]">
       <motion.div
         onViewportEnter={() => setSelectedPage(SelectedPage.Treatments)}
       >

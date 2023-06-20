@@ -1,6 +1,6 @@
 import React, { createContext, PropsWithChildren } from 'react';
 import { useStorage } from '@/hooks/useStorage';
-import { UserType } from "@/shared/types";
+import { UserType } from "@/types";
 
 const initialState: {
   userStored: UserType | null;

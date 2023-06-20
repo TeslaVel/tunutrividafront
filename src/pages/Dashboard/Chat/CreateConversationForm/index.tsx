@@ -3,7 +3,7 @@ import { useMutationCreateConversation } from '@/hooks/graph/useMutationCreateCo
 import Aside from '@/components/Aside'
 
 // types
-import { UserType } from '@/shared/types'
+import { UserType } from '@/types'
 
 type Props = {
   userStored: UserType | null;

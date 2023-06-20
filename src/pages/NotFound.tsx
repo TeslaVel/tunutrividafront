@@ -1,4 +1,4 @@
-import { SelectedPage } from "@/shared/types";
+import { SelectedPage } from "@/types";
 import { motion } from "framer-motion";
 
 type Props = {

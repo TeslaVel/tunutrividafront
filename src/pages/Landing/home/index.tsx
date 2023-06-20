@@ -1,6 +1,6 @@
 import useMediaQuery from "@/hooks/useMediaQuery";
-import { SelectedPage } from "@/shared/types";
-import ActionButton from "@/shared/ActionButton";
+import { SelectedPage } from "@/types";
+import ActionButton from "@/components/Compound/Buttons/ActionButton";
 import HomePageText from "@/assets/HomePageText.png";
 import HomePageGraphic from "@/assets/HomePageGraphic.png";
 import SponsorRedBull from "@/assets/SponsorRedBull.png";
@@ -62,13 +62,13 @@ const Home = ({ setSelectedPage }: Props) => {
               visible: { opacity: 1, x: 0 },
             }}
           >
-            <ActionButton setSelectedPage={setSelectedPage} selectedPage={SelectedPage.Contactanos}>
+            <ActionButton setSelectedPage={setSelectedPage} selectedPage={SelectedPage.Contactus}>
               Join Now
             </ActionButton>
             <AnchorLink
               className="text-sm font-bold text-primary-500 underline hover:text-primary-300"
-              onClick={() => setSelectedPage(SelectedPage.Contactanos)}
-              href={`#${SelectedPage.Contactanos}`}
+              onClick={() => setSelectedPage(SelectedPage.Contactus)}
+              href={`#${SelectedPage.Contactus}`}
             >
               <p>Learn More</p>
             </AnchorLink>
@@ -85,13 +85,13 @@ const Home = ({ setSelectedPage }: Props) => {
       </motion.div>
 
       {/* SPONSORS */}
-      {isAboveMediumScreens && (
-        <div className="h-[150px] w-full bg-primary-50 py-10">
+      {false && (
+        <div className="h-[150px] w-full bg-purple-05 py-10">
           <div className="mx-auto w-5/6">
             <div className="flex w-3/5 items-center justify-between gap-8">
-              <img alt="redbull-sponsor" src={SponsorRedBull} />
+              {/* <img alt="redbull-sponsor" src={SponsorRedBull} />
               <img alt="forbes-sponsor" src={SponsorForbes} />
-              <img alt="fortune-sponsor" src={SponsorFortune} />
+              <img alt="fortune-sponsor" src={SponsorFortune} /> */}
             </div>
           </div>
         </div>

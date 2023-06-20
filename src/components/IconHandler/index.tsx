@@ -3,7 +3,7 @@ import PhoneIcon from '@/assets/icons/phoneIcon'
 import CameraIcon from '@/assets/icons/cameraIcon'
 import ChevronUp from '@/assets/icons/chevronUp'
 import ChevronDown from '@/assets/icons/chevronDown'
-import { Colors } from '@/shared/types'
+import { Colors } from '@/types'
 
 interface IProps {
   name: string,

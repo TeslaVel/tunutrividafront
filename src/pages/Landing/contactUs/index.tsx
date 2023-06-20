@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
-import { SelectedPage } from "@/shared/types";
+import { SelectedPage } from "@/types";
 import { motion } from "framer-motion";
 // import ContactUsPageGraphic from "@/assets/ContactUsPageGraphic.png";
 import ImageNtv3 from "@/assets/ntv/imagen_ntv_3.png";
-import HText from "@/shared/HText";
+import HText from "@/components/Compound/Title/HText";
 import { useMutationContactUs } from '@/hooks/graph/useMutationContactUs';
 
 
@@ -14,8 +14,9 @@ type Props = {
 const ContactUs = ({ setSelectedPage }: Props) => {
   const { CreateContactUs, data, loading, error, reset } = useMutationContactUs();
 
-  const inputStyles = `mb-5 w-full rounded-lg bg-purple-15
-  px-5 py-3 placeholder-white`;
+  const inputStyles = `mb-5 w-full rounded-lg px-5 py-3 bg-dark-purple-05 text-white placeholder-white`;
+  const buttonStyles = `mt-5 rounded-lg px-20 py-3 transition duration-500
+  bg-dark-purple-50 hover:bg-dark-purple-200 text-white hover:text-white`
 
   const {
     register,
@@ -56,7 +57,7 @@ const ContactUs = ({ setSelectedPage }: Props) => {
             }}
           >
             <HText>
-              <span className="text-purple-100">ÚNETE AHORA</span> PARA MOLDEAR TU MEJOR VERSION
+              <span className="text-dark-purple-10">ÚNETE AHORA</span> PARA MOLDEAR TU MEJOR VERSION
             </HText>
             <p className="my-5">
               Felicidades por tomar la decisión de mejorar tu salud y transformar tu cuerpo!
@@ -153,7 +154,7 @@ const ContactUs = ({ setSelectedPage }: Props) => {
 
               <button
                 type="submit"
-                className="mt-5 rounded-lg bg-purple-15 hover:bg-purple-50 px-20 py-3 transition duration-500 hover:text-white"
+                className={buttonStyles}
               >
                 ENVIAR
               </button>

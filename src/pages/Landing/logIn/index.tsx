@@ -1,10 +1,10 @@
 import { useEffect, useContext } from 'react';
 import { useForm } from "react-hook-form";
-import { SelectedPage } from "@/shared/types";
+import { SelectedPage } from "@/types";
 import { motion } from "framer-motion";
 // import ContactUsPageGraphic from "@/assets/ContactUsPageGraphic.png";
 import Scale1 from "@/assets/ntv/scale1.png";
-import HText from "@/shared/HText";
+import HText from "@/components/Compound/Title/HText";
 import { AuthContext } from '@/AuthProviderManager';
 import { useMutationLogin } from '@/hooks/graph/useMutationLogin';
 
@@ -27,8 +27,11 @@ const LogIn = ({ setSelectedPage }: Props) => {
     }
   }, [data?.createAuth]);
 
-  const inputStyles = `mb-5 w-full rounded-lg bg-purple-15
+  const inputStyles = `mb-5 w-full rounded-lg bg-dark-purple-05 text-white
   px-5 py-3 placeholder-white`;
+
+  const buttonStyles = `bg-dark-purple-50 hover:bg-dark-purple-200 text-white sm:px-15 px-20 text-center w-auto rounded-lg
+  py-3 transition duration-500 hover:text-white`
 
   const {
     register,
@@ -128,12 +131,12 @@ const LogIn = ({ setSelectedPage }: Props) => {
               <div className="flex sm:gap-4 sm:flex-col lg:flex-row lg:justify-between mt-5">
                 <button
                   type="submit"
-                  className="sm:px-15 px-20 text-center w-auto rounded-lg bg-purple-15 hover:bg-purple-50 py-3 transition duration-500 hover:text-white"
+                  className={buttonStyles}
                 >
                   Logear
                 </button>
 
-                <a className="sm:px-16 px-20 text-center w-auto rounded-lg bg-purple-15 hover:bg-purple-50 px-20 py-3 transition duration-500 hover:text-white"
+                <a className={buttonStyles}
                   onClick={() => setSelectedPage(SelectedPage.Contactus)}
                   href={`#${SelectedPage.Contactus}`} >
                   Únete a Nosotors

@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import Home from "@/pages/Landing/scenes/home";
-import Treatments from "@/pages/Landing/scenes/treatments";
-import Packages from "@/pages/Landing/scenes/packages";
-import ContactUs from "@/pages/Landing/scenes/contactUs";
-import LogIn from "@/pages/Landing/scenes/logIn";
-import Footer from "@/pages/Landing/scenes/footer";
+import Home from "@/pages/Landing/home";
+import Treatments from "@/pages/Landing/treatments";
+import Packages from "@/pages/Landing/packages";
+import ContactUs from "@/pages/Landing/contactUs";
+import LogIn from "@/pages/Landing/logIn";
+import Footer from "@/pages/Landing/footer";
 
-import { SelectedPage } from "@/shared/types";
+import { SelectedPage } from "@/types";
 
 type Props = {
   selectedPage: SelectedPage;

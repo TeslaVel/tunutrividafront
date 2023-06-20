@@ -1,4 +1,4 @@
-import { Colors } from '@/shared/types'
+import { Colors } from '@/types'
 
 interface IProps {
   width?: number

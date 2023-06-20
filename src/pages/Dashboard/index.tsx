@@ -6,7 +6,7 @@ import { AuthContext } from '@/AuthProviderManager';
 import Scroller from '@/components/Scroller'
 
 // types
-import { SelectedPage } from "@/shared/types";
+import { SelectedPage } from "@/types";
 
 type Props = {
   selectedPage: SelectedPage

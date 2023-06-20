@@ -7,12 +7,11 @@ import ChatIcon from "@/assets/icons/chatIcon"
 import Logout from "@/assets/icons/logout"
 import ArrowRight from "@/assets/icons/arrowright"
 import ArrowLeft from "@/assets/icons/arrowleft"
-import { UserType } from '@/shared/types'
 import { NavLink } from "react-router-dom";
 import useMediaQuery from "@/hooks/useMediaQuery";
 
 // types
-import { SelectedPage } from "@/shared/types";
+import { SelectedPage, UserType } from "@/types";
 
 type Props = {
   selectedPage: SelectedPage;
@@ -61,7 +60,7 @@ const Sidebar = ({selectedPage, userStored, deleteUserStored}: Props) => {
   }
 
   const injectedStyle = {
-    background: 'linear-gradient(50deg, #f8b4ff 0%, #ef91f7 100%)'
+    background: 'linear-gradient(30deg, rgb(120, 33, 145) 0%, rgb(100, 23, 130) 100%)'
   }
 
   return (
@@ -107,7 +106,7 @@ const Sidebar = ({selectedPage, userStored, deleteUserStored}: Props) => {
               key={`sidebar-option-${index}`}
               to={`/${opt.value}`}
               className={`h-8 mt-3 flex items-center rounded-lg hover:bg-purple-50 ${expanded ? 'px-4' : 'px-1'}
-              ${selectedPage === opt.value ? 'bg-purple-50' : ''}`}
+              ${selectedPage === opt.value ? 'bg-dark-purple-40' : ''}`}
             >
               {showIcon(opt.icon)}
               {elementVisible && <span className="ml-2">{opt.label}</span>}

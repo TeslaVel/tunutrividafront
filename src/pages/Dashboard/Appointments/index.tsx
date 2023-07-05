@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { useGetAppointments } from '@/hooks/useGetAppointments'
 import Scroller from '@/components/Scroller'
 import CollapsibleSection from '@/components/CollapsibleSection'
-import IconHandler from '@/components/IconHandler'
+import IconHandler from '@/components/icons/IconHandler'
 import { customDateFormat } from '@/components/utils/TimeUtils'
 import { GeneralFilter } from '@/components/Filter'
 

@@ -14,7 +14,7 @@ function App({updateMainStatusLogin, asignCLientForUploadImage}: IProps) {
   );
 
   return (
-    <div className="app bg-gray-20">
+    <div className="app">
       <AuthProvider updateMainStatusLogin={updateMainStatusLogin}>
         <AppRoutes
           asignCLientForUploadImage={asignCLientForUploadImage}

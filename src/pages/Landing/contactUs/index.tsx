@@ -14,9 +14,9 @@ type Props = {
 const ContactUs = ({ setSelectedPage }: Props) => {
   const { CreateContactUs, data, loading, error, reset } = useMutationContactUs();
 
-  const inputStyles = `mb-5 w-full rounded-lg px-5 py-3 bg-dark-purple-05 text-white placeholder-white`;
+  const inputStyles = `mb-5 w-full rounded-lg px-5 py-3 bg-dark-purple-500 text-gray-purple-10 placeholder-white`;
   const buttonStyles = `mt-5 rounded-lg px-20 py-3 transition duration-500
-  bg-dark-purple-50 hover:bg-dark-purple-200 text-white hover:text-white`
+  bg-dark-purple-500 hover:bg-dark-purple-200 text-gray-purple-10 hover:text-white xxs:w-full sm:w-full md:w-auto`
 
   const {
     register,
@@ -38,150 +38,151 @@ const ContactUs = ({ setSelectedPage }: Props) => {
 
   return (
     <section id="contactus" className="mx-auto w-5/6 pt-[7rem] pb-32">
-      <motion.div
-        onViewportEnter={() => setSelectedPage(SelectedPage.Contactus)}
-        className="justify-between gap-8 md:flex"
-      >
-        {/* FORM AND IMAGE */}
-        <div >
-          {/* HEADER */}
-          <motion.div
-            className="md:w-3/5"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.5 }}
-            variants={{
-              hidden: { opacity: 0, x: -50 },
-              visible: { opacity: 1, x: 0 },
-            }}
-          >
-            <HText>
-              <span className="text-dark-purple-10">ÚNETE AHORA</span> PARA MOLDEAR TU MEJOR VERSION
-            </HText>
-            <p className="my-5">
-              Felicidades por tomar la decisión de mejorar tu salud y transformar tu cuerpo!
-              con nosotoros encontrarás todo lo que necesitas para comenzar este emocionante viaje.
-              Completa el formulario y comencemos juntos a lograr tus objetivos de bienestar y salud.
-            </p>
-          </motion.div>
+      <div className="bg-purple-15 p-5 rounded-lg">
+        <motion.div
+          onViewportEnter={() => setSelectedPage(SelectedPage.Contactus)}
+          className="justify-between gap-8 md:flex"
+        >
+          {/* FORM AND IMAGE */}
+          <div className="sm:w-full md:w-full lg:w-5/6">
+            {/* HEADER */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.5 }}
+              variants={{
+                hidden: { opacity: 0, x: -50 },
+                visible: { opacity: 1, x: 0 },
+              }}
+            >
+              <HText>
+                <span className="text-dark-purple-100">ÚNETE AHORA</span> PARA MOLDEAR TU MEJOR VERSION
+              </HText>
+              <p className="my-5">
+                Felicidades por tomar la decisión de mejorar tu salud y transformar tu cuerpo!
+                con nosotoros encontrarás todo lo que necesitas para comenzar este emocionante viaje.
+                Completa el formulario y comencemos juntos a lograr tus objetivos de bienestar y salud.
+              </p>
+            </motion.div>
+
+            <motion.div
+              className="mt-10 basis-3/5 md:mt-0"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.5 }}
+              variants={{
+                hidden: { opacity: 0, y: 50 },
+                visible: { opacity: 1, y: 0 },
+              }}
+            >
+              <form
+                target="_blank"
+                onSubmit={onSubmit}
+                method="POST"
+              >
+                <input
+                  className={inputStyles}
+                  type="text"
+                  placeholder="FIRST NAME"
+                  {...register("first_name", {
+                    required: true,
+                    maxLength: 100,
+                  })}
+                />
+                {errors.first_name && (
+                  <p className="mt-1 text-primary-500">
+                    {errors.first_name.type === "required" && "This field is required."}
+                    {errors.first_name.type === "maxLength" &&
+                      "Max length is 100 char."}
+                  </p>
+                )}
+
+                <input
+                  className={inputStyles}
+                  type="text"
+                  placeholder="LAST NAME"
+                  {...register("last_name", {
+                    required: true,
+                    maxLength: 100,
+                  })}
+                />
+                {errors.last_name && (
+                  <p className="mt-1 text-primary-500">
+                    {errors.last_name.type === "required" && "This field is required."}
+                    {errors.last_name.type === "maxLength" &&
+                      "Max length is 100 char."}
+                  </p>
+                )}
+
+                <input
+                  className={inputStyles}
+                  type="text"
+                  placeholder="EMAIL"
+                  {...register("email", {
+                    required: true,
+                    pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  })}
+                />
+                {errors.email && (
+                  <p className="mt-1 text-primary-500">
+                    {errors.email.type === "required" &&
+                      "This field is required."}
+                    {errors.email.type === "pattern" && "Invalid email address."}
+                  </p>
+                )}
+
+                <textarea
+                  className={inputStyles}
+                  placeholder="MESSAGE"
+                  rows={4}
+                  cols={50}
+                  {...register("message", {
+                    required: true,
+                    maxLength: 2000,
+                  })}
+                />
+                {errors.message && (
+                  <p className="mt-1 text-primary-500">
+                    {errors.message.type === "required" &&
+                      "This field is required."}
+                    {errors.message.type === "maxLength" &&
+                      "Max length is 2000 char."}
+                  </p>
+                )}
+
+                <button
+                  type="submit"
+                  className={buttonStyles}
+                >
+                  ENVIAR
+                </button>
+              </form>
+            </motion.div>
+          </div>
 
           <motion.div
-            className="mt-10 basis-3/5 md:mt-0"
+            className="relative mt-16 basis-2/5 md:mt-0 flex items-center sm:hidden md:block "
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.5 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
             variants={{
               hidden: { opacity: 0, y: 50 },
               visible: { opacity: 1, y: 0 },
             }}
           >
-            <form
-              target="_blank"
-              onSubmit={onSubmit}
-              method="POST"
-            >
-              <input
-                className={inputStyles}
-                type="text"
-                placeholder="FIRST NAME"
-                {...register("first_name", {
-                  required: true,
-                  maxLength: 100,
-                })}
+            <div className="flex h-full items-center before:z-[-1]">
+              <img
+                className="h-auto min-w-[250px]"
+                alt="contact-us-page-graphic"
+                src={ImageNtv3}
               />
-              {errors.first_name && (
-                <p className="mt-1 text-primary-500">
-                  {errors.first_name.type === "required" && "This field is required."}
-                  {errors.first_name.type === "maxLength" &&
-                    "Max length is 100 char."}
-                </p>
-              )}
-
-              <input
-                className={inputStyles}
-                type="text"
-                placeholder="LAST NAME"
-                {...register("last_name", {
-                  required: true,
-                  maxLength: 100,
-                })}
-              />
-              {errors.last_name && (
-                <p className="mt-1 text-primary-500">
-                  {errors.last_name.type === "required" && "This field is required."}
-                  {errors.last_name.type === "maxLength" &&
-                    "Max length is 100 char."}
-                </p>
-              )}
-
-              <input
-                className={inputStyles}
-                type="text"
-                placeholder="EMAIL"
-                {...register("email", {
-                  required: true,
-                  pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                })}
-              />
-              {errors.email && (
-                <p className="mt-1 text-primary-500">
-                  {errors.email.type === "required" &&
-                    "This field is required."}
-                  {errors.email.type === "pattern" && "Invalid email address."}
-                </p>
-              )}
-
-              <textarea
-                className={inputStyles}
-                placeholder="MESSAGE"
-                rows={4}
-                cols={50}
-                {...register("message", {
-                  required: true,
-                  maxLength: 2000,
-                })}
-              />
-              {errors.message && (
-                <p className="mt-1 text-primary-500">
-                  {errors.message.type === "required" &&
-                    "This field is required."}
-                  {errors.message.type === "maxLength" &&
-                    "Max length is 2000 char."}
-                </p>
-              )}
-
-              <button
-                type="submit"
-                className={buttonStyles}
-              >
-                ENVIAR
-              </button>
-            </form>
+            </div>
           </motion.div>
-        </div>
-
-        <motion.div
-          className="relative mt-16 basis-2/5 md:mt-0 flex items-center"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-          variants={{
-            hidden: { opacity: 0, y: 50 },
-            visible: { opacity: 1, y: 0 },
-          }}
-        >
-          <div className="w-full flex justify-center before:absolute before:-bottom-20 before:-right-10 before:z-[-1]">
-            <img
-              className="h-auto"
-              alt="contact-us-page-graphic"
-              src={ImageNtv3}
-            />
-          </div>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 };

@@ -1,8 +1,8 @@
-import UserIcon from '@/assets/icons/userIcon'
-import PhoneIcon from '@/assets/icons/phoneIcon'
-import CameraIcon from '@/assets/icons/cameraIcon'
-import ChevronUp from '@/assets/icons/chevronUp'
-import ChevronDown from '@/assets/icons/chevronDown'
+import UserIcon from '@/components/icons/userIcon'
+import PhoneIcon from '@/components/icons/phoneIcon'
+import CameraIcon from '@/components/icons/cameraIcon'
+import ChevronUp from '@/components/icons/chevronUp'
+import ChevronDown from '@/components/icons/chevronDown'
 import { Colors } from '@/types'
 
 interface IProps {

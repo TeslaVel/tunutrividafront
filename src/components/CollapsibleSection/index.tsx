@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import IconHandler from '@/components/IconHandler'
+import IconHandler from '@/components/icons/IconHandler'
 import { Colors } from '@/types'
 
 interface IProps {
@@ -30,7 +30,8 @@ const CollapsibleSection = ({
   const toggleChildrenVisibility = (): void => setCollapsed(!collapsed)
 
   return (
-    <div className="flex flex-col w-100 bg-gray-20 mb-2 cursor-pointer" style={ collapsed ? {borderRadius: '20px'} : {borderRadius: '15px'}}>
+    <div className="flex flex-col w-100 bg-gray-20 mb-2 cursor-pointer"
+         style={ collapsed ? {borderRadius: '20px'} : {borderRadius: '15px'}}>
       <div
         className='flex items-center justify-between h-[30px] px-3'
         onClick={_ => toggleChildrenVisibility()}

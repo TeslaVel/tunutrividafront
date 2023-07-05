@@ -27,10 +27,10 @@ const LogIn = ({ setSelectedPage }: Props) => {
     }
   }, [data?.createAuth]);
 
-  const inputStyles = `mb-5 w-full rounded-lg bg-dark-purple-05 text-white
+  const inputStyles = `mb-5 w-full rounded-lg bg-dark-purple-600 text-white
   px-5 py-3 placeholder-white`;
 
-  const buttonStyles = `bg-dark-purple-50 hover:bg-dark-purple-200 text-white sm:px-15 px-20 text-center w-auto rounded-lg
+  const buttonStyles = `bg-dark-purple-500 hover:bg-dark-purple-200 text-white sm:px-15 px-20 text-center w-auto rounded-lg
   py-3 transition duration-500 hover:text-white`
 
   const {
@@ -48,124 +48,125 @@ const LogIn = ({ setSelectedPage }: Props) => {
   };
 
   return (
-    <section id="login" className="mx-auto w-5/6 pt-[8rem] pb-[17rem]">
-      <motion.div
-        onViewportEnter={() => setSelectedPage(SelectedPage.LogIn)}
-        className='justify-between gap-8 md:flex'
-      >
-
-        {/* FORM AND IMAGE */}
-        <div>
-          {/* HEADER */}
-          <motion.div
-            className="md:w-3/5"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.5 }}
-            variants={{
-              hidden: { opacity: 0, x: -50 },
-              visible: { opacity: 1, x: 0 },
-            }}
-          >
-            <HText>
-              <span className="text-primary-500">LOGIN</span>
-            </HText>
-            <p className="my-5">
-              Ingresa con energía y siente la transformación en tu cuerpo - ¡Bienvenido a nuestro portal de salud nutricional!
-            </p>
-          </motion.div>
-
-          <motion.div
-            className="basis-3/5 md:mt-0"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.5 }}
-            variants={{
-              hidden: { opacity: 0, y: 50 },
-              visible: { opacity: 1, y: 0 },
-            }}
-          >
-            <form
-              target="_blank"
-              onSubmit={onSubmit}
-              method="POST"
-            >
-
-              <input
-                className={inputStyles}
-                type="text"
-                placeholder="EMAIL"
-                {...register("email", {
-                  required: true,
-                  pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                })}
-              />
-              {errors.email && (
-                <p className="mt-1 text-primary-500">
-                  {errors.email.type === "required" &&
-                    "This field is required."}
-                  {errors.email.type === "pattern" && "Invalid email address."}
-                </p>
-              )}
-
-              <input
-                className={inputStyles}
-                type="password"
-                placeholder="Password"
-                {...register("password", {
-                  required: true,
-                  maxLength: 100,
-                })}
-              />
-              {errors.password && (
-                <p className="mt-1 text-primary-500">
-                  {errors.password.type === "required" && "This field is required."}
-                  {errors.password.type === "maxLength" &&
-                    "Max length is 100 char."}
-                </p>
-              )}
-
-
-              <div className="flex sm:gap-4 sm:flex-col lg:flex-row lg:justify-between mt-5">
-                <button
-                  type="submit"
-                  className={buttonStyles}
-                >
-                  Logear
-                </button>
-
-                <a className={buttonStyles}
-                  onClick={() => setSelectedPage(SelectedPage.Contactus)}
-                  href={`#${SelectedPage.Contactus}`} >
-                  Únete a Nosotors
-                </a>
-              </div>
-            </form>
-          </motion.div>
-        </div>
-
+    <section id="login" className="mx-auto w-5/6 pt-[7rem] pb-[17rem]">
+      <div className="bg-purple-15 p-5 rounded-lg">
         <motion.div
-            className="relative mt-16 basis-3/5 md:mt-0"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            variants={{
-              hidden: { opacity: 0, y: 50 },
-              visible: { opacity: 1, y: 0 },
-            }}
-          >
-            <div className="w-full before:absolute before:-bottom-20 before:-right-10 before:z-[-1]">
-              <img
-                className="w-full"
-                alt="contact-us"
-                src={Scale1}
-              />
-            </div>
-          </motion.div>
-      </motion.div>
+          onViewportEnter={() => setSelectedPage(SelectedPage.LogIn)}
+          className='justify-between gap-8 md:flex'
+        >
+
+          {/* FORM AND IMAGE */}
+          <div className="sm:w-full md:w-full lg:w-5/6">
+            {/* HEADER */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.5 }}
+              variants={{
+                hidden: { opacity: 0, x: -50 },
+                visible: { opacity: 1, x: 0 },
+              }}
+            >
+              <HText>
+                <span className="text-primary-500">LOGIN</span>
+              </HText>
+              <p className="my-5">
+                Ingresa con energía y siente la transformación en tu cuerpo - ¡Bienvenido a nuestro portal de salud nutricional!
+              </p>
+            </motion.div>
+
+            <motion.div
+              className="basis-3/5 md:mt-0"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.5 }}
+              variants={{
+                hidden: { opacity: 0, y: 50 },
+                visible: { opacity: 1, y: 0 },
+              }}
+            >
+              <form
+                target="_blank"
+                onSubmit={onSubmit}
+                method="POST"
+              >
+
+                <input
+                  className={inputStyles}
+                  type="text"
+                  placeholder="EMAIL"
+                  {...register("email", {
+                    required: true,
+                    pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  })}
+                />
+                {errors.email && (
+                  <p className="mt-1 text-primary-500">
+                    {errors.email.type === "required" &&
+                      "This field is required."}
+                    {errors.email.type === "pattern" && "Invalid email address."}
+                  </p>
+                )}
+
+                <input
+                  className={inputStyles}
+                  type="password"
+                  placeholder="Password"
+                  {...register("password", {
+                    required: true,
+                    maxLength: 100,
+                  })}
+                />
+                {errors.password && (
+                  <p className="mt-1 text-primary-500">
+                    {errors.password.type === "required" && "This field is required."}
+                    {errors.password.type === "maxLength" &&
+                      "Max length is 100 char."}
+                  </p>
+                )}
+
+
+                <div className="flex xxs:gap-5  ms:gap-0 xxs:flex-col sm:flex-row lg:flex-row sm:justify-between md:justify-between mt-5">
+                  <button
+                    type="submit"
+                    className={buttonStyles}
+                  >
+                    Logear
+                  </button>
+
+                  <a className={buttonStyles}
+                    onClick={() => setSelectedPage(SelectedPage.Contactus)}
+                    href={`#${SelectedPage.Contactus}`} >
+                    Únete a Nosotors
+                  </a>
+                </div>
+              </form>
+            </motion.div>
+          </div>
+
+          <motion.div
+              className="relative mt-16 basis-3/5 md:mt-0 sm:hidden md:block lg:block"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              variants={{
+                hidden: { opacity: 0, y: 50 },
+                visible: { opacity: 1, y: 0 },
+              }}
+            >
+              <div className="flex h-full items-center before:z-[-1]">
+                <img
+                  className="w-full min-w-[250px]"
+                  alt="contact-us"
+                  src={Scale1}
+                />
+              </div>
+            </motion.div>
+        </motion.div>
+      </div>
     </section>
   );
 };

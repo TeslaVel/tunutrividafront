@@ -6,8 +6,6 @@ type Props = {
   classNames?: string
 }
 
-
-
 const Scroller = ({
   children,
   header = null,
@@ -28,7 +26,7 @@ const Scroller = ({
   return (
     <>
       { header &&
-        <div className="topbar topbar gap-5 flex mx-5 fixed"  style={{height: `${headerHeight}px`}}>
+        <div className="topbar topbar gap-5 flex mx-5 fixed" style={{height: `${headerHeight}px`}}>
           {header}
         </div>
       }

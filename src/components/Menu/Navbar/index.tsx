@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 // import Logo from "@/assets/Logo.png";
-import Logo from "@/assets/ntv/logo_3.png";
+import DynamicLogo  from './DynamicLogo'
 import LinkAnchor from "@/components/Compound/Links/LinkAnchor";
 import { SelectedPage } from "@/types";
 import useMediaQuery from "@/hooks/useMediaQuery";
@@ -14,16 +14,22 @@ type Props = {
   setSelectedPage: (value: SelectedPage) => void;
 };
 
+
+
 const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
   const flexBetween = "flex items-center justify-between";
   const [isMenuToggled, setIsMenuToggled] = useState<boolean>(false);
   const isAboveMediumScreens = useMediaQuery("(min-width: 1060px)");
-  const sameColor = 'bg-dark-purple-300'
+  const sameColor = 'bg-dark-purple-600'
   const navbarBackground = isTopOfPage ? "" : `${sameColor}`;
 
+  const buttonBaseColor = isTopOfPage
+    ?`${sameColor} hover:bg-dark-purple-300 text-white`
+    :'bg-gray-purple-10 text-dark-purple-600 hover:bg-dark-purple-50 hover:text-gray-purple-10'
+  const anchorBaseColor = isTopOfPage ? 'text-pink-100 hover:text-pink-400' : 'text-white hover:text-pink-30'
+  const selectePageColor ='text-pink-30 hover:pink-50'
+
   const landingOptions = () => {
-    const anchorBaseColor = isTopOfPage ? 'text-pink-100 hover:text-pink-400' : 'text-white hover:text-pink-30'
-    const selectePageColor ='text-pink-30 hover:pink-50'
     return (
       <>
         <LinkAnchor
@@ -63,10 +69,6 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
   }
 
   const landingMenu = () => {
-    const buttonBaseColor = isTopOfPage
-      ?`${sameColor} hover:bg-dark-purple-30 text-white`
-      :'bg-dark-purple-05 hover:bg-dark-purple-500 text-white'
-
     return (
       <>
         <div className={`${flexBetween} gap-8 text-sm`}>
@@ -79,17 +81,27 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
             selectedPage={SelectedPage.LogIn}>
             Logear
           </ActionButton>
-          <ActionButton
-            baseColor={buttonBaseColor}
-            setSelectedPage={setSelectedPage}
-            selectedPage={SelectedPage.Contactus}>
-            Únete a Nosotors
-          </ActionButton>
         </div>
       </>
     )
   }
-  const movilLandingMenu = () => landingOptions()
+  const movilLandingMenu = () => {
+    return(
+      <>
+        { landingOptions() }
+        <div className={`flex flex-col gap-8`}>
+          <LinkAnchor
+            page="Logear"
+            url="login"
+            selectedPage={selectedPage}
+            setSelectedPage={setSelectedPage}
+            baseColor={anchorBaseColor}
+            selectePageColor={selectePageColor}
+          />
+        </div>
+      </>
+    )
+  }
 
 
   return (
@@ -101,7 +113,7 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
           <div className={`${flexBetween} w-full gap-10`}>
             {/* LEFT SIDE */}
             <Link to='/'>
-              <img alt="logo" src={Logo} style={{width: '200px', height: '51px'}} />
+              <DynamicLogo  isTopOfPage={isTopOfPage}/>
             </Link>
 
             {/* RIGHT SIDE */}
@@ -132,7 +144,7 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
           </div>
 
           {/* MENU ITEMS */}
-          <div className="ml-[33%] flex flex-col gap-10 text-2xl">
+          <div className="ml-[20%] flex flex-col gap-10 text-2xl">
             { movilLandingMenu() }
           </div>
         </div>

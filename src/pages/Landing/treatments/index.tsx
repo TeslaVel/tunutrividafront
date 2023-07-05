@@ -13,7 +13,7 @@ import auriculoterapia from "@/assets/ntv/auriculoterapia.png";
 import { motion } from "framer-motion";
 import HText from "@/components/Compound/Title/HText";
 // import Class from "./Class";
-import Carousel from "./Carousel";
+import Carousel from "./CarouselMulti";
 
 const classes: Array<ClassType> = [
   {
@@ -53,7 +53,7 @@ type Props = {
 
 const Treatments = ({ setSelectedPage }: Props) => {
   return (
-    <section id="treatments" className="w-full min-h-full bg-purple-05 py-[7rem]">
+    <section id="treatments" className="w-full min-h-full py-[7rem] bg-purple-20">
       <motion.div
         onViewportEnter={() => setSelectedPage(SelectedPage.Treatments)}
       >
@@ -75,8 +75,8 @@ const Treatments = ({ setSelectedPage }: Props) => {
             </p>
           </div>
         </motion.div>
-        <div className="mt-10 h-[400px] mx-auto md:w-[88%] sm:w-[100%]">
-          <Carousel images={classes} />
+        <div className="mt-10 h-[400px] mx-auto w-5/6">
+          <Carousel images={classes} deviceType='desktop'/>
         </div>
       </motion.div>
     </section>

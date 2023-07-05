@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import NoImage from "@/assets/ntv/noimage.png";
-import Calendar from "@/assets/icons/calendar"
-import HomeIcon from "@/assets/icons/homeIcon"
-import SessionIcon from "@/assets/icons/sessionIcon"
-import ChatIcon from "@/assets/icons/chatIcon"
-import Logout from "@/assets/icons/logout"
-import ArrowRight from "@/assets/icons/arrowright"
-import ArrowLeft from "@/assets/icons/arrowleft"
+import Calendar from "@/components/icons/calendar"
+import HomeIcon from "@/components/icons/homeIcon"
+import SessionIcon from "@/components/icons/sessionIcon"
+import ChatIcon from "@/components/icons/chatIcon"
+import Logout from "@/components/icons/logout"
+import ArrowRight from "@/components/icons/arrowright"
+import ArrowLeft from "@/components/icons/arrowleft"
 import { NavLink } from "react-router-dom";
 import useMediaQuery from "@/hooks/useMediaQuery";
 

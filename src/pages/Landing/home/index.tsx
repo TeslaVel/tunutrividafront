@@ -2,10 +2,10 @@ import useMediaQuery from "@/hooks/useMediaQuery";
 import { SelectedPage } from "@/types";
 import ActionButton from "@/components/Compound/Buttons/ActionButton";
 import HomePageText from "@/assets/HomePageText.png";
-import HomePageGraphic from "@/assets/HomePageGraphic.png";
-import SponsorRedBull from "@/assets/SponsorRedBull.png";
-import SponsorForbes from "@/assets/SponsorForbes.png";
-import SponsorFortune from "@/assets/SponsorFortune.png";
+import body3 from "@/assets/ntv/body3.png";
+// import SponsorRedBull from "@/assets/SponsorRedBull.png";
+// import SponsorForbes from "@/assets/SponsorForbes.png";
+// import SponsorFortune from "@/assets/SponsorFortune.png";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 import { motion } from "framer-motion";
 
@@ -23,7 +23,15 @@ const Home = ({ setSelectedPage }: Props) => {
         className="mx-auto w-5/6 items-center justify-center md:flex md:h-5/6"
         onViewportEnter={() => setSelectedPage(SelectedPage.Home)}
       >
-        {/* MAIN HEADER */}
+
+        {/* IMAGE */}
+        <div
+          className="flex basis-3/5 justify-center md:z-10
+             md:mt-16 md:justify-items-end"
+        >
+          <img alt="home-pageGraphic" src={body3} />
+        </div>
+
         <div className="z-10 mt-32 md:basis-3/5">
           {/* HEADINGS */}
           <motion.div
@@ -37,22 +45,16 @@ const Home = ({ setSelectedPage }: Props) => {
               visible: { opacity: 1, x: 0 },
             }}
           >
-            <div className="relative">
-              <div className="before:absolute before:-top-20 before:-left-20 before:z-[-1] md:before:content-evolvetext">
-                <img alt="home-page-text" src={HomePageText} />
-              </div>
-            </div>
-
             <p className="mt-8 text-sm">
-              Unrivaled Gym. Unparalleled Training Fitness Classes. World Class
-              Studios to get the Body Shapes That you Dream of.. Get Your Dream
-              Body Now.
+              Consultorio nutricional y tratamientos corporales excepcionales. Transforma tu cuerpo y alcanza una salud óptima.
+              Servicios profesionales y personalizados para lograr la figura con la que siempre has soñado.
+              ¡Empieza a construir el cuerpo de tus sueños hoy mismo!
             </p>
           </motion.div>
 
           {/* ACTIONS */}
           <motion.div
-            className="mt-8 flex items-center gap-8"
+            className="mt-5 flex items-center gap-8"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.5 }}
@@ -73,14 +75,6 @@ const Home = ({ setSelectedPage }: Props) => {
               <p>Learn More</p>
             </AnchorLink>
           </motion.div>
-        </div>
-
-        {/* IMAGE */}
-        <div
-          className="flex basis-3/5 justify-center md:z-10
-              md:ml-40 md:mt-16 md:justify-items-end"
-        >
-          <img alt="home-pageGraphic" src={HomePageGraphic} />
         </div>
       </motion.div>
 

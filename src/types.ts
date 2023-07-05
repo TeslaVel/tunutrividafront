@@ -53,9 +53,19 @@ export interface User {
 
 
 export enum Colors {
-  PRIMARY100="#FFE1E0",
-  PRIMARY300="#FFA6A3",
-  PRIMARY500="#FF6B66",
+  GRAYPURPLE10= "rgb(236, 212, 236)",
+  DARKPURPLE600= "rgb(73, 3, 103)",
+  DARKPURPLE500= "rgb(80, 13, 115)",
+  DARKPURPLE400= "rgb(100, 23, 130)",
+  DARKPURPLE300= "rgb(120, 33, 145)",
+  DARKPURPLE200= "rgb(140, 43, 160)",
+  DARKPURPLE100= "rgb(160, 53, 175)",
+  DARKPURPLE50= "rgb(180, 63, 190)",
+  DARKPURPLE40= "rgb(200, 73, 205)",
+  DARKPURPLE30= "rgb(220, 83, 220)",
+  DARKPURPLE20= "rgb(240, 93, 235)",
+  DARKPURPLE10= "rgb(260, 103, 250)",
+  DARKPURPLE05= "rgb(280, 113, 265)",
   GRAY20="#F8F4EB",
   GRAY50="#EFE6E6",
   GRAY100="#DFCCCC",
@@ -67,7 +77,6 @@ export enum Colors {
 
 
 /* FOR QUERIES */
-
 export interface EntryType {
   id: string;
   description:  string;

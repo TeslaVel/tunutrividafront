@@ -1,8 +1,11 @@
-import useMediaQuery from "@/hooks/useMediaQuery";
+// import useMediaQuery from "@/hooks/useMediaQuery";
+import { useState } from 'react'
 import { SelectedPage } from "@/types";
 import ActionButton from "@/components/Compound/Buttons/ActionButton";
-import HomePageText from "@/assets/HomePageText.png";
+// import HomePageText from "@/assets/HomePageText.png";
 import body3 from "@/assets/ntv/body3.png";
+import backgroundImage from "@/assets/ntv/background-1.jpg";
+import HText from "@/components/Compound/Title/HText";
 // import SponsorRedBull from "@/assets/SponsorRedBull.png";
 // import SponsorForbes from "@/assets/SponsorForbes.png";
 // import SponsorFortune from "@/assets/SponsorFortune.png";
@@ -14,28 +17,24 @@ type Props = {
 };
 
 const Home = ({ setSelectedPage }: Props) => {
-  const isAboveMediumScreens = useMediaQuery("(min-width:1060px)");
-
+  // const isAboveMediumScreens = useMediaQuery("(min-width:1060px)");
   return (
-    <section id="home" className="gap-16 bg-gray-20 py-10 md:h-full md:pb-0">
+    <section id="home" className="gap-16 bg-gray-20 py-10 md:h-full md:pb-0 xxxs:h-full md:h-[100vh]"
+     style={{
+      backgroundImage: `url(${backgroundImage})`,
+      backgroundSize: 'cover'
+    }}
+    >
       {/* IMAGE AND MAIN HEADER */}
       <motion.div
-        className="mx-auto w-5/6 items-center justify-center md:flex md:h-5/6"
+        className="mx-auto w-5/6 xxxs:mt-[5rem] xxs:mt-[4rem] sm:mt-[4rem] md:mt-[15rem]"
         onViewportEnter={() => setSelectedPage(SelectedPage.Home)}
       >
 
-        {/* IMAGE */}
-        <div
-          className="flex basis-3/5 justify-center md:z-10
-             md:mt-16 md:justify-items-end"
-        >
-          <img alt="home-pageGraphic" src={body3} />
-        </div>
-
-        <div className="z-10 mt-32 md:basis-3/5">
+        <div className="z-10 md:basis-3/5 xs:w-4/6 md:w-3/6 ">
           {/* HEADINGS */}
           <motion.div
-            className="md:-mt-20"
+            className=""
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.5 }}
@@ -45,10 +44,11 @@ const Home = ({ setSelectedPage }: Props) => {
               visible: { opacity: 1, x: 0 },
             }}
           >
-            <p className="mt-8 text-sm">
-              Consultorio nutricional y tratamientos corporales excepcionales. Transforma tu cuerpo y alcanza una salud óptima.
-              Servicios profesionales y personalizados para lograr la figura con la que siempre has soñado.
+            <HText classes="text-pink-10 text-[2.5rem]">
               ¡Empieza a construir el cuerpo de tus sueños hoy mismo!
+            </HText>
+            <p className="mt-8 text-pink-10 font-bold text-[18px]">
+              Tratanmientos y dietas personalizados para moldear tu mejor version.
             </p>
           </motion.div>
 
@@ -64,15 +64,18 @@ const Home = ({ setSelectedPage }: Props) => {
               visible: { opacity: 1, x: 0 },
             }}
           >
-            <ActionButton setSelectedPage={setSelectedPage} selectedPage={SelectedPage.Contactus}>
-              Join Now
+            <ActionButton
+              baseColor='bg-dark-purple-500 hover:bg-dark-purple-700 text-white-01 xs:w-auto xxs:px-2 xs:px-2'
+              setSelectedPage={setSelectedPage}
+              selectedPage={SelectedPage.Contactus}>
+              Únete Ahora
             </ActionButton>
             <AnchorLink
-              className="text-sm font-bold text-primary-500 underline hover:text-primary-300"
+              className="text-sm font-bold text-pink-10 hover:text-pink-30"
               onClick={() => setSelectedPage(SelectedPage.Contactus)}
               href={`#${SelectedPage.Contactus}`}
             >
-              <p>Learn More</p>
+              <p>Mas información</p>
             </AnchorLink>
           </motion.div>
         </div>

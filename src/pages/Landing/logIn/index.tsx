@@ -7,6 +7,7 @@ import Scale1 from "@/assets/ntv/scale1.png";
 import HText from "@/components/Compound/Title/HText";
 import { AuthContext } from '@/AuthProviderManager';
 import { useMutationLogin } from '@/hooks/graph/useMutationLogin';
+import '@/components/Compound/Buttons/ActionButton.css'
 
 type Props = {
   setSelectedPage: (value: SelectedPage) => void;
@@ -27,11 +28,16 @@ const LogIn = ({ setSelectedPage }: Props) => {
     }
   }, [data?.createAuth]);
 
-  const inputStyles = `mb-5 w-full rounded-lg bg-dark-purple-600 text-white
-  px-5 py-3 placeholder-white`;
+  const inputStyles = `
+  bg-dark-purple-600
+  text-white placeholder-white
+  px-5 py-3 mb-5 w-full rounded-md`;
 
-  const buttonStyles = `bg-dark-purple-500 hover:bg-dark-purple-200 text-white sm:px-15 px-20 text-center w-auto rounded-lg
-  py-3 transition duration-500 hover:text-white`
+  const buttonStyles = `ntv-custom-shadow
+  bg-dark-purple-500 hover:bg-dark-purple-700
+  text-white sm:px-7 text-center hover:text-white
+  py-3  px-10 w-auto rounded-lg
+  transition duration-500`
 
   const {
     register,
@@ -48,17 +54,16 @@ const LogIn = ({ setSelectedPage }: Props) => {
   };
 
   return (
-    <section id="login" className="mx-auto w-5/6 pt-[7rem] pb-[17rem]">
-      <div className="bg-purple-15 p-5 rounded-lg">
+    <section id="login" className="py-[8rem] min-h-[700px] h-[100vh] bg-purple-05">
         <motion.div
           onViewportEnter={() => setSelectedPage(SelectedPage.LogIn)}
-          className='justify-between gap-8 md:flex'
+          className='flex justify-center items-center h-full gap-8'
         >
-
           {/* FORM AND IMAGE */}
-          <div className="sm:w-full md:w-full lg:w-5/6">
+          <div className="xxxs:px-4 xxs:px-4 md:p-5 sm:w-full md:w-full md:w-3/6 lg:w-2/6 bg-dark-purple-500 rounded-lg text-white-01">
             {/* HEADER */}
             <motion.div
+              className="mb-[3rem]"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.5 }}
@@ -69,15 +74,15 @@ const LogIn = ({ setSelectedPage }: Props) => {
               }}
             >
               <HText>
-                <span className="text-primary-500">LOGIN</span>
+                <span className="text-white-01">LOGIN</span>
               </HText>
-              <p className="my-5">
+              <p className="my-5 text-[18px] text-white-01">
                 Ingresa con energía y siente la transformación en tu cuerpo - ¡Bienvenido a nuestro portal de salud nutricional!
               </p>
             </motion.div>
 
             <motion.div
-              className="basis-3/5 md:mt-0"
+              className="basis-3/5 md:mt-0 "
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.5 }}
@@ -92,7 +97,6 @@ const LogIn = ({ setSelectedPage }: Props) => {
                 onSubmit={onSubmit}
                 method="POST"
               >
-
                 <input
                   className={inputStyles}
                   type="text"
@@ -127,46 +131,24 @@ const LogIn = ({ setSelectedPage }: Props) => {
                   </p>
                 )}
 
-
-                <div className="flex xxs:gap-5  ms:gap-0 xxs:flex-col sm:flex-row lg:flex-row sm:justify-between md:justify-between mt-5">
+                <div className="flex gap-4 xxxs:flex-col xxs:flex-col sm:flex-row lg:flex-row mt-5">
                   <button
                     type="submit"
-                    className={buttonStyles}
+                    className={`${buttonStyles} sm:flex-[2] md:flex-[none] md:w-auto`}
                   >
                     Logear
                   </button>
 
-                  <a className={buttonStyles}
+                  <a className={`${buttonStyles} sm:flex-1 md:flex-[none] md:w-auto`}
                     onClick={() => setSelectedPage(SelectedPage.Contactus)}
                     href={`#${SelectedPage.Contactus}`} >
-                    Únete a Nosotors
+                    Únete
                   </a>
                 </div>
               </form>
             </motion.div>
           </div>
-
-          <motion.div
-              className="relative mt-16 basis-3/5 md:mt-0 sm:hidden md:block lg:block"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.5 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-              variants={{
-                hidden: { opacity: 0, y: 50 },
-                visible: { opacity: 1, y: 0 },
-              }}
-            >
-              <div className="flex h-full items-center before:z-[-1]">
-                <img
-                  className="w-full min-w-[250px]"
-                  alt="contact-us"
-                  src={Scale1}
-                />
-              </div>
-            </motion.div>
         </motion.div>
-      </div>
     </section>
   );
 };

@@ -1,35 +1,33 @@
 import ActionButton from "@/components/Compound/Buttons/ActionButton";
 import HText from "@/components/Compound/Title/HText";
-import { PackageType, SelectedPage } from "@/types";
-import {
-  HomeModernIcon,
-  UserGroupIcon,
-  AcademicCapIcon,
-} from "@heroicons/react/24/solid";
+import { SelectedPage, ClassType } from "@/types";
+// import {
+//   HomeModernIcon,
+//   UserGroupIcon,
+//   AcademicCapIcon,
+// } from "@heroicons/react/24/solid";
 import { motion } from "framer-motion";
-import BenefitsPageGraphic from "@/assets/BenefitsPageGraphic.png";
+// import BenefitsPageGraphic from "@/assets/BenefitsPageGraphic.png";
+import package_1 from "@/assets/ntv/package-1.png";
+import package_2 from "@/assets/ntv/package-2.png";
+import package_3 from "@/assets/ntv/package-3.png";
+
 import Package from "./Package";
 
-const packages: Array<PackageType> = [
+const packages: Array<ClassType> = [
   {
-    icon: <HomeModernIcon className="h-6 w-6" />,
-    title: "State of the Art Facilities",
-    description:
-      "Neque adipiscing amet amet enim. Feugiat dolor enim fermentum in a in lectus pellentesque. Ullamcorper et.",
+    name: "Paquete 1",
+    url: package_1,
   },
   {
-    icon: <UserGroupIcon className="h-6 w-6" />,
-    title: "100's of Diverse Classes",
-    description:
-      "Eu ipsum id egestas risus tempus enim semper felis quis. Nec consectetur ac venenatis facilisi est. Eget ac turpis id.",
+    name: "Paquete 2",
+    url: package_2,
   },
   {
-    icon: <AcademicCapIcon className="h-6 w-6" />,
-    title: "Expert and Pro Trainers",
-    description:
-      "Fusce vestibulum aliquam ut cras. Nisl lectus egestas sapien nisl. Lacus at mi sit pellentesque. Congue parturient.",
-  },
-];
+    name: "Paquete 3",
+    url: package_3,
+  }
+]
 
 const container = {
   hidden: {},
@@ -44,9 +42,10 @@ type Props = {
 
 const Packages = ({ setSelectedPage }: Props) => {
   return (
-    <section id="packages" className="mx-auto min-h-full w-5/6 py-[5.2rem]">
+    <section id="packages" className="xxxs:h-full xxxs:py-[7rem] min-h-[800px] h-[100vh] flex flex-col justify-center bg-purple-05">
       <motion.div
         onViewportEnter={() => setSelectedPage(SelectedPage.Packages)}
+        className="mx-auto w-5/6"
       >
         {/* HEADER */}
         <motion.div
@@ -60,102 +59,30 @@ const Packages = ({ setSelectedPage }: Props) => {
             visible: { opacity: 1, x: 0 },
           }}
         >
-          <HText>MORE THAN JUST GYM.</HText>
-          <p className="my-5 text-sm">
-            We provide world class fitness equipment, trainers and classes to
-            get you to your ultimate fitness goals with ease. We provide true
-            care into each and every member.
+          <HText classes='text-pink-500'>Más que una dieta</HText>
+          <p className="px-1 my-5 text-[20px] text-pink-500">
+            Proveemos un tratamiento nutricional adecuado a tu metabolismo y antecedentes y gustos
           </p>
         </motion.div>
 
         {/* BENEFITS */}
         <motion.div
-          className="mt-5 items-center justify-between gap-8 md:flex"
+          className="mt-5 items-center justify-between gap-5 md:flex-row flex xxs:flex-col"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.5 }}
           variants={container}
         >
-          {packages.map((pack: PackageType) => (
+          {packages.map((pack: ClassType) => (
             <Package
-              key={pack.title}
-              icon={pack.icon}
-              title={pack.title}
-              description={pack.description}
+              classes=""
+              key={pack.name}
+              name={pack.name}
+              url={pack.url}
               setSelectedPage={setSelectedPage}
             />
           ))}
         </motion.div>
-
-        {/* GRAPHICS AND DESCRIPTION */}
-        <div className="mt-16 items-center justify-between gap-20 md:mt-28 md:flex">
-          {/* GRAPHIC */}
-          <img
-            className="mx-auto"
-            alt="benefits-page-graphic"
-            src={BenefitsPageGraphic}
-          />
-
-          {/* DESCRIPTION */}
-          <div>
-            {/* TITLE */}
-            <div className="relative">
-              <div className="before:absolute before:-top-20 before:-left-20 before:z-[1] before:content-abstractwaves">
-                <motion.div
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, amount: 0.5 }}
-                  transition={{ duration: 0.5 }}
-                  variants={{
-                    hidden: { opacity: 0, x: 50 },
-                    visible: { opacity: 1, x: 0 },
-                  }}
-                >
-                  <HText>
-                    MILLIONS OF HAPPY MEMBERS GETTING{" "}
-                    <span className="text-primary-500">FIT</span>
-                  </HText>
-                </motion.div>
-              </div>
-            </div>
-
-            {/* DESCRIPT */}
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.5 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-              variants={{
-                hidden: { opacity: 0, x: 50 },
-                visible: { opacity: 1, x: 0 },
-              }}
-            >
-              <p className="my-5">
-                Nascetur aenean massa auctor tincidunt. Iaculis potenti amet
-                egestas ultrices consectetur adipiscing ultricies enim. Pulvinar
-                fames vitae vitae quis. Quis amet vulputate tincidunt at in
-                nulla nec. Consequat sed facilisis dui sit egestas ultrices
-                tellus. Ullamcorper arcu id pretium sapien proin integer nisl.
-                Felis orci diam odio.
-              </p>
-              <p className="mb-5">
-                Fringilla a sed at suspendisse ut enim volutpat. Rhoncus vel est
-                tellus quam porttitor. Mauris velit euismod elementum arcu neque
-                facilisi. Amet semper tortor facilisis metus nibh. Rhoncus sit
-                enim mattis odio in risus nunc.
-              </p>
-            </motion.div>
-
-            {/* BUTTON */}
-            <div className="relative mt-16">
-              <div className="before:absolute before:-bottom-20 before:right-40 before:z-[-1] before:content-sparkles">
-                <ActionButton setSelectedPage={setSelectedPage} selectedPage={SelectedPage.Contactus}>
-                  Join Now
-                </ActionButton>
-              </div>
-            </div>
-          </div>
-        </div>
       </motion.div>
     </section>
   );

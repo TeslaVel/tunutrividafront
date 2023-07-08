@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect, Suspense } from 'react';
-import Menu from "@/components/Menu";
+import Menu from "@/pages/Landing/Menu";
 import ProtectedRoute from '@/ProtectedRoute';
 import Dashboard from '@/pages/Dashboard';
 import Sessions from '@/pages/Dashboard/Sessions';
@@ -52,7 +52,7 @@ export const AppRoutes = ({ selectedPage, setSelectedPage, asignCLientForUploadI
               setSelectedPage={setSelectedPage}
             />
 
-            <div className={`${isLogged ? 'flex-1 bg-purple-10 h-[100%]' : 'bg-purple-20'}`}>
+            <div className={`${isLogged ? 'flex-1 bg-purple-10 h-[100%]' : 'bg-purple-15'}`}>
               <Routes>
                 <Route element={<ProtectedRoute isNotLogged={isLogged} redirectPath="/dashboard" />}>
                   <Route index path="/" element={

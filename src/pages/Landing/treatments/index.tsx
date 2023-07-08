@@ -4,18 +4,12 @@ import radiofrecuencia from "@/assets/ntv/radiofrecuencia1.png";
 import vacumterapia from "@/assets/ntv/vacumterapia1.png";
 import lipolaser from "@/assets/ntv/lipolaser1.png";
 import auriculoterapia from "@/assets/ntv/auriculoterapia.png";
-// import image1 from "@/assets/image1.png";
-// import image2 from "@/assets/image2.png";
-// import image3 from "@/assets/image3.png";
-// import image4 from "@/assets/image4.png";
-// import image5 from "@/assets/image5.png";
-// import image6 from "@/assets/image6.png";
 import { motion } from "framer-motion";
 import HText from "@/components/Compound/Title/HText";
 // import Class from "./Class";
-import Carousel from "./CarouselMulti";
+import Carousel from "@/components/Carousel";
 
-const classes: Array<ClassType> = [
+const images: Array<ClassType> = [
   {
     name: "Auriculoterapia",
     description:
@@ -53,7 +47,7 @@ type Props = {
 
 const Treatments = ({ setSelectedPage }: Props) => {
   return (
-    <section id="treatments" className="w-full min-h-full py-[7rem] bg-purple-20">
+    <section id="treatments" className="xxxs:h-full xxxs:py-[7rem] min-h-[800px] h-[100vh] flex flex-col justify-center  bg-dark-purple-500">
       <motion.div
         onViewportEnter={() => setSelectedPage(SelectedPage.Treatments)}
       >
@@ -68,15 +62,19 @@ const Treatments = ({ setSelectedPage }: Props) => {
             visible: { opacity: 1, x: 0 },
           }}
         >
-          <div className="md:w-3/5">
+          <div className="md:w-3/5 text-white-01">
             <HText>Nuestros Tratamientos</HText>
-            <p className="py-5">
-              Explicar algo aqui sobre vacumterapia, radio etc.
+            <p className="py-5 text-[20px]">
+              Ofrecemos los mejores tratamientos de la vanguardia.
             </p>
           </div>
         </motion.div>
         <div className="mt-10 h-[400px] mx-auto w-5/6">
-          <Carousel images={classes} deviceType='desktop'/>
+          <Carousel
+            withDescription
+            withTitle
+            images={images} deviceType='desktop'
+          />
         </div>
       </motion.div>
     </section>

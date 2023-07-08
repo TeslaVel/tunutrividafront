@@ -1,6 +1,5 @@
 import { SelectedPage } from "@/types";
 import { motion } from "framer-motion";
-import AnchorLink from "react-anchor-link-smooth-scroll";
 
 const childVariant = {
   hidden: { opacity: 0, scale: 0.9 },
@@ -8,35 +7,25 @@ const childVariant = {
 };
 
 type Props = {
-  icon: JSX.Element;
-  title: string;
-  description: string;
+  name: string;
+  url: string;
+  classes?: string;
+  description?: string;
   setSelectedPage: (value: SelectedPage) => void;
 };
 
-const Package = ({ icon, title, description, setSelectedPage }: Props) => {
+const Package = ({name, url, classes}: Props) => {
   return (
     <motion.div
       variants={childVariant}
-      className="mt-5 rounded-md border-2 border-gray-100 px-5 py-16 text-center"
+      className='w-full h-[350px]'
     >
-      <div className="mb-4 flex justify-center">
-        <div className="rounded-full border-2 border-gray-100 bg-primary-100 p-4">
-          {icon}
-        </div>
-      </div>
-
-      <h4 className="font-bold">{title}</h4>
-      <p className="my-3">{description}</p>
-      <AnchorLink
-        className="text-sm font-bold text-primary-500 underline hover:text-primary-300"
-        onClick={() => setSelectedPage(SelectedPage.Contactus)}
-        href={`#${SelectedPage.Contactus}`}
-      >
-        <p>Learn More</p>
-      </AnchorLink>
+       <img
+        src={url}
+        alt={name}
+        className={`rounded-md border-2 w-full h-full`}/>
     </motion.div>
   );
 };
 
-export default Package;
+export default Package

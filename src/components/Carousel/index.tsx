@@ -6,10 +6,13 @@ import RectangleIcon from '@/components/icons/rectangleIcon'
 
 // types
 import { ClassType, Colors } from "@/types";
+import { HexbinSeries } from "react-vis";
 
 interface CarouselProps {
   images: ClassType[];
   deviceType: string
+  withDescription?: boolean
+  withTitle?: boolean
 }
 
 const responsive = {
@@ -32,7 +35,12 @@ const responsive = {
   }
 };
 
-const CarouselMulti: React.FC<CarouselProps> = ({ images, deviceType = 'desktop' }) => {
+const CarouselMulti: React.FC<CarouselProps> = ({
+  images,
+  deviceType = 'desktop',
+  withDescription,
+  withTitle
+}) => {
   const CustomDot = ({ onClick, ...rest }: any) => {
     const {
       index,
@@ -40,15 +48,22 @@ const CarouselMulti: React.FC<CarouselProps> = ({ images, deviceType = 'desktop'
       carouselState: { currentSlide, deviceType }
     } = rest;
 
+    let circleStyle = {
+      border: 'thin solid rgba(62, 18, 83, 0.74)',
+      borderRadius: '2em',
+      margin: '0 2px',
+      color: 'black',
+      display: 'inline-block',
+      height: '.7em',
+      width: '.7em',
+      background: active ? 'rgba(73, 3, 103, 0.5)' : 'none',
+      transition: 'background-color .4s ease-out'
+    }
     return (
       <button
         onClick={() => onClick()}
       >
-        <RectangleIcon
-          width={20}
-          height={20}
-          color={active ? Colors.DARKPURPLE600 : Colors.NONE}
-        />
+        <span style={circleStyle}/>
       </button>
     );
   };
@@ -71,17 +86,32 @@ const CarouselMulti: React.FC<CarouselProps> = ({ images, deviceType = 'desktop'
         removeArrowOnDeviceType={["tablet", "mobile"]}
         deviceType={deviceType}
         dotListClass='custom-dot-list-style'
-        itemClass="p-2"
+        itemClass="px-2"
         renderDotsOutside
       >
         {images.map((image, index) => (
-          <div className="w-full h-full flex flex-col">
-            <img src={image.url} className="relative w-full h-full rounded-lg h-[270px] h-min-[200px]"/>
-            <div className="px-2 pt-1"><h3 className="text-lg text-center font-semibold" >{image.name}</h3></div>
-            <div className="absolute px-2 pt-4 rounded-lg opacity-0 w-[20rem] h-[17rem] hover:opacity-[0.8] hover:bg-rgba-82">
-              <p>{image.description}</p>
+          <>
+            <div key={index} className="w-full h-full flex flex-col h-[350px] h-min-[250px] rounded-md border-2"
+              style={{
+                backgroundImage: `url(${image.url})`,
+                backgroundSize: 'cover'
+              }}>
+              { withDescription &&
+                <div
+                className="absolute p-5 rounded-lg opacity-0 w-full h-full hover:opacity-[0.8] hover:bg-rgba-82"
+                style={{
+                  height: 'inherit',
+                  width: 'calc(100% - 1em)',
+                  transition: 'all .2s linear'
+                }}>
+                  <p className="text-dark-purple-600">{image.description}</p>
+                </div>
+              }
             </div>
-          </div>
+            { withTitle &&
+              <div className="px-2 pt-1 text-white-01"><h3 className="text-lg text-center font-semibold" >{image.name}</h3></div>
+            }
+          </>
         ))}
       </Carousel>
     </div>

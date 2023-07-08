@@ -9,7 +9,6 @@ interface IProps {
   collapsedByDefault?: boolean
 }
 
-
 const labelStyle = {
   marginRight: 'auto'
 }

@@ -45,10 +45,10 @@ const Home = ({ setSelectedPage }: Props) => {
             }}
           >
             <HText classes="text-pink-10 text-[2.5rem]">
-              ¡Empieza a construir el cuerpo de tus sueños hoy mismo!
+              ¡Empieza a mejorar tu salud hoy mismo!
             </HText>
             <p className="mt-8 text-pink-10 font-bold text-[18px]">
-              Tratanmientos y dietas personalizados para moldear tu mejor version.
+              Tratanmientos y planes de alimentacion personalizados para lograr tu mejor version.
             </p>
           </motion.div>
 
@@ -65,9 +65,11 @@ const Home = ({ setSelectedPage }: Props) => {
             }}
           >
             <ActionButton
-              baseColor='bg-dark-purple-500 hover:bg-dark-purple-700 text-white-01 xs:w-auto xxs:px-2 xs:px-2'
+              baseColor='bg-dark-purple-700 hover:bg-dark-purple-400 text-white-01 xs:w-auto xxs:px-2 xs:px-2'
               setSelectedPage={setSelectedPage}
-              selectedPage={SelectedPage.Contactus}>
+              selectedPage={SelectedPage.Contactus}
+              toSelect={SelectedPage.Contactus}
+            >
               Únete Ahora
             </ActionButton>
             <AnchorLink

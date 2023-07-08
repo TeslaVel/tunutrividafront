@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { UserColors } from "@/types";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -19,9 +20,10 @@ type arrayObject = {
 }
 
 interface Props {
-  chartLabels: [string],
+  chartLabels: [string]
   chartTitle: string,
   optionRanges: arrayObject[]
+  userColors: UserColors | null
 }
 
 ChartJS.register(
@@ -48,7 +50,7 @@ const optionsChart = {
   },
 }
 
-export const LineBar = ( { chartLabels, chartTitle, optionRanges }: Props ) => {
+export const LineBar = ( { chartLabels, chartTitle, optionRanges, userColors }: Props ) => {
   if (!chartLabels) return null
 
   const [selectedValue, setSelectedValue] = useState<string>(optionRanges[0].name)
@@ -70,11 +72,11 @@ export const LineBar = ( { chartLabels, chartTitle, optionRanges }: Props ) => {
 
   return (
     <div className="flex flex-col">
-      {chartTitle && <h5 className='mx-2 mt-4 text-center'> {chartTitle} [{selectedValue}] </h5>}
+      {chartTitle && <h5 className='mx-2 mt-4 text-center text-dark-purple-700'> {chartTitle} [{selectedValue}] </h5>}
       <Line options={optionsChart} data={dataChart}/>
       <div className="mx-2 mt-4 flex gap-3 mb-3">
         { optionRanges?.map((opt: arrayObject, index: number) => (
-          <button key={index} className="px-3 rounded bg-purple-15 hover:bg-purple-50" onClick={() => setSelectedValue(opt.name)}>{opt.label}</button>
+          <button key={index} className={`px-3 rounded ${userColors?.buttonBgColor}`} onClick={() => setSelectedValue(opt.name)}>{opt.label}</button>
         ))}
       </div>
     </div>

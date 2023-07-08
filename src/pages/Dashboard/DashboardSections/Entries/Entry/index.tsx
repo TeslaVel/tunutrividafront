@@ -14,7 +14,9 @@ type Props = {
 
 
 export const Entry = ({ entry, isList, setAction, showComments, userStored }: Props) => {
-    const klasses = `entries relative flex flex-col flex-wrap bg-primary-20 mb-8 ${isList ? 'min-w-[300px] w-[350px] ' : 'xxs:w-6/6 xs:w-6/6 sm:w-5/6 md:w-5/6 lg:w-3/6'}`
+    const entryClasses = `entries relative flex flex-col flex-wrap
+    bg-purple-01 border border-purple-300 ${isList ? 'w-full' : 'xxxs:xxs:sm:w-6/6 md:w-5/6 lg:w-3/6'}`;
+
     const [commentList, setCommentList] = useState<CommentType[]>(entry.comments);
     const { CreateComment, data, loading, error, reset } = useMutationCreateComment();
     if (error) {
@@ -56,32 +58,30 @@ export const Entry = ({ entry, isList, setAction, showComments, userStored }: Pr
             ? () => setAction && setAction(entry)
             : () => {}
           }
-          className={klasses}
+          className={entryClasses}
           style={injectdStyles}
         >
-        <div className="flex items-center p-4 bg-primary-100" style={{borderRadius: '20px 20px 0 0'}}>
+        <div className="flex items-center p-4 bg-purple-300 text-white-01" style={{borderRadius: '20px 20px 0 0'}}>
           <div>
-            <span className="w-[3rem] h-[3rem] bg-secondary-500 rounded-full mr-4 flex items-center justify-center"></span>
+            <span className="w-[3rem] h-[3rem] bg-dark-purple-300 rounded-full mr-4 flex items-center justify-center"></span>
           </div>
           <div>
             <p className="text-lg font-bold">{entry.user.fullName }</p>
             <p className="text-sm ">{customDateFormat(entry.createdAt, 'LL HH:mm') }</p>
           </div>
         </div>
-        { hasImage &&
+        { hasImage && !isList &&
           <div className="border-b p-3">
               <img src={entry.imageUrl} alt={entry.entryType} className={`w-full ${isList ? 'h-[200px]' : 'h-[250px]'}`} />
           </div>
         }
-        <div className="w-full h-[60px] p-3"
+        <div className="w-full min-h-[60px] p-3"
           style={{}}
         >
-          <p className="text-gray-500">{entry.description}</p>
+          <p className="px-2">{entry.description}</p>
         </div>
-        <div className={`flex justify-end px-4 py-3 ${isList && !hasImage ? 'absolute bottom-0 right-0' : ''}`}>
-          <button className={`p-1 ${isList && 'bg-primary-400 hover:bg-primary-500 text-white rounded-lg'}`}>
-            Comentarios ({commentList.length})
-          </button>
+        <div className={`flex justify-end px-4 pb-2 pt-1 ${isList && !hasImage ? '' : ''}`}>
+          Comentarios ({commentList.length})
         </div>
         {showComments && commentList.length > 0 &&
           <Comments

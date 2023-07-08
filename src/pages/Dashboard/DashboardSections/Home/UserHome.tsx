@@ -1,17 +1,18 @@
 import { useEffect } from "react";
 import { useGetSessionDataChart } from '@/hooks/useGetSessionDataChart'
 import BmiRanges from '@/components/BmiRanges'
-import { UserType } from "@/types";
+import { UserType, UserColors } from "@/types";
 import LineBar from "@/components/Chart/LineBar";
 
 // types
 
 type Props = {
   userStored: UserType | null;
+  userColors: UserColors | null
   handleCableAction: () => void;
 };
 
-const UserHome = ({userStored}: Props) => {
+const UserHome = ({ userStored, userColors }: Props) => {
   const { loading: loadinChart, data: dataChart, refetch: refetchChart } = useGetSessionDataChart()
 
   useEffect(() => {
@@ -27,17 +28,22 @@ const UserHome = ({userStored}: Props) => {
       }
       { !loadinChart &&
           <div className='dashboard-section flex flex-col w-full'>
-            <div className='bg-primary-20 p-3 flex flex-col w-auto md:w-[50rem] sm:w-[30rem] xs:w-[25rem] xxs:w-[20rem] xxxs:w-100' style={{alignSelf: 'center', borderRadius: '20px'}}>
+            <div className={`${userColors?.bgGraphColor} p-3 flex flex-col w-auto md:w-[50rem] sm:w-[30rem] xs:w-[25rem] xxs:w-[20rem] xxxs:w-100`} style={{alignSelf: 'center', borderRadius: '20px'}}>
               <strong className='text-center pb-5'>BMI</strong>
-              <BmiRanges bmi={userStored?.imc} gender={userStored?.gender || null}/>
+              <BmiRanges
+                bmi={userStored?.imc}
+                gender={userStored?.gender || null}
+                userColors={userColors}
+                />
             </div>
 
             { chartData &&
-              <div className="flex justify-center  mt-[2rem]">
-                <div  className="w-auto w-full md:w-[50rem] sm:w-[30rem] xs:w-[25rem] xxs:w-[20rem] xxxs:w-100 bg-gray-20">
+              <div className="flex justify-center mt-[2rem]">
+                <div className={`${userColors?.bgGraphColor} w-auto w-full md:w-[50rem] sm:w-[30rem] xs:w-[25rem] xxs:w-[20rem] xxxs:w-100 p-3`}>
                   <LineBar
                     chartTitle="Grafico de evolucion"
                     chartLabels={chartData.days}
+                    userColors={userColors}
                     optionRanges={[
                       {
                         name: 'Peso',

@@ -90,8 +90,8 @@ const CarouselMulti: React.FC<CarouselProps> = ({
         renderDotsOutside
       >
         {images.map((image, index) => (
-          <>
-            <div key={index} className="w-full h-full flex flex-col h-[350px] h-min-[250px] rounded-md border-2"
+          <div key={index}>
+            <div className="w-full h-full flex flex-col h-[350px] h-min-[250px] rounded-md border-2"
               style={{
                 backgroundImage: `url(${image.url})`,
                 backgroundSize: 'cover'
@@ -111,7 +111,7 @@ const CarouselMulti: React.FC<CarouselProps> = ({
             { withTitle &&
               <div className="px-2 pt-1 text-white-01"><h3 className="text-lg text-center font-semibold" >{image.name}</h3></div>
             }
-          </>
+          </div>
         ))}
       </Carousel>
     </div>

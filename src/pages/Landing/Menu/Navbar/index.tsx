@@ -22,8 +22,8 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
   const navbarBackground = isTopOfPage ? "" : `${sameColor}`;
 
   const buttonBaseColor = `h-[36px] f-size-[14px] ${isTopOfPage
-    ?`${sameColor} hover:bg-dark-purple-500 text-white-01`
-    :'bg-dark-purple-500 hover:bg-dark-purple-700 text-white-01'
+    ?`${sameColor} hover:bg-dark-purple-400 text-white-01`
+    :'bg-dark-purple-400 hover:bg-dark-purple-700 text-white-01'
   }`
   const anchorBaseColor = `text-[18px] ${isTopOfPage ? 'text-pink-10 hover:text-pink-50' : 'text-white-01 hover:text-pink-30'}`
   const selectePageColor ='text-[18px] text-pink-50 hover:pink-50'
@@ -34,32 +34,48 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
         <LinkAnchor
           page="Home"
           url="home"
+          toSelect={SelectedPage.Home}
           selectedPage={selectedPage}
-          setSelectedPage={setSelectedPage}
+          setSelectedPage={(selected) => {
+              setSelectedPage(selected)
+              setIsMenuToggled(false)
+            }}
           baseColor={anchorBaseColor}
           selectePageColor={selectePageColor}
         />
         <LinkAnchor
           page="Paquetes"
           url="packages"
+          toSelect={SelectedPage.Packages}
           selectedPage={selectedPage}
-          setSelectedPage={setSelectedPage}
+          setSelectedPage={(selected) => {
+              setSelectedPage(selected)
+              setIsMenuToggled(false)
+            }}
           baseColor={anchorBaseColor}
           selectePageColor={selectePageColor}
         />
         <LinkAnchor
           page="Tratamientos"
           url="treatments"
+          toSelect={SelectedPage.Treatments}
           selectedPage={selectedPage}
-          setSelectedPage={setSelectedPage}
+          setSelectedPage={(selected) => {
+              setSelectedPage(selected)
+              setIsMenuToggled(false)
+            }}
           baseColor={anchorBaseColor}
           selectePageColor={selectePageColor}
         />
         <LinkAnchor
           page="Contactanos"
           url="contactus"
+          toSelect={SelectedPage.Contactus}
           selectedPage={selectedPage}
-          setSelectedPage={setSelectedPage}
+          setSelectedPage={(selected) => {
+            setSelectedPage(selected)
+            setIsMenuToggled(false)
+          }}
           baseColor={anchorBaseColor}
           selectePageColor={selectePageColor}
         />
@@ -76,9 +92,12 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
         <div className={`${flexBetween} gap-8`}>
           <ActionButton
             baseColor={buttonBaseColor}
-            setSelectedPage={setSelectedPage}
-            action={() => setSelectedPage(SelectedPage.LogIn)}
-            selectedPage={SelectedPage.LogIn}>
+            setSelectedPage={(selected) => {
+              setSelectedPage(selected)
+              setIsMenuToggled(false)
+            }}
+            toSelect={SelectedPage.LogIn}
+            selectedPage={selectedPage}>
             Logear
           </ActionButton>
         </div>
@@ -91,12 +110,17 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
         { landingOptions() }
         <div className={`flex flex-col gap-8`}>
           <LinkAnchor
-            page="Logear"
+            page="LogearM"
             url="login"
+            custom
             selectedPage={selectedPage}
-            setSelectedPage={setSelectedPage}
+            setSelectedPage={(selected) => {
+              setSelectedPage(selected)
+              setIsMenuToggled(false)
+            }}
             baseColor={anchorBaseColor}
             selectePageColor={selectePageColor}
+            toSelect={SelectedPage.LogIn}
           />
         </div>
       </>

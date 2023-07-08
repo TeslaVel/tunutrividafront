@@ -11,7 +11,7 @@ import { NavLink } from "react-router-dom";
 import useMediaQuery from "@/hooks/useMediaQuery";
 
 // types
-import { SelectedPage, UserType } from "@/types";
+import { SelectedPage, UserType, Colors } from "@/types";
 
 type Props = {
   selectedPage: SelectedPage;
@@ -60,7 +60,7 @@ const Sidebar = ({selectedPage, userStored, deleteUserStored}: Props) => {
   }
 
   const injectedStyle = {
-    background: 'linear-gradient(30deg, rgb(120, 33, 145) 0%, rgb(100, 23, 130) 100%)'
+    background: `linear-gradient(30deg, ${Colors.DARKPURPLE05} 0%, ${Colors.DARKPURPLE700} 100%)`
   }
 
   return (
@@ -71,7 +71,7 @@ const Sidebar = ({selectedPage, userStored, deleteUserStored}: Props) => {
       }` }
       onTransitionEnd={() => mostrarElementos()}
     >
-      <div className="overflow-scroll" style={{height: '100vh'}}>
+      <div style={{height: '100vh'}}>
 
         <div className="h-25 border-b border-gray-700 px-4 py-4">
           { expanded &&
@@ -105,8 +105,8 @@ const Sidebar = ({selectedPage, userStored, deleteUserStored}: Props) => {
             <NavLink
               key={`sidebar-option-${index}`}
               to={`/${opt.value}`}
-              className={`h-8 mt-3 flex items-center rounded-lg hover:bg-purple-50 ${expanded ? 'px-4' : 'px-1'}
-              ${selectedPage === opt.value ? 'bg-dark-purple-40' : ''}`}
+              className={`h-8 mt-3 flex items-center rounded-lg hover:bg-purple-200 ${expanded ? 'px-4' : 'px-1'}
+              ${selectedPage === opt.value ? 'bg-purple-200' : ''}`}
             >
               {showIcon(opt.icon)}
               {elementVisible && <span className="ml-2">{opt.label}</span>}

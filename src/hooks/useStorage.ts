@@ -18,7 +18,6 @@ export function useStorage (key: string, initialValue: null){
   const [userData, setUser] = useState<UserType | null>(() => getStorage());
 
   const setStorage = (newValue: UserType | null): void => {
-    console.log('guardando', newValue)
     try {
       window.localStorage.setItem(key, JSON.stringify(newValue))
       setUser(newValue);

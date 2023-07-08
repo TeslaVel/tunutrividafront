@@ -43,6 +43,8 @@ export interface UserType {
   age: string
 }
 
+export interface UserColors {[key: string]: string}
+
 export interface User {
   id: string
   firstName: string
@@ -53,19 +55,32 @@ export interface User {
 
 
 export enum Colors {
-  GRAYPURPLE10= "rgb(236, 212, 236)",
+  PURPLE500= "rgb(145, 98, 145)",
+  PURPLE400= "rgb(156, 108, 156)",
+  PURPLE300= "rgb(167, 118, 167)",
+  PURPLE200= "rgb(178, 128, 178)",
+  PURPLE100= "rgb(189, 138, 189)",
+  PURPLE50= "rgb(210, 148, 210)",
+  PURPLE30= "rgb(211, 158, 211)",
+  PURPLE20= "rgb(222, 168, 222)",
+  PURPLE15= "rgb(233, 178, 233)",
+  PURPLE10= "rgb(244, 188, 244)",
+  PURPLE05= "rgb(255, 198, 255)",
+  PURPLE01= "rgb(241, 224, 241)",
+  GRAYPURPLE10= "rgb(203, 181, 209)",
+  DARKPURPLE700= "rgb(72, 3, 96)",
   DARKPURPLE600= "rgb(73, 3, 103)",
-  DARKPURPLE500= "rgb(80, 13, 115)",
-  DARKPURPLE400= "rgb(100, 23, 130)",
-  DARKPURPLE300= "rgb(120, 33, 145)",
-  DARKPURPLE200= "rgb(140, 43, 160)",
-  DARKPURPLE100= "rgb(160, 53, 175)",
-  DARKPURPLE50= "rgb(180, 63, 190)",
-  DARKPURPLE40= "rgb(200, 73, 205)",
-  DARKPURPLE30= "rgb(220, 83, 220)",
-  DARKPURPLE20= "rgb(240, 93, 235)",
-  DARKPURPLE10= "rgb(260, 103, 250)",
-  DARKPURPLE05= "rgb(280, 113, 265)",
+  DARKPURPLE500= "rgb(74, 3, 96)",
+  DARKPURPLE400= "rgb(76, 4, 96)",
+  DARKPURPLE300= "rgb(78, 4, 96)",
+  DARKPURPLE200= "rgb(80, 4, 96)",
+  DARKPURPLE100= "rgb(82, 5, 96)",
+  DARKPURPLE50= "rgb(84, 5, 96)",
+  DARKPURPLE40= "rgb(86, 5, 96)",
+  DARKPURPLE30= "rgb(88, 5, 96)",
+  DARKPURPLE20= "rgb(90, 5, 96)",
+  DARKPURPLE10= "rgb(92, 5, 96)",
+  DARKPURPLE05= "rgb(94, 7, 93)",
   GRAY20="#F8F4EB",
   GRAY50="#EFE6E6",
   GRAY100="#DFCCCC",

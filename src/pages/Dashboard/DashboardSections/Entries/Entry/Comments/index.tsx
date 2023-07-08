@@ -32,8 +32,8 @@ export const Comments = ({sentComments, entry_id, comments, userStored, loading}
     };
 
     return (
-      <div  id='content-comments' className="flex flex-col w-full overflow-hidden h-[40vh]" style={{borderRadius: '0 0 20px 20px'}}>
-        <div  id='content-comments-scroll'  className="overflow-y-scroll bg-primary-100  px-2" style={{borderRadius: '20px 20px 0 0 '}}>
+      <div id='content-comments' className="flex flex-col w-full overflow-hidden " style={{borderRadius: '0 0 20px 20px'}}>
+        <div id='content-comments-scroll'  className="overflow-y-scroll bg-gray-10 border border-gray-20 px-2" style={{borderRadius: '20px 20px 0 0 '}}>
           {comments?.map((comment: CommentType, index: number) => (
             (comment.user.id === userStored.id
               ? <div className="w-full flex items-center justify-end py-2 " key={`comment_${comment.id}-${index}`}>
@@ -53,7 +53,7 @@ export const Comments = ({sentComments, entry_id, comments, userStored, loading}
             )
           ))}
         </div>
-        <div id='comment-form-content' className="flex justify-between items-center pb-3 px-3 bg-primary-200" style={{borderRadius: '0 0 20px 20px'}}>
+        <div id='comment-form-content' className="flex justify-between items-center pb-3 px-3 bg-purple-300" style={{borderRadius: '0 0 20px 20px'}}>
           <form
             target="_blank"
             onSubmit={onSubmit}

@@ -13,12 +13,15 @@ import BmMaleRange3 from "@/assets/ntv/bmi/bm_male_range_3.png"
 import BmMaleRange4 from "@/assets/ntv/bmi/bm_male_range_4.png"
 import BmMaleRange5 from "@/assets/ntv/bmi/bm_male_range_5.png"
 
+import { UserColors } from "@/types";
+
 type Props = {
   gender: 'female' | 'male' | null
   bmi?: string
+  userColors: UserColors | null
 }
 
-const BmiRanges = ({ bmi, gender = 'female' }: Props) => {
+const BmiRanges = ({ bmi, gender = 'female', userColors}: Props) => {
   if (!bmi) return null
   if (!gender) return null
 
@@ -47,10 +50,11 @@ const BmiRanges = ({ bmi, gender = 'female' }: Props) => {
   return (
     <div className="flex flex-row ">
       {ranges[gender].map((range, index) => (
-        <div key={index} className={`flex flex-col items-center justify-between px-3 py-3 h-auto ${resKlas}`}
-          style={ bmiFloat > range.min && bmiFloat <= range.max
-          ? {background: 'rgb(253, 185, 219)', borderRadius: '25px' }
-          : {}}
+        <div key={index}
+          className={`
+          flex flex-col items-center justify-between px-3 py-3 h-auto ${resKlas}
+          ${ (bmiFloat > range.min && bmiFloat <= range.max) ? `${userColors?.itemSelected} rounded-lg` : ''}
+          `}
        >
           <img src={range.image} alt={`Imagen ${index}`} className="w-fill" />
           <div className="flex flex-col">

@@ -7,25 +7,15 @@ type Props = {
   children: React.ReactNode;
   setSelectedPage: (value: SelectedPage) => void;
   selectedPage: SelectedPage;
+  toSelect: SelectedPage;
   baseColor?: string
-  action?: () => void
 };
 
-const ActionButton = ({ children, setSelectedPage, selectedPage, baseColor, action}: Props) => {
-
-  if (action) {
-    return <button
-      onClick={action}
-      className={`ntv-custom-shadow rounded-sm px-5 py-2 ${baseColor}`}
-    >
-      {children}
-    </button>
-  }
-
+const ActionButton = ({ children, setSelectedPage, selectedPage, toSelect, baseColor}: Props) => {
   return (
     <AnchorLink
       className={`ntv-custom-shadow rounded-sm px-5 py-2 ${baseColor}`}
-      onClick={() => setSelectedPage(selectedPage)}
+      onClick={() => setSelectedPage(toSelect)}
       href={`#${selectedPage}`}
     >
       {children}

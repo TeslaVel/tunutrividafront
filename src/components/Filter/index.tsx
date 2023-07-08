@@ -20,10 +20,10 @@ export const GeneralFilter = ({ options, filterSelected, setFilterBy }: IProps) 
   if(options.length < 1)  return null
 
   return (
-    <>
+    <nav>
       { options.map((opt: any, index: number) => (
         <span
-          className={`filter-tab hover:text-primary-500 ${opt.value === filterSelected ? 'text-primary-500' : ''}`}
+          className={`filter-tab hover:text-pink-300 ${opt.value === filterSelected ? 'text-pink-300' : ''}`}
           onClick={() => setFilterBy(opt.value)}
           style={
             index === 0
@@ -36,7 +36,7 @@ export const GeneralFilter = ({ options, filterSelected, setFilterBy }: IProps) 
           {opt.label}
         </span>
       ))}
-    </>
+    </nav>
   )
 }
 

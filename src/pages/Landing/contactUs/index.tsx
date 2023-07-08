@@ -37,7 +37,7 @@ const ContactUs = ({ setSelectedPage }: Props) => {
   };
 
   return (
-    <section id="contactus" className="xxxs:h-full xxxs:py-[7rem] min-h-[800px] h-[100vh] flex flex-col justify-center bg-purple-05">
+    <section id="contactus" className="xxxs:xs:sm:h-full xxxs:xs:sm:py-[7rem] md:lg:min-h-[800px] md:lg:h-[100vh] flex flex-col justify-center bg-purple-05">
       <motion.div
         onViewportEnter={() => setSelectedPage(SelectedPage.Contactus)}
         className="justify-between gap-8 flex flex-col mx-auto xxxs:px-4 xxs:px-4 xxs:w-full sm:w-full  md:w-4/6  lg:w-3/6"
@@ -58,7 +58,7 @@ const ContactUs = ({ setSelectedPage }: Props) => {
               <span className="text-pink-500">ÚNETE</span> <span className="text-pink-100">Y COMIENZA A MOLDEAR TU MEJOR VERSION</span>
             </HText>
             <p className="my-5 text-[18px] text-pink-500">
-              Completa el formulario y comencemos juntos a lograr tus objetivos de bienestar y salud.
+              Completa el formulario y comencemos a cumplir tus objetivos.
             </p>
           </motion.div>
 

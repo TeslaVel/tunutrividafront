@@ -77,7 +77,7 @@ export const ChatForm = ({userStored, conversation, refetchConversation}: Props)
   return (
     <div className="flex flex-col mx-[5rem] mt-[5rem]" >
       <div
-        className="flex flex-col w-full overflow-hidden h-[50vh] bg-primary-100"
+        className="flex flex-col w-full overflow-hidden h-[50vh] border border-purple-300 bg-purple-01"
         style={{borderRadius: '20px 20px 0 0 '}}>
         <div  id='content-note-scroll'  className="overflow-y-scroll px-2">
           {notes?.map((comment: CommentType, index: number) => (
@@ -107,7 +107,7 @@ export const ChatForm = ({userStored, conversation, refetchConversation}: Props)
         method="POST"
         id="form-create-note"
       >
-        <div className="flex justify-between items-center pb-3 pt-8 px-3 bg-primary-200">
+        <div className="flex justify-between items-center pb-3 pt-8 px-3 bg-purple-300">
           <div className="flex flex-grow flex-col" >
             <div id="emojiPanel" className="flex ml-1 pb-1 gap-3 emoji-panel">
               <button type="button" className="emoji" onClick={() => inserEmoji('👍')}>👍</button>

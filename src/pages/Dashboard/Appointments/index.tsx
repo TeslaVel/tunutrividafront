@@ -64,9 +64,7 @@ export const Appointments = ({ setSelectedPage }: IProps) => {
               <h2>Citas</h2>
             </div>
 
-            <div className="flex pt-2">
-              <GeneralFilter options={optionFilter} filterSelected={filterBy} setFilterBy={setFilterBy} />
-            </div>
+            <GeneralFilter options={optionFilter} filterSelected={filterBy} setFilterBy={setFilterBy} />
 
             <div className=" pt-10">
               { appointments?.map((apt: AppointmentType, index: number) => (

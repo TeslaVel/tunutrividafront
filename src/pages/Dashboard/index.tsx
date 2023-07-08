@@ -18,7 +18,7 @@ type Props = {
 const cable = actioncable.createConsumer('ws://localhost:3001/cable');
 
 export const Dashboard = ({setSelectedPage, dietitian_id, asignCLientForUploadImage}: Props) => {
-  const { userStored } = useContext(AuthContext);
+  const { userStored, userColors } = useContext(AuthContext);
   const [optionSelected, setOptionSelected] = useState<string>('dashboard')
 
   useEffect(() => {
@@ -55,6 +55,7 @@ export const Dashboard = ({setSelectedPage, dietitian_id, asignCLientForUploadIm
           <DashboardSections
             asignCLientForUploadImage={asignCLientForUploadImage}
             userStored={userStored}
+            userColors={userColors}
             optionSelected={optionSelected}
             handleCableAction={handleCableAction}
           />

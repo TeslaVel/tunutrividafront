@@ -75,11 +75,11 @@ export const ChatForm = ({userStored, conversation, refetchConversation}: Props)
   };
 
   return (
-    <div className="flex flex-col mx-[5rem] mt-[5rem]" >
+    <div>
       <div
-        className="flex flex-col w-full overflow-hidden h-[50vh] border border-purple-300 bg-purple-01"
+        className="flex flex-col w-auto overflow-hidden h-[50vh] border border-purple-300 bg-purple-01"
         style={{borderRadius: '20px 20px 0 0 '}}>
-        <div  id='content-note-scroll'  className="overflow-y-scroll px-2">
+        <div id='content-note-scroll' className="overflow-y-scroll px-2">
           {notes?.map((comment: CommentType, index: number) => (
             (userStored && userStored.id === comment.user.id
               ? <div className="w-full flex items-center justify-end py-2 " key={`comment_${comment.id}-${index}`}>
@@ -107,8 +107,8 @@ export const ChatForm = ({userStored, conversation, refetchConversation}: Props)
         method="POST"
         id="form-create-note"
       >
-        <div className="flex justify-between items-center pb-3 pt-8 px-3 bg-purple-300">
-          <div className="flex flex-grow flex-col" >
+        <div className="min-w-[100px] flex md:flex-row xxxs:flex-col xxs:flex-col justify-between items-center gap-3 pb-3 pt-8 px-3 bg-purple-300">
+          <div className="flex flex-grow flex-col xxxs:w-full xxs:w-full " >
             <div id="emojiPanel" className="flex ml-1 pb-1 gap-3 emoji-panel">
               <button type="button" className="emoji" onClick={() => inserEmoji('👍')}>👍</button>
               <button type="button" className="emoji" onClick={() => inserEmoji('👏')}>👏</button>
@@ -125,9 +125,9 @@ export const ChatForm = ({userStored, conversation, refetchConversation}: Props)
               id='message'
               type="text"
               placeholder="Escribe tu mensaje..."
-              className="mr-4 p-1 border rounded-lg focus:outline-none" />
+              className="mr-2 p-1 border rounded-lg focus:outline-none" />
           </div>
-          <button className="px-4 py-1 bg-blue-500 text-white rounded-lg" style={{alignSelf: 'end'}}>Enviar</button>
+          <button className="xxxs:w-full xxs:w-full md:w-auto lg:w-auto px-4 py-1 bg-dark-purple-700 hover:bg-pink-400 text-white-01 rounded-lg" style={{alignSelf: 'end'}}>Enviar</button>
         </div>
       </form>
     </div>

@@ -110,7 +110,7 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
         { landingOptions() }
         <div className={`flex flex-col gap-8`}>
           <LinkAnchor
-            page="LogearM"
+            page="Logear"
             url="login"
             custom
             selectedPage={selectedPage}

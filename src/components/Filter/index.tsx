@@ -1,40 +1,29 @@
 import { GeneralOptions } from '@/types'
-
+import './style.css'
 interface IProps {
   options: Array<GeneralOptions>
   filterSelected: string;
   setFilterBy: React.Dispatch<React.SetStateAction<string>>
 };
 
-let filterTab = {
-  borderRight: '1px solid #d1547d',
-  padding: '1px 7px',
-  borderTop: '1px solid #d1547d',
-  borderBottom: '1px solid #d1547d',
-  cursor: 'pointer'
-}
-
 export const GeneralFilter = ({ options, filterSelected, setFilterBy }: IProps) => {
   if(!setFilterBy) return null
   if(!options) return null
-  if(options.length < 1)  return null
+  if(options.length < 1) return null
 
   return (
-    <nav>
+    <nav className='ntv-filter-tab inline-flex h-auto bg-pink-10 rounded-md border border-1 border-dark-purple-700'>
       { options.map((opt: any, index: number) => (
-        <span
-          className={`filter-tab hover:text-pink-300 ${opt.value === filterSelected ? 'text-pink-300' : ''}`}
+        <button
+          className={`ntv-filter-tab-button
+            border-r border-l border-dark-purple-700
+            p-2 hover:text-white-01 hover:bg-dark-purple-500 hover:border-none
+            ${opt.value === filterSelected ? 'text-white-01 bg-dark-purple-500' : ''}`}
           onClick={() => setFilterBy(opt.value)}
-          style={
-            index === 0
-              ? { ...filterTab, borderLeft: '1px solid #d1547d', borderRadius: '20px 0 0 20px' }
-              : index === options.length -1
-                ? { ...filterTab, borderRadius: '0 20px 20px 0' }
-                : filterTab}
           key={index}
         >
           {opt.label}
-        </span>
+        </button>
       ))}
     </nav>
   )

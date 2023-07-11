@@ -16,7 +16,7 @@ const labelStyle = {
 const sectionBody = {
   padding: '14px 25px',
   borderTop: '1px solid gray',
-  borderRadius: '0 0 15px'
+  borderRadius: '0 0 15px 15px'
 }
 
 const CollapsibleSection = ({

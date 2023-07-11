@@ -1,6 +1,6 @@
 import { useState, useEffect, SyntheticEvent } from 'react'
 import '@/components/Compound/Buttons/ActionButton.css'
-import './style.css'
+import './globalModalStyle.css'
 
 
 type Props = {
@@ -29,7 +29,7 @@ const Modal = ({children, isOpen, action, width, maxWidth, close, title, buttonT
     setModalOpen(false)
   }
 
-  const buttonStyles = `ntv-custom-shadow
+  const buttonStyles = `ntv-custom-button-shadow
   bg-dark-purple-500 hover:bg-dark-purple-700
   text-white-01 sm:px-7 text-center
   py-2  px-8 w-auto rounded-lg

@@ -31,7 +31,7 @@ const LinkAnchor = ({
         className={klazz}
         onClick={() => setSelectedPage(toSelect)}
       >
-        {page} 2
+        {page}
       </a>
     )
   }

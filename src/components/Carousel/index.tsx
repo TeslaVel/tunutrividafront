@@ -49,14 +49,14 @@ const CarouselMulti: React.FC<CarouselProps> = ({
     } = rest;
 
     let circleStyle = {
-      border: 'thin solid rgba(62, 18, 83, 0.74)',
+      border: 'thin solid rgba(181, 107, 217, 0.74)',
       borderRadius: '2em',
       margin: '0 2px',
       color: 'black',
       display: 'inline-block',
       height: '.7em',
       width: '.7em',
-      background: active ? 'rgba(73, 3, 103, 0.5)' : 'none',
+      background: active ? 'rgba(168, 89, 202, 0.5)' : 'none',
       transition: 'background-color .4s ease-out'
     }
     return (

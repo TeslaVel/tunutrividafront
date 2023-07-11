@@ -33,7 +33,7 @@ const LogIn = ({ setSelectedPage }: Props) => {
   text-white placeholder-white
   px-5 py-3 mb-5 w-full rounded-md`;
 
-  const buttonStyles = `ntv-custom-shadow
+  const buttonStyles = `ntv-custom-button-shadow
   bg-dark-purple-500 hover:bg-dark-purple-700
   text-white sm:px-7 text-center hover:text-white
   py-3  px-10 w-auto rounded-lg

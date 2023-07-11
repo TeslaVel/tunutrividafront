@@ -42,7 +42,12 @@ type Props = {
 
 const Packages = ({ setSelectedPage }: Props) => {
   return (
-    <section id="packages" className="xxxs:xs:sm:h-full xxxs:xs:sm:py-[7rem] md:lg:min-h-[800px] lg:md:h-[100vh] flex flex-col justify-center bg-purple-05">
+    <section id="packages" className="
+      xxxs:h-full xxs:h-full xs:h-full sm:h-full
+      xxxs:py-[7rem] xxs:py-[7rem] xs:py-[7rem] sm:py-[7rem]
+      md:min-h-[800px] lg:min-h-[800px]
+      lg:h-[100vh] md:h-[100vh]
+      flex flex-col justify-center bg-purple-05">
       <motion.div
         onViewportEnter={() => setSelectedPage(SelectedPage.Packages)}
         className="mx-auto w-5/6"
@@ -67,7 +72,8 @@ const Packages = ({ setSelectedPage }: Props) => {
 
         {/* BENEFITS */}
         <motion.div
-          className="mt-5 items-center justify-between gap-5 md:flex-row flex xxs:flex-col"
+          className="mt-5 items-center justify-between gap-5 md:flex-row flex
+          xxxs:flex-col xxs:flex-col xs:flex-col"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.5 }}

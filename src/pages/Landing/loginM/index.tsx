@@ -41,7 +41,7 @@ const LoginM = ({ formId, selectedPage, setSelectedPage}: Props) => {
 `;
 
   const buttonStyles = `
-  ntv-custom-shadow w-full text-white bg-dark-purple-500 hover:bg-dark-purple-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center
+  ntv-custom-button-shadow w-full text-white bg-dark-purple-500 hover:bg-dark-purple-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center
   `
 
   const {

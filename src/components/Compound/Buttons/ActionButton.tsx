@@ -14,7 +14,7 @@ type Props = {
 const ActionButton = ({ children, setSelectedPage, selectedPage, toSelect, baseColor}: Props) => {
   return (
     <AnchorLink
-      className={`ntv-custom-shadow rounded-sm px-5 py-2 ${baseColor}`}
+      className={`ntv-custom-button-shadow rounded-sm px-5 py-2 ${baseColor}`}
       onClick={() => setSelectedPage(toSelect)}
       href={`#${selectedPage}`}
     >

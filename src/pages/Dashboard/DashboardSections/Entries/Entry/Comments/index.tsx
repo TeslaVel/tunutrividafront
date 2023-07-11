@@ -95,7 +95,7 @@ export const Comments = ({sentComments, entry_id, comments, userStored, loading}
             </div>
             <button type="submit"
               disabled={loading}
-              className="px-4 py-1 bg-primary-400 hover:bg-primary-500 text-white rounded-lg"
+              className="px-4 py-1 bg-dark-purple-700 hover:bg-pink-400 text-white rounded-lg"
               style={{alignSelf: 'end'}}>Enviar
             </button>
           </form>

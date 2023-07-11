@@ -32,7 +32,7 @@ export const Chat = ({setSelectedPage }: Props) => {
   return (
     <>
       <Scroller scrollerName='sessions'>
-        <section id="chat" className="py-3 px-5 w-full">
+        <section id="chat" className="px-2 xxxs:pt-5 xxs:pt-5 lg:px-[5rem] md:px-[5rem] lg:pt-[5rem] md:pt-[5rem] w-full">
           <>
           { loading
             ? <div>Cargando...</div>

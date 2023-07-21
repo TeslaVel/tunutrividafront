@@ -10,6 +10,8 @@ export enum SelectedPage {
   Appointments = "appointments",
   Sessions = "sessions",
   Chat = "chat",
+  Terms = "terms",
+  Policies = "policies",
 }
 
 export interface PackageType {

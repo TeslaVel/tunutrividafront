@@ -11,7 +11,7 @@ type Props = {
   setSelectedPage: (value: SelectedPage) => void;
 }
 
-const Menu = ({isLogged, isTopOfPage, selectedPage, setSelectedPage}: Props) => {
+const Head = ({isLogged, isTopOfPage, selectedPage, setSelectedPage}: Props) => {
   const { userStored, deleteUserStored } = useContext(AuthContext);
   return (
     isLogged
@@ -27,4 +27,4 @@ const Menu = ({isLogged, isTopOfPage, selectedPage, setSelectedPage}: Props) => 
   );
 };
 
-export default Menu;
+export default Head;

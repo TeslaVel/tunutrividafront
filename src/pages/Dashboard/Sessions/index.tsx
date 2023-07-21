@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useGetSessions } from '@/hooks/useGetSessions'
-import Scroller from '@/components/Scroller'
+import Scroller from '@/components/Scroller/Scroller'
 import CollapsibleSection from '@/components/CollapsibleSection'
 import { customDateFormat } from '@/components/utils/TimeUtils'
 // types

@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect, Suspense } from 'react';
-import Menu from "@/pages/Landing/Menu";
+import Head from "@/pages/Landing/Head";
 import ProtectedRoute from '@/ProtectedRoute';
 import Dashboard from '@/pages/Dashboard';
 import Sessions from '@/pages/Dashboard/Sessions';
@@ -13,8 +13,10 @@ import {
   BrowserRouter
 } from 'react-router-dom';
 import Landing from "@/pages/Landing";
-import { SelectedPage } from "@/types";
 import { AuthContext } from '@/AuthProviderManager';
+
+// types
+import { SelectedPage } from "@/types";
 
 type Props = {
   selectedPage: SelectedPage
@@ -24,7 +26,6 @@ type Props = {
 
 export const AppRoutes = ({ selectedPage, setSelectedPage, asignCLientForUploadImage}: Props) => {
   const { userStored } = useContext(AuthContext);
-
   const [isTopOfPage, setIsTopOfPage] = useState<boolean>(true);
 
   useEffect(() => {
@@ -38,27 +39,39 @@ export const AppRoutes = ({ selectedPage, setSelectedPage, asignCLientForUploadI
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const element = document.getElementById(selectedPage);
+    if (element && selectedPage !== SelectedPage.LogIn) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  },[selectedPage])
+
   const isLogged = !(userStored == undefined || userStored == null || userStored?.token?.length < 1 && userStored.dietitianId)
+  const sectionNotVisible = ['terms', 'policies'].includes(selectedPage)
 
   return (
     <>
       <Suspense fallback={<div />}>
         <BrowserRouter>
           <div className={`${isLogged ? 'flex min-h-screen' : ''}`}>
-            <Menu
+            <Head
               isLogged={isLogged}
               isTopOfPage={isTopOfPage}
               selectedPage={selectedPage}
               setSelectedPage={setSelectedPage}
             />
 
-            <div className={`${isLogged ? 'flex-1 bg-gray-pink-10 h-[100%]' : ''}`}>
+            <div className={`${isLogged ? 'flex-1 bg-gray-pink-10 h-[100%]' : ''}`} id='routes-content'>
               <Routes>
                 <Route element={<ProtectedRoute isNotLogged={isLogged} redirectPath="/dashboard" />}>
                   <Route index path="/" element={
-                    <Landing selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
+                    <Landing
+                      sectionNotVisible={sectionNotVisible}
+                      selectedPage={selectedPage}
+                      setSelectedPage={setSelectedPage} />
                   }/>
                 </Route>
+
 
                 <Route element={<ProtectedRoute isNotLogged={!isLogged} redirectPath="/" />}>
                   <Route path="/dashboard" element={

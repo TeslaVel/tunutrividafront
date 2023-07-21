@@ -1,5 +1,7 @@
 import { SelectedPage } from "@/types";
-import AnchorLink from "react-anchor-link-smooth-scroll";
+// import AnchorLink from "react-anchor-link-smooth-scroll";
+// import { Link } from 'react-router-dom';
+
 
 type Props = {
   url: string;
@@ -19,32 +21,30 @@ const LinkAnchor = ({
   toSelect,
   setSelectedPage,
   baseColor = '',
-  selectePageColor = 'text-primary-50 hover:primary-100',
+  selectePageColor = 'text-purple-200 hover:text-purple-300',
   custom
 }: Props) => {
   const lowerCasePage = url.toLowerCase().replace(/ /g, "") as SelectedPage;
-  const klazz = `cursor-pointer transition duration-500 ${selectedPage === lowerCasePage ? `${selectePageColor} font-bold` : baseColor} `
-
-  if (custom) {
-    return (
-        <a
-        className={klazz}
-        onClick={() => setSelectedPage(toSelect)}
-      >
-        {page}
-      </a>
-    )
-  }
+  const klazz = `cursor-pointer transition duration-500 hover:text-purple-300 ${selectedPage === lowerCasePage ? `${selectePageColor} font-bold` : baseColor} `
 
   return (
-    <AnchorLink
+    <a
       className={klazz}
-      href={`#${lowerCasePage}`}
       onClick={() => setSelectedPage(toSelect)}
     >
       {page}
-    </AnchorLink>
-  );
+    </a>
+  )
+
+  // return (
+  //   <AnchorLink
+  //     className={klazz}
+  //     href={`#${lowerCasePage}`}
+  //     onClick={() => setSelectedPage(toSelect)}
+  //   >
+  //     {page}
+  //   </AnchorLink>
+  // );
 };
 
 export default LinkAnchor;

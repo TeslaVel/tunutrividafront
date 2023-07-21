@@ -6,6 +6,8 @@ import LinkAnchor from "@/components/Compound/Links/LinkAnchor";
 import { SelectedPage } from "@/types";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import ActionButton from "@/components/Compound/Buttons/ActionButton";
+import LoginM from "@/pages/Landing/LoginModal";
+
 import { Link } from "react-router-dom";
 
 type Props = {
@@ -17,9 +19,12 @@ type Props = {
 const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
   const flexBetween = "flex items-center justify-between";
   const [isMenuToggled, setIsMenuToggled] = useState<boolean>(false);
+  const [isLoginModalOpen, setLoginModalOpen] = useState<boolean>(false)
   const isAboveMediumScreens = useMediaQuery("(min-width: 1060px)");
   const sameColor = 'bg-dark-purple-700'
-  const navbarBackground = isTopOfPage ? "" : `${sameColor}`;
+
+  const termAndPolicies = ['terms', 'policies'].includes(selectedPage)
+  const navbarBackground = !isTopOfPage || termAndPolicies ? `${sameColor}` : '';
 
   const buttonBaseColor = `h-[36px] f-size-[14px] ${isTopOfPage
     ?`${sameColor} hover:bg-dark-purple-400 text-white-01`
@@ -40,6 +45,7 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
               setSelectedPage(selected)
               setIsMenuToggled(false)
             }}
+          custom={termAndPolicies}
           baseColor={anchorBaseColor}
           selectePageColor={selectePageColor}
         />
@@ -52,6 +58,7 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
               setSelectedPage(selected)
               setIsMenuToggled(false)
             }}
+          custom={termAndPolicies}
           baseColor={anchorBaseColor}
           selectePageColor={selectePageColor}
         />
@@ -64,6 +71,7 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
               setSelectedPage(selected)
               setIsMenuToggled(false)
             }}
+          custom={termAndPolicies}
           baseColor={anchorBaseColor}
           selectePageColor={selectePageColor}
         />
@@ -76,6 +84,7 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
             setSelectedPage(selected)
             setIsMenuToggled(false)
           }}
+          custom={termAndPolicies}
           baseColor={anchorBaseColor}
           selectePageColor={selectePageColor}
         />
@@ -92,12 +101,8 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
         <div className={`${flexBetween} gap-8`}>
           <ActionButton
             baseColor={buttonBaseColor}
-            setSelectedPage={(selected) => {
-              setSelectedPage(selected)
-              setIsMenuToggled(false)
-            }}
-            toSelect={SelectedPage.LogIn}
-            selectedPage={selectedPage}>
+            action={() => setLoginModalOpen(true)}
+            type='button'>
             Logear
           </ActionButton>
         </div>
@@ -175,6 +180,11 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
           </div>
         }
       </nav>
+      <LoginM
+        isOpen={isLoginModalOpen}
+        formId='ntv-modal-login-form'
+        closeAction={() => setLoginModalOpen(false)}
+      />
     </>
   );
 };

@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { AuthContext } from '@/AuthProviderManager';
 import { UseGetConversation } from '@/hooks/useGetConversation'
-import Scroller from '@/components/Scroller'
+import Scroller from '@/components/Scroller/Scroller'
 import ChatForm from './ChatForm'
 import { CreateConversationForm } from './CreateConversationForm'
 // types

@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext, ChangeEvent } from 'react'
 import { AuthContext } from '@/AuthProviderManager';
 import { useGetUserEntries } from '@/hooks/useGetUserEntries'
-import Scroller from '@/components/Scroller'
+import Scroller from '@/components/Scroller/Scroller'
 import { Entry } from './Entry'
 import EntryWrapper from './EntryWrapper'
 import { CreateEntryForm } from './CreateEntryForm'

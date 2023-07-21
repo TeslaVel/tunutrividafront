@@ -45,18 +45,21 @@ const BmiRanges = ({ bmi, gender = 'female', userColors}: Props) => {
   };
 
   const bmiFloat = parseFloat(bmi)
-  const resKlas = 'xxxs:mr-2 lg:text-[14px] md:text-[12px] xs:text-[11px] xxs:text-[10px] xxxs:text-[9px] \
-    w-[120px] md:w-[100px] sm:w-[80px] xs:w-[60px] xxs:w-[40px] xxxs:w-[35px]'
+  const resKlas = `xxxs:mr-2` // lg:text-[14px] md:text-[12px] xs:text-[11px] xxs:text-[10px] xxxs:text-[9px]
+  const imgStyle = {
+    width: '200px',
+    height: '100%'
+
+  }
   return (
-    <div className="flex flex-row ">
+    <div className="flex flex-row overflow-scroll">
       {ranges[gender].map((range, index) => (
         <div key={index}
-          className={`
-          flex flex-col items-center justify-between px-3 py-3 h-auto ${resKlas}
+          className={` flex flex-col items-center justify-between px-3 py-3 h-auto ${resKlas}
           ${ (bmiFloat > range.min && bmiFloat <= range.max) ? `${userColors?.itemSelected} rounded-lg` : ''}
           `}
-       >
-          <img src={range.image} alt={`Imagen ${index}`} className="w-fill" />
+        >
+          <img src={range.image} alt={`Imagen ${index}`} style={imgStyle}/>
           <div className="flex flex-col">
             <span className="text-center"> {`<= ${range.max}`}</span>
             <span className="text-center">{range.title}</span>

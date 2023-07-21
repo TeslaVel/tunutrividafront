@@ -1,35 +1,46 @@
 import { useEffect, useState } from "react";
-import Home from "@/pages/Landing/home";
-import Treatments from "@/pages/Landing/treatments";
-import Packages from "@/pages/Landing/packages";
-import ContactUs from "@/pages/Landing/contactUs";
-import LoginM from "@/pages/Landing/loginM";
-import Footer from "@/pages/Landing/footer";
+import Home from "@/pages/Landing/Home";
+import Treatments from "@/pages/Landing/Treatments";
+import Packages from "@/pages/Landing/Packages";
+import ContactUs from "@/pages/Landing/ContactUs";
+import Footer from "@/pages/Landing/Footer";
+import Terms from '@/pages/Landing/TermsAndPolicies/Terms';
+import Policies from '@/pages/Landing/TermsAndPolicies/Policies';
+
+// types
 import { SelectedPage } from "@/types";
 
 type Props = {
   selectedPage: SelectedPage;
   setSelectedPage: (value: SelectedPage) => void;
+  sectionNotVisible: boolean
 };
 
-export const Landing = ({ selectedPage, setSelectedPage }: Props) => {
+export const Landing = ({ selectedPage, setSelectedPage, sectionNotVisible}: Props) => {
   useEffect(() => {
     setSelectedPage(SelectedPage.Landing)
   }, []);
 
+  const termsAndPolicies = ['terms', 'policies'].includes(selectedPage)
+
   return (
     <>
-      <Home setSelectedPage={setSelectedPage} />
-      <LoginM
-        selectedPage={selectedPage}
-        setSelectedPage={setSelectedPage}
-        formId='ntv-modal-login-form'
-      />
-      <Packages setSelectedPage={setSelectedPage} />
-      <Treatments setSelectedPage={setSelectedPage} />
-      <ContactUs setSelectedPage={setSelectedPage} />
+      <div style={{ display: termsAndPolicies ? 'none' : 'block'}}>
+        <Home setSelectedPage={setSelectedPage} />
+        <Packages setSelectedPage={setSelectedPage}/>
+        <Treatments setSelectedPage={setSelectedPage}/>
+        <ContactUs setSelectedPage={setSelectedPage}/>
+      </div>
+
+      <div style={{ display: termsAndPolicies && selectedPage === SelectedPage.Terms  ? 'block' : 'none'}}>
+        <Terms setSelectedPage={setSelectedPage} />
+      </div>
+
+      <div style={{ display: termsAndPolicies && selectedPage === SelectedPage.Policies  ? 'block' : 'none'}}>
+        <Policies setSelectedPage={setSelectedPage} />
+      </div>
       {/* <LogIn setSelectedPage={setSelectedPage} /> */}
-      <Footer />
+      <Footer selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
     </>
   );
 }

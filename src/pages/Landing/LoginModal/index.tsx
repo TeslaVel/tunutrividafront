@@ -3,20 +3,18 @@ import { useForm } from "react-hook-form";
 import { SelectedPage } from "@/types";
 import { AuthContext } from '@/AuthProviderManager';
 import { useMutationLogin } from '@/hooks/graph/useMutationLogin';
-import ModalDesign from "@/components/Modal/ModalDesign";
+import Modal from "@/components/Modal/Modal";
 import '@/components/Compound/Buttons/ActionButton.css'
 
 type Props = {
   formId: string
-  selectedPage: SelectedPage;
-  setSelectedPage: (value: SelectedPage) => void;
+  isOpen: boolean
+  closeAction: () => void
 };
 
-const LoginM = ({ formId, selectedPage, setSelectedPage}: Props) => {
+const LoginModal = ({ formId, isOpen, closeAction}: Props) => {
   const { storeUser } = useContext(AuthContext);
   const { Login, data, loading, error, reset } = useMutationLogin();
-  const [isLoginModalOpen, setLoginModalOpen] = useState<boolean>(false)
-  const [lastSelected, setLastSelected] = useState<SelectedPage>(selectedPage)
 
   useEffect(() =>{
     if ( data && data?.createAuth ) {
@@ -28,12 +26,6 @@ const LoginM = ({ formId, selectedPage, setSelectedPage}: Props) => {
       }
     }
   }, [data?.createAuth]);
-
-  useEffect(() => {
-    if (selectedPage != SelectedPage.LogIn ) setLastSelected(selectedPage)
-
-    setLoginModalOpen(selectedPage === SelectedPage.LogIn)
-  }, [selectedPage]);
 
   const inputStyles =`
   bg-purple-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600
@@ -48,36 +40,33 @@ const LoginM = ({ formId, selectedPage, setSelectedPage}: Props) => {
     register,
     trigger,
     getValues,
+    handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const handleSubmit = async (e: React.SyntheticEvent) => {
-    e.preventDefault()
+  const handleAction = async () => {
     const values = getValues()
-    console.log('login values', getValues())
     Login({variables: values });
   };
 
   const handleClose = () => {
-    setLoginModalOpen(false)
-    setSelectedPage(lastSelected)
+    closeAction()
   }
 
-  if (!isLoginModalOpen) return null
+  if (!isOpen) return null
 
   return (
     <form
       id={formId}
       target="_self"
-      onSubmit={handleSubmit}
       method="POST"
+      onSubmit={handleSubmit(handleAction)}
     >
-      <ModalDesign
+      <Modal
         title='Iniciar Session'
-        isOpen={isLoginModalOpen}
+        isOpen={isOpen}
         width="w-[30rem]"
         close={() => handleClose()}
-        action={handleSubmit}
         buttonTitle='Logear'
       >
         <>
@@ -138,12 +127,12 @@ const LoginM = ({ formId, selectedPage, setSelectedPage}: Props) => {
           <button
             type="submit"
             className={buttonStyles}>
-             Logear
+             Logear2
           </button>
         </>
-      </ModalDesign>
+      </Modal>
     </form>
   );
 };
 
-export default LoginM;
+export default LoginModal;

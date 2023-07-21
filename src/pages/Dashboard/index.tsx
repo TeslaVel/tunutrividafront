@@ -3,7 +3,7 @@ import actioncable from 'actioncable';
 import DashboardSections from './DashboardSections';
 import TopBar from './TopBar';
 import { AuthContext } from '@/AuthProviderManager';
-import Scroller from '@/components/Scroller'
+import Scroller from '@/components/Scroller/Scroller'
 
 // types
 import { SelectedPage } from "@/types";

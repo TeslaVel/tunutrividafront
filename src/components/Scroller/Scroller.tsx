@@ -2,7 +2,7 @@ type Props = {
   children: JSX.Element
   header?: JSX.Element | null
   scrollerName?: string
-  scrollerHeight?: string
+  scrollerHeight?: string | null
   classNames?: string
 }
 
@@ -10,11 +10,12 @@ const Scroller = ({
   children,
   header = null,
   scrollerName = 'component',
-  classNames = '',
+  scrollerHeight = null,
+  classNames = ''
 }: Props) => {
-  const headerHeight = '40'
-  const withTopNav = header !== null
-  const ztyle = withTopNav
+  const headerHeight = scrollerHeight ?? '40'
+  const withHeader = header !== null
+  const ztyle = withHeader
     ? {
       height: `calc(100vh - ${headerHeight}px)`,
       marginTop: `${headerHeight}px`

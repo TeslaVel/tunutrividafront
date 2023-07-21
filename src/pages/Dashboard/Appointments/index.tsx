@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation } from 'react-router-dom';
 import { useGetAppointments } from '@/hooks/useGetAppointments'
-import Scroller from '@/components/Scroller'
+import Scroller from '@/components/Scroller/Scroller'
 import CollapsibleSection from '@/components/CollapsibleSection'
 import IconHandler from '@/components/icons/IconHandler'
 import { customDateFormat } from '@/components/utils/TimeUtils'

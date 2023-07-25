@@ -74,7 +74,7 @@ export const Policies = ({ setSelectedPage }: Props) => {
         <HText size={1} classes="text-center">Política de Privacidad</HText>
         <div className="mx-auto w-3/6 mt-5">
           { policies?.map((policy: any, index: number) => (
-            <section className="py-5">
+            <section className="py-5" key={`policy-${index}`}>
               <header>
                 <strong>{policy.title}</strong>
               </header>
@@ -83,7 +83,7 @@ export const Policies = ({ setSelectedPage }: Props) => {
               { policy.list &&
                 <ul className="px-5">
                   { policy.list.map((text: any, index: number) => (
-                    <li className="ml-5 list-disc">
+                    <li className="ml-5 list-disc" key={`policy-list-${index}`}>
                        {text}
                     </li>
                   ))}

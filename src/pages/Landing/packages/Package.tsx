@@ -18,12 +18,12 @@ const Package = ({name, url, classes}: Props) => {
   return (
     <motion.div
       variants={childVariant}
-      className='w-full h-[350px]'
+      className='w-full h-[350px] '
     >
        <img
         src={url}
         alt={name}
-        className={`rounded-md border-2 w-full h-full`}/>
+        className={`rounded-md border-2 w-full h-full hover:scale-110 hover:rounded-xl transition-transform`}/>
     </motion.div>
   );
 };

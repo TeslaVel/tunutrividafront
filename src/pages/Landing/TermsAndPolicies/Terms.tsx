@@ -11,11 +11,15 @@ type Props = {
 const terminos = [
   {
     title: 'Propósito y Uso',
-    description: 'Nuestro sitio web tiene como objetivo proporcionar información sobre nuestros servicios de nutrición, dietética y masajes terapéuticos con tecnología avanzada. La información contenida en el sitio web es de carácter general y no constituye asesoramiento médico. Siempre se recomienda buscar el consejo de un profesional de la salud calificado antes de tomar decisiones relacionadas con tu salud o bienestar.'
+    description: 'Nuestro sitio web tiene como objetivo proporcionar información sobre nuestros servicios de nutrición, dietética y masajes terapéuticos con tecnología avanzada.'
   },
   {
     title: 'Propiedad Intelectual',
-    description: 'El contenido y los materiales presentes en nuestro sitio web, incluyendo, pero no limitándose a, textos, imágenes, logotipos, gráficos y videos, están protegidos por derechos de autor y otras leyes de propiedad intelectual. Queda estrictamente prohibida la reproducción, distribución o uso no autorizado de cualquier contenido sin nuestro consentimiento expreso por escrito.'
+    description: <>
+      <p>El contenido y los materiales presentes en nuestro sitio web, incluyendo, pero no limitándose a, textos, imágenes, logotipos, gráficos y videos, están protegidos por derechos de autor y otras leyes de propiedad intelectual. Sin embargo, todas las imágenes y videos utilizados en este sitio web son de uso gratuito y están disponibles en dominio público o con licencias de uso permitido.</p>
+      <br />
+      <p>Queda estrictamente prohibida la reproducción, distribución o uso no autorizado de cualquier contenido que no esté marcado como de uso gratuito. Para aquellos elementos que tengan restricciones de uso, se debe obtener nuestro consentimiento expreso por escrito antes de utilizarlos en cualquier forma.</p>
+    </>
   },
   {
     title: 'Privacidad',
@@ -35,7 +39,7 @@ const terminos = [
   },
   {
     title: 'Ley Aplicable y Jurisdicción',
-    description: 'Estos términos y condiciones se rigen por las leyes del [País o Región]. Cualquier disputa que surja en relación con nuestro sitio web estará sujeta a la jurisdicción exclusiva de los tribunales del [País o Región].'
+    description: 'Estos términos y condiciones se rigen por las leyes de Venezuela. Cualquier disputa que surja en relación con nuestro sitio web estará sujeta a la jurisdicción exclusiva de los tribunales de Venezuela.'
   }
 ];
 
@@ -50,7 +54,7 @@ export const Terms = ({ setSelectedPage }: Props) => {
         <HText size={1} classes="text-center">Términos y Condiciones</HText>
         <div className="mx-auto w-3/6 mt-5">
           { terminos?.map((term: any, index: number) => (
-            <div className="py-5">
+            <div className="py-5" key={`term-${index}`}>
               <header>
                 <strong>{term.title}</strong>
               </header>

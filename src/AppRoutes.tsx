@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect, Suspense } from 'react';
+import { useContext, useState, useEffect, Suspense, useRef } from 'react';
 import Head from "@/pages/Landing/Head";
 import ProtectedRoute from '@/ProtectedRoute';
 import Dashboard from '@/pages/Dashboard';
@@ -25,6 +25,7 @@ type Props = {
 };
 
 export const AppRoutes = ({ selectedPage, setSelectedPage, asignCLientForUploadImage}: Props) => {
+  const scrollRef = useRef(null);
   const { userStored } = useContext(AuthContext);
   const [isTopOfPage, setIsTopOfPage] = useState<boolean>(true);
 
@@ -42,9 +43,18 @@ export const AppRoutes = ({ selectedPage, setSelectedPage, asignCLientForUploadI
   useEffect(() => {
     const element = document.getElementById(selectedPage);
     if (element && selectedPage !== SelectedPage.LogIn) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      // Cancelar el desplazamiento anterior si existe
+      if (scrollRef.current) {
+        window.cancelAnimationFrame(scrollRef.current);
+      }
+
+      // Realizar el nuevo desplazamiento
+      const scroll = () => {
+        element.scrollIntoView({ behavior: 'smooth' });
+      };
+      scrollRef.current = window.requestAnimationFrame(scroll);
     }
-  },[selectedPage])
+  }, [selectedPage]);
 
   const isLogged = !(userStored == undefined || userStored == null || userStored?.token?.length < 1 && userStored.dietitianId)
   const sectionNotVisible = ['terms', 'policies'].includes(selectedPage)

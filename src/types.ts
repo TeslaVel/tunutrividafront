@@ -57,6 +57,7 @@ export interface User {
 
 
 export enum Colors {
+  WHITE01="#EEE",
   PURPLE500= "rgb(145, 98, 145)",
   PURPLE400= "rgb(156, 108, 156)",
   PURPLE300= "rgb(167, 118, 167)",
@@ -68,7 +69,7 @@ export enum Colors {
   PURPLE15= "rgb(233, 178, 233)",
   PURPLE10= "rgb(244, 188, 244)",
   PURPLE05= "rgb(255, 198, 255)",
-  PURPLE01= "rgb(241, 224, 241)",
+  PURPLE01= "rgb(250, 215, 250)",
   GRAYPURPLE10= "rgb(203, 181, 209)",
   DARKPURPLE700= "rgb(72, 3, 96)",
   DARKPURPLE600= "rgb(73, 3, 103)",
@@ -84,11 +85,7 @@ export enum Colors {
   DARKPURPLE10= "rgb(92, 5, 96)",
   DARKPURPLE05= "rgb(94, 7, 93)",
   GRAY20="#F8F4EB",
-  GRAY50="#EFE6E6",
-  GRAY100="#DFCCCC",
-  GRAY500="#5E0000",
-  SECONDARY400="#FFCD5B",
-  SECONDARY500="#FFA6A3",
+  BURGUNDY500="#5E0000",
   NONE="none"
 }
 

@@ -117,7 +117,11 @@ export const CreateEntryForm = ({refetch, isOpenAside, setIsOpenAside}: Props) =
           <div className="py-2">
             <label htmlFor="description">
               Descripcion
-              <textarea  id="description" className="w-full"autoComplete='off'
+              <textarea 
+                id="description"
+                className="w-full p-1"
+                autoComplete='off'
+                placeholder="Agregue una descripcion"
                 {...register("description", {
                   required: true,
                   minLength: 1,
@@ -126,17 +130,23 @@ export const CreateEntryForm = ({refetch, isOpenAside, setIsOpenAside}: Props) =
             </label>
           </div>
           <div className="py-2">
-            <select id="entry_type" className="w-full px-2 py-1"
-              {...register("entry_type", {
-                required: true,
-              })}
-            >
-              <option value="FoodEntry">Comida</option>
-              <option value="MetricEntry">Metricas</option>
-              <option value="WorkoutEntry">Ejercicio </option>
-              <option value="NoteEntry">Notas</option>
-              <option value="OtherEntry">Otros</option>
-            </select>
+            <label htmlFor="entry_type">
+              Tipo de entrada
+              <select
+                id="entry_type"
+                className="w-full px-2 py-1 text-black"
+                placeholder="Seleccione un tipo"
+                {...register("entry_type", {
+                  required: true,
+                })}
+              >
+                <option value="FoodEntry">Comida</option>
+                <option value="MetricEntry">Metricas</option>
+                <option value="WorkoutEntry">Ejercicio </option>
+                <option value="NoteEntry">Notas</option>
+                <option value="OtherEntry">Otros</option>
+              </select>
+            </label>
           </div>
           <div>
             <button type="submit" className="px-3 py-1 w-full bg-primary-400 hover:bg-primary-500 text-white rounded-lg">

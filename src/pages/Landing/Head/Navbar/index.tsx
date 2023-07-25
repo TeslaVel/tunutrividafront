@@ -143,7 +143,7 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
             <div className={`${flexBetween} w-full gap-10`}>
               {/* LEFT SIDE */}
               <Link to='/'>
-                <DynamicLogo  isTopOfPage={isTopOfPage}/>
+                <DynamicLogo isTopOfPage={isTopOfPage && !termAndPolicies}/>
               </Link>
 
               {/* RIGHT SIDE */}

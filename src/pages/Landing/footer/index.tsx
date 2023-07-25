@@ -23,7 +23,7 @@ const Footer = ({selectedPage, setSelectedPage}: Props) => {
         </div>
         <div className="mt-16 basis-1/4 md:mt-0">
           <h4 className="font-bold text-pink-50">Links</h4>
-          <ul>
+          <ul className="gap-2 mt-4 flex flex-col">
             <li>
               <LinkAnchor
                 page="Terminos y Condiciones"
@@ -50,9 +50,31 @@ const Footer = ({selectedPage, setSelectedPage}: Props) => {
           </ul>
         </div>
         <div className="mt-16 basis-1/4 md:mt-0">
-          <h4 className="font-bold text-pink-50">Contact Us</h4>
-          <p className="my-5">Tempus metus mattis risus volutpat egestas.</p>
-          <p>(333)425-6825</p>
+          <h4 className="font-bold text-pink-50">Contactanos</h4>
+          <div className="flex flex-col gap-2 mt-4">
+            <LinkAnchor
+              page="tunutrividalb@gmail.com"
+              url="contactus"
+              toSelect={SelectedPage.Contactus}
+              selectedPage={selectedPage}
+              baseColor="text-white-01"
+              selectePageColor="text-white-01"
+              setSelectedPage={(selected) => {
+                const element = document.getElementById(selected);
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+            />
+
+            <a
+              href='https://api.whatsapp.com/send?phone=4125873473'
+              target="_blank"
+            >
+              (0412) 5873473
+            </a>
+          </div>
+          
         </div>
       </div>
     </footer>

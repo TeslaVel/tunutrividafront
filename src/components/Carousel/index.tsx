@@ -51,7 +51,7 @@ const CarouselMulti: React.FC<CarouselProps> = ({
     let circleStyle = {
       border: 'thin solid rgba(181, 107, 217, 0.74)',
       borderRadius: '2em',
-      margin: '0 2px',
+      margin: '0 4px',
       color: 'black',
       display: 'inline-block',
       height: '.7em',
@@ -73,12 +73,12 @@ const CarouselMulti: React.FC<CarouselProps> = ({
       <Carousel
         customDot={<CustomDot />}
         swipeable={false}
-        draggable={false}
+        draggable={true}
         showDots={true}
         responsive={responsive}
         infinite={true}
         // autoPlay={deviceType !== "mobile" ? true : false}
-        autoPlaySpeed={1000}
+        autoPlaySpeed={2000}
         keyBoardControl={true}
         customTransition="all .5"
         transitionDuration={500}
@@ -90,8 +90,10 @@ const CarouselMulti: React.FC<CarouselProps> = ({
         renderDotsOutside
       >
         {images.map((image, index) => (
-          <div key={index}>
-            <div className="w-full h-full flex flex-col h-[350px] h-min-[250px] rounded-md border-2"
+          <div key={index} className="hover:scale-105 hover:rounded-xl transition-transform">
+            <div className="
+              w-full h-full flex flex-col h-[350px] h-min-[250px]
+              rounded-md border-2"
               style={{
                 backgroundImage: `url(${image.url})`,
                 backgroundSize: 'cover'
@@ -101,7 +103,7 @@ const CarouselMulti: React.FC<CarouselProps> = ({
                 className="absolute p-5 rounded-lg opacity-0 w-full h-full hover:opacity-[0.8] hover:bg-rgba-82"
                 style={{
                   height: 'inherit',
-                  width: 'calc(100% - 1em)',
+                  width: '',//calc(100% - 1em)
                   transition: 'all .2s linear'
                 }}>
                   <p className="text-dark-purple-600">{image.description}</p>

@@ -4,15 +4,16 @@ import { UseGetConversation } from '@/hooks/useGetConversation'
 import Scroller from '@/components/Scroller/Scroller'
 import ChatForm from './ChatForm'
 import { CreateConversationForm } from './CreateConversationForm'
+
 // types
-import { SelectedPage, CommentType } from "@/types";
+import { SelectedPage, UserColors } from "@/types";
 
 type Props = {
+  userColors: UserColors
   setSelectedPage: (value: SelectedPage) => void;
 };
 
-
-export const Chat = ({setSelectedPage }: Props) => {
+export const Chat = ({setSelectedPage, userColors }: Props) => {
   const { userStored } = useContext(AuthContext);
   const { loading, data, refetch } = UseGetConversation()
   const [isOpenAside, setIsOpenAside] = useState<boolean>(false)
@@ -42,12 +43,13 @@ export const Chat = ({setSelectedPage }: Props) => {
                   refetchConversation={refetchConversation}
                   conversation={conversation}
                   userStored={userStored}
+                  userColors={userColors}
                 />
               }
 
               { !conversation &&
                 <div className="flex justify-center p-[70px]">
-                  <button onClick={() => setIsOpenAside(true)} className="px-3 py-1 bg-purple-30 hover:bg-purple-100 text-white rounded-lg">
+                  <button onClick={() => setIsOpenAside(true)} className={`px-3 py-1 ${userColors?.general.primaryBgColor} ${userColors?.general.primaryBgColorHover} text-white rounded-lg`}>
                     Crear Nueva Conversación
                   </button>
                 </div>
@@ -59,6 +61,7 @@ export const Chat = ({setSelectedPage }: Props) => {
       </Scroller>
       <CreateConversationForm
         userStored={userStored}
+        userColors={userColors}
         isOpenAside={isOpenAside}
         setIsOpenAside={setIsOpenAside}
         refetchConversation={refetchConversation}

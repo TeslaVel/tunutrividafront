@@ -38,7 +38,7 @@ const Modal = ({children, isOpen, action, width, maxWidth, close, title, buttonT
 
   return (
     <div id="modal" className="fixed inset-0 flex items-center justify-center ntv-modal-overlay" style={{zIndex: '999'}}>
-       <div className="ntv-modal-custom-shadow rounded-lg dark:border md:mt-0  sm:w-[28rem] md: w-[35rem] lg:w-[35rem] xl:p-0 bg-dark-purple-700 border-dark-purple-700">
+       <div className="ntv-modal-custom-shadow rounded-lg dark:border md:mt-0  sm:w-[28rem] md: w-[35rem] lg:w-[35rem] xl:p-0 bg-primary-female-700 border-primary-female-700">
           <div className="p-8 space-y-4 md:space-y-6 sm:p-8">
             <div className="flex justify-between mb-3">
               <div></div>

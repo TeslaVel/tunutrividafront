@@ -1,7 +1,12 @@
 import React from 'react';
 
+// types
+import { UserColors } from "@/types";
+
+
 type Props = {
   setOptionSelected: (value: string) => void;
+  userColors: UserColors
   optionSelected: string;
 };
 
@@ -11,15 +16,14 @@ const tapOptions = [
   { label: 'Metas', value: 'goals' }
 ];
 
-const TopBar = ({ setOptionSelected, optionSelected }: Props) => {
-  const classSelected = 'border-b border-purple-300 text-purple-300'
-
+const TopBar = ({ setOptionSelected, optionSelected, userColors}: Props) => {
   return (
     <>
       {
         tapOptions.map( (opt: {[key: string]: string}, index: number) => {
           return <span key={`${index}-${opt}`}
-                    className={`h-[30px] cursor-pointer p-2 hover:border-b hover:border-purple-300 hover:text-purple-300 ${opt.value === optionSelected ? classSelected : '' } `}
+                    className={`h-[30px] cursor-pointer p-2  ${userColors?.topBar.optionHover}
+                    ${opt.value === optionSelected ? `${userColors?.topBar.optionSelected}` : `${userColors?.topBar.option}` } `}
                     onClick={() => setOptionSelected(opt.value)}
                   >
                     {opt.label}

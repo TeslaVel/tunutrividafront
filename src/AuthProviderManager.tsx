@@ -1,7 +1,10 @@
 import { createContext, useState, PropsWithChildren } from 'react';
 import { useStorage } from '@/hooks/useStorage';
-import { useGeneralStorage } from '@/hooks/useGeneralStorage';
-import { UserType, UserColors } from "@/types";
+import { useColorStorage } from '@/hooks/useColorStorage';
+import { colorByGender } from '@/components/utils/GeneralUtils'
+
+// types
+import { UserType, UserColors, Colors } from "@/types";
 
 const initialState: {
   userStored: UserType | null;
@@ -25,24 +28,14 @@ export const AuthContext = createContext(initialState);
 // used on routes
 export const AuthProvider = ({children, updateMainStatusLogin}: PropsWithChildren<IProps>) => {
   const {userData, setStorage} = useStorage('pgus-tk', null)
-  const {localData: userColors, setLocalStorage: setUserColors} = useGeneralStorage('ntv-uc-tk', null)
+  const {localData: userColors, setLocalStorage: setUserColors} = useColorStorage('ntv-uc-tk', colorByGender(userData?.gender))
 
   const setUserToken = (user: UserType) => {
     setStorage(user)
     updateMainStatusLogin()
 
-    const genderColor = user.gender === 'male'
-      ? {
-        bgGraphColor: 'bg-gray-blue-05',
-        itemSelected: 'bg-gray-blue-20',
-        buttonBgColor: 'bg-gray-blue-50 hover:bg-gray-blue-100 text-dark-blue-700'
-      }
-      : {
-        bgGraphColor: 'bg-purple-01',
-        itemSelected: 'bg-purple-15',
-        buttonBgColor: 'bg-purple-15 hover:bg-purple-50'
-      }
-      setUserColors(genderColor)
+    const genderColor: UserColors = colorByGender(user.gender)
+    setUserColors(genderColor)
   }
 
   const deleteUserToken = () => {

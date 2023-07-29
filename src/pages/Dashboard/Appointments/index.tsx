@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useLocation } from 'react-router-dom';
+import { AuthContext } from '@/AuthProviderManager';
 import { useGetAppointments } from '@/hooks/useGetAppointments'
 import Scroller from '@/components/Scroller/Scroller'
 import CollapsibleSection from '@/components/CollapsibleSection'
@@ -8,9 +9,10 @@ import { customDateFormat } from '@/components/utils/TimeUtils'
 import { GeneralFilter } from '@/components/Filter'
 
 // types
-import { SelectedPage, AppointmentType } from '@/types'
+import { SelectedPage, AppointmentType, UserColors} from '@/types'
 
 interface IProps {
+  userColors: UserColors
   setSelectedPage: (value: SelectedPage) => void;
 };
 
@@ -28,7 +30,8 @@ const stNames = {
   'cancelled': 'Cancelado',
 }
 
-export const Appointments = ({ setSelectedPage }: IProps) => {
+export const Appointments = ({ setSelectedPage, userColors }: IProps) => {
+  const { userStored } = useContext(AuthContext);
   const [filterBy, setFilterBy] = useState<string>('pending')
   const location = useLocation();
   const params = new URLSearchParams(location.search);
@@ -64,12 +67,18 @@ export const Appointments = ({ setSelectedPage }: IProps) => {
               <h2>Citas</h2>
             </div>
 
-            <GeneralFilter options={optionFilter} filterSelected={filterBy} setFilterBy={setFilterBy} />
+            <GeneralFilter
+              options={optionFilter}
+              filterSelected={filterBy}
+              setFilterBy={setFilterBy}
+              userColors={userColors}
+            />
 
             <div className=" pt-10">
               { appointments?.map((apt: AppointmentType, index: number) => (
                 <CollapsibleSection
                   key={`appointment_${index}_${apt.id}`}
+                  userColors={userColors}
                   headerName={
                     <>
                       <IconHandler name={apt.appointmentType}/> &nbsp;[{statusName(apt.status)}] Fecha: {customDateFormat(apt.startDate, 'DD/MM/YY')}

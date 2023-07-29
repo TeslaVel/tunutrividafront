@@ -16,9 +16,9 @@ const terminos = [
   {
     title: 'Propiedad Intelectual',
     description: <>
-      <p>El contenido y los materiales presentes en nuestro sitio web, incluyendo, pero no limitándose a, textos, imágenes, logotipos, gráficos y videos, están protegidos por derechos de autor y otras leyes de propiedad intelectual. Sin embargo, todas las imágenes y videos utilizados en este sitio web son de uso gratuito y están disponibles en dominio público o con licencias de uso permitido.</p>
+      El contenido y los materiales presentes en nuestro sitio web, incluyendo, pero no limitándose a, textos, imágenes, logotipos, gráficos y videos, están protegidos por derechos de autor y otras leyes de propiedad intelectual. Sin embargo, todas las imágenes y videos utilizados en este sitio web son de uso gratuito y están disponibles en dominio público o con licencias de uso permitido.
       <br />
-      <p>Queda estrictamente prohibida la reproducción, distribución o uso no autorizado de cualquier contenido que no esté marcado como de uso gratuito. Para aquellos elementos que tengan restricciones de uso, se debe obtener nuestro consentimiento expreso por escrito antes de utilizarlos en cualquier forma.</p>
+      Queda estrictamente prohibida la reproducción, distribución o uso no autorizado de cualquier contenido que no esté marcado como de uso gratuito. Para aquellos elementos que tengan restricciones de uso, se debe obtener nuestro consentimiento expreso por escrito antes de utilizarlos en cualquier forma.
     </>
   },
   {
@@ -49,7 +49,7 @@ export const Terms = ({ setSelectedPage }: Props) => {
   }, []);
 
   return (
-    <section id="terms" className="h-full pb-10 pt-[125px] flex flex-col justify-center bg-purple-05" >
+    <section id="terms" className="h-full pb-10 pt-[125px] flex flex-col justify-center bg-secondly-female-05" >
       <div className="flex flex-col">
         <HText size={1} classes="text-center">Términos y Condiciones</HText>
         <div className="mx-auto w-3/6 mt-5">
@@ -58,7 +58,7 @@ export const Terms = ({ setSelectedPage }: Props) => {
               <header>
                 <strong>{term.title}</strong>
               </header>
-              <p className="mt-1 text-justify">{term.description}</p>
+              <p className="mt-1 text-justify"> {term.description} </p>
             </div>
           ))}
         </div>

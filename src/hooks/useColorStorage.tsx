@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { UserColors } from "@/types";
 
-export function useGeneralStorage (key: string, initialValue: null){
-  const getLocalStorage = (): UserColors | null => {
+export function useColorStorage (key: string, initialValue: UserColors){
+  const getLocalStorage = (): UserColors => {
     let val = null;
     try {
       const item = window.localStorage.getItem(key);
@@ -12,11 +12,11 @@ export function useGeneralStorage (key: string, initialValue: null){
     } catch (e) {
       val = null;
     }
-    return val
+    return initialValue
   }
-  const [localData, setLocalData] = useState<UserColors | null>(() => getLocalStorage());
+  const [localData, setLocalData] = useState<UserColors >(() => getLocalStorage());
 
-  const setLocalStorage = (newValue: UserColors | null): void => {
+  const setLocalStorage = (newValue: UserColors): void => {
     try {
       window.localStorage.setItem(key, JSON.stringify(newValue))
       setLocalData(newValue);

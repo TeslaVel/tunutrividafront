@@ -6,6 +6,7 @@ import Sessions from '@/pages/Dashboard/Sessions';
 import Appointments from '@/pages/Dashboard/Appointments';
 import Chat from '@/pages/Dashboard/Chat';
 import NotFound from '@/pages/NotFound';
+// import { colorByGender } from '@/components/utils/GeneralUtils'
 
 import {
   Route,
@@ -25,8 +26,8 @@ type Props = {
 };
 
 export const AppRoutes = ({ selectedPage, setSelectedPage, asignCLientForUploadImage}: Props) => {
-  const scrollRef = useRef(null);
-  const { userStored } = useContext(AuthContext);
+  const scrollRef = useRef<number | null>(null);
+  const { userStored, userColors } = useContext(AuthContext);
   const [isTopOfPage, setIsTopOfPage] = useState<boolean>(true);
 
   useEffect(() => {
@@ -65,13 +66,14 @@ export const AppRoutes = ({ selectedPage, setSelectedPage, asignCLientForUploadI
         <BrowserRouter>
           <div className={`${isLogged ? 'flex min-h-screen' : ''}`}>
             <Head
+              userColors={userColors}
               isLogged={isLogged}
               isTopOfPage={isTopOfPage}
               selectedPage={selectedPage}
               setSelectedPage={setSelectedPage}
             />
 
-            <div className={`${isLogged ? 'flex-1 bg-gray-pink-10 h-[100%]' : ''}`} id='routes-content'>
+            <div className={`${isLogged ? `flex-1 h-[100%] ${userColors?.general.baseBgColor} ${userColors?.general.baseTextColor}` : ''}`} id='routes-content'>
               <Routes>
                 <Route element={<ProtectedRoute isNotLogged={isLogged} redirectPath="/dashboard" />}>
                   <Route index path="/" element={
@@ -83,28 +85,36 @@ export const AppRoutes = ({ selectedPage, setSelectedPage, asignCLientForUploadI
                 </Route>
 
 
-                <Route element={<ProtectedRoute isNotLogged={!isLogged} redirectPath="/" />}>
-                  <Route path="/dashboard" element={
-                    <Dashboard
-                      asignCLientForUploadImage={asignCLientForUploadImage}
-                      selectedPage={selectedPage}
-                      setSelectedPage={setSelectedPage}
-                      dietitian_id={userStored?.dietitianId} />
-                  }/>
+                { isLogged && userColors &&
+                  <Route element={<ProtectedRoute isNotLogged={!isLogged} redirectPath="/" />}>
+                    <Route path="/dashboard" element={
+                      <Dashboard
+                        asignCLientForUploadImage={asignCLientForUploadImage}
+                        selectedPage={selectedPage}
+                        userColors={userColors}
+                        setSelectedPage={setSelectedPage}
+                        dietitian_id={userStored?.dietitianId} />
+                    }/>
 
-                  <Route path="/sessions" element={
-                    <Sessions
-                      setSelectedPage={setSelectedPage}/>
-                  }/>
-                  <Route path="/chat" element={
-                    <Chat
-                      setSelectedPage={setSelectedPage}/>
-                  }/>
+                    <Route path="/sessions" element={
+                      <Sessions
+                        userColors={userColors}
+                        setSelectedPage={setSelectedPage}/>
+                    }/>
+                    <Route path="/chat" element={
+                      <Chat
+                        userColors={userColors}
+                        setSelectedPage={setSelectedPage}/>
+                    }/>
 
-                  <Route path="/appointments" element={
-                    <Appointments setSelectedPage={setSelectedPage}/>
-                  }/>
-                </Route>
+                    <Route path="/appointments" element={
+                      <Appointments
+                        userColors={userColors}
+                        setSelectedPage={setSelectedPage}
+                      />
+                    }/>
+                  </Route>
+                }
 
                 <Route element={<ProtectedRoute isNotLogged={!isLogged} redirectPath="/" />}>
                   <Route path='*' element={<NotFound setSelectedPage={setSelectedPage} />} />

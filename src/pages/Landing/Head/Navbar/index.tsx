@@ -21,14 +21,14 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
   const [isMenuToggled, setIsMenuToggled] = useState<boolean>(false);
   const [isLoginModalOpen, setLoginModalOpen] = useState<boolean>(false)
   const isAboveMediumScreens = useMediaQuery("(min-width: 1060px)");
-  const sameColor = 'bg-dark-purple-700'
+  const sameColor = 'bg-primary-female-700'
 
   const termAndPolicies = ['terms', 'policies'].includes(selectedPage)
   const navbarBackground = !isTopOfPage || termAndPolicies ? `${sameColor}` : '';
 
   const buttonBaseColor = `h-[36px] f-size-[14px] ${isTopOfPage
-    ?`${sameColor} hover:bg-dark-purple-400 text-white-01`
-    :'bg-dark-purple-400 hover:bg-dark-purple-700 text-white-01'
+    ?`${sameColor} hover:bg-primary-female-400 text-white-01`
+    :'bg-primary-female-400 hover:bg-primary-female-700 text-white-01'
   }`
   const anchorBaseColor = `text-[18px] ${isTopOfPage ? 'text-pink-10 hover:text-pink-50' : 'text-white-01 hover:text-pink-30'}`
   const selectePageColor ='text-[18px] text-pink-50 hover:pink-50'
@@ -39,52 +39,44 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
         <LinkAnchor
           page="Home"
           url="home"
-          toSelect={SelectedPage.Home}
           selectedPage={selectedPage}
-          setSelectedPage={(selected) => {
-              setSelectedPage(selected)
-              setIsMenuToggled(false)
-            }}
-          custom={termAndPolicies}
+          action={() => {
+            setSelectedPage(SelectedPage.Home)
+            setIsMenuToggled(false)
+          }}
           baseColor={anchorBaseColor}
           selectePageColor={selectePageColor}
         />
         <LinkAnchor
           page="Paquetes"
           url="packages"
-          toSelect={SelectedPage.Packages}
           selectedPage={selectedPage}
-          setSelectedPage={(selected) => {
-              setSelectedPage(selected)
-              setIsMenuToggled(false)
-            }}
-          custom={termAndPolicies}
+          action={() => {
+            setSelectedPage(SelectedPage.Packages)
+            setIsMenuToggled(false)
+          }}
           baseColor={anchorBaseColor}
           selectePageColor={selectePageColor}
         />
         <LinkAnchor
           page="Tratamientos"
           url="treatments"
-          toSelect={SelectedPage.Treatments}
           selectedPage={selectedPage}
-          setSelectedPage={(selected) => {
-              setSelectedPage(selected)
-              setIsMenuToggled(false)
-            }}
-          custom={termAndPolicies}
+          action={() => {
+            setSelectedPage(SelectedPage.Treatments)
+            setIsMenuToggled(false)
+          }}
           baseColor={anchorBaseColor}
           selectePageColor={selectePageColor}
         />
         <LinkAnchor
           page="Contactanos"
           url="contactus"
-          toSelect={SelectedPage.Contactus}
           selectedPage={selectedPage}
-          setSelectedPage={(selected) => {
-            setSelectedPage(selected)
+          action={() => {
+            setSelectedPage(SelectedPage.Contactus)
             setIsMenuToggled(false)
           }}
-          custom={termAndPolicies}
           baseColor={anchorBaseColor}
           selectePageColor={selectePageColor}
         />
@@ -117,15 +109,14 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
           <LinkAnchor
             page="Logear"
             url="login"
-            custom
             selectedPage={selectedPage}
-            setSelectedPage={(selected) => {
-              setSelectedPage(selected)
+            action={() => {
+              setSelectedPage(SelectedPage.LogIn)
               setIsMenuToggled(false)
+              setLoginModalOpen(true)
             }}
             baseColor={anchorBaseColor}
             selectePageColor={selectePageColor}
-            toSelect={SelectedPage.LogIn}
           />
         </div>
       </>
@@ -153,7 +144,7 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
                 </div>
               ) : (
                 <button
-                  className="rounded-full bg-purple-20 p-2"
+                  className="rounded-full bg-secondly-female-20 p-2"
                   onClick={() => setIsMenuToggled(!isMenuToggled)}
                 >
                   <Bars3Icon className="h-6 w-6 text-white" />

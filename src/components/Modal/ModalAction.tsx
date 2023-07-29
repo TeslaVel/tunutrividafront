@@ -29,13 +29,13 @@ const ModalAction = ({children, isOpen, action, width, maxWidth, close, title, b
   }
 
   const buttonStyles = `ntv-custom-button-shadow
-  bg-dark-purple-500 hover:bg-dark-purple-700
+  bg-primary-female-500 hover:bg-primary-female-700
   text-white-01 sm:px-7 text-center
   py-2  px-8 w-auto rounded-lg
   transition duration-500`
 
 
-  const borderColor = 'border-dark-purple-20'
+  const borderColor = 'border-primary-female-20'
 
   const handleCLick = (e: SyntheticEvent) => {
     if (action) {
@@ -50,7 +50,7 @@ const ModalAction = ({children, isOpen, action, width, maxWidth, close, title, b
 
   return (
     <div id="modal" className="fixed inset-0 flex items-center justify-center ntv-modal-overlay" style={{zIndex: '999'}}>
-      <div className={`ntv-modal-custom-shadow ${modalWidth} ${modalMAxWidth} rounded-lg overflow-hidden bg-dark-purple-600 text-white-01`}>
+      <div className={`ntv-modal-custom-shadow ${modalWidth} ${modalMAxWidth} rounded-lg overflow-hidden bg-primary-female-600 text-white-01`}>
         <div className={`modal-header grid justify-center py-4 px-6  border-b ${borderColor}`}>
           <h2 className="text-xl font-bold">{title}</h2>
           <button id="closeModalButton" className="absolute justify-self-end text-white-01 hover:text-pink-10" onClick={closeModal}>

@@ -5,7 +5,7 @@ import './ActionButton.css'
 
 type Props = {
   children: React.ReactNode;
-  setSelectedPage?: (value: SelectedPage) => void;
+  // setSelectedPage?: (value: SelectedPage) => void;
   selectedPage?: SelectedPage;
   toSelect?: SelectedPage;
   baseColor?: string
@@ -13,12 +13,14 @@ type Props = {
   action?: () => void
 };
 
-const ActionButton = ({ children, setSelectedPage, selectedPage = SelectedPage.Home, toSelect = SelectedPage.Home, baseColor, action, type = 'link'}: Props) => {
+const ActionButton = ({ children, selectedPage = SelectedPage.Home, toSelect = SelectedPage.Home, baseColor, action, type = 'link'}: Props) => {
   if (type === 'button') {
     return (
       <button
         className={`ntv-custom-button-shadow rounded-sm px-5 py-2 ${baseColor}`}
-        onClick={action ? action : () => {}}
+        onClick={ () => action
+          ? action()
+          : {}}
       >
         {children}
       </button>
@@ -28,10 +30,9 @@ const ActionButton = ({ children, setSelectedPage, selectedPage = SelectedPage.H
   return (
     <AnchorLink
       className={`ntv-custom-button-shadow rounded-sm px-5 py-2 ${baseColor}`}
-      onClick={() => setSelectedPage
-        ? setSelectedPage(toSelect)
-        : {}
-      }
+      onClick={ () => action
+        ? action()
+        : {}}
       href={`#${selectedPage}`}
     >
       {children}

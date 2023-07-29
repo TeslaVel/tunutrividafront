@@ -23,7 +23,7 @@ interface Props {
   chartLabels: [string]
   chartTitle: string,
   optionRanges: arrayObject[]
-  userColors: UserColors | null
+  userColors: UserColors
 }
 
 ChartJS.register(
@@ -72,11 +72,11 @@ export const LineBar = ( { chartLabels, chartTitle, optionRanges, userColors }: 
 
   return (
     <div className="flex flex-col">
-      {chartTitle && <h5 className='mx-2 mt-4 text-center text-dark-purple-700'> {chartTitle} [{selectedValue}] </h5>}
+      {chartTitle && <h5 className={`mx-2 mt-4 text-center ${userColors?.general.baseTextColor}`}> {chartTitle} [{selectedValue}] </h5>}
       <Line options={optionsChart} data={dataChart}/>
       <div className="mx-2 mt-4 flex gap-3 mb-3">
         { optionRanges?.map((opt: arrayObject, index: number) => (
-          <button key={index} className={`px-3 rounded ${userColors?.buttonBgColor}`} onClick={() => setSelectedValue(opt.name)}>{opt.label}</button>
+          <button key={index} className={`px-3 rounded ${userColors?.chart.button}`} onClick={() => setSelectedValue(opt.name)}>{opt.label}</button>
         ))}
       </div>
     </div>

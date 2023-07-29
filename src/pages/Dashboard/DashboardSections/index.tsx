@@ -1,12 +1,13 @@
 import Entries from '@/pages/Dashboard/DashboardSections/Entries'
 import UserHome from './Home/UserHome'
+import Palette from '@/components/Palette'
 
 // types
 import { UserType, UserColors } from "@/types";
 
 type Props = {
   userStored: UserType | null
-  userColors: UserColors | null
+  userColors: UserColors
   optionSelected: string
   handleCableAction: () => void
   asignCLientForUploadImage: () => void
@@ -24,7 +25,7 @@ const DashboardSections = ({optionSelected, handleCableAction, userStored, userC
   if (optionSelected === 'goals') {
     return (
       <div>
-        Esta es la seccion del Goals
+        <Palette />
       </div>
     )
   }

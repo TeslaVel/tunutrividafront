@@ -37,11 +37,11 @@ const deleteAndRedirect = () => {
 const AppWrapper = () => {
   const item = window.localStorage.getItem('upldtkTnvD');
   const isSetted = item !== null ? JSON.parse(item) : null;
-  console.log('isSetted', isSetted);
+  // console.log('isSetted', isSetted);
   const { userData, getStorage } = useStorage('pgus-tk', null)
   const [client, setClient] = useState(() => {
     const auth = userData?.token ? {authorization: `Bearer ${userData?.token}`} : {authorization: ''};
-    console.log('auth new', auth)
+    // console.log('auth new', auth)
     return new ApolloClient({
       cache: new InMemoryCache(),
       link: from([errorLink, new HttpLink({ uri: VITE_GRAPHQ_URL, headers: auth })])
@@ -51,7 +51,7 @@ const AppWrapper = () => {
   const asignClientAfterLogin = () => {
     const userTokenData = getStorage()
     const auth = userTokenData?.token ? {authorization: `Bearer ${userTokenData?.token}`} : {authorization: ''};
-    console.log('auth useEffect', auth)
+    // console.log('auth useEffect', auth)
     setClient(new ApolloClient({
       cache: new InMemoryCache(),
       link: from([errorLink, new HttpLink({ uri: VITE_GRAPHQ_URL, headers: auth })])
@@ -62,7 +62,7 @@ const AppWrapper = () => {
     if (isSetted) {
       const userTokenData = getStorage()
       const auth = userTokenData?.token ? {authorization: `Bearer ${userTokenData?.token}`} : {authorization: ''};
-      console.log('UploadImage useEffect', auth)
+      // console.log('UploadImage useEffect', auth)
       const link = createUploadLink({
         uri: VITE_GRAPHQ_URL,
         headers: auth,

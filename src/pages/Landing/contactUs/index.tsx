@@ -14,9 +14,9 @@ type Props = {
 const ContactUs = ({ setSelectedPage }: Props) => {
   const { CreateContactUs, data, loading, error, reset } = useMutationContactUs();
 
-  const inputStyles = `mb-5 w-full rounded-lg px-5 py-2 bg-dark-purple-500 text-white-01 placeholder-gray-purple-10`;
+  const inputStyles = `mb-5 w-full rounded-lg px-5 py-2 bg-primary-female-500 text-white-01 placeholder-gray-purple-10`;
   const buttonStyles = `mt-5 rounded-lg px-20 py-3 transition duration-500
-  bg-dark-purple-500 hover:bg-dark-purple-200 text-white-01 xxs:w-full sm:w-full md:w-auto`
+  bg-primary-female-500 hover:bg-primary-female-200 text-white-01 xxs:w-full sm:w-full md:w-auto`
 
   const {
     register,
@@ -42,7 +42,7 @@ const ContactUs = ({ setSelectedPage }: Props) => {
       xxxs:py-[7rem] xxs:py-[7rem] xs:py-[7rem] sm:py-[7rem]
       md:min-h-[800px] lg:min-h-[800px]
       md:h-[100vh] lg:h-[100vh]
-      flex flex-col justify-center bg-purple-05">
+      flex flex-col justify-center bg-secondly-female-05">
       <motion.div
         onViewportEnter={() => setSelectedPage(SelectedPage.Contactus)}
         className="justify-between gap-8 flex flex-col mx-auto xxxs:px-4 xxs:px-4 xxs:w-full sm:w-full  md:w-4/6  lg:w-3/6"

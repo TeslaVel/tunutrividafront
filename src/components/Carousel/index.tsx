@@ -106,7 +106,7 @@ const CarouselMulti: React.FC<CarouselProps> = ({
                   width: '',//calc(100% - 1em)
                   transition: 'all .2s linear'
                 }}>
-                  <p className="text-dark-purple-600">{image.description}</p>
+                  <p className="text-primary-female-600">{image.description}</p>
                 </div>
               }
             </div>

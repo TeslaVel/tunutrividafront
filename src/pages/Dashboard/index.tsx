@@ -6,10 +6,11 @@ import { AuthContext } from '@/AuthProviderManager';
 import Scroller from '@/components/Scroller/Scroller'
 
 // types
-import { SelectedPage } from "@/types";
+import { SelectedPage, UserColors } from "@/types";
 
 type Props = {
   selectedPage: SelectedPage
+  userColors: UserColors
   setSelectedPage: (value: SelectedPage) => void;
   asignCLientForUploadImage: () => void;
   dietitian_id?: string;
@@ -17,8 +18,8 @@ type Props = {
 
 const cable = actioncable.createConsumer('ws://localhost:3001/cable');
 
-export const Dashboard = ({setSelectedPage, dietitian_id, asignCLientForUploadImage}: Props) => {
-  const { userStored, userColors } = useContext(AuthContext);
+export const Dashboard = ({setSelectedPage, dietitian_id, userColors, asignCLientForUploadImage}: Props) => {
+  const { userStored } = useContext(AuthContext);
   const [optionSelected, setOptionSelected] = useState<string>('dashboard')
 
   useEffect(() => {
@@ -48,6 +49,7 @@ export const Dashboard = ({setSelectedPage, dietitian_id, asignCLientForUploadIm
           <TopBar
             optionSelected={optionSelected}
             setOptionSelected={setOptionSelected}
+            userColors={userColors}
             />
         }
       >

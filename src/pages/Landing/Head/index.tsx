@@ -1,21 +1,26 @@
 import { useContext } from 'react'
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
-import { SelectedPage } from "@/types";
 import { AuthContext } from '@/AuthProviderManager';
+
+// types
+import { SelectedPage, UserColors } from "@/types";
 
 type Props = {
   isLogged: boolean;
+  userColors: UserColors | null
   isTopOfPage: boolean;
   selectedPage: SelectedPage;
   setSelectedPage: (value: SelectedPage) => void;
 }
 
-const Head = ({isLogged, isTopOfPage, selectedPage, setSelectedPage}: Props) => {
-  const { userStored, deleteUserStored } = useContext(AuthContext);
+const Head = ({isLogged, isTopOfPage, selectedPage, setSelectedPage, userColors}: Props) => {
+  if (!userColors) return null
+  const { userStored, deleteUserStored} = useContext(AuthContext);
   return (
     isLogged
     ? <Sidebar
+      userColors={userColors}
       userStored={userStored}
       deleteUserStored={deleteUserStored}
       selectedPage={selectedPage} />

@@ -1,15 +1,18 @@
 import { useForm } from "react-hook-form";
-import { UserType, CommentType } from '@/types'
+
+// types
+import { UserType, CommentType, UserColors } from '@/types'
 
 interface IProps {
   userStored: UserType
+  userColors: UserColors
   entry_id: string
   comments: CommentType[]
   sentComments: (values: any) => Promise<void>
   loading: boolean
 }
 
-export const Comments = ({sentComments, entry_id, comments, userStored, loading}: IProps) => {
+export const Comments = ({sentComments, entry_id, comments, userStored, userColors, loading}: IProps) => {
     const inserEmoji = (emoji: string) => {
       const inputField = document.getElementById('messageInput') as HTMLInputElement;
 
@@ -53,7 +56,7 @@ export const Comments = ({sentComments, entry_id, comments, userStored, loading}
             )
           ))}
         </div>
-        <div id='comment-form-content' className="flex justify-between items-center pb-3 px-3 bg-purple-300" style={{borderRadius: '0 0 20px 20px'}}>
+        <div id='comment-form-content' className={`flex justify-between items-center pb-3 px-3 ${userColors?.entry.secondaryBgColor}`} style={{borderRadius: '0 0 20px 20px'}}>
           <form
             target="_blank"
             onSubmit={onSubmit}
@@ -95,7 +98,7 @@ export const Comments = ({sentComments, entry_id, comments, userStored, loading}
             </div>
             <button type="submit"
               disabled={loading}
-              className="px-4 py-1 bg-dark-purple-700 hover:bg-pink-400 text-white rounded-lg"
+              className="px-4 py-1 bg-primary-female-700 hover:bg-pink-400 text-white rounded-lg"
               style={{alignSelf: 'end'}}>Enviar
             </button>
           </form>

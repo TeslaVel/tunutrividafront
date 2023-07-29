@@ -28,12 +28,12 @@ const LoginModal = ({ formId, isOpen, closeAction}: Props) => {
   }, [data?.createAuth]);
 
   const inputStyles =`
-  bg-purple-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600
+  bg-secondly-female-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600
   block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
 `;
 
   const buttonStyles = `
-  ntv-custom-button-shadow w-full text-white bg-dark-purple-500 hover:bg-dark-purple-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center
+  ntv-custom-button-shadow w-full text-white bg-primary-female-500 hover:bg-primary-female-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center
   `
 
   const {
@@ -116,13 +116,13 @@ const LoginModal = ({ formId, isOpen, closeAction}: Props) => {
             <div className="flex items-start">
               <div className="flex items-center h-5">
                 <input id="remember" aria-describedby="remember" type="checkbox"
-                className="w-4 h-4 border border-dark-purple-300 rounded bg-dark-purple-50 focus:ring-1 focus:ring-purpl-100 dark:focus:ring-dark-purple-600 dark:ring-offset-purple-100" required={true} />
+                className="w-4 h-4 border border-primary-female-300 rounded bg-primary-female-50 focus:ring-1 focus:ring-purpl-100 dark:focus:ring-primary-female-600 dark:ring-offset-secondly-female-100" required={true} />
               </div>
               <div className="ml-3 text-sm">
                 <label  className="text-gray-500 dark:text-gray-300">Remember me</label>
               </div>
             </div>
-            <a href="#" className="text-sm font-medium text-purple-600 hover:underline dark:text-purple-50">Olvidó su contraseña?</a>
+            <a href="#" className="text-sm font-medium text-secondly-female-600 hover:underline dark:text-secondly-female-50">Olvidó su contraseña?</a>
           </div>
           <button
             type="submit"

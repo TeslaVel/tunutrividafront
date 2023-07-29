@@ -18,7 +18,7 @@ import { UserColors } from "@/types";
 type Props = {
   gender: 'female' | 'male' | null
   bmi?: string
-  userColors: UserColors | null
+  userColors: UserColors
 }
 
 const BmiRanges = ({ bmi, gender = 'female', userColors}: Props) => {
@@ -56,13 +56,13 @@ const BmiRanges = ({ bmi, gender = 'female', userColors}: Props) => {
       {ranges[gender].map((range, index) => (
         <div key={index}
           className={` flex flex-col items-center justify-between px-3 py-3 h-auto ${resKlas}
-          ${ (bmiFloat > range.min && bmiFloat <= range.max) ? `${userColors?.itemSelected} rounded-lg` : ''}
+          ${ (bmiFloat > range.min && bmiFloat <= range.max) ? `${userColors?.bmi.itemSelected} rounded-lg` : ''}
           `}
         >
           <img src={range.image} alt={`Imagen ${index}`} style={imgStyle}/>
           <div className="flex flex-col">
-            <span className="text-center"> {`<= ${range.max}`}</span>
-            <span className="text-center">{range.title}</span>
+            <span className={`text-center ${userColors?.general.baseTextColor}`}> {`<= ${range.max}`}</span>
+            <span className={`text-center ${userColors?.general.baseTextColor}`}>{range.title}</span>
           </div>
         </div>
       ))}

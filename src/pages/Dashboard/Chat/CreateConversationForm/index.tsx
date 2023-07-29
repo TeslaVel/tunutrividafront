@@ -3,16 +3,18 @@ import { useMutationCreateConversation } from '@/hooks/graph/useMutationCreateCo
 import Aside from '@/components/Aside'
 
 // types
-import { UserType } from '@/types'
+import { UserType, UserColors } from '@/types'
 
 type Props = {
   userStored: UserType | null;
+  userColors: UserColors
   refetchConversation: () => void
   isOpenAside: boolean;
   setIsOpenAside: (value: boolean) => void;
 };
 
-export const CreateConversationForm = ({refetchConversation, isOpenAside, setIsOpenAside, userStored}: Props) => {
+export const CreateConversationForm = ({refetchConversation, isOpenAside, setIsOpenAside, userStored, userColors}: Props) => {
+
   const { CreateConversation, data, loading, error } = useMutationCreateConversation();
 
   const {
@@ -62,6 +64,7 @@ export const CreateConversationForm = ({refetchConversation, isOpenAside, setIsO
   return(
     <Aside
       isOpen={isOpenAside}
+      userColors={userColors}
       close={() => closeAside()}
       title="Nueva Conversación"
     >
@@ -95,7 +98,7 @@ export const CreateConversationForm = ({refetchConversation, isOpenAside, setIsO
             </label>
           </div>
           <div>
-            <button type="submit" className="px-3 py-1 w-full bg-purple-50 hover:bg-purple-100 text-white rounded-lg">
+            <button type="submit" className={`px-3 py-1 w-full ${userColors?.general.secondaryBgColor} ${userColors?.general.secondaryBgColorHover} text-white rounded-lg`}>
               Crear
             </button>
           </div>

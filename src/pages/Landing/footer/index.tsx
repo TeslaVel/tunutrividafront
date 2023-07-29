@@ -11,7 +11,7 @@ type Props = {
 
 const Footer = ({selectedPage, setSelectedPage}: Props) => {
   return (
-    <footer className="bg-dark-purple-700 text-white py-16 ">
+    <footer className="bg-primary-female-700 text-white py-16 ">
       <div className="justify-content mx-auto w-5/6 gap-16 md:flex">
         <div className="mt-16 basis-1/2 md:mt-0">
           <img alt="logo" height={120} width={120} src={Logo} />
@@ -19,7 +19,7 @@ const Footer = ({selectedPage, setSelectedPage}: Props) => {
             Nos especializamos en dietas personalizadas y masajes terapéuticos con tecnología avanzada.
             Mejora tu bienestar con nuestros servicios expertos en nutrición y tratamientos de última generación.
           </p>
-          <p>© TeslaDev All Rights Reserved.</p>
+          <p> © TeslaDev All Rights Reserved. </p>
         </div>
         <div className="mt-16 basis-1/4 md:mt-0">
           <h4 className="font-bold text-pink-50">Links</h4>
@@ -28,10 +28,9 @@ const Footer = ({selectedPage, setSelectedPage}: Props) => {
               <LinkAnchor
                 page="Terminos y Condiciones"
                 url="terms"
-                toSelect={SelectedPage.Terms}
                 selectedPage={selectedPage}
-                setSelectedPage={(selected) => {
-                  setSelectedPage(selected)
+                action={() => {
+                  setSelectedPage(SelectedPage.Terms)
                 }}
               />
             </li>
@@ -40,10 +39,9 @@ const Footer = ({selectedPage, setSelectedPage}: Props) => {
               <LinkAnchor
                 page="Politicas"
                 url="policies"
-                toSelect={SelectedPage.Policies}
                 selectedPage={selectedPage}
-                setSelectedPage={(selected) => {
-                  setSelectedPage(selected)
+                action={() => {
+                  setSelectedPage(SelectedPage.Policies)
                 }}
               />
             </li>
@@ -55,12 +53,11 @@ const Footer = ({selectedPage, setSelectedPage}: Props) => {
             <LinkAnchor
               page="tunutrividalb@gmail.com"
               url="contactus"
-              toSelect={SelectedPage.Contactus}
               selectedPage={selectedPage}
               baseColor="text-white-01"
               selectePageColor="text-white-01"
-              setSelectedPage={(selected) => {
-                const element = document.getElementById(selected);
+              action={() => {
+                const element = document.getElementById(SelectedPage.Contactus);
                 if (element) {
                   element.scrollIntoView({ behavior: 'smooth' });
                 }
@@ -74,7 +71,7 @@ const Footer = ({selectedPage, setSelectedPage}: Props) => {
               (0412) 5873473
             </a>
           </div>
-          
+
         </div>
       </div>
     </footer>

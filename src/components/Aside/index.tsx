@@ -1,19 +1,16 @@
 import { useState, useEffect } from 'react'
 // types
-import { Colors } from "@/types";
+import { Colors, UserColors } from "@/types";
 
 type Props = {
   children: JSX.Element
+  userColors: UserColors
   title: string
   isOpen?: boolean
   close: () => void
 }
 
-const injectedStyle = {
-  background: `linear-gradient(30deg, ${Colors.DARKPURPLE05} 0%, ${Colors.DARKPURPLE700} 100%)`
-}
-
-const Aside = ({children, isOpen, close, title}: Props) => {
+const Aside = ({children, isOpen, close, title, userColors}: Props) => {
   const [asideOpen, setAsideOpen] = useState<boolean>(false)
 
   useEffect(() => {
@@ -26,6 +23,10 @@ const Aside = ({children, isOpen, close, title}: Props) => {
   const closeAside = () => {
     close()
     setAsideOpen(false)
+  }
+
+  const injectedStyle = {
+    background: userColors?.sideBar.styleBgGradient
   }
 
   return (

@@ -1,16 +1,18 @@
 import { useEffect } from "react";
-
-import { UserType, ConversationType, CommentType } from "@/types";
 import { useMutationCreateNote } from '@/hooks/graph/useMutationCreateNote'
 import { useForm } from "react-hook-form"
+
+// types
+import { UserType, ConversationType, CommentType, UserColors} from "@/types";
 
 interface Props {
   refetchConversation: () => void
   conversation: ConversationType
   userStored: UserType | null;
+  userColors: UserColors
 }
 
-export const ChatForm = ({userStored, conversation, refetchConversation}: Props) => {
+export const ChatForm = ({userStored, conversation, refetchConversation, userColors}: Props) => {
   const notes = conversation?.notes
 
   useEffect(() => {
@@ -77,7 +79,7 @@ export const ChatForm = ({userStored, conversation, refetchConversation}: Props)
   return (
     <div>
       <div
-        className="flex flex-col w-auto overflow-hidden h-[50vh] border border-purple-300 bg-purple-01"
+        className={`flex flex-col w-auto overflow-hidden h-[50vh] border ${userColors?.general.border} ${userColors?.general.baseBgColor}`}
         style={{borderRadius: '20px 20px 0 0 '}}>
         <div id='content-note-scroll' className="overflow-y-scroll px-2">
           {notes?.map((comment: CommentType, index: number) => (
@@ -107,7 +109,10 @@ export const ChatForm = ({userStored, conversation, refetchConversation}: Props)
         method="POST"
         id="form-create-note"
       >
-        <div className="min-w-[100px] flex md:flex-row xxxs:flex-col xxs:flex-col justify-between items-center gap-3 pb-3 pt-8 px-3 bg-purple-300">
+        <div className={`
+          min-w-[100px] flex md:flex-row xxxs:flex-col xxs:flex-col justify-between items-center gap-3 pb-3 pt-8 px-3
+          ${userColors?.general.primaryBgColor}
+        `}>
           <div className="flex flex-grow flex-col xxxs:w-full xxs:w-full " >
             <div id="emojiPanel" className="flex ml-1 pb-1 gap-3 emoji-panel">
               <button type="button" className="emoji" onClick={() => inserEmoji('👍')}>👍</button>
@@ -127,7 +132,10 @@ export const ChatForm = ({userStored, conversation, refetchConversation}: Props)
               placeholder="Escribe tu mensaje..."
               className="mr-2 p-1 border rounded-lg focus:outline-none" />
           </div>
-          <button className="xxxs:w-full xxs:w-full md:w-auto lg:w-auto px-4 py-1 bg-dark-purple-700 hover:bg-pink-400 text-white-01 rounded-lg" style={{alignSelf: 'end'}}>Enviar</button>
+          <button className={`
+          xxxs:w-full xxs:w-full md:w-auto lg:w-auto px-4 py-1
+          text-white-01 rounded-lg
+          ${userColors?.general.secondaryBgColor} ${userColors?.general.secondaryBgColorHover} `} style={{alignSelf: 'end'}}>Enviar</button>
         </div>
       </form>
     </div>

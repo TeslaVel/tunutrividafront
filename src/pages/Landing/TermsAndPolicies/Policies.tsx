@@ -69,7 +69,7 @@ export const Policies = ({ setSelectedPage }: Props) => {
   }, []);
 
   return (
-    <section id="policies" className="h-full pb-10 pt-[125px] flex flex-col justify-center bg-purple-05" >
+    <section id="policies" className="h-full pb-10 pt-[125px] flex flex-col justify-center bg-secondly-female-05" >
       <div className="flex flex-col">
         <HText size={1} classes="text-center">Política de Privacidad</HText>
         <div className="mx-auto w-3/6 mt-5">

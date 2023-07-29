@@ -47,7 +47,7 @@ const Packages = ({ setSelectedPage }: Props) => {
       xxxs:py-[7rem] xxs:py-[7rem] xs:py-[7rem] sm:py-[7rem]
       md:min-h-[800px] lg:min-h-[800px]
       lg:h-[100vh] md:h-[100vh]
-      flex flex-col justify-center bg-purple-05">
+      flex flex-col justify-center bg-secondly-female-05">
       <motion.div
         onViewportEnter={() => setSelectedPage(SelectedPage.Packages)}
         className="mx-auto w-5/6"

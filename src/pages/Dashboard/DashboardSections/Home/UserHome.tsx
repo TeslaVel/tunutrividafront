@@ -8,7 +8,7 @@ import LineBar from "@/components/Chart/LineBar";
 
 type Props = {
   userStored: UserType | null;
-  userColors: UserColors | null
+  userColors: UserColors
   handleCableAction: () => void;
 };
 
@@ -28,8 +28,8 @@ const UserHome = ({ userStored, userColors }: Props) => {
       }
       { !loadinChart &&
           <div className='dashboard-section flex flex-col w-full'>
-            <div className={`${userColors?.bgGraphColor} p-3 flex flex-col md:w-[50rem] sm:w-[30rem] xs:w-[25rem] xxs:w-[20rem] xxxs:w-[18rem]`} style={{alignSelf: 'center', borderRadius: '20px'}}>
-              <strong className='text-center pb-5'>BMI</strong>
+            <div className={`${userColors?.bmi.primaryBgColor} p-3 flex flex-col md:w-[50rem] sm:w-[30rem] xs:w-[25rem] xxs:w-[20rem] xxxs:w-[18rem]`} style={{alignSelf: 'center', borderRadius: '20px'}}>
+              <strong className={`text-center pb-5 ${userColors?.general.baseTextColor}`}>BMI</strong>
               <BmiRanges
                 bmi={userStored?.imc}
                 gender={userStored?.gender || null}
@@ -39,7 +39,7 @@ const UserHome = ({ userStored, userColors }: Props) => {
 
             { chartData &&
               <div className="flex justify-center mt-[2rem]">
-                <div className={`${userColors?.bgGraphColor} w-auto w-full md:w-[50rem] sm:w-[30rem] xs:w-[25rem] xxs:w-[20rem] xxxs:w-[18rem] p-3`}>
+                <div className={`${userColors?.bmi.primaryBgColor} w-auto w-full md:w-[50rem] sm:w-[30rem] xs:w-[25rem] xxs:w-[20rem] xxxs:w-[18rem] p-3`}>
                   <LineBar
                     chartTitle="Grafico de evolucion"
                     chartLabels={chartData.days}

@@ -52,7 +52,7 @@ const Treatments = ({ setSelectedPage }: Props) => {
       xxxs:py-[7rem] xxs:py-[7rem] xs:py-[7rem] sm:py-[7rem]
       md::min-h-[800px] lg:min-h-[800px]
       md::h-[100vh] lg:h-[100vh]
-      flex flex-col justify-center bg-dark-purple-500">
+      flex flex-col justify-center bg-primary-female-300">
       <motion.div
         onViewportEnter={() => setSelectedPage(SelectedPage.Treatments)}
       >

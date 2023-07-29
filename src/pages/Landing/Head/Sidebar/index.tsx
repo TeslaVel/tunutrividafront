@@ -11,10 +11,11 @@ import { NavLink } from "react-router-dom";
 import useMediaQuery from "@/hooks/useMediaQuery";
 
 // types
-import { SelectedPage, UserType, Colors } from "@/types";
+import { SelectedPage, UserType, Colors, UserColors } from "@/types";
 
 type Props = {
   selectedPage: SelectedPage;
+  userColors: UserColors
   userStored: UserType | null;
   deleteUserStored: () => void;
 }
@@ -26,16 +27,22 @@ const optionsForSidebar = [
   {label: 'Chat', value: 'chat', icon: 'chat'}
 ];
 
-const showIcon = (key: string) => {
-  if (key === 'calendar') return <Calendar />
-  if (key === 'home') return <HomeIcon />
-  if (key === 'session') return <SessionIcon />
-  if (key === 'chat') return <ChatIcon />
-
-  return null
+const showIcon = (value: string) => {
+  switch(value) {
+    case 'calendar':
+      return <Calendar />
+     case 'home':
+      return <HomeIcon />
+     case 'session':
+      return <SessionIcon />
+     case 'chat':
+      return <ChatIcon />
+    default:
+      return null;
+  }
 };
 
-const Sidebar = ({selectedPage, userStored, deleteUserStored}: Props) => {
+const Sidebar = ( {selectedPage, userStored, deleteUserStored, userColors}: Props) => {
   const isAboveMediumScreens = useMediaQuery("(min-width: 940px)");
   const [expanded, setExpanded] = useState<boolean>(true);
   const [elementVisible, setElementVisible] = useState<boolean>(true);
@@ -50,6 +57,9 @@ const Sidebar = ({selectedPage, userStored, deleteUserStored}: Props) => {
     }
   }, [isAboveMediumScreens]);
 
+
+  if(userColors === null) return null
+
   const toggleExpand = () => {
     setExpanded(!expanded);
     if (expanded) setElementVisible(false)
@@ -60,7 +70,7 @@ const Sidebar = ({selectedPage, userStored, deleteUserStored}: Props) => {
   }
 
   const injectedStyle = {
-    background: `linear-gradient(30deg, ${Colors.DARKPURPLE05} 0%, ${Colors.DARKPURPLE700} 100%)`
+    background: userColors.sideBar.styleBgGradient
   }
 
   return (
@@ -105,15 +115,14 @@ const Sidebar = ({selectedPage, userStored, deleteUserStored}: Props) => {
             <NavLink
               key={`sidebar-option-${index}`}
               to={`/${opt.value}`}
-              className={`h-8 mt-3 flex items-center rounded-lg hover:bg-purple-200 ${expanded ? 'px-4' : 'px-1'}
-              ${selectedPage === opt.value ? 'bg-purple-200' : ''}`}
+              className={`h-8 mt-3 flex items-center rounded-lg ${userColors.sideBar.sidebarLinkHover} ${expanded ? 'px-4' : 'px-1'} ${selectedPage === opt.value ? `${userColors.sideBar.sidebarLink}` : ''}`}
             >
               {showIcon(opt.icon)}
               {elementVisible && <span className="ml-2">{opt.label}</span>}
             </NavLink>
           ))}
 
-          <span className={`h-8 mt-10 flex items-center rounded-lg hover:bg-purple-50 cursor-pointer ${expanded ? 'px-4' : 'px-1'}`}>
+          <span className={userColors.sideBar.sidebarLinkHover + `h-8 mt-10 flex items-center rounded-lg cursor-pointer ${expanded ? 'px-4' : 'px-1'}`}>
             <button className="flex" onClick={() => deleteUserStored()}>
               <Logout />
               { elementVisible && <span className="ml-2">Log Out</span> }

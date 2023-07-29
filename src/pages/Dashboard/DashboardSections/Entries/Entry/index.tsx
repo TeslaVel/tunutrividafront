@@ -1,21 +1,24 @@
 import { useState } from 'react'
-import { EntryType, UserType, CommentType } from '@/types'
 import { Comments } from './Comments'
 import { useMutationCreateComment } from '@/hooks/graph/useMutationCreateComment';
 import { customDateFormat } from '@/components/utils/TimeUtils'
 
+//
+import { EntryType, UserType, CommentType, UserColors } from '@/types'
+
 type Props = {
-  userStored: UserType;
-  entry: EntryType;
-  showComments: Boolean;
-  isList: Boolean;
-  setAction?: (entry: EntryType) => void;
-};
+  userStored: UserType
+  userColors: UserColors
+  entry: EntryType
+  showComments: Boolean
+  isList: Boolean
+  setAction?: (entry: EntryType) => void
+}
 
 
-export const Entry = ({ entry, isList, setAction, showComments, userStored }: Props) => {
+export const Entry = ({ entry, isList, setAction, showComments, userStored, userColors }: Props) => {
     const entryClasses = `entries relative flex flex-col flex-wrap
-    bg-purple-01 border border-purple-300 ${isList ? 'w-full' : 'xxxs:xxs:sm:w-6/6 md:w-5/6 lg:w-3/6'}`;
+    ${userColors?.general.baseBgColor} ${userColors?.entry.border} ${isList ? 'w-full' : 'xxxs:xxs:sm:w-6/6 md:w-5/6 lg:w-3/6'}`;
 
     const [commentList, setCommentList] = useState<CommentType[]>(entry.comments);
     const { CreateComment, data, loading, error, reset } = useMutationCreateComment();
@@ -61,9 +64,9 @@ export const Entry = ({ entry, isList, setAction, showComments, userStored }: Pr
           className={entryClasses}
           style={injectdStyles}
         >
-        <div className="flex items-center p-4 bg-purple-300 text-white-01" style={{borderRadius: '20px 20px 0 0'}}>
+        <div className={`flex items-center p-4 ${userColors?.entry.secondaryBgColor} text-white-01`} style={{borderRadius: '20px 20px 0 0'}}>
           <div>
-            <span className="w-[3rem] h-[3rem] bg-dark-purple-300 rounded-full mr-4 flex items-center justify-center"></span>
+            <span className={`w-[3rem] h-[3rem] ${userColors?.entry.primaryBgColor} rounded-full mr-4 flex items-center justify-center`}></span>
           </div>
           <div>
             <p className="text-lg font-bold">{entry.user.fullName }</p>
@@ -86,6 +89,7 @@ export const Entry = ({ entry, isList, setAction, showComments, userStored }: Pr
         {showComments && commentList.length > 0 &&
           <Comments
             sentComments={sentComments}
+            userColors={userColors}
             loading={loading}
             userStored={userStored}
             entry_id={entry.id}

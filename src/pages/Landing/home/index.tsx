@@ -65,10 +65,11 @@ const Home = ({ setSelectedPage }: Props) => {
             }}
           >
             <ActionButton
-              baseColor='bg-dark-purple-700 hover:bg-dark-purple-400 text-white-01 xs:w-auto xxs:px-2 xs:px-2'
-              setSelectedPage={setSelectedPage}
+              baseColor='bg-primary-female-700 hover:bg-primary-female-400 text-white-01 xs:w-auto xxs:px-2 xs:px-2'
               selectedPage={SelectedPage.Contactus}
-              toSelect={SelectedPage.Contactus}
+              action={() => {
+                setSelectedPage(SelectedPage.Contactus)
+              }}
             >
               Únete Ahora
             </ActionButton>
@@ -85,7 +86,7 @@ const Home = ({ setSelectedPage }: Props) => {
 
       {/* SPONSORS */}
       {false && (
-        <div className="h-[150px] w-full bg-purple-05 py-10">
+        <div className="h-[150px] w-full bg-secondly-female-05 py-10">
           <div className="mx-auto w-5/6">
             <div className="flex w-3/5 items-center justify-between gap-8">
               {/* <img alt="redbull-sponsor" src={SponsorRedBull} />

@@ -1,16 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useContext } from "react";
+import { AuthContext } from '@/AuthProviderManager';
 import { useGetSessions } from '@/hooks/useGetSessions'
 import Scroller from '@/components/Scroller/Scroller'
 import CollapsibleSection from '@/components/CollapsibleSection'
 import { customDateFormat } from '@/components/utils/TimeUtils'
 // types
-import { SelectedPage, SessionType } from "@/types";
+import { SelectedPage, SessionType, UserColors } from "@/types";
 
 interface IProps {
+  userColors: UserColors
   setSelectedPage: (value: SelectedPage) => void;
 };
 
-export const Sessions = ({setSelectedPage }: IProps) => {
+export const Sessions = ({setSelectedPage, userColors}: IProps) => {
+  const { userStored } = useContext(AuthContext);
   const { loading, data, refetch } = useGetSessions()
 
   useEffect(() => {
@@ -35,7 +38,9 @@ export const Sessions = ({setSelectedPage }: IProps) => {
             { sessions?.map((session: SessionType, index: number) => (
               <CollapsibleSection
                 key={`session_${index}_${session.id}`}
-                headerName={customDateFormat(session.date, 'DD/MM/YY')}>
+                headerName={customDateFormat(session.date, 'DD/MM/YY')}
+                userColors={userColors}
+              >
                 <div className="flex flex-col">
                   <div><strong>Edad</strong>: {session.age}</div>
                   <div><strong>Altura</strong>: {session.height}</div>

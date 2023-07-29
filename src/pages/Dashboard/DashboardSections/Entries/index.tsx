@@ -1,13 +1,14 @@
 import { useEffect, useState, useContext, ChangeEvent } from 'react'
 import { AuthContext } from '@/AuthProviderManager';
 import { useGetUserEntries } from '@/hooks/useGetUserEntries'
-import Scroller from '@/components/Scroller/Scroller'
+// import Scroller from '@/components/Scroller/Scroller'
+import { colorByGender } from '@/components/utils/GeneralUtils'
 import { Entry } from './Entry'
 import EntryWrapper from './EntryWrapper'
 import { CreateEntryForm } from './CreateEntryForm'
 
 // types
-import { EntryType } from '@/types'
+import { EntryType, UserColors } from '@/types'
 
 type Props = {
   asignCLientForUploadImage: () => void;
@@ -16,7 +17,8 @@ type Props = {
 
 export const Entries = ({asignCLientForUploadImage}: Props) => {
     const [orderBy] = useState<string>('created_at_desc')
-    const { userStored } = useContext(AuthContext);
+    const { userStored } = useContext(AuthContext)
+    const userColors: UserColors = colorByGender(userStored?.gender)
     const { loading: loadingEntries, data: dataEntries, refetch } = useGetUserEntries(orderBy)
     const [selectedEntry, setSelectedEntry] = useState<EntryType | null>(null)
     const [isOpenAside, setIsOpenAside] = useState<boolean>(false)
@@ -64,6 +66,7 @@ export const Entries = ({asignCLientForUploadImage}: Props) => {
                   <Entry
                     key={`entry_key_${selectedEntry.id}`}
                     userStored={userStored}
+                    userColors={userColors}
                     entry={selectedEntry}
                     isList={isList}
                     showComments={true} />
@@ -73,7 +76,8 @@ export const Entries = ({asignCLientForUploadImage}: Props) => {
           }
           { isList &&
             <>
-              <span style={{cursor: 'pointer'}} onClick={() => setIsOpenAside && setIsOpenAside(true)}>Nueva Entrada</span>
+              <span style={{cursor: 'pointer'}} className={`${userColors?.general.baseTextColor}`}
+                onClick={() => setIsOpenAside && setIsOpenAside(true)}>Nueva Entrada</span>
               <EntryWrapper>
               { entries?.map((entry: EntryType, index: number) => (
                   <Entry
@@ -81,6 +85,7 @@ export const Entries = ({asignCLientForUploadImage}: Props) => {
                     isList={isList}
                     setAction={setSelectedEntry}
                     userStored={userStored}
+                    userColors={userColors}
                     entry={entry}
                     showComments={false}
                   />
@@ -95,6 +100,7 @@ export const Entries = ({asignCLientForUploadImage}: Props) => {
           asignCLientForUploadImage={asignCLientForUploadImage}
           isOpenAside={isOpenAside}
           setIsOpenAside={setIsOpenAside}
+          userColors={userColors}
         />
       </>
     )

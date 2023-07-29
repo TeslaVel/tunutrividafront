@@ -1,17 +1,21 @@
+import { ChangeEvent, useContext } from 'react'
 import { useForm } from "react-hook-form"
-import { ChangeEvent } from 'react'
 import Aside from '@/components/Aside'
 // import { useMutationCreateEntry } from '@/hooks/graph/useMutationCreateEntry'
 import { CreateEntry } from '@/api/actions'
 
+// types
+import { UserColors } from "@/types";
+
 type Props = {
   refetch: () => void
+  userColors: UserColors
   asignCLientForUploadImage: () => void;
   isOpenAside: boolean;
   setIsOpenAside: (value: boolean) => void;
 };
 
-export const CreateEntryForm = ({refetch, isOpenAside, setIsOpenAside}: Props) => {
+export const CreateEntryForm = ({refetch, isOpenAside, setIsOpenAside, userColors}: Props) => {
   // const { CreateEntry, data, loading, error, reset } = useMutationCreateEntry();
 
   const {
@@ -89,6 +93,7 @@ export const CreateEntryForm = ({refetch, isOpenAside, setIsOpenAside}: Props) =
   return(
     <Aside
       isOpen={isOpenAside}
+      userColors={userColors}
       close={() => setIsOpenAside(false)}
       title="Nueva Entrada"
     >
@@ -117,9 +122,9 @@ export const CreateEntryForm = ({refetch, isOpenAside, setIsOpenAside}: Props) =
           <div className="py-2">
             <label htmlFor="description">
               Descripcion
-              <textarea 
+              <textarea
                 id="description"
-                className="w-full p-1"
+                className={`w-full p-1 text-gray-300`}
                 autoComplete='off'
                 placeholder="Agregue una descripcion"
                 {...register("description", {
@@ -129,7 +134,7 @@ export const CreateEntryForm = ({refetch, isOpenAside, setIsOpenAside}: Props) =
               />
             </label>
           </div>
-          <div className="py-2">
+          <div className="py-4">
             <label htmlFor="entry_type">
               Tipo de entrada
               <select
@@ -148,8 +153,9 @@ export const CreateEntryForm = ({refetch, isOpenAside, setIsOpenAside}: Props) =
               </select>
             </label>
           </div>
-          <div>
-            <button type="submit" className="px-3 py-1 w-full bg-primary-400 hover:bg-primary-500 text-white rounded-lg">
+          <div className="pt-4">
+            <button type="submit"
+              className={`px-3 py-1 w-full ${userColors?.general.secondaryBgColor} ${userColors?.general.secondaryBgColorHover} text-white rounded-lg`}>
               Crear
             </button>
           </div>

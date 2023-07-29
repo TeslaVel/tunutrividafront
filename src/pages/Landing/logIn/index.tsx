@@ -29,12 +29,12 @@ const LogIn = ({ setSelectedPage }: Props) => {
   }, [data?.createAuth]);
 
   const inputStyles = `
-  bg-dark-purple-600
+  bg-primary-female-600
   text-white placeholder-white
   px-5 py-3 mb-5 w-full rounded-md`;
 
   const buttonStyles = `ntv-custom-button-shadow
-  bg-dark-purple-500 hover:bg-dark-purple-700
+  bg-primary-female-500 hover:bg-primary-female-700
   text-white sm:px-7 text-center hover:text-white
   py-3  px-10 w-auto rounded-lg
   transition duration-500`
@@ -54,13 +54,13 @@ const LogIn = ({ setSelectedPage }: Props) => {
   };
 
   return (
-    <section id="login" className="py-[8rem] min-h-[700px] h-[100vh] bg-purple-05">
+    <section id="login" className="py-[8rem] min-h-[700px] h-[100vh] bg-secondly-female-05">
         <motion.div
           onViewportEnter={() => setSelectedPage(SelectedPage.LogIn)}
           className='flex justify-center items-center h-full gap-8'
         >
           {/* FORM AND IMAGE */}
-          <div className="xxxs:px-4 xxs:px-4 md:p-5 sm:w-full md:w-full md:w-3/6 lg:w-2/6 bg-dark-purple-500 rounded-lg text-white-01">
+          <div className="xxxs:px-4 xxs:px-4 md:p-5 sm:w-full md:w-full md:w-3/6 lg:w-2/6 bg-primary-female-500 rounded-lg text-white-01">
             {/* HEADER */}
             <motion.div
               className="mb-[3rem]"

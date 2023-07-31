@@ -6,7 +6,7 @@ import { SelectedPage } from "@/types";
 
 type Props = {
   selectedPage: SelectedPage
-  setSelectedPage: (value: SelectedPage) => void;
+  setSelectedPage: (value: SelectedPage, center?: boolean) => void;
 };
 
 export const Footer = ({selectedPage, setSelectedPage}: Props) => {
@@ -30,7 +30,7 @@ export const Footer = ({selectedPage, setSelectedPage}: Props) => {
                 url="terms"
                 selectedPage={selectedPage}
                 action={() => {
-                  setSelectedPage(SelectedPage.Terms)
+                  setSelectedPage(SelectedPage.Terms, true)
                 }}
               />
             </li>
@@ -41,7 +41,7 @@ export const Footer = ({selectedPage, setSelectedPage}: Props) => {
                 url="policies"
                 selectedPage={selectedPage}
                 action={() => {
-                  setSelectedPage(SelectedPage.Policies)
+                  setSelectedPage(SelectedPage.Policies, true)
                 }}
               />
             </li>

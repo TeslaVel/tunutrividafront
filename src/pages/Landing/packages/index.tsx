@@ -1,4 +1,3 @@
-import ActionButton from "@/components/Compound/Buttons/ActionButton";
 import HText from "@/components/Compound/Title/HText";
 import { SelectedPage, ClassType } from "@/types";
 import { motion } from "framer-motion";

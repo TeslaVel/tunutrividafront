@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { AuthProvider } from '@/AuthProviderManager';
 import AppRoutes from "@/AppRoutes";
-import { SelectedPage } from "@/types";
 
 interface IProps {
   updateMainStatusLogin: () => void
@@ -9,17 +8,11 @@ interface IProps {
 }
 
 function App({updateMainStatusLogin, asignCLientForUploadImage}: IProps) {
-  const [selectedPage, setSelectedPage] = useState<SelectedPage>(
-    SelectedPage.Landing
-  );
-
   return (
     <div className="app">
       <AuthProvider updateMainStatusLogin={updateMainStatusLogin}>
         <AppRoutes
-          asignCLientForUploadImage={asignCLientForUploadImage}
-          selectedPage={selectedPage}
-          setSelectedPage={setSelectedPage} />
+          asignCLientForUploadImage={asignCLientForUploadImage} />
       </AuthProvider>
     </div>
   );

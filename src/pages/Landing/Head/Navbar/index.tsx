@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 type Props = {
   isTopOfPage: boolean;
   selectedPage: SelectedPage;
-  setSelectedPage: (value: SelectedPage) => void;
+  setSelectedPage: (value: SelectedPage, center?: boolean) => void;
 };
 
 const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
@@ -41,7 +41,7 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
           url="home"
           selectedPage={selectedPage}
           action={() => {
-            setSelectedPage(SelectedPage.Home)
+            setSelectedPage(SelectedPage.Home, true)
             setIsMenuToggled(false)
           }}
           baseColor={anchorBaseColor}
@@ -52,7 +52,7 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
           url="packages"
           selectedPage={selectedPage}
           action={() => {
-            setSelectedPage(SelectedPage.Packages)
+            setSelectedPage(SelectedPage.Packages, true)
             setIsMenuToggled(false)
           }}
           baseColor={anchorBaseColor}
@@ -63,7 +63,7 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
           url="treatments"
           selectedPage={selectedPage}
           action={() => {
-            setSelectedPage(SelectedPage.Treatments)
+            setSelectedPage(SelectedPage.Treatments, true)
             setIsMenuToggled(false)
           }}
           baseColor={anchorBaseColor}
@@ -74,7 +74,7 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
           url="contactus"
           selectedPage={selectedPage}
           action={() => {
-            setSelectedPage(SelectedPage.Contactus)
+            setSelectedPage(SelectedPage.Contactus, true)
             setIsMenuToggled(false)
           }}
           baseColor={anchorBaseColor}

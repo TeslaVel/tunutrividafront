@@ -20,12 +20,13 @@ import { AuthContext } from '@/AuthProviderManager';
 import { SelectedPage } from "@/types";
 
 type Props = {
-  selectedPage: SelectedPage
-  setSelectedPage: (value: SelectedPage) => void;
+  // selectedPage: SelectedPage
+  // setSelectedPage: (value: SelectedPage) => void;
   asignCLientForUploadImage: () => void;
 };
 
-export const AppRoutes = ({ selectedPage, setSelectedPage, asignCLientForUploadImage}: Props) => {
+export const AppRoutes = ({ asignCLientForUploadImage}: Props) => {
+  const [selectedPage, setSelectedPage] = useState<SelectedPage>(SelectedPage.Landing);
   const scrollRef = useRef<number | null>(null);
   const { userStored, userColors } = useContext(AuthContext);
   const [isTopOfPage, setIsTopOfPage] = useState<boolean>(true);
@@ -41,8 +42,14 @@ export const AppRoutes = ({ selectedPage, setSelectedPage, asignCLientForUploadI
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    const element = document.getElementById(selectedPage);
+
+  const selectAndCenterPage = (selected: SelectedPage, center: boolean | undefined = false) => {
+    setSelectedPage(selected)
+
+    if(!center) return
+
+    const element = document.getElementById(selected);
+
     if (element && selectedPage !== SelectedPage.LogIn) {
       // Cancelar el desplazamiento anterior si existe
       if (scrollRef.current) {
@@ -55,7 +62,7 @@ export const AppRoutes = ({ selectedPage, setSelectedPage, asignCLientForUploadI
       };
       scrollRef.current = window.requestAnimationFrame(scroll);
     }
-  }, [selectedPage]);
+  }
 
   const isLogged = !(userStored == undefined || userStored == null || userStored?.token?.length < 1 && userStored.dietitianId)
   const sectionNotVisible = ['terms', 'policies'].includes(selectedPage)
@@ -70,7 +77,7 @@ export const AppRoutes = ({ selectedPage, setSelectedPage, asignCLientForUploadI
               isLogged={isLogged}
               isTopOfPage={isTopOfPage}
               selectedPage={selectedPage}
-              setSelectedPage={setSelectedPage}
+              setSelectedPage={selectAndCenterPage}
             />
 
             <div className={`${isLogged ? `flex-1 h-[100%] ${userColors?.general.baseBgColor} ${userColors?.general.baseTextColor}` : ''}`} id='routes-content'>
@@ -80,7 +87,7 @@ export const AppRoutes = ({ selectedPage, setSelectedPage, asignCLientForUploadI
                     <Landing
                       sectionNotVisible={sectionNotVisible}
                       selectedPage={selectedPage}
-                      setSelectedPage={setSelectedPage} />
+                      setSelectedPage={selectAndCenterPage} />
                   }/>
                 </Route>
 
@@ -92,32 +99,32 @@ export const AppRoutes = ({ selectedPage, setSelectedPage, asignCLientForUploadI
                         asignCLientForUploadImage={asignCLientForUploadImage}
                         selectedPage={selectedPage}
                         userColors={userColors}
-                        setSelectedPage={setSelectedPage}
+                        setSelectedPage={selectAndCenterPage}
                         dietitian_id={userStored?.dietitianId} />
                     }/>
 
                     <Route path="/sessions" element={
                       <Sessions
                         userColors={userColors}
-                        setSelectedPage={setSelectedPage}/>
+                        setSelectedPage={selectAndCenterPage}/>
                     }/>
                     <Route path="/chat" element={
                       <Chat
                         userColors={userColors}
-                        setSelectedPage={setSelectedPage}/>
+                        setSelectedPage={selectAndCenterPage}/>
                     }/>
 
                     <Route path="/appointments" element={
                       <Appointments
                         userColors={userColors}
-                        setSelectedPage={setSelectedPage}
+                        setSelectedPage={selectAndCenterPage}
                       />
                     }/>
                   </Route>
                 }
 
                 <Route element={<ProtectedRoute isNotLogged={!isLogged} redirectPath="/" />}>
-                  <Route path='*' element={<NotFound setSelectedPage={setSelectedPage} />} />
+                  <Route path='*' element={<NotFound setSelectedPage={selectAndCenterPage} />} />
                 </Route>
               </Routes>
             </div>

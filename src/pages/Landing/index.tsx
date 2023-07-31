@@ -12,7 +12,7 @@ import { SelectedPage } from "@/types";
 
 type Props = {
   selectedPage: SelectedPage;
-  setSelectedPage: (value: SelectedPage) => void;
+  setSelectedPage: (value: SelectedPage, center?: boolean) => void;
   sectionNotVisible: boolean
 };
 

@@ -11,7 +11,7 @@ type Props = {
   userColors: UserColors | null
   isTopOfPage: boolean;
   selectedPage: SelectedPage;
-  setSelectedPage: (value: SelectedPage) => void;
+  setSelectedPage: (value: SelectedPage, center?: boolean) => void;
 }
 
 const Head = ({isLogged, isTopOfPage, selectedPage, setSelectedPage, userColors}: Props) => {

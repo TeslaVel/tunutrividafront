@@ -11,7 +11,7 @@ type Props = {
   setSelectedPage: (value: SelectedPage) => void;
 };
 
-const ContactUs = ({ setSelectedPage }: Props) => {
+export const ContactUs = ({ setSelectedPage }: Props) => {
   const { CreateContactUs, data, loading, error, reset } = useMutationContactUs();
 
   const inputStyles = `mb-5 w-full rounded-lg px-5 py-2 bg-primary-female-500 text-white-01 placeholder-gray-purple-10`;

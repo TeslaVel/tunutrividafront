@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const VITE_API_URL= 'http://localhost:3001/api'
+const VITE_API_SERVER = import.meta.env.VITE_APP_API_SERVER
 
 function getUserStored () {
   const dataStored = window.localStorage.getItem('pgus-tk');
@@ -14,7 +14,7 @@ export async function CreateEntry(data: any) {
 
   if (userStored?.token) {
     try {
-      const response = await axios.post(`${VITE_API_URL}/entries`, data, {
+      const response = await axios.post(`${VITE_API_SERVER}/entries`, data, {
         headers: {
           // 'Content-Type': 'application/json',
           'Content-Type': 'multipart/form-data',

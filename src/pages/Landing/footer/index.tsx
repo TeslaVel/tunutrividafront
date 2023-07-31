@@ -9,7 +9,7 @@ type Props = {
   setSelectedPage: (value: SelectedPage) => void;
 };
 
-const Footer = ({selectedPage, setSelectedPage}: Props) => {
+export const Footer = ({selectedPage, setSelectedPage}: Props) => {
   return (
     <footer className="bg-primary-female-700 text-white py-16 ">
       <div className="justify-content mx-auto w-5/6 gap-16 md:flex">

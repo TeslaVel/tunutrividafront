@@ -16,7 +16,8 @@ type Props = {
   dietitian_id?: string;
 };
 
-const cable = actioncable.createConsumer('ws://localhost:3001/cable');
+const VITE_SOCKET_SERVER = import.meta.env.VITE_APP_WEB_SOCKET
+const cable = actioncable.createConsumer(VITE_SOCKET_SERVER);
 
 export const Dashboard = ({setSelectedPage, dietitian_id, userColors, asignCLientForUploadImage}: Props) => {
   const { userStored } = useContext(AuthContext);

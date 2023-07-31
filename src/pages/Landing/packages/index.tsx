@@ -1,13 +1,7 @@
 import ActionButton from "@/components/Compound/Buttons/ActionButton";
 import HText from "@/components/Compound/Title/HText";
 import { SelectedPage, ClassType } from "@/types";
-// import {
-//   HomeModernIcon,
-//   UserGroupIcon,
-//   AcademicCapIcon,
-// } from "@heroicons/react/24/solid";
 import { motion } from "framer-motion";
-// import BenefitsPageGraphic from "@/assets/BenefitsPageGraphic.png";
 import package_1 from "@/assets/ntv/package-1.png";
 import package_2 from "@/assets/ntv/package-2.png";
 import package_3 from "@/assets/ntv/package-3.png";
@@ -40,7 +34,7 @@ type Props = {
   setSelectedPage: (value: SelectedPage) => void;
 };
 
-const Packages = ({ setSelectedPage }: Props) => {
+export const Packages = ({ setSelectedPage }: Props) => {
   return (
     <section id="packages" className="
       xxxs:h-full xxs:h-full xs:h-full sm:h-full

@@ -9,7 +9,7 @@ import { ApolloClient, InMemoryCache, HttpLink, from, ApolloProvider } from '@ap
 import { createUploadLink } from 'apollo-upload-client';
 import { onError } from "@apollo/client/link/error";
 
-const VITE_GRAPHQ_URL= 'http://localhost:3001/graphql'
+const VITE_GRAPHQ_SERVER = import.meta.env.VITE_APP_GRAPH_SERVER
 
 const deleteUploadCookie = () => window.localStorage.removeItem('upldtkTnvD');
 
@@ -44,7 +44,7 @@ const AppWrapper = () => {
     // console.log('auth new', auth)
     return new ApolloClient({
       cache: new InMemoryCache(),
-      link: from([errorLink, new HttpLink({ uri: VITE_GRAPHQ_URL, headers: auth })])
+      link: from([errorLink, new HttpLink({ uri: VITE_GRAPHQ_SERVER, headers: auth })])
     });
   });
 
@@ -54,7 +54,7 @@ const AppWrapper = () => {
     // console.log('auth useEffect', auth)
     setClient(new ApolloClient({
       cache: new InMemoryCache(),
-      link: from([errorLink, new HttpLink({ uri: VITE_GRAPHQ_URL, headers: auth })])
+      link: from([errorLink, new HttpLink({ uri: VITE_GRAPHQ_SERVER, headers: auth })])
     }));
   }
 
@@ -64,7 +64,7 @@ const AppWrapper = () => {
       const auth = userTokenData?.token ? {authorization: `Bearer ${userTokenData?.token}`} : {authorization: ''};
       // console.log('UploadImage useEffect', auth)
       const link = createUploadLink({
-        uri: VITE_GRAPHQ_URL,
+        uri: VITE_GRAPHQ_SERVER,
         headers: auth,
         credentials: 'include'
       })

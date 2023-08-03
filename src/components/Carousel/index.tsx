@@ -54,8 +54,8 @@ const CarouselMulti: React.FC<CarouselProps> = ({
       margin: '0 4px',
       color: 'black',
       display: 'inline-block',
-      height: '.7em',
-      width: '.7em',
+      height: '.9em',
+      width: '.9em',
       background: active ? 'rgba(168, 89, 202, 0.5)' : 'none',
       transition: 'background-color .4s ease-out'
     }

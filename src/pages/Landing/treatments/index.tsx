@@ -4,6 +4,8 @@ import radiofrecuencia from "@/assets/ntv/radiofrecuencia1.png";
 import vacumterapia from "@/assets/ntv/vacumterapia1.png";
 import lipolaser from "@/assets/ntv/lipolaser1.png";
 import auriculoterapia from "@/assets/ntv/auriculoterapia.png";
+import ondasrusas from "@/assets/ntv/ondasrusas.png";
+import masajereductor from "@/assets/ntv/masajereductor.png";
 import { motion } from "framer-motion";
 import HText from "@/components/Compound/Title/HText";
 // import Class from "./Class";
@@ -13,31 +15,43 @@ const images: Array<ClassType> = [
   {
     name: "Auriculoterapia",
     description:
-      "La auriculoterapia es una Lorem ipsum dolor sit amet, consectet",
+      "",
     url: auriculoterapia,
   },
   {
     name: "Vacumterapia",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "Tratamiento estético no invasivo que aplica succion a la piel ayudando a mejorar la circulación sanguínea y linfática y reduce la celulitis,",
     url: vacumterapia,
   },
   {
     name: "Ultra Cavitacion",
-    description: "Porque es buena etc etc",
+    description: "Tratamiento estético no invasivo que utiliza ondas ultrasónicas para eliminar la grasa localizada. Es especialmente útil para reducir la grasa abdominal, de los muslos y los glúteos",
     url: cavitation,
   },
   {
     name: "Radiofrecuencia",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "Tratamiento estético no invasivo que utiliza ondas de calor para reducir la grasa localizada y mejorar la apariencia de la piel.",
     url: radiofrecuencia,
   },
   {
     name: "Lipolaser",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "Tratamiendo estético o invasivo que utiliza la tecnología láser para reducir la grasa localizada en áreas específicas del cuerpo, sin la necesidad de realizar incisiones en la piel utilizando láseres de baja intensidad para disolver las células de grasa",
     url: lipolaser,
+  },
+  {
+    name: "Ondas Rusas",
+    description:
+      "Tratamiento de electroestimulación no invasivo donde se contrae el musculo para tonificarlo dándole firmeza a la piel.",
+    url: ondasrusas,
+  },
+  {
+    name: "Masaje Reductivo",
+    description:
+      "Masajes que ayudan a mejorar la circulación sanguínea, lo que ayuda a reducir la retención de líquidos y mejorar la apariencia de la piel.",
+    url: masajereductor,
   }
 ];
 

@@ -106,7 +106,13 @@ const CarouselMulti: React.FC<CarouselProps> = ({
                   width: '',//calc(100% - 1em)
                   transition: 'all .2s linear'
                 }}>
-                  <p className="text-primary-female-600">{image.description}</p>
+                  <p className="text-primary-female-600"
+                  style={{
+                    fontSize: '17px',
+                    textAlign: 'justify',
+                    textJustify: 'inter-word'
+                  }}
+                  >{image.description}</p>
                 </div>
               }
             </div>

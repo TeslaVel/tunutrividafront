@@ -32,7 +32,7 @@ const CollapsibleSection = ({
   const toggleChildrenVisibility = (): void => setCollapsed(!collapsed)
 
   return (
-    <div className="flex flex-col w-100  mb-2 cursor-pointer">
+    <div className="flex flex-col w-full  mb-2 cursor-pointer">
       <div
         className={`flex items-center justify-between h-[30px] px-3 text-white-01 ${userColors.collapsible.primaryBgColor}`}
         onClick={() => toggleChildrenVisibility()}

@@ -16,13 +16,14 @@ export const colorByGender = (gender: UserType[`gender`] = 'male'): UserColors =
         borderT: `border border-t border-primary-male-700`,
         border: `border border-primary-male-700`,
         primaryBgColor: `bg-primary-male-700`,
-        primaryBgColorHover: `hover:bg-primary-male-500`,
+        primaryBgColorHover: `hover:bg-primary-male-400`,
         secondaryBgColor: `bg-secondly-male-300`,
         secondaryBgColorHover: `hover:bg-secondly-male-100`,
       },
       entry: {
         primaryBgColor: `bg-primary-male-300`,
         secondaryBgColor: `bg-secondly-male-300`,
+        thirdBgColor: `bg-secondly-male-05`,
         border: `border border-secondly-male-300`
       },
       topBar: {
@@ -65,13 +66,14 @@ export const colorByGender = (gender: UserType[`gender`] = 'male'): UserColors =
       borderT: `border border-t border-primary-female-700`,
       border: `border border-primary-female-700`,
       primaryBgColor: `bg-primary-female-700`,
-      primaryBgColorHover: `hover:bg-primary-female-500`,
+      primaryBgColorHover: `hover:bg-primary-female-400`,
       secondaryBgColor: `bg-secondly-female-300`,
       secondaryBgColorHover: `hover:bg-secondly-female-100`,
     },
     entry: {
       primaryBgColor: `bg-primary-female-300`,
       secondaryBgColor: `bg-secondly-female-300`,
+      thirdBgColor: `bg-secondly-female-05`,
       border: `border border-secondly-female-300`
     },
     topBar: {

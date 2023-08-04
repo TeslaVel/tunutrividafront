@@ -35,8 +35,8 @@ export const Comments = ({sentComments, entry_id, comments, userStored, userColo
     };
 
     return (
-      <div id='content-comments' className="flex flex-col w-full overflow-hidden " style={{borderRadius: '0 0 20px 20px'}}>
-        <div id='content-comments-scroll'  className="overflow-y-scroll bg-gray-10 border border-gray-20 px-2" style={{borderRadius: '20px 20px 0 0 '}}>
+      <div id='content-comments' className="flex flex-col w-full overflow-hidden xxxs:h-[250px] sm:h-[320px]" style={{borderRadius: '0 0 20px 20px'}}>
+        <div id='content-comments-scroll'  className={`overflow-y-scroll ${userColors?.entry.thirdBgColor} border border-gray-20 px-2`}>
           {comments?.map((comment: CommentType, index: number) => (
             (comment.user.id === userStored.id
               ? <div className="w-full flex items-center justify-end py-2 " key={`comment_${comment.id}-${index}`}>
@@ -56,53 +56,64 @@ export const Comments = ({sentComments, entry_id, comments, userStored, userColo
             )
           ))}
         </div>
-        <div id='comment-form-content' className={`flex justify-between items-center pb-3 px-3 ${userColors?.entry.secondaryBgColor}`} style={{borderRadius: '0 0 20px 20px'}}>
           <form
             target="_blank"
             onSubmit={onSubmit}
             method="POST"
-            className="flex justify-between items-center w-full"
+            className=""
           >
-          <div className="flex flex-grow flex-col" >
-            <div id="emojiPanel" className="flex ml-1 pb-1 gap-3 emoji-panel">
-              <button type="button" className="emoji" onClick={() => inserEmoji('👍')}>👍</button>
-              <button type="button" className="emoji" onClick={() => inserEmoji('👏')}>👏</button>
-              <button type="button" className="emoji" onClick={() => inserEmoji('☺️')}>☺️</button>
-              <button type="button" className="emoji" onClick={() => inserEmoji('🎉')}>🎉</button>
-              <button type="button" className="emoji" onClick={() => inserEmoji('🤔')}>🤔</button>
-              <button type="button" className="emoji" onClick={() => inserEmoji('😎')}>😎</button>
+           <div id='comment-form-content'
+              className={`
+              min-w-[100px] flex md:flex-row sm:flex-row xxxs:flex-col xxs:flex-col justify-between items-center gap-3 py-3 px-3
+              ${userColors?.entry.secondaryBgColor}`}
+              style={{borderRadius: '0 0 20px 20px'}}
+            >
+              <div className="flex flex-grow flex-col xxxs:w-full xxs:w-full " >
+                <div id="emojiPanel" className="flex ml-1 pb-1 gap-3 emoji-panel">
+                  <button type="button" className="emoji" onClick={() => inserEmoji('👍')}>👍</button>
+                  <button type="button" className="emoji" onClick={() => inserEmoji('👏')}>👏</button>
+                  <button type="button" className="emoji" onClick={() => inserEmoji('☺️')}>☺️</button>
+                  <button type="button" className="emoji" onClick={() => inserEmoji('🎉')}>🎉</button>
+                  <button type="button" className="emoji" onClick={() => inserEmoji('🤔')}>🤔</button>
+                  <button type="button" className="emoji" onClick={() => inserEmoji('😎')}>😎</button>
+                </div>
+                <input
+                  type="hidden"
+                  value={entry_id}
+                  {...register("entry_id")}
+                />
+                <input
+                  type="text"
+                  id="messageInput"
+                  autoComplete='off'
+                  placeholder="Escribe tu mensaje..."
+                  className="mr-4 p-1 border rounded-lg focus:outline-none
+                  w-full
+                  "
+                  {...register("message", {
+                    required: true,
+                    minLength: 1,
+                  })}
+                />
+                {errors.message && (
+                  <p className="mt-1 text-primary-500">
+                    {errors.message.type === "required" && "This field is required."}
+                    {errors.message.type === "maxLength" &&
+                      "This field is empry."}
+                  </p>
+                )}
+              </div>
+              <button type="submit"
+                disabled={loading}
+                className={`
+                xxxs:w-full xxs:w-full md:w-auto lg:w-auto px-4 py-1
+                text-white-01 rounded-lg
+                ${userColors?.general.primaryBgColor} ${userColors?.general.primaryBgColorHover}
+                `}
+                style={{alignSelf: 'end'}}>Enviar
+              </button>
             </div>
-              <input
-                type="hidden"
-                value={entry_id}
-                {...register("entry_id")}
-              />
-              <input
-                type="text"
-                id="messageInput"
-                autoComplete='off'
-                placeholder="Escribe tu mensaje..."
-                className="mr-4 p-1 border rounded-lg focus:outline-none"
-                {...register("message", {
-                  required: true,
-                  minLength: 1,
-                })}
-              />
-              {errors.message && (
-                <p className="mt-1 text-primary-500">
-                  {errors.message.type === "required" && "This field is required."}
-                  {errors.message.type === "maxLength" &&
-                    "This field is empry."}
-                </p>
-              )}
-            </div>
-            <button type="submit"
-              disabled={loading}
-              className="px-4 py-1 bg-primary-female-700 hover:bg-pink-400 text-white rounded-lg"
-              style={{alignSelf: 'end'}}>Enviar
-            </button>
           </form>
-        </div>
       </div>
     )
 };

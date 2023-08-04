@@ -17,8 +17,9 @@ type Props = {
 
 
 export const Entry = ({ entry, isList, setAction, showComments, userStored, userColors }: Props) => {
-    const entryClasses = `entries relative flex flex-col flex-wrap
-    ${userColors?.general.baseBgColor} ${userColors?.entry.border} ${isList ? 'w-full' : 'xxxs:xxs:sm:w-6/6 md:w-5/6 lg:w-3/6'}`;
+    const entryClasses = `
+    entries relative flex flex-col flex-wrap
+    ${userColors?.general.baseBgColor} ${userColors?.entry.border} ${isList ? 'w-full' : 'w-full'}`;
 
     const [commentList, setCommentList] = useState<CommentType[]>(entry.comments);
     const { CreateComment, data, loading, error, reset } = useMutationCreateComment();

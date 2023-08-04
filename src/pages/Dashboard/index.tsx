@@ -54,7 +54,10 @@ export const Dashboard = ({setSelectedPage, dietitian_id, userColors, asignCLien
             />
         }
       >
-        <section id="profile" className="py-3 px-5 sm:px-5 xxs:px-3 xxxs:px-1 w-full" >
+        <section id="profile" className="
+          xxxs:px-1 xxs:px-1 xs:px-4 sm:px-4 md:px-5 lg:px-5
+          xxxs:w-full xxs:w-full xs:w-full sm:w-full md:w-5/6 lg:w-5/6 m-auto
+        " >
           <DashboardSections
             asignCLientForUploadImage={asignCLientForUploadImage}
             userStored={userStored}

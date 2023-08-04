@@ -79,7 +79,7 @@ export const ChatForm = ({userStored, conversation, refetchConversation, userCol
   return (
     <div>
       <div
-        className={`flex flex-col w-auto overflow-hidden h-[50vh] border ${userColors?.general.border} ${userColors?.general.baseBgColor}`}
+        className={`flex flex-col w-auto overflow-hidden h-[50vh] border ${userColors?.entry.border} ${userColors?.entry.thirdBgColor}`}
         style={{borderRadius: '20px 20px 0 0 '}}>
         <div id='content-note-scroll' className="overflow-y-scroll px-2">
           {notes?.map((comment: CommentType, index: number) => (
@@ -110,9 +110,10 @@ export const ChatForm = ({userStored, conversation, refetchConversation, userCol
         id="form-create-note"
       >
         <div className={`
-          min-w-[100px] flex md:flex-row xxxs:flex-col xxs:flex-col justify-between items-center gap-3 pb-3 pt-8 px-3
-          ${userColors?.general.primaryBgColor}
-        `}>
+          min-w-[100px] flex md:flex-row sm:flex-row xxxs:flex-col xxs:flex-col justify-between items-center gap-3 pb-3 pt-8 px-3
+          ${userColors?.entry.secondaryBgColor}
+        `}
+        style={{borderRadius: '0 0 20px 20px'}}>
           <div className="flex flex-grow flex-col xxxs:w-full xxs:w-full " >
             <div id="emojiPanel" className="flex ml-1 pb-1 gap-3 emoji-panel">
               <button type="button" className="emoji" onClick={() => inserEmoji('👍')}>👍</button>
@@ -135,7 +136,7 @@ export const ChatForm = ({userStored, conversation, refetchConversation, userCol
           <button className={`
           xxxs:w-full xxs:w-full md:w-auto lg:w-auto px-4 py-1
           text-white-01 rounded-lg
-          ${userColors?.general.secondaryBgColor} ${userColors?.general.secondaryBgColorHover} `} style={{alignSelf: 'end'}}>Enviar</button>
+          ${userColors?.general.primaryBgColor} ${userColors?.general.primaryBgColorHover} `} style={{alignSelf: 'end'}}>Enviar</button>
         </div>
       </form>
     </div>

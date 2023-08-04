@@ -127,7 +127,7 @@ const LoginModal = ({ formId, isOpen, closeAction}: Props) => {
           <button
             type="submit"
             className={buttonStyles}>
-             Logear2
+             Logear
           </button>
         </>
       </Modal>

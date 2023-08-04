@@ -3,24 +3,31 @@ import React from 'react';
 // types
 import { UserColors } from "@/types";
 
-
 type Props = {
   setOptionSelected: (value: string) => void;
   userColors: UserColors
   optionSelected: string;
 };
 
-const tapOptions = [
-  { label: 'Dashboard', value: 'dashboard' },
-  { label: 'Entradas', value: 'entries' },
-  { label: 'Metas', value: 'goals' }
+interface TopBarOption {
+  label: string,
+  value: string,
+  visible: boolean
+}
+
+const tapOptions: TopBarOption[] = [
+  { label: 'Dashboard', value: 'dashboard', visible: true},
+  { label: 'Entradas', value: 'entries', visible: true},
+  { label: 'Metas', value: 'goals', visible: false}
 ];
 
 const TopBar = ({ setOptionSelected, optionSelected, userColors}: Props) => {
   return (
     <>
       {
-        tapOptions.map( (opt: {[key: string]: string}, index: number) => {
+        tapOptions.map( (opt: TopBarOption, index: number) => {
+          if (!opt.visible) return
+
           return <span key={`${index}-${opt}`}
                     className={`h-[30px] cursor-pointer p-2  ${userColors?.topBar.optionHover}
                     ${opt.value === optionSelected ? `${userColors?.topBar.optionSelected}` : `${userColors?.topBar.option}` } `}

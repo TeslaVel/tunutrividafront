@@ -43,17 +43,17 @@ const showIcon = (value: string) => {
 };
 
 const Sidebar = ( {selectedPage, userStored, deleteUserStored, userColors}: Props) => {
-  const isAboveMediumScreens = useMediaQuery("(min-width: 940px)");
+  const isAboveMediumScreens = useMediaQuery("(max-width: 600px)");
   const [expanded, setExpanded] = useState<boolean>(true);
   const [elementVisible, setElementVisible] = useState<boolean>(true);
 
   useEffect(() => {
     if (isAboveMediumScreens) {
-      setExpanded(true)
-      setElementVisible(true)
-    } else {
       setExpanded(false)
       setElementVisible(false)
+    } else {
+      setExpanded(true)
+      setElementVisible(true)
     }
   }, [isAboveMediumScreens]);
 
@@ -77,7 +77,7 @@ const Sidebar = ( {selectedPage, userStored, deleteUserStored, userColors}: Prop
     <div
       style={injectedStyle}
       className={`min-h-screen left-0 bottom-0 z-40 text-white flex flex-col transition-width duration-200 ease-in-out overflow-hidden ${
-        expanded ? "w-[250px]" : "w-[55px] min-w-[55px]"
+        expanded ? "min-w-[250px]" : "w-[55px] min-w-[55px]"
       }` }
       onTransitionEnd={() => mostrarElementos()}
     >

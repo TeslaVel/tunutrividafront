@@ -7,6 +7,7 @@ import CollapsibleSection from '@/components/CollapsibleSection'
 import IconHandler from '@/components/icons/IconHandler'
 import { customDateFormat } from '@/components/utils/TimeUtils'
 import { GeneralFilter } from '@/components/Filter'
+import useMediaQuery from "@/hooks/useMediaQuery";
 
 // types
 import { SelectedPage, AppointmentType, UserColors} from '@/types'
@@ -36,7 +37,8 @@ export const Appointments = ({ setSelectedPage, userColors }: IProps) => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const statusParam = params.get('status');
-  console.log('filterParam', statusParam)
+  const isAboveMediumScreens = useMediaQuery("(max-width: 450px)");
+  // console.log('filterParam', statusParam)
   // const history = useHistory();
   const { loading, data, refetch } = useGetAppointments({status: filterBy})
 
@@ -57,31 +59,39 @@ export const Appointments = ({ setSelectedPage, userColors }: IProps) => {
 
   return (
     <Scroller scrollerName='appointments'>
-      <section id="appointments" className="py-3 px-5 w-full">
-        { loading &&
-          <div>Cargando...</div>
-        }
-        { !loading &&
-          <div>
-            <div className="text-center my-5">
-              <h2>Citas</h2>
-            </div>
+      <section id="appointments" className="py-3
+        xxxs:px-1 xxs:px-1 xs:px-4 sm:px-4 md:px-5 lg:px-5
+        xxxs:w-full xxs:w-full xs:w-full sm:w-full md:w-5/6 lg:w-5/6 m-auto
+        ">
+        <div className="text-center my-5">
+          <h2>Citas</h2>
+        </div>
 
-            <GeneralFilter
-              options={optionFilter}
-              filterSelected={filterBy}
-              setFilterBy={setFilterBy}
-              userColors={userColors}
-            />
-
-            <div className=" pt-10">
-              { appointments?.map((apt: AppointmentType, index: number) => (
+        <GeneralFilter
+          options={optionFilter}
+          filterSelected={filterBy}
+          setFilterBy={setFilterBy}
+          userColors={userColors}
+          isMobile={isAboveMediumScreens}
+        />
+        <div className=" pt-10">
+          { loading &&
+            <div>Cargando...</div>
+          }
+          { !loading &&
+            <>
+              { appointments.length < 1 &&
+                <div>
+                  No hay Citas
+                </div>
+              }
+              { appointments.length > 0 && appointments.map((apt: AppointmentType, index: number) => (
                 <CollapsibleSection
                   key={`appointment_${index}_${apt.id}`}
                   userColors={userColors}
                   headerName={
                     <>
-                      <IconHandler name={apt.appointmentType}/> &nbsp;[{statusName(apt.status)}] Fecha: {customDateFormat(apt.startDate, 'DD/MM/YY')}
+                      <IconHandler name={apt.appointmentType}/>&nbsp;[{statusName(apt.status)}] { !isAboveMediumScreens && <span>Fecha:</span>} {customDateFormat(apt.startDate, 'DD/MM/YY')}
                     </>
                   }>
                     <div>
@@ -90,9 +100,9 @@ export const Appointments = ({ setSelectedPage, userColors }: IProps) => {
                     </div>
                 </CollapsibleSection>
               ))}
-            </div>
-          </div>
-        }
+            </>
+          }
+        </div>
       </section>
     </Scroller>
   );

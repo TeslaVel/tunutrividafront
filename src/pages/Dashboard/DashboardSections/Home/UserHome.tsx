@@ -28,7 +28,10 @@ const UserHome = ({ userStored, userColors }: Props) => {
       }
       { !loadinChart &&
           <div className='dashboard-section flex flex-col w-full'>
-            <div className={`${userColors?.bmi.primaryBgColor} p-3 flex flex-col md:w-[50rem] sm:w-[30rem] xs:w-[25rem] xxs:w-[20rem] xxxs:w-[18rem]`} style={{alignSelf: 'center', borderRadius: '20px'}}>
+            <div className={`${userColors?.bmi.primaryBgColor}
+             flex flex-col
+             mx-auto lg:w-[40rem] md:w-[40rem] sm:w-[30rem] xs:w-[25rem] xxs:w-[20rem] xxxs:w-[17rem]
+            `}>
               <strong className={`text-center pb-5 ${userColors?.general.baseTextColor}`}>BMI</strong>
               <BmiRanges
                 bmi={userStored?.imc}
@@ -38,8 +41,9 @@ const UserHome = ({ userStored, userColors }: Props) => {
             </div>
 
             { chartData &&
-              <div className="flex justify-center mt-[2rem]">
-                <div className={`${userColors?.bmi.primaryBgColor} w-auto w-full md:w-[50rem] sm:w-[30rem] xs:w-[25rem] xxs:w-[20rem] xxxs:w-[18rem] p-3`}>
+              <div className="flex mt-[2rem]">
+                <div className={`${userColors?.bmi.primaryBgColor}
+                  mx-auto lg:w-[40rem] md:w-[40rem] sm:w-[30rem] xs:w-[25rem] xxs:w-[20rem] xxxs:w-[17rem]`}>
                   <LineBar
                     chartTitle="Grafico de evolucion"
                     chartLabels={chartData.days}

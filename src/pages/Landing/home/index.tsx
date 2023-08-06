@@ -45,7 +45,7 @@ const Home = ({ setSelectedPage }: Props) => {
               ¡Empieza a mejorar tu salud hoy mismo!
             </HText>
             <p className="mt-8 text-pink-10 font-bold text-[18px]">
-              Tratanmientos y planes de alimentacion personalizados para lograr tu mejor version.
+              Tratamientos y planes de alimentacion personalizados para lograr tu mejor version.
             </p>
           </motion.div>
 

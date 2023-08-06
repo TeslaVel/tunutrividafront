@@ -88,7 +88,7 @@ export const CreateConversationForm = ({refetchConversation, isOpenAside, setIsO
             <label htmlFor="message">
               <textarea
                 id="message"
-                className="w-full"autoComplete='off'
+                className={`w-full px-2 ${userColors?.general.baseTextColor}`} autoComplete='off'
                 placeholder="Dile hola a tu dietista"
                 {...register("message", {
                   required: true,

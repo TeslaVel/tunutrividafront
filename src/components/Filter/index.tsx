@@ -29,6 +29,7 @@ export const GeneralFilter = ({
             <option
               key={`filter-select-${opt.value}-${index}`}
               value={opt.value}
+              selected={opt.value === filterSelected}
             >
               {opt.label}
             </option>

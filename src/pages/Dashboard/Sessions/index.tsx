@@ -4,6 +4,7 @@ import { useGetSessions } from '@/hooks/useGetSessions'
 import Scroller from '@/components/Scroller/Scroller'
 import CollapsibleSection from '@/components/CollapsibleSection'
 import { customDateFormat } from '@/components/utils/TimeUtils'
+import { Loading } from '@/components/Loading'
 // types
 import { SelectedPage, SessionType, UserColors } from "@/types";
 
@@ -21,8 +22,7 @@ export const Sessions = ({setSelectedPage, userColors}: IProps) => {
     refetch()
   }, []);
 
-  if (!data?.sessions) return null
-  const { sessions } = data
+  const sessions = data?.sessions
 
   return (
     <Scroller scrollerName='sessions'>
@@ -31,7 +31,10 @@ export const Sessions = ({setSelectedPage, userColors}: IProps) => {
         xxxs:w-full xxs:w-full xs:w-full sm:w-full md:w-5/6 lg:w-5/6 m-auto
       ">
         { loading &&
-          <div>Cargando...</div>
+            <Loading
+              width={45}
+              height={45}
+              color={userColors.general.baseColor}/>
         }
         { !loading &&
           <div >

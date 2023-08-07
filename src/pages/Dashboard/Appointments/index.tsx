@@ -7,6 +7,7 @@ import CollapsibleSection from '@/components/CollapsibleSection'
 import IconHandler from '@/components/icons/IconHandler'
 import { customDateFormat } from '@/components/utils/TimeUtils'
 import { GeneralFilter } from '@/components/Filter'
+import { Loading } from '@/components/Loading'
 import useMediaQuery from "@/hooks/useMediaQuery";
 
 // types
@@ -42,14 +43,17 @@ export const Appointments = ({ setSelectedPage, userColors }: IProps) => {
   // const history = useHistory();
   const { loading, data, refetch } = useGetAppointments({status: filterBy})
 
-
   useEffect(() => {
     setSelectedPage(SelectedPage.Appointments)
     refetch();
   }, []);
 
-  if (!data?.appointments) return null
-  const { appointments } = data
+  useEffect(() => {
+    refetch();
+  }, [filterBy]);
+
+  // if (!data?.appointments) return null
+  const appointments = data?.appointments
 
   const statusName = (status_name: 'pending' | 'ocurred' | 'happening' | 'cancelled' = 'pending') => {
     if (!status_name) return ''
@@ -74,10 +78,16 @@ export const Appointments = ({ setSelectedPage, userColors }: IProps) => {
           userColors={userColors}
           isMobile={isAboveMediumScreens}
         />
-        <div className=" pt-10">
+
+        <div className="pt-10">
           { loading &&
-            <div>Cargando...</div>
+            <Loading
+              width={45}
+              height={45}
+              color={userColors.general.baseColor}
+            />
           }
+
           { !loading &&
             <>
               { appointments.length < 1 &&

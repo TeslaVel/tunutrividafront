@@ -8,6 +8,7 @@ export const colorByGender = (gender: UserType[`gender`] = 'male'): UserColors =
   if (gender === 'male') {
     return {
       general: {
+        baseColor: `primary-male-700`,
         baseTextColor: `text-primary-male-700`,
         baseBgColor: `bg-secondly-male-01`,
         borderL: `border border-1 border-primary-male-700`,
@@ -58,6 +59,7 @@ export const colorByGender = (gender: UserType[`gender`] = 'male'): UserColors =
 
   return {
     general: {
+      baseColor: `primary-female-700`,
       baseTextColor: `text-primary-female-700`,
       baseBgColor: `bg-secondly-female-01 `,
       borderL: `border border-1 border-primary-female-700`,

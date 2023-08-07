@@ -110,7 +110,8 @@ export const Comments = ({sentComments, entry_id, comments, userStored, userColo
                 text-white-01 rounded-lg
                 ${userColors?.general.primaryBgColor} ${userColors?.general.primaryBgColorHover}
                 `}
-                style={{alignSelf: 'end'}}>Enviar
+                style={{alignSelf: 'end'}}>
+                  Enviar
               </button>
             </div>
           </form>

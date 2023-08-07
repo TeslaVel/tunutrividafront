@@ -98,7 +98,14 @@ export const CreateConversationForm = ({refetchConversation, isOpenAside, setIsO
             </label>
           </div>
           <div>
-            <button type="submit" className={`px-3 py-1 w-full ${userColors?.general.secondaryBgColor} ${userColors?.general.secondaryBgColorHover} text-white rounded-lg`}>
+            <button
+              type="submit"
+              className={`px-3 py-1 w-full
+                ${userColors?.general.secondaryBgColor}
+                ${userColors?.general.secondaryBgColorHover}
+                text-white rounded-lg`}
+              disabled={loading}
+            >
               Crear
             </button>
           </div>

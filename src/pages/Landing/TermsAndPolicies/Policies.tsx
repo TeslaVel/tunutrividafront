@@ -70,9 +70,9 @@ export const Policies = ({ setSelectedPage }: Props) => {
 
   return (
     <section id="policies" className="h-full pb-10 pt-[125px] flex flex-col justify-center bg-secondly-female-05" >
-      <div className="flex flex-col">
+      <div className="flex flex-col justify-between mx-auto xxxs:px-3 xxs:px-3 xxs:w-full sm:w-full md:w-4/6 lg:w-3/6">
         <HText size={1} classes="text-center">Política de Privacidad</HText>
-        <div className="mx-auto w-3/6 mt-5">
+        <div className="mx-auto mt-5">
           { policies?.map((policy: any, index: number) => (
             <section className="py-5" key={`policy-${index}`}>
               <header>

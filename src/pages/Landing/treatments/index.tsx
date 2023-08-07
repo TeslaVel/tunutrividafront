@@ -1,4 +1,4 @@
-import { SelectedPage, ClassType } from "@/types";
+import { SelectedPage, ClassType, Colors } from "@/types";
 import cavitation from "@/assets/ntv/cavitation1.png";
 import radiofrecuencia from "@/assets/ntv/radiofrecuencia1.png";
 import vacumterapia from "@/assets/ntv/vacumterapia1.png";
@@ -66,7 +66,9 @@ export const Treatments = ({ setSelectedPage }: Props) => {
       xxxs:py-[7rem] xxs:py-[7rem] xs:py-[7rem] sm:py-[7rem]
       md::min-h-[800px] lg:min-h-[800px]
       md::h-[100vh] lg:h-[100vh]
-      flex flex-col justify-center bg-primary-female-300">
+      flex flex-col justify-center "
+    style={{background:`linear-gradient(30deg, ${Colors.PRIMARYFEMALE20} 0%, ${Colors.PRIMARYFEMALE100} 100%)`}}
+    >
       <motion.div
         onViewportEnter={() => setSelectedPage(SelectedPage.Treatments)}
       >

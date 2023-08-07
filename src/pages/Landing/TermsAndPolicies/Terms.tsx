@@ -50,9 +50,9 @@ export const Terms = ({ setSelectedPage }: Props) => {
 
   return (
     <section id="terms" className="h-full pb-10 pt-[125px] flex flex-col justify-center bg-secondly-female-05" >
-      <div className="flex flex-col">
+      <div className="flex flex-col justify-between mx-auto xxxs:px-3 xxs:px-3 xxs:w-full sm:w-full md:w-4/6 lg:w-3/6">
         <HText size={1} classes="text-center">Términos y Condiciones</HText>
-        <div className="mx-auto w-3/6 mt-5">
+        <div className="mx-auto mt-5">
           { terminos?.map((term: any, index: number) => (
             <div className="py-5" key={`term-${index}`}>
               <header>

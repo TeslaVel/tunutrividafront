@@ -53,7 +53,7 @@ export const Appointments = ({ setSelectedPage, userColors }: IProps) => {
   }, [filterBy]);
 
   // if (!data?.appointments) return null
-  const appointments = data?.appointments
+  const appointments: AppointmentType[] = data?.appointments
 
   const statusName = (status_name: 'pending' | 'ocurred' | 'happening' | 'cancelled' = 'pending') => {
     if (!status_name) return ''

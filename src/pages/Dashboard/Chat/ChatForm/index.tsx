@@ -136,7 +136,12 @@ export const ChatForm = ({userStored, conversation, refetchConversation, userCol
           <button className={`
           xxxs:w-full xxs:w-full md:w-auto lg:w-auto px-4 py-1
           text-white-01 rounded-lg
-          ${userColors?.general.primaryBgColor} ${userColors?.general.primaryBgColorHover} `} style={{alignSelf: 'end'}}>Enviar</button>
+          ${userColors?.general.primaryBgColor} ${userColors?.general.primaryBgColorHover} `}
+          style={{alignSelf: 'end'}}
+          disabled={loading}
+          >
+            Enviar
+          </button>
         </div>
       </form>
     </div>

@@ -22,7 +22,7 @@ export const Sessions = ({setSelectedPage, userColors}: IProps) => {
     refetch()
   }, []);
 
-  const sessions = data?.sessions
+  const sessions: SessionType[] = data?.sessions
 
   return (
     <Scroller scrollerName='sessions'>

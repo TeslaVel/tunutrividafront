@@ -45,7 +45,7 @@ export const ContactUs = ({ setSelectedPage }: Props) => {
       flex flex-col justify-center bg-secondly-female-05">
       <motion.div
         onViewportEnter={() => setSelectedPage(SelectedPage.Contactus)}
-        className="justify-between gap-8 flex flex-col mx-auto xxxs:px-4 xxs:px-4 xxs:w-full sm:w-full  md:w-4/6  lg:w-3/6"
+        className="justify-between flex flex-col mx-auto xxxs:px-4 xxs:px-4 xxs:w-full sm:w-full  md:w-4/6  lg:w-3/6"
       >
         {/* FORM AND IMAGE */}
           {/* HEADER */}
@@ -68,7 +68,7 @@ export const ContactUs = ({ setSelectedPage }: Props) => {
           </motion.div>
 
           <motion.div
-            className="mt-10 basis-3/5 md:mt-0"
+            className="xxxs:mt-5 xxs:mt-5 xs:mt-5 sm:mt-12 md:mt-12 basis-3/5 md:mt-0"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.5 }}
@@ -156,6 +156,7 @@ export const ContactUs = ({ setSelectedPage }: Props) => {
               <button
                 type="submit"
                 className={buttonStyles}
+                disabled={loading}
               >
                 ENVIAR
               </button>

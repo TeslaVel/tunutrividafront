@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { useForm } from "react-hook-form"
 import Aside from '@/components/Aside'
 // import { useMutationCreateEntry } from '@/hooks/graph/useMutationCreateEntry'
@@ -16,6 +16,7 @@ type Props = {
 };
 
 export const CreateEntryForm = ({refetch, isOpenAside, setIsOpenAside, userColors}: Props) => {
+  const [loading, setLoading] = useState<boolean>(false)
   // const { CreateEntry, data, loading, error, reset } = useMutationCreateEntry();
 
   const {
@@ -29,6 +30,7 @@ export const CreateEntryForm = ({refetch, isOpenAside, setIsOpenAside, userColor
   const watchImage: HTMLImageElement = watch('image');
 
   const createAction = async (e: React.SyntheticEvent): Promise<void> => {
+    setLoading(true)
     e.preventDefault();
 
     const formData = new FormData();
@@ -41,6 +43,8 @@ export const CreateEntryForm = ({refetch, isOpenAside, setIsOpenAside, userColor
       console.log('result', result)
       refetch()
       setIsOpenAside(false)
+
+      if (result) setLoading(false)
       const descriptionField = document.getElementById('description') as HTMLInputElement;
       descriptionField.value=''
       const myDiv = document.getElementById('entry-list-scroller')
@@ -51,6 +55,7 @@ export const CreateEntryForm = ({refetch, isOpenAside, setIsOpenAside, userColor
       }
     } catch (error) {
       console.log('error', error)
+      setLoading(false)
       // Manejar el error
     }
 
@@ -124,7 +129,7 @@ export const CreateEntryForm = ({refetch, isOpenAside, setIsOpenAside, userColor
               Descripcion
               <textarea
                 id="description"
-                className={`w-full p-1 text-gray-300`}
+                className={`w-full p-1 ${userColors?.general.baseTextColor}`}
                 autoComplete='off'
                 placeholder="Agregue una descripcion"
                 {...register("description", {
@@ -155,7 +160,9 @@ export const CreateEntryForm = ({refetch, isOpenAside, setIsOpenAside, userColor
           </div>
           <div className="pt-4">
             <button type="submit"
-              className={`px-3 py-1 w-full ${userColors?.general.secondaryBgColor} ${userColors?.general.secondaryBgColorHover} text-white rounded-lg`}>
+              className={`px-3 py-1 w-full ${userColors?.general.secondaryBgColor} ${userColors?.general.secondaryBgColorHover} text-white rounded-lg`}
+              disabled={loading}
+            >
               Crear
             </button>
           </div>

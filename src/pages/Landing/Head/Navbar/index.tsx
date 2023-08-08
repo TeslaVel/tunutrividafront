@@ -133,9 +133,9 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
           <div className={`${flexBetween} mx-auto w-5/6`}>
             <div className={`${flexBetween} w-full gap-10`}>
               {/* LEFT SIDE */}
-              <Link to='/'>
+              <span onClick={() => setSelectedPage(SelectedPage.Home, true)} className="cursor-pointer">
                 <DynamicLogo isTopOfPage={isTopOfPage && !termAndPolicies}/>
-              </Link>
+              </span>
 
               {/* RIGHT SIDE */}
               {isAboveMediumScreens ? (

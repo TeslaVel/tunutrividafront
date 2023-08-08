@@ -9,10 +9,9 @@ import LineBar from "@/components/Chart/LineBar";
 type Props = {
   userStored: UserType | null;
   userColors: UserColors
-  handleCableAction: () => void;
 };
 
-const UserHome = ({ userStored, userColors }: Props) => {
+const UserHome = ({ userStored, userColors}: Props) => {
   const { loading: loadinChart, data: dataChart, refetch: refetchChart } = useGetSessionDataChart()
 
   useEffect(() => {
@@ -80,7 +79,6 @@ const UserHome = ({ userStored, userColors }: Props) => {
             }
           </div>
       }
-    {/* <button className="btn btn-primary" onClick={handleCableAction}>Send message to backend</button> */}
     </>
   )
 };

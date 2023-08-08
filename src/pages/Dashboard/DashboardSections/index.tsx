@@ -9,11 +9,10 @@ type Props = {
   userStored: UserType | null
   userColors: UserColors
   optionSelected: string
-  handleCableAction: () => void
   asignCLientForUploadImage: () => void
 };
 
-const DashboardSections = ({optionSelected, handleCableAction, userStored, userColors, asignCLientForUploadImage}: Props) => {
+const DashboardSections = ({optionSelected, userStored, userColors, asignCLientForUploadImage}: Props) => {
   console.log('optionSelected', optionSelected)
 
   if (optionSelected === 'entries') {
@@ -35,7 +34,6 @@ const DashboardSections = ({optionSelected, handleCableAction, userStored, userC
       <UserHome
         userStored={userStored}
         userColors={userColors}
-        handleCableAction={handleCableAction}
       />
     )
   }

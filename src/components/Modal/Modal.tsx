@@ -43,7 +43,6 @@ const Modal = ({children, isOpen, action, width, maxWidth, close, title, buttonT
             <div className="flex justify-between mb-3">
               <div></div>
               <a href="#" className="flex items-center text-2xl font-semibold text-gray-900 dark:text-white">
-                <img className="w-8 h-8 mr-2" src="" alt="logo" />
                 Tunutrivida
               </a>
               <button id="closeModalButton" className=" text-white-01 hover:text-pink-10" onClick={closeModal}>

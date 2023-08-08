@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useMutationCreateNote } from '@/hooks/graph/useMutationCreateNote'
 import { useForm } from "react-hook-form"
+import { customDateFormat } from '@/components/utils/TimeUtils'
 
 // types
 import { UserType, ConversationType, CommentType, UserColors} from "@/types";
@@ -10,9 +11,10 @@ interface Props {
   conversation: ConversationType
   userStored: UserType | null;
   userColors: UserColors
+  handleCableAction: (id: string) => void
 }
 
-export const ChatForm = ({userStored, conversation, refetchConversation, userColors}: Props) => {
+export const ChatForm = ({userStored, conversation, refetchConversation, userColors, handleCableAction}: Props) => {
   const notes = conversation?.notes
 
   useEffect(() => {
@@ -62,32 +64,33 @@ export const ChatForm = ({userStored, conversation, refetchConversation, userCol
       conversation_id: conversation.id,
       ...getValues()
     }
-    console.log('values', values)
 
     const { data } = await CreateNote({ variables: values }) || {};
     if (error) {
       console.log(error)
     }
     else if (data && data.createNote) {
+      handleCableAction(data.createNote.id);
       refetchConversation();
       reset()
-      // const messageField = document.getElementById('message') as HTMLInputElement;
-      // messageField.value=''
     }
   };
 
   return (
     <div>
       <div
-        className={`flex flex-col w-auto overflow-hidden h-[50vh] border ${userColors?.entry.border} ${userColors?.entry.thirdBgColor}`}
+        className={`flex flex-col w-auto overflow-hidden xxxs:h-[25vh] xxs:h-[25vh] xs:h-[30vh] sm:h-[50vh] md:h-[50vh] border ${userColors?.entry.border} bg-white`}
         style={{borderRadius: '20px 20px 0 0 '}}>
         <div id='content-note-scroll' className="overflow-y-scroll px-2">
           {notes?.map((comment: CommentType, index: number) => (
             (userStored && userStored.id === comment.user.id
               ? <div className="w-full flex items-center justify-end py-2 " key={`comment_${comment.id}-${index}`}>
                   <div className="flex-grow flex flex-col items-end mr-2">
-                    <strong>{comment.user.fullName}</strong>
+                    <strong>{comment.user.fullName} </strong>
                     <p className="text-gray-500 mr-2">{comment.message}</p>
+                    <time>
+                      {customDateFormat(comment.createdAt, 'MMM D at HH:mm:a') }
+                    </time>
                   </div>
                   <div className="w-[3rem] h-[3rem] bg-gray-300 rounded-full  flex items-center justify-center">{comment.user.initials}</div>
                 </div>
@@ -96,6 +99,9 @@ export const ChatForm = ({userStored, conversation, refetchConversation, userCol
                   <div className='w-full flex-grow flex flex-col items-start mr-2'>
                     <strong>{comment.user.fullName}</strong>
                     <p className="text-gray-500">{comment.message}</p>
+                    <time>
+                      {customDateFormat(comment.createdAt, 'MMM D at HH:mm:a') }
+                    </time>
                   </div>
                 </div>
             )

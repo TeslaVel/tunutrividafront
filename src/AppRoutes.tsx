@@ -99,8 +99,7 @@ export const AppRoutes = ({ asignCLientForUploadImage}: Props) => {
                         asignCLientForUploadImage={asignCLientForUploadImage}
                         selectedPage={selectedPage}
                         userColors={userColors}
-                        setSelectedPage={selectAndCenterPage}
-                        dietitian_id={userStored?.dietitianId} />
+                        setSelectedPage={selectAndCenterPage}/>
                     }/>
 
                     <Route path="/sessions" element={

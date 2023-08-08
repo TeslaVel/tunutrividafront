@@ -30,17 +30,19 @@ export const Sessions = ({setSelectedPage, userColors}: IProps) => {
         xxxs:px-1 xxs:px-1 xs:px-4 sm:px-4 md:px-5 lg:px-5
         xxxs:w-full xxs:w-full xs:w-full sm:w-full md:w-5/6 lg:w-5/6 m-auto
       ">
+        <div className="text-center my-5">
+          <h2>Sesiones</h2>
+        </div>
+
         { loading &&
             <Loading
               width={45}
               height={45}
               color={userColors.general.baseColor}/>
         }
+
         { !loading &&
-          <div >
-            <div className="text-center my-5">
-              <h2>Sesiones</h2>
-            </div>
+          <>
             { sessions?.map((session: SessionType, index: number) => (
               <CollapsibleSection
                 key={`session_${index}_${session.id}`}
@@ -66,7 +68,7 @@ export const Sessions = ({setSelectedPage, userColors}: IProps) => {
                 </div>
               </CollapsibleSection>
             ))}
-          </div>
+          </>
         }
       </section>
     </Scroller>

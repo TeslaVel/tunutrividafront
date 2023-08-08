@@ -1,28 +1,51 @@
-import { useEffect, useState, useContext } from "react";
-import { AuthContext } from '@/AuthProviderManager';
+import { useEffect, useState, useContext } from "react"
+import { AuthContext } from '@/AuthProviderManager'
 import { UseGetConversation } from '@/hooks/useGetConversation'
 import Scroller from '@/components/Scroller/Scroller'
+import actioncable from 'actioncable'
 import ChatForm from './ChatForm'
 import { CreateConversationForm } from './CreateConversationForm'
 
 // types
-import { SelectedPage, UserColors } from "@/types";
+import { SelectedPage, UserColors } from "@/types"
 
 type Props = {
   userColors: UserColors
   setSelectedPage: (value: SelectedPage) => void;
 };
+const VITE_SOCKET_SERVER = import.meta.env.VITE_APP_WEB_SOCKET
+const cable: any = actioncable.createConsumer(VITE_SOCKET_SERVER)
 
 export const Chat = ({setSelectedPage, userColors }: Props) => {
-  const { userStored } = useContext(AuthContext);
+  const { userStored } = useContext(AuthContext)
   const { loading, data, refetch } = UseGetConversation()
   const [isOpenAside, setIsOpenAside] = useState<boolean>(false)
+
+  if (!userStored) return null
 
   useEffect(() => {
     setSelectedPage(SelectedPage.Chat)
     refetch()
+
+    const channel = cable.subscriptions.create({ channel: 'DietitianEvents', dietitian_id: userStored.dietitianId }, {
+      received: (data: {[key: string]: string }) => {
+        if (data.event_emitter === 'dietitian') {
+          console.log('received', data);
+          refetch()
+        }
+      }
+    });
+
+    return () => {
+      channel.unsubscribe();
+    };
   }, []);
 
+  const handleCableAction = (conversation_id: string | null = null) => {
+    if (conversation_id ===  null || conversation_id === undefined) return
+
+    cable.subscriptions.subscriptions[0].send({conversation_id: conversation_id});
+  };
 
   const refetchConversation = () => {
     refetch()
@@ -48,6 +71,7 @@ export const Chat = ({setSelectedPage, userColors }: Props) => {
                   conversation={conversation}
                   userStored={userStored}
                   userColors={userColors}
+                  handleCableAction={handleCableAction}
                 />
               }
 

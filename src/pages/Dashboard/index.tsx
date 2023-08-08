@@ -1,5 +1,4 @@
 import { useEffect, useState, useContext } from "react";
-import actioncable from 'actioncable';
 import DashboardSections from './DashboardSections';
 import TopBar from './TopBar';
 import { AuthContext } from '@/AuthProviderManager';
@@ -13,34 +12,18 @@ type Props = {
   userColors: UserColors
   setSelectedPage: (value: SelectedPage) => void;
   asignCLientForUploadImage: () => void;
-  dietitian_id?: string;
 };
 
-const VITE_SOCKET_SERVER = import.meta.env.VITE_APP_WEB_SOCKET
-const cable = actioncable.createConsumer(VITE_SOCKET_SERVER);
+// const VITE_SOCKET_SERVER = import.meta.env.VITE_APP_WEB_SOCKET
+// const cable = actioncable.createConsumer(VITE_SOCKET_SERVER);
 
-export const Dashboard = ({setSelectedPage, dietitian_id, userColors, asignCLientForUploadImage}: Props) => {
+export const Dashboard = ({setSelectedPage, userColors, asignCLientForUploadImage}: Props) => {
   const { userStored } = useContext(AuthContext);
   const [optionSelected, setOptionSelected] = useState<string>('dashboard')
 
   useEffect(() => {
     setSelectedPage(SelectedPage.Dashboard)
-
-    const channel = cable.subscriptions.create({ channel: 'GlobalEvents', dietitian_id: dietitian_id }, {
-      received: (data: any) => {
-      }
-    });
-
-    return () => {
-      channel.unsubscribe();
-    };
   }, []);
-
-  const handleCableAction = () => {
-    const message = { text: 'Este es un mensaje desde el front!' };
-    console.log('cable', cable)
-    // cable.subscriptions.subscriptions[0].send({ message });
-  };
 
   return (
     <>
@@ -63,7 +46,6 @@ export const Dashboard = ({setSelectedPage, dietitian_id, userColors, asignCLien
             userStored={userStored}
             userColors={userColors}
             optionSelected={optionSelected}
-            handleCableAction={handleCableAction}
           />
         </section>
       </Scroller>

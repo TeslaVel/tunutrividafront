@@ -65,7 +65,7 @@ export const Appointments = ({ setSelectedPage, userColors }: IProps) => {
     <Scroller scrollerName='appointments'>
       <section id="appointments" className="py-3
         xxxs:px-1 xxs:px-1 xs:px-4 sm:px-4 md:px-5 lg:px-5
-        xxxs:w-full xxs:w-full xs:w-full sm:w-full md:w-5/6 lg:w-5/6 m-auto
+        xxxs:w-full xxs:w-full xs:w-full sm:w-full md:w-5/6 lg:w-5/6 mx-auto
         ">
         <div className="text-center my-5">
           <h2>Citas</h2>

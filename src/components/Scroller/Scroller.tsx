@@ -37,6 +37,7 @@ const Scroller = ({
         <div
           className={`flex w-full scroller-section-${scrollerName} flex overflow-y-scroll`}
           id={`scroller-section-${scrollerName}`}
+          style={{height: '100%'}}
         >
           {children}
         </div>

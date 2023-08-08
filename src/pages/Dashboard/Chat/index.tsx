@@ -59,7 +59,7 @@ export const Chat = ({setSelectedPage, userColors }: Props) => {
         <section id="chat" className="
           xxxs:pt-5 xxs:pt-5 lg:pt-[5rem] md:pt-[5rem] w-full
           xxxs:px-2 xxs:px-2 xs:px-4 sm:px-4 md:px-5 lg:px-5
-          xxxs:w-full xxs:w-full xs:w-full sm:w-full md:w-5/6 lg:w-5/6 m-auto
+          xxxs:w-full xxs:w-full xs:w-full sm:w-full md:w-5/6 lg:w-5/6 mx-auto
           ">
           <>
           { loading

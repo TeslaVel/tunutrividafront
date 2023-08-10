@@ -4,6 +4,7 @@ import { UseGetConversation } from '@/hooks/useGetConversation'
 import Scroller from '@/components/Scroller/Scroller'
 import actioncable from 'actioncable'
 import ChatForm from './ChatForm'
+import { Loading } from '@/components/Loading'
 import { CreateConversationForm } from './CreateConversationForm'
 
 // types
@@ -62,9 +63,15 @@ export const Chat = ({setSelectedPage, userColors }: Props) => {
           xxxs:w-full xxs:w-full xs:w-full sm:w-full md:w-5/6 lg:w-5/6 mx-auto
           ">
           <>
-          { loading
-            ? <div>Cargando...</div>
-            : <>
+          { loading &&
+            <Loading
+              width={45}
+              height={45}
+              fillColor={userColors.general.fillSvgColorPrimary}
+            />
+          }
+          { !loading &&
+            <>
               { conversation &&
                 <ChatForm
                   refetchConversation={refetchConversation}

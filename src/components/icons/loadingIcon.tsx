@@ -9,7 +9,7 @@ const LoadingIcong = ({
   width = 24,
   height = 24,
   color = 'dark:text-gray-600',
-  fillColor = 'fill-purple-600'
+  fillColor
 }: IProps): JSX.Element =>
   <svg width={width} height={height} aria-hidden="true"
     viewBox="0 0 100 101"

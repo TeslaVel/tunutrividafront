@@ -8,6 +8,7 @@ export const colorByGender = (gender: UserType[`gender`] = 'male'): UserColors =
   if (gender === 'male') {
     return {
       general: {
+        fillSvgColorPrimary: `fill-primary-male-700`,
         baseColor: `primary-male-700`,
         baseTextColor: `text-primary-male-700`,
         baseBgColor: `bg-secondly-male-01`,
@@ -59,6 +60,7 @@ export const colorByGender = (gender: UserType[`gender`] = 'male'): UserColors =
 
   return {
     general: {
+      fillSvgColorPrimary: `fill-primary-female-700`,
       baseColor: `primary-female-700`,
       baseTextColor: `text-primary-female-700`,
       baseBgColor: `bg-secondly-female-01 `,

@@ -1,0 +1,73 @@
+// types
+import { UserColors } from "@/types";
+
+interface IProps {
+  userColors: UserColors
+  totalPages: number
+  itemsPerPage: number
+  currentPage: number
+  prevPage: number
+  nextPage: number
+  setPage: React.Dispatch<React.SetStateAction<number>>
+}
+
+export const Pagination = ({totalPages, currentPage = 1, prevPage, nextPage, userColors, setPage} : IProps) => {
+  const pts = Array.from({ length: totalPages }, (_, index) => index + 1);
+
+  return (
+    <nav aria-label="Page navigation" className="w-full flex justify-center">
+      <ul className="flex items-center -space-x-px h-8 text-sm">
+        <li key={`pagination-item-prev-${prevPage}`}>
+          <button
+            disabled={ prevPage === currentPage || prevPage === null}
+            onClick={() => setPage(prevPage)}
+            className={`flex items-center justify-center px-3 h-8 ml-0 leading-tight
+              text-white-01 rounded-l-lg hover:bg-gray-100
+              ${userColors.general.primaryBgColor} ${userColors.general.primaryBgColorHover}
+              disabled:bg-gray-20
+            `}>
+            <span className="sr-only">Previous</span>
+            <svg className="w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 1 1 5l4 4"/>
+            </svg>
+          </button>
+        </li>
+        {pts.map((element: number, index: number) => (
+          element > 0 && element <= totalPages &&
+          <li key={`pagination-item-${element}`}>
+            <button
+              onClick={() => setPage(element)}
+              className={`flex items-center justify-center px-3 h-8 leading-tight
+              text-white-01
+              ${ element === currentPage ? userColors.general.secondaryBgColor : userColors.general.primaryBgColor }
+              ${ element === currentPage ? '' : userColors.general.primaryBgColorHover }`}>
+                {element}
+            </button>
+          </li>
+        ))}
+        <li key={`pagination-item-next-${nextPage}`}>
+          <button
+            disabled={ nextPage === currentPage || nextPage === null}
+            onClick={() => setPage(nextPage)}
+            className={`flex items-center justify-center px-3 h-8 leading-tight
+              text-white-01 rounded-r-lg
+              ${userColors.general.primaryBgColor} ${userColors.general.primaryBgColorHover}
+              disabled:bg-gray-20
+            `}>
+            <span className="sr-only">Next</span>
+            <svg className="w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4"/>
+            </svg>
+          </button>
+        </li>
+        <li key={`pagination-item-total-${totalPages}`}>
+          <span className={`flex items-center justify-center px-3 h-8 text-lg leading-tight ${userColors.general.baseTextColor}`}>
+            ({totalPages})
+          </span>
+        </li>
+      </ul>
+    </nav>
+  )
+};
+
+export default Pagination;

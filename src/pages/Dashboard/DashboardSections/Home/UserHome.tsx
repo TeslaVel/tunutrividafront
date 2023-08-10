@@ -3,6 +3,7 @@ import { useGetSessionDataChart } from '@/hooks/useGetSessionDataChart'
 import BmiRanges from '@/components/BmiRanges'
 import { UserType, UserColors } from "@/types";
 import LineBar from "@/components/Chart/LineBar";
+import { Loading } from '@/components/Loading'
 
 // types
 
@@ -23,7 +24,11 @@ const UserHome = ({ userStored, userColors}: Props) => {
   return (
     <>
       { loadinChart &&
-        <div>Cargando...</div>
+        <Loading
+          width={45}
+          height={45}
+          fillColor={userColors.general.fillSvgColorPrimary}
+        />
       }
       { !loadinChart &&
           <div className='dashboard-section flex flex-col w-full'>

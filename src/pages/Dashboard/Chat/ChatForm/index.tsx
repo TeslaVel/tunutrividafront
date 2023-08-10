@@ -79,7 +79,7 @@ export const ChatForm = ({userStored, conversation, refetchConversation, userCol
   return (
     <div>
       <div
-        className={`flex flex-col w-auto overflow-hidden xxxs:h-[25vh] xxs:h-[25vh] xs:h-[30vh] sm:h-[50vh] md:h-[50vh] border ${userColors?.entry.border} bg-white`}
+        className={`flex flex-col w-auto overflow-hidden xxxs:h-[35vh] xxs:h-[35vh] xs:h-[40vh] sm:h-[50vh] md:h-[50vh] border ${userColors?.entry.border} bg-white`}
         style={{borderRadius: '20px 20px 0 0 '}}>
         <div id='content-note-scroll' className="overflow-y-scroll px-2">
           {notes?.map((comment: CommentType, index: number) => (
@@ -87,8 +87,8 @@ export const ChatForm = ({userStored, conversation, refetchConversation, userCol
               ? <div className="w-full flex items-center justify-end py-2 " key={`comment_${comment.id}-${index}`}>
                   <div className="flex-grow flex flex-col items-end mr-2">
                     <strong>{comment.user.fullName} </strong>
-                    <p className="text-gray-500 mr-2">{comment.message}</p>
-                    <time>
+                    <p className="text-gray-500 mr-2 text-lg">{comment.message}</p>
+                    <time className="text-xs">
                       {customDateFormat(comment.createdAt, 'MMM D at HH:mm:a') }
                     </time>
                   </div>
@@ -98,8 +98,8 @@ export const ChatForm = ({userStored, conversation, refetchConversation, userCol
                   <div className="w-[3.5rem] h-[3rem] bg-gray-300 rounded-full mr-4  flex items-center justify-center">{comment.user.initials}</div>
                   <div className='w-full flex-grow flex flex-col items-start mr-2'>
                     <strong>{comment.user.fullName}</strong>
-                    <p className="text-gray-500">{comment.message}</p>
-                    <time>
+                    <p className="text-gray-500 text-lg">{comment.message}</p>
+                    <time className="text-xs">
                       {customDateFormat(comment.createdAt, 'MMM D at HH:mm:a') }
                     </time>
                   </div>

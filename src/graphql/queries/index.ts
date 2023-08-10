@@ -232,32 +232,39 @@ export const GET_CURRENT_APPOINTMENTS = gql`
 `
 
 export const GET_SESSIONS = gql`
-  query sessions {
-    sessions {
-      id
-      age
-      height
-      weight
-      waist
-      hip
-      highAbdomen
-      lowAbdomen
-      imc
-      idealWeight
-      bodyGrease
-      visceralGrease
-      muscleMass
-      boneMass
-      waterPercentage
-      bmr
-      metabolicAge
-      physicalComplexion
-      date
-      activityFactor {
+  query getSessions($page: Int, $limit: Int) {
+    sessions(page: $page, limit: $limit) {
+      paginated {
           id
-          name
-          description
+          height
+          weight
+          waist
+          hip
+          highAbdomen
+          lowAbdomen
+          imc
+          idealWeight
+          bodyGrease
+          visceralGrease
+          muscleMass
+          boneMass
+          waterPercentage
+          bmr
+          metabolicAge
+          physicalComplexion
+          date
+          activityFactor {
+              id
+              name
+              description
+          }
       }
+      page
+      limit
+      nextPage
+      prevPage
+      totalPages
+      currentPage
     }
   }
 `

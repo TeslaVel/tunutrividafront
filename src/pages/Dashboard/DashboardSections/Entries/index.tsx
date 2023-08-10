@@ -6,6 +6,7 @@ import { colorByGender } from '@/components/utils/GeneralUtils'
 import { Entry } from './Entry'
 import EntryWrapper from './EntryWrapper'
 import { CreateEntryForm } from './CreateEntryForm'
+import { Loading } from '@/components/Loading'
 
 // types
 import { EntryType, UserColors } from '@/types'
@@ -29,12 +30,9 @@ export const Entries = ({asignCLientForUploadImage}: Props) => {
 
     if (!userStored) return null
     if (!userStored.token) return null
-    if (loadingEntries) {
-      return <div>Cargando...</div>;
-    }
-    if (!dataEntries?.entries) return null;
-    const { entries } = dataEntries;
-    const isList = selectedEntry == null
+    // if (!dataEntries?.entries) return null;
+    const entries: EntryType[] = dataEntries?.entries;
+    const isList: boolean = selectedEntry == null
 
     const openAside = (value: boolean) => {
       console.log('abre aside', value)
@@ -58,39 +56,61 @@ export const Entries = ({asignCLientForUploadImage}: Props) => {
     return (
       <>
         <div className="w-full entry-wrapper-content">
-          { !isList &&
-              <>
-                <span style={{cursor: 'pointer'}} onClick={() => setSelectedEntry(null)}>back</span>
-                <EntryWrapper
-                >
-                  <Entry
-                    key={`entry_key_${selectedEntry.id}`}
-                    userStored={userStored}
-                    userColors={userColors}
-                    entry={selectedEntry}
-                    isList={isList}
-                    showComments={true} />
-                </EntryWrapper>
-              </>
-
+          { loadingEntries &&
+              <Loading
+                width={45}
+                height={45}
+                fillColor={userColors.general.fillSvgColorPrimary}/>
           }
-          { isList &&
+
+          { !loadingEntries && selectedEntry &&
             <>
-              <span style={{cursor: 'pointer'}} className={`${userColors?.general.baseTextColor}`}
-                onClick={() => setIsOpenAside && setIsOpenAside(true)}>Nueva Entrada</span>
-              <EntryWrapper>
-              { entries?.map((entry: EntryType, index: number) => (
-                  <Entry
-                    key={`entry_key_${entry.id}`}
-                    isList={isList}
-                    setAction={setSelectedEntry}
-                    userStored={userStored}
-                    userColors={userColors}
-                    entry={entry}
-                    showComments={false}
-                  />
-                  ))}
+              <span style={{cursor: 'pointer'}} onClick={() => setSelectedEntry(null)}>back</span>
+              <EntryWrapper
+              >
+                <Entry
+                  key={`entry_key_${selectedEntry.id}`}
+                  userStored={userStored}
+                  userColors={userColors}
+                  entry={selectedEntry}
+                  isList={isList}
+                  showComments={true} />
               </EntryWrapper>
+            </>
+          }
+
+          { !loadingEntries && isList &&
+            <>
+              <div className="flex justify-center mx-auto mt-2">
+                <button onClick={() => setIsOpenAside && setIsOpenAside(true)} className={`px-3 py-1 ${userColors?.general.primaryBgColor} ${userColors?.general.primaryBgColorHover} text-white rounded-lg`}>
+                  Nueva Entrada
+                </button>
+              </div>
+
+              { entries?.length < 1 &&
+                <div className="p-[50px]">
+                  No hay Entradas
+                </div>
+              }
+
+              { entries?.length > 0 &&
+                <EntryWrapper>
+                  <>
+                    { entries.map((entry: EntryType, index: number) => (
+                      <Entry
+                        key={`entry_key_${entry.id}`}
+                        isList={isList}
+                        setAction={setSelectedEntry}
+                        userStored={userStored}
+                        userColors={userColors}
+                        entry={entry}
+                        showComments={false}
+                      />
+                    ))}
+                  </>
+                </EntryWrapper>
+
+              }
             </>
           }
         </div>

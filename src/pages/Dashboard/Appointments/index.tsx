@@ -84,18 +84,19 @@ export const Appointments = ({ setSelectedPage, userColors }: IProps) => {
             <Loading
               width={45}
               height={45}
-              color={userColors.general.baseColor}
+              fillColor={userColors.general.fillSvgColorPrimary}
             />
           }
 
           { !loading &&
             <>
-              { appointments.length < 1 &&
+              { appointments?.length < 1 &&
                 <div>
                   No hay Citas
                 </div>
               }
-              { appointments.length > 0 && appointments.map((apt: AppointmentType, index: number) => (
+
+              { appointments?.length > 0 && appointments.map((apt: AppointmentType, index: number) => (
                 <CollapsibleSection
                   key={`appointment_${index}_${apt.id}`}
                   userColors={userColors}

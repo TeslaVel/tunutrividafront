@@ -208,6 +208,16 @@ export interface SessionType {
     description: string
   }
 }
+
+export interface PaginatedSessionType {
+  paginated: SessionType[]
+  page: number
+  limit: number
+  nextPage: number
+  prevPage: number
+  totalPages: number
+  currentPage: number
+}
 // export interface EntriesQueryData {
 //   entries: EntryType[] | [];
 // };

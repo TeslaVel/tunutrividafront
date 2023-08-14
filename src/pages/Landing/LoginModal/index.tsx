@@ -12,7 +12,7 @@ type Props = {
   closeAction: () => void
 };
 
-const LoginModal = ({ formId, isOpen, closeAction}: Props) => {
+const LoginModal: React.FC<Props> = ({ formId, isOpen, closeAction}: Props) => {
   const { storeUser } = useContext(AuthContext);
   const { Login, data, loading, error, reset } = useMutationLogin();
 

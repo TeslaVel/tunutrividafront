@@ -15,8 +15,7 @@ type Props = {
   setAction?: (entry: EntryType) => void
 }
 
-
-export const Entry = ({ entry, isList, setAction, showComments, userStored, userColors }: Props) => {
+export const Entry: React.FC<Props> = ({ entry, isList, setAction, showComments, userStored, userColors }: Props) => {
     const entryClasses = `
     entries relative flex flex-col flex-wrap
     ${userColors?.general.baseBgColor} ${userColors?.entry.border} ${isList ? 'w-full' : 'w-full'}`;

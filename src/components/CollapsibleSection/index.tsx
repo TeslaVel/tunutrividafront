@@ -2,7 +2,7 @@ import { useState } from 'react'
 import IconHandler from '@/components/icons/IconHandler'
 import { Colors, UserColors } from '@/types'
 
-interface IProps {
+type Props = {
   headerName: JSX.Element | string
   userColors: UserColors
   label?: JSX.Element
@@ -20,13 +20,13 @@ const sectionBody = {
   borderRadius: '0 0 15px 15px'
 }
 
-const CollapsibleSection = ({
+const CollapsibleSection: React.FC<Props> = ({
   collapsedByDefault = true,
   children,
   label,
   headerName,
   userColors
-}: IProps ) => {
+}: Props ) => {
   const [collapsed, setCollapsed] = useState(collapsedByDefault)
 
   const toggleChildrenVisibility = (): void => setCollapsed(!collapsed)

@@ -16,7 +16,7 @@ type Props = {
   sectionNotVisible: boolean
 };
 
-export const Landing = ({ selectedPage, setSelectedPage, sectionNotVisible}: Props) => {
+export const Landing: React.FC<Props> = ({ selectedPage, setSelectedPage, sectionNotVisible}: Props) => {
   useEffect(() => {
     setSelectedPage(SelectedPage.Landing)
   }, []);

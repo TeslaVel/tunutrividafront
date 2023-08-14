@@ -5,7 +5,7 @@ type Props = {
   isTopOfPage: boolean;
 };
 
-const DynamicLogo = ({isTopOfPage}: Props) => {
+const DynamicLogo: React.FC<Props> = ({isTopOfPage}: Props) => {
   if (!isTopOfPage) {
     return <img alt="logo" src={Logo2} style={{width: '280px', height: '51px'}} />
   }

@@ -13,7 +13,7 @@ type Props = {
   action?: () => void
 };
 
-const ActionButton = ({ children, selectedPage = SelectedPage.Home, toSelect = SelectedPage.Home, baseColor, action, type = 'link'}: Props) => {
+const ActionButton: React.FC<Props> = ({ children, selectedPage = SelectedPage.Home, toSelect = SelectedPage.Home, baseColor, action, type = 'link'}: Props) => {
   if (type === 'button') {
     return (
       <button

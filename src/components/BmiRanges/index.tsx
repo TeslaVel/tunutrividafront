@@ -21,7 +21,7 @@ type Props = {
   userColors: UserColors
 }
 
-const BmiRanges = ({ bmi, gender = 'female', userColors}: Props) => {
+const BmiRanges: React.FC<Props> = ({ bmi, gender = 'female', userColors}: Props) => {
   if (!bmi) return null
   if (!gender) return null
 

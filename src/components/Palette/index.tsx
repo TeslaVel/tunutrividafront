@@ -1,7 +1,7 @@
 import { useState } from 'react'
 // types
 
-interface colorArray  {
+type colorArray = {
   [key: string]: string
 }
 const Palette = () => {

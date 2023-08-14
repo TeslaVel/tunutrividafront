@@ -13,7 +13,7 @@ type Props = {
   setSelectedPage: (value: SelectedPage) => void;
 };
 
-const LogIn = ({ setSelectedPage }: Props) => {
+const LogIn: React.FC<Props> = ({ setSelectedPage }: Props) => {
   const { storeUser } = useContext(AuthContext);
   const { Login, data, loading, error, reset } = useMutationLogin();
 

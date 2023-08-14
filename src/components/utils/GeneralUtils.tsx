@@ -42,7 +42,7 @@ export const colorByGender = (gender: UserType[`gender`] = 'male'): UserColors =
         secondaryBgColor: `bg-secondly-male-05`,
       },
       bmi: {
-        itemSelected: `bg-secondly-male-15`,
+        itemSelected: `bg-secondly-male-10`,
         primaryBgColor: `bg-secondly-male-05`,
       },
       chart: {
@@ -94,7 +94,7 @@ export const colorByGender = (gender: UserType[`gender`] = 'male'): UserColors =
       secondaryBgColor: `bg-secondly-female-05`,
     },
     bmi: {
-      itemSelected: `bg-secondly-female-15`,
+      itemSelected: `bg-secondly-female-10`,
       primaryBgColor: `bg-secondly-female-05`,
     },
     chart: {

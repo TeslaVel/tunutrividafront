@@ -25,7 +25,7 @@ type Props = {
   asignCLientForUploadImage: () => void;
 };
 
-export const AppRoutes = ({ asignCLientForUploadImage}: Props) => {
+export const AppRoutes: React.FC<Props> = ({ asignCLientForUploadImage}: Props) => {
   const [selectedPage, setSelectedPage] = useState<SelectedPage>(SelectedPage.Landing);
   const scrollRef = useRef<number | null>(null);
   const { userStored, userColors } = useContext(AuthContext);

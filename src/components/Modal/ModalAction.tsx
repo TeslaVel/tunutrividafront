@@ -13,7 +13,7 @@ type Props = {
   action?: (e: React.SyntheticEvent) => Promise<void>
 }
 
-const ModalAction = ({children, isOpen, action, width, maxWidth, close, title, buttonTitle = 'Ok'}: Props) => {
+const ModalAction: React.FC<Props> = ({children, isOpen, action, width, maxWidth, close, title, buttonTitle = 'Ok'}: Props) => {
   const [modalOpen, setModalOpen] = useState<boolean>(isOpen ?? false)
 
   useEffect(() => {

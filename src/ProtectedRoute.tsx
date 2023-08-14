@@ -6,7 +6,7 @@ type Props = {
   children?: JSX.Element,
 };
 
-const ProtectedRoute = ({
+const ProtectedRoute: React.FC<Props> = ({
 isNotLogged,
 redirectPath,
 children }: Props

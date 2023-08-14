@@ -1,6 +1,6 @@
 import { GeneralOptions, UserColors } from '@/types'
 import './style.css'
-interface IProps {
+type Props = {
   options: Array<GeneralOptions>
   userColors: UserColors
   filterSelected: string;
@@ -9,13 +9,13 @@ interface IProps {
   isMobile?: boolean
 };
 
-export const GeneralFilter = ({
+export const GeneralFilter: React.FC<Props> = ({
   options,
   filterSelected,
   setFilterBy,
   userColors,
   isMobile=false
-}: IProps) => {
+}: Props) => {
   if(!setFilterBy) return null
   if(!options) return null
   if(options.length < 1) return null

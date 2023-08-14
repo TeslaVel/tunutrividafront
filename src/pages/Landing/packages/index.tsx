@@ -33,7 +33,7 @@ type Props = {
   setSelectedPage: (value: SelectedPage) => void;
 };
 
-export const Packages = ({ setSelectedPage }: Props) => {
+export const Packages: React.FC<Props> = ({ setSelectedPage }: Props) => {
   return (
     <section id="packages" className="
       xxxs:h-full xxs:h-full xs:h-full sm:h-full

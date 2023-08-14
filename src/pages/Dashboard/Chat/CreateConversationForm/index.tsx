@@ -13,8 +13,13 @@ type Props = {
   setIsOpenAside: (value: boolean) => void;
 };
 
-export const CreateConversationForm = ({refetchConversation, isOpenAside, setIsOpenAside, userStored, userColors}: Props) => {
-
+export const CreateConversationForm: React.FC<Props> = ({
+  refetchConversation,
+  isOpenAside,
+  setIsOpenAside,
+  userStored,
+  userColors
+}: Props) => {
   const { CreateConversation, data, loading, error } = useMutationCreateConversation();
 
   const {

@@ -1,7 +1,7 @@
 // types
 import { UserColors } from "@/types";
 
-interface IProps {
+type Props = {
   userColors: UserColors
   totalPages: number
   itemsPerPage: number
@@ -11,7 +11,7 @@ interface IProps {
   setPage: React.Dispatch<React.SetStateAction<number>>
 }
 
-export const Pagination = ({totalPages, currentPage = 1, prevPage, nextPage, userColors, setPage} : IProps) => {
+export const Pagination: React.FC<Props> = ({totalPages, currentPage = 1, prevPage, nextPage, userColors, setPage} : Props) => {
   const pts = Array.from({ length: totalPages }, (_, index) => index + 1);
 
   return (

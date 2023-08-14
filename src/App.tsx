@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AuthProvider } from '@/AuthProviderManager';
 import AppRoutes from "@/AppRoutes";
 
-interface IProps {
+type IProps = {
   updateMainStatusLogin: () => void
   asignCLientForUploadImage: () => void
 }

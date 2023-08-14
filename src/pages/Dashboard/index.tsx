@@ -17,7 +17,7 @@ type Props = {
 // const VITE_SOCKET_SERVER = import.meta.env.VITE_APP_WEB_SOCKET
 // const cable = actioncable.createConsumer(VITE_SOCKET_SERVER);
 
-export const Dashboard = ({setSelectedPage, userColors, asignCLientForUploadImage}: Props) => {
+export const Dashboard: React.FC<Props> = ({setSelectedPage, userColors, asignCLientForUploadImage}: Props) => {
   const { userStored } = useContext(AuthContext);
   const [optionSelected, setOptionSelected] = useState<string>('dashboard')
 

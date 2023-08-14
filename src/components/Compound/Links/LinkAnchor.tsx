@@ -13,7 +13,7 @@ type Props = {
   action?: () => void
 };
 
-const LinkAnchor = ({
+const LinkAnchor: React.FC<Props> = ({
   page,
   url,
   selectedPage,

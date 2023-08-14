@@ -50,7 +50,7 @@ const optionsChart = {
   },
 }
 
-export const LineBar = ( { chartLabels, chartTitle, optionRanges, userColors }: Props ) => {
+export const LineBar: React.FC<Props> = ( { chartLabels, chartTitle, optionRanges, userColors }: Props ) => {
   if (!chartLabels) return null
 
   const [selectedValue, setSelectedValue] = useState<string>(optionRanges[0].name)

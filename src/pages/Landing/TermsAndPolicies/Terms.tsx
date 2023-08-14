@@ -43,7 +43,7 @@ const terminos = [
   }
 ];
 
-export const Terms = ({ setSelectedPage }: Props) => {
+export const Terms: React.FC<Props> = ({ setSelectedPage }: Props) => {
   useEffect(() => {
     setSelectedPage(SelectedPage.Terms)
   }, []);

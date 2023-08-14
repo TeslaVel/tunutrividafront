@@ -15,8 +15,7 @@ type Props = {
   asignCLientForUploadImage: () => void;
 };
 
-
-export const Entries = ({asignCLientForUploadImage}: Props) => {
+export const Entries: React.FC<Props> = ({asignCLientForUploadImage}: Props) => {
     const [orderBy] = useState<string>('created_at_desc')
     const { userStored } = useContext(AuthContext)
     const userColors: UserColors = colorByGender(userStored?.gender)

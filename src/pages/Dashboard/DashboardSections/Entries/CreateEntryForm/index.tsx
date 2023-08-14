@@ -15,7 +15,7 @@ type Props = {
   setIsOpenAside: (value: boolean) => void;
 };
 
-export const CreateEntryForm = ({refetch, isOpenAside, setIsOpenAside, userColors}: Props) => {
+export const CreateEntryForm: React.FC<Props> = ({refetch, isOpenAside, setIsOpenAside, userColors}: Props) => {
   const [loading, setLoading] = useState<boolean>(false)
   // const { CreateEntry, data, loading, error, reset } = useMutationCreateEntry();
 

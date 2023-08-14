@@ -14,7 +14,7 @@ interface Props {
   handleCableAction: (id: string) => void
 }
 
-export const ChatForm = ({userStored, conversation, refetchConversation, userColors, handleCableAction}: Props) => {
+export const ChatForm: React.FC<Props> = ({userStored, conversation, refetchConversation, userColors, handleCableAction}: Props) => {
   const notes = conversation?.notes
 
   useEffect(() => {

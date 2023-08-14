@@ -42,7 +42,7 @@ const showIcon = (value: string) => {
   }
 };
 
-const Sidebar = ( {selectedPage, userStored, deleteUserStored, userColors}: Props) => {
+const Sidebar: React.FC<Props> = ( {selectedPage, userStored, deleteUserStored, userColors}: Props) => {
   const isAboveMediumScreens = useMediaQuery("(max-width: 600px)");
   const [expanded, setExpanded] = useState<boolean>(true);
   const [elementVisible, setElementVisible] = useState<boolean>(true);

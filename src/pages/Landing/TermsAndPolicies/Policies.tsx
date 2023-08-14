@@ -63,7 +63,7 @@ const policies = [
   }
 ]
 
-export const Policies = ({ setSelectedPage }: Props) => {
+export const Policies: React.FC<Props> = ({ setSelectedPage }: Props) => {
   useEffect(() => {
     setSelectedPage(SelectedPage.Policies)
   }, []);

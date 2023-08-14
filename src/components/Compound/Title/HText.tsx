@@ -6,7 +6,7 @@ type Props = {
   classes?: string
 };
 
-const HText = ({
+const HText: React.FC<Props> = ({
   children,
   size = 1,
   classes = ''

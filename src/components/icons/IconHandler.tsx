@@ -5,14 +5,14 @@ import ChevronUp from '@/components/icons/chevronUp'
 import ChevronDown from '@/components/icons/chevronDown'
 import { Colors } from '@/types'
 
-interface IProps {
+type Props = {
   name: string,
   width?: number
   height?: number
   color?: Colors
 }
 
-const IconHandler = ({ name, width, height, color} : IProps) => {
+const IconHandler: React.FC<Props> = ({ name, width, height, color} : Props) => {
   switch(name) {
     case 'in_person':
       return <UserIcon width={width} height={height} color={color}/>

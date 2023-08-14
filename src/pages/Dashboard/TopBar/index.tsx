@@ -21,7 +21,7 @@ const tapOptions: TopBarOption[] = [
   { label: 'Metas', value: 'goals', visible: false}
 ];
 
-const TopBar = ({ setOptionSelected, optionSelected, userColors}: Props) => {
+const TopBar: React.FC<Props> = ({ setOptionSelected, optionSelected, userColors}: Props) => {
   return (
     <>
       {

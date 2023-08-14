@@ -13,7 +13,7 @@ import useMediaQuery from "@/hooks/useMediaQuery";
 // types
 import { SelectedPage, AppointmentType, UserColors} from '@/types'
 
-interface IProps {
+interface Props {
   userColors: UserColors
   setSelectedPage: (value: SelectedPage) => void;
 };
@@ -25,14 +25,15 @@ const optionFilter = [
   {label: 'Cancelados', value: 'cancelled'},
 ]
 
-const stNames = {
+const statusName = {
   'pending': 'Pendiente',
   'ocurred': 'Finalizada',
   'happening': 'En Proceso',
   'cancelled': 'Cancelado',
 }
-
-export const Appointments = ({ setSelectedPage, userColors }: IProps) => {
+export const Appointments: React.FC<Props> = ({
+  setSelectedPage, userColors
+}: Props) => {
   const { userStored } = useContext(AuthContext);
   const [filterBy, setFilterBy] = useState<string>('pending')
   const location = useLocation();
@@ -55,10 +56,10 @@ export const Appointments = ({ setSelectedPage, userColors }: IProps) => {
   // if (!data?.appointments) return null
   const appointments: AppointmentType[] = data?.appointments
 
-  const statusName = (status_name: 'pending' | 'ocurred' | 'happening' | 'cancelled' = 'pending') => {
+  const getStatusName = (status_name: 'pending' | 'ocurred' | 'happening' | 'cancelled' = 'pending') => {
     if (!status_name) return ''
 
-    return stNames[status_name]
+    return statusName[status_name]
   }
 
   return (
@@ -102,7 +103,7 @@ export const Appointments = ({ setSelectedPage, userColors }: IProps) => {
                   userColors={userColors}
                   headerName={
                     <>
-                      <IconHandler name={apt.appointmentType}/>&nbsp;[{statusName(apt.status)}] { !isAboveMediumScreens && <span>Fecha:</span>} {customDateFormat(apt.startDate, 'DD/MM/YY')}
+                      <IconHandler name={apt.appointmentType}/>&nbsp;[{getStatusName(apt.status)}] { !isAboveMediumScreens && <span>Fecha:</span>} {customDateFormat(apt.startDate, 'DD/MM/YY')}
                     </>
                   }>
                     <div>

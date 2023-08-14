@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 // types
 import { UserType, CommentType, UserColors } from '@/types'
 
-interface IProps {
+type Props = {
   userStored: UserType
   userColors: UserColors
   entry_id: string
@@ -12,7 +12,7 @@ interface IProps {
   loading: boolean
 }
 
-export const Comments = ({sentComments, entry_id, comments, userStored, userColors, loading}: IProps) => {
+export const Comments: React.FC<Props> = ({sentComments, entry_id, comments, userStored, userColors, loading}: Props) => {
     const inserEmoji = (emoji: string) => {
       const inputField = document.getElementById('messageInput') as HTMLInputElement;
 

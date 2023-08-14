@@ -7,7 +7,7 @@ type Props = {
   landing?: boolean
 }
 
-const Scroller = ({
+const Scroller: React.FC<Props> = ({
   children,
   scrollerName = 'component',
   marginTop = null,

@@ -6,7 +6,7 @@ type Props = {
 };
 
 
-export const NotFound = ({ setSelectedPage }: Props) => {
+export const NotFound: React.FC<Props> = ({ setSelectedPage }: Props) => {
   return (
     <>
       <section id="notfound" className="gap-16 py-10 md:h-full md:pb-0">

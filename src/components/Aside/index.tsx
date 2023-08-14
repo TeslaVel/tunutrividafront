@@ -10,7 +10,7 @@ type Props = {
   close: () => void
 }
 
-const Aside = ({children, isOpen, close, title, userColors}: Props) => {
+const Aside: React.FC<Props> = ({children, isOpen, close, title, userColors}: Props) => {
   const [asideOpen, setAsideOpen] = useState<boolean>(false)
 
   useEffect(() => {

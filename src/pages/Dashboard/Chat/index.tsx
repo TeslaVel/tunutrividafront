@@ -17,7 +17,7 @@ type Props = {
 const VITE_SOCKET_SERVER = import.meta.env.VITE_APP_WEB_SOCKET
 const cable: any = actioncable.createConsumer(VITE_SOCKET_SERVER)
 
-export const Chat = ({setSelectedPage, userColors }: Props) => {
+export const Chat: React.FC<Props> = ({setSelectedPage, userColors }: Props) => {
   const { userStored } = useContext(AuthContext)
   const { loading, data, refetch } = UseGetConversation()
   const [isOpenAside, setIsOpenAside] = useState<boolean>(false)

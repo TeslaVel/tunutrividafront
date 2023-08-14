@@ -14,7 +14,7 @@ type Props = {
   setSelectedPage: (value: SelectedPage) => void;
 };
 
-const Package = ({name, url, classes}: Props) => {
+const Package: React.FC<Props> = ({name, url, classes}: Props) => {
   return (
     <motion.div
       variants={childVariant}

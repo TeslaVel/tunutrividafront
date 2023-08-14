@@ -14,7 +14,7 @@ type Props = {
   setSelectedPage: (value: SelectedPage, center?: boolean) => void;
 }
 
-const Head = ({isLogged, isTopOfPage, selectedPage, setSelectedPage, userColors}: Props) => {
+const Head: React.FC<Props> = ({isLogged, isTopOfPage, selectedPage, setSelectedPage, userColors}: Props) => {
   if (!userColors) return null
   const { userStored, deleteUserStored} = useContext(AuthContext);
   return (

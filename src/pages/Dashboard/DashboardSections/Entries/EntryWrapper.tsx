@@ -3,7 +3,7 @@ type Props = {
   setAction?: () => void
 }
 
-const EntryWrapper = ({children, setAction}: Props) => {
+const EntryWrapper: React.FC<Props> = ({children, setAction}: Props) => {
   const KlassEntriesScroller = `entry-wrapper-section mt-10 w-full flex flex-col items-center gap-5`
 
   return (

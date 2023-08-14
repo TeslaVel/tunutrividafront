@@ -6,7 +6,7 @@ type Props = {
   classNames?: string
 }
 
-const Scroller = ({
+const Scroller: React.FC<Props> = ({
   children,
   header = null,
   scrollerName = 'component',

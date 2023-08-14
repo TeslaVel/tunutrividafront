@@ -59,7 +59,7 @@ type Props = {
   setSelectedPage: (value: SelectedPage) => void;
 };
 
-export const Treatments = ({ setSelectedPage }: Props) => {
+export const Treatments: React.FC<Props> = ({ setSelectedPage }: Props) => {
   return (
     <section id="treatments" className="
       xxxs:h-full xxs:h-full xs:h-full sm:h-full

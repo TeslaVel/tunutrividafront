@@ -251,10 +251,3 @@ export interface ConversationType {
   patient_id: string;
   notes: NoteType[]
 }
-// export interface CommentMutationType {
-//   comment: Comment;
-// };
-// export interface CommentVariables {
-//   message: string;
-//   entryId: string;
-// };

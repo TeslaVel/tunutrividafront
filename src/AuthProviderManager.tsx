@@ -18,7 +18,8 @@ const initialState: {
   userColors: null
 };
 
-interface IProps {
+type Props = {
+  children: JSX.Element
   updateMainStatusLogin: () => void
 }
 
@@ -26,7 +27,7 @@ interface IProps {
 export const AuthContext = createContext(initialState);
 
 // used on routes
-export const AuthProvider = ({children, updateMainStatusLogin}: PropsWithChildren<IProps>) => {
+export const AuthProvider: React.FC<Props> = ({children, updateMainStatusLogin}: PropsWithChildren<Props>) => {
   const {userData, setStorage} = useStorage('pgus-tk', null)
   const {localData: userColors, setLocalStorage: setUserColors} = useColorStorage('ntv-uc-tk', colorByGender(userData?.gender))
 

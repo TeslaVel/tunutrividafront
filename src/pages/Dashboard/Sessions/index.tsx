@@ -9,12 +9,12 @@ import { Pagination } from '@/components/Pagination'
 // types
 import { SelectedPage, SessionType, PaginatedSessionType, UserColors } from "@/types";
 
-interface IProps {
+type Props = {
   userColors: UserColors
   setSelectedPage: (value: SelectedPage) => void;
 };
 
-export const Sessions = ({setSelectedPage, userColors}: IProps) => {
+export const Sessions: React.FC<Props> = ({setSelectedPage, userColors}: Props) => {
   const [perPage] =  useState<number>(8)
   const [page, setPage] =  useState<number>(1)
 

@@ -15,18 +15,22 @@ type Props = {
 };
 
 export const Sessions: React.FC<Props> = ({setSelectedPage, userColors}: Props) => {
-  const [perPage] =  useState<number>(8)
+  const [perPage] =  useState<number>(7)
   const [page, setPage] =  useState<number>(1)
 
-  const { loading, data: result, refetch } = useGetSessions(page, perPage)
+  const { loading, sessions, pagination, refetch } = useGetSessions(page, perPage)
 
   useEffect(() => {
     setSelectedPage(SelectedPage.Sessions)
     refetch()
   }, []);
 
-  const data: PaginatedSessionType = result?.sessions
-  const sessions: SessionType[] = data?.paginated
+  useEffect(() => {
+    refetch()
+  }, [page]);
+
+  // const data: PaginatedSessionType = result?.sessions
+  // const sessions: SessionType[] = data?.paginated
 
   return (
     <Scroller scrollerName='sessions'>
@@ -82,11 +86,10 @@ export const Sessions: React.FC<Props> = ({setSelectedPage, userColors}: Props) 
                 ))}
 
                 <Pagination
-                  totalPages={data?.totalPages}
-                  itemsPerPage={perPage}
-                  currentPage={data?.currentPage}
-                  prevPage={data?.prevPage}
-                  nextPage={data?.nextPage}
+                  totalPages={pagination?.totalPages}
+                  currentPage={pagination?.currentPage}
+                  prevPage={pagination?.prevPage}
+                  nextPage={pagination?.nextPage}
                   userColors={userColors}
                   setPage={setPage}
                 />

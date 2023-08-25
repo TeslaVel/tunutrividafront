@@ -189,23 +189,31 @@ export const GET_CONVERSATION = gql`
 `
 
 export const GET_APPOINTMENTS = gql`
-  query appointments($filter: FilterInput) {
-    appointments(filter: $filter) {
-      id
-      title
-      createdAt
-      timeEnd
-      timeStart
-      startDate
-      appointmentType
-      status
-      dietitian {
-          id
-          firstName
-          lastName
-          fullName
-          initials
+  query appointments($filter: FilterInput, $page: Int, $limit: Int) {
+    appointments(filter: $filter, page: $page, limit: $limit) {
+      paginated {
+        id
+        title
+        createdAt
+        timeEnd
+        timeStart
+        startDate
+        appointmentType
+        status
+        dietitian {
+            id
+            firstName
+            lastName
+            fullName
+            initials
+        }
       }
+      page
+      limit
+      nextPage
+      prevPage
+      totalPages
+      currentPage
     }
 }
 `

@@ -182,6 +182,16 @@ export interface AppointmentType {
   dietitian: User
 }
 
+export interface PaginatedAppointmentType {
+  paginated: AppointmentType[]
+  page: number
+  limit: number
+  nextPage: number
+  prevPage: number
+  totalPages: number
+  currentPage: number
+}
+
 export interface SessionType {
   id: string
   age: string

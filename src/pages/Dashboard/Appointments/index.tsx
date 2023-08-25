@@ -9,6 +9,7 @@ import { customDateFormat } from '@/components/utils/TimeUtils'
 import { GeneralFilter } from '@/components/Filter'
 import { Loading } from '@/components/Loading'
 import useMediaQuery from "@/hooks/useMediaQuery";
+import { Pagination } from '@/components/Pagination'
 
 // types
 import { SelectedPage, AppointmentType, UserColors} from '@/types'
@@ -34,7 +35,7 @@ const statusName = {
 export const Appointments: React.FC<Props> = ({
   setSelectedPage, userColors
 }: Props) => {
-  const { userStored } = useContext(AuthContext);
+  // const { userStored } = useContext(AuthContext);
   const [filterBy, setFilterBy] = useState<string>('pending')
   const location = useLocation();
   const params = new URLSearchParams(location.search);
@@ -42,7 +43,11 @@ export const Appointments: React.FC<Props> = ({
   const isAboveMediumScreens = useMediaQuery("(max-width: 450px)");
   // console.log('filterParam', statusParam)
   // const history = useHistory();
-  const { loading, data, refetch } = useGetAppointments({status: filterBy})
+  const [perPage] =  useState<number>(7)
+  const [page, setPage] =  useState<number>(1)
+
+  const { loading, appointments, pagination, refetch } = useGetAppointments({status: filterBy},page, perPage)
+  // const { loading, data, refetch } = useGetAppointments({status: filterBy})
 
   useEffect(() => {
     setSelectedPage(SelectedPage.Appointments)
@@ -53,8 +58,9 @@ export const Appointments: React.FC<Props> = ({
     refetch();
   }, [filterBy]);
 
-  // if (!data?.appointments) return null
-  const appointments: AppointmentType[] = data?.appointments
+  useEffect(() => {
+    refetch()
+  }, [page]);
 
   const getStatusName = (status_name: 'pending' | 'ocurred' | 'happening' | 'cancelled' = 'pending') => {
     if (!status_name) return ''
@@ -112,6 +118,14 @@ export const Appointments: React.FC<Props> = ({
                     </div>
                 </CollapsibleSection>
               ))}
+              <Pagination
+                totalPages={pagination?.totalPages}
+                currentPage={pagination?.currentPage}
+                prevPage={pagination?.prevPage}
+                nextPage={pagination?.nextPage}
+                userColors={userColors}
+                setPage={setPage}
+              />
             </>
           }
         </div>

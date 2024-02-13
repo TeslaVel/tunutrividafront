@@ -42,7 +42,7 @@ export const ContactUs: React.FC<Props> = ({ setSelectedPage }: Props) => {
       xxxs:py-[7rem] xxs:py-[7rem] xs:py-[7rem] sm:py-[7rem]
       md:min-h-[800px] lg:min-h-[800px]
       md:h-[100vh] lg:h-[100vh]
-      flex flex-col justify-center bg-secondly-female-05">
+      flex flex-col justify-center">
       <motion.div
         onViewportEnter={() => setSelectedPage(SelectedPage.Contactus)}
         className="justify-between flex flex-col mx-auto xxxs:px-4 xxs:px-4 xxs:w-full sm:w-full  md:w-4/6  lg:w-3/6"

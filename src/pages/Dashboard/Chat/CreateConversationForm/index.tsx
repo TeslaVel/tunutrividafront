@@ -36,7 +36,7 @@ export const CreateConversationForm: React.FC<Props> = ({
       ...getValues(),
       dietitian_id: userStored?.dietitianId
     }
-    console.log('values', values)
+
     const { data } = await CreateConversation({ variables: values }) || {};
     if (error) {
       console.log(error)

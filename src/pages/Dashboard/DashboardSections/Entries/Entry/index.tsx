@@ -49,7 +49,6 @@ export const Entry: React.FC<Props> = ({ entry, isList, setAction, showComments,
         const inputText = document.getElementById('messageInput') as HTMLInputElement
         if (inputText) { inputText.value = ''}
       }
-      console.log('data.createComment', data.createComment)
     };
 
     const hasImage = entry.imageUrl !== null && entry.imageUrl.length > 0

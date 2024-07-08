@@ -7,7 +7,7 @@ export function useColorStorage (key: string, initialValue: UserColors){
     try {
       const item = window.localStorage.getItem(key);
       val = item !== null ? JSON.parse(item) : initialValue;
-      // console.log('retornar encontrado  del storage', val)
+
       return val;
     } catch (e) {
       val = null;

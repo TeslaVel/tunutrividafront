@@ -13,8 +13,6 @@ type Props = {
 };
 
 const DashboardSections = ({optionSelected, userStored, userColors, asignCLientForUploadImage}: Props) => {
-  console.log('optionSelected', optionSelected)
-
   if (optionSelected === 'entries') {
     return (
       <Entries asignCLientForUploadImage={asignCLientForUploadImage}/>

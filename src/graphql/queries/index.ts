@@ -11,7 +11,7 @@ export const CONTACT_US_MUTATION = gql`
     createContactUs(input: {
        email: $email,
        firstName: $first_name,
-       lastName: $last_name,
+       lastNamae: $last_name,
        message: $message
     }) {
       id
@@ -123,6 +123,7 @@ export const LOGIN_MUTATION = gql`
     }
   }
 `;
+
 export const LOGOUT_MUTATION = gql`
   mutation LogoutMuation {
     logout(input: {}) {
@@ -244,6 +245,7 @@ export const GET_SESSIONS = gql`
     sessions(page: $page, limit: $limit) {
       paginated {
           id
+          age
           height
           weight
           waist
@@ -265,6 +267,37 @@ export const GET_SESSIONS = gql`
               id
               name
               description
+          }
+          diet {
+            id
+            name
+            description
+            dietMealWeeks {
+              id
+              dietId
+              dayOfWeek
+              createdAt
+
+              dietMealTimes {
+                id
+                dietMealWeekId
+                mealTime
+                createdAt
+
+                dietIngredient {
+                  id
+                  dietMealTimeId
+                  mealId
+                  instructions
+                  createdAt
+
+                  meal {
+                    id
+                    name
+                  }
+                }
+              }
+            }
           }
       }
       page

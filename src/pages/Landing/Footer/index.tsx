@@ -1,6 +1,5 @@
 import Logo from "@/assets/ntv/logo_3.png";
 import LinkAnchor from "@/components/Compound/Links/LinkAnchor";
-// import { Link } from 'react-router-dom';
 
 import { SelectedPage } from "@/types";
 

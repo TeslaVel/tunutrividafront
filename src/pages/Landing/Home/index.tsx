@@ -1,8 +1,5 @@
-// import useMediaQuery from "@/hooks/useMediaQuery";
-import { useState } from 'react'
 import { SelectedPage } from "@/types";
 import ActionButton from "@/components/Compound/Buttons/ActionButton";
-import body3 from "@/assets/ntv/body3.png";
 import backgroundImage from "@/assets/ntv/background-1.jpg";
 import HText from "@/components/Compound/Title/HText";
 
@@ -14,7 +11,6 @@ type Props = {
 };
 
 const Home: React.FC<Props> = ({ setSelectedPage }: Props) => {
-  // const isAboveMediumScreens = useMediaQuery("(min-width:1060px)");
   return (
     <section id="home" className="gap-16 bg-gray-20 py-10 md:h-full md:pb-0 xxxs:h-full md:h-[100vh]"
      style={{
@@ -22,14 +18,12 @@ const Home: React.FC<Props> = ({ setSelectedPage }: Props) => {
       backgroundSize: 'cover'
     }}
     >
-      {/* IMAGE AND MAIN HEADER */}
       <motion.div
         className="mx-auto w-5/6 xxxs:mt-[5rem] xxs:mt-[4rem] sm:mt-[4rem] md:mt-[15rem]"
         onViewportEnter={() => setSelectedPage(SelectedPage.Home)}
       >
 
         <div className="z-10 md:basis-3/5 xs:w-4/6 md:w-3/6 ">
-          {/* HEADINGS */}
           <motion.div
             className=""
             initial="hidden"
@@ -49,7 +43,6 @@ const Home: React.FC<Props> = ({ setSelectedPage }: Props) => {
             </p>
           </motion.div>
 
-          {/* ACTIONS */}
           <motion.div
             className="mt-5 flex items-center gap-8"
             initial="hidden"
@@ -81,7 +74,6 @@ const Home: React.FC<Props> = ({ setSelectedPage }: Props) => {
         </div>
       </motion.div>
 
-      {/* SPONSORS */}
       {false && (
         <div className="h-[150px] w-full bg-secondly-female-05 py-10">
           <div className="mx-auto w-5/6">

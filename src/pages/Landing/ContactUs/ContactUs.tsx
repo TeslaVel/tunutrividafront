@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
 import { SelectedPage } from "@/types";
 import { motion } from "framer-motion";
-// import ContactUsPageGraphic from "@/assets/ContactUsPageGraphic.png";
 import ImageNtv3 from "@/assets/ntv/imagen_ntv_3.png";
 import HText from "@/components/Compound/Title/HText";
 import { useMutationContactUs } from '@/hooks/graph/useMutationContactUs';
@@ -28,10 +27,7 @@ export const ContactUs: React.FC<Props> = ({ setSelectedPage }: Props) => {
   const onSubmit = async (e: any) => {
     e.preventDefault();
     const values = getValues()
-    // const isValid = await trigger();
-    // if (!isValid) {
-    //   e.preventDefault();
-    // }
+ 
     console.log('values', getValues())
     CreateContactUs({variables: values });
   };

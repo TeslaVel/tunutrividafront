@@ -19,13 +19,13 @@ const LogIn: React.FC<Props> = ({ setSelectedPage }: Props) => {
 
   useEffect(() =>{
     if ( data && data?.createAuth ) {
-      console.log('createAuth si hay data', data.createAuth.token);
       if (data.createAuth.token !== null) {
         storeUser(data.createAuth);
       } else {
         alert('credentials invalid')
       }
     }
+
   }, [data?.createAuth]);
 
   const inputStyles = `
@@ -48,8 +48,7 @@ const LogIn: React.FC<Props> = ({ setSelectedPage }: Props) => {
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
-    const values = getValues()
-    console.log('login values', getValues())
+    const values = getValues();
     Login({variables: values });
   };
 

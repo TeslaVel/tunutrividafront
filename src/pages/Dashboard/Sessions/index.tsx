@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AuthContext } from '@/AuthProviderManager';
+// import { AuthContext } from '@/AuthProviderManager';
 import { useGetSessions } from '@/hooks/useGetSessions'
 import Scroller from '@/components/Scroller/Scroller'
 import CollapsibleSection from '@/components/CollapsibleSection'
@@ -29,9 +29,6 @@ export const Sessions: React.FC<Props> = ({setSelectedPage, userColors}: Props) 
     refetch()
   }, [page]);
 
-  // const data: PaginatedSessionType = result?.sessions
-  // const sessions: SessionType[] = data?.paginated
-
   return (
     <Scroller scrollerName='sessions'>
       <section id="sessions" className="
@@ -59,29 +56,71 @@ export const Sessions: React.FC<Props> = ({setSelectedPage, userColors}: Props) 
 
             { sessions?.length > 0 &&
               <>
-                { sessions.map((session: SessionType, index: number) => (
+                { sessions.map((session, index) => (
                   <CollapsibleSection
                     key={`session_${index}_${session.id}`}
                     headerName={customDateFormat(session.date, 'DD/MM/YY')}
                     userColors={userColors}
                   >
-                    <div className="flex flex-col">
-                      <div><strong>Edad</strong>: {session.age}</div>
-                      <div><strong>Altura</strong>: {session.height}</div>
-                      <div><strong>Peso</strong>: {session.weight}</div>
-                      <div><strong>IMC</strong>: {session.imc}</div>
-                      { session.hip && <div><strong>Cadera</strong>: {session.hip}</div>}
-                      { session.waist && <div><strong>Cintura</strong>: {session.waist}</div>}
-                      { session.highAbdomen && <div><strong>Abdomen Alto</strong>: {session.highAbdomen}</div>}
-                      { session.lowAbdomen && <div><strong>Abdomen Bajo</strong>: {session.lowAbdomen}</div>}
-                      { session.bodyGrease && <div><strong>Grasa Corporal</strong>: {session.bodyGrease}</div>}
-                      { session.visceralGrease && <div><strong>Grasa Visceral</strong>: {session.visceralGrease}</div>}
-                      { session.idealWeight && <div><strong>Peso Ideal Muscular</strong>: {session.idealWeight}</div>}
-                      { session.muscleMass && <div><strong>Masa Muscular</strong>: {session.muscleMass}</div>}
-                      { session.boneMass && <div><strong>Masa Osea</strong>: {session.boneMass}</div>}
-                      { session.physicalComplexion && <div><strong>Complexion Fisica</strong>: {session.physicalComplexion}</div>}
-                      { session.activityFactor && <div><strong>Factor Actvidad</strong>: {session.activityFactor.name}</div>}
-                    </div>
+                    <>
+                      <div className="flex flex-row gap-10">
+                        <div className="flex flex-col">
+                          <span><strong>Edad</strong>: {session.age} </span>
+                          <span><strong>Altura</strong>: {session.height} </span>
+                          <span><strong>Peso</strong>: {session.weight} </span>
+                          <span><strong>IMC</strong>: {session.imc} </span>
+                        </div>
+                        <div className="flex flex-col">
+                          { session.hip && <span><strong>Cadera</strong>: {session.hip}</span>}
+                          { session.waist && <span><strong>Cintura</strong>: {session.waist}</span>}
+                          { session.highAbdomen && <span><strong>Abdomen Alto</strong>: {session.highAbdomen}</span>}
+                          { session.lowAbdomen && <span><strong>Abdomen Bajo</strong>: {session.lowAbdomen}</span>}
+                        </div>
+                        <div className="flex flex-col">
+                          { session.bodyGrease && <span><strong>Grasa Corporal</strong>: {session.bodyGrease}</span>}
+                          { session.visceralGrease && <span><strong>Grasa Visceral</strong>: {session.visceralGrease}</span>}
+                          { session.idealWeight && <span><strong>Peso Ideal Muscular</strong>: {session.idealWeight}</span>}
+                          { session.muscleMass && <span><strong>Masa Muscular</strong>: {session.muscleMass}</span>}
+                        </div>
+
+                        <div className="flex flex-col">
+                          { session.boneMass && <span><strong>Masa Osea</strong>: {session.boneMass}</span>}
+                          { session.physicalComplexion && <span><strong>Complexion Fisica</strong>: {session.physicalComplexion}</span>}
+                          { session.activityFactor && <span><strong>Factor Actvidad</strong>: {session.activityFactor.name}</span>}
+                        </div>
+                      </div>
+
+                      { session?.diet?.dietMealWeeks &&
+                        <div className="py-5" style={{ overflowX: 'auto' }}>
+                          <div className="grid grid-cols-7 grid-rows-auto text-center">
+                            {/* Header row for days of the week */}
+                            {session.diet.dietMealWeeks.map((dmw, index) => (
+                              <div
+                                key={index}
+                                className={`text-white ${userColors.general.primaryBgColor} border font-bold`}
+                              >
+                                {dmw.dayOfWeek}
+                              </div>
+                            ))}
+                            {/* Meal time and information for each day */}
+                            {session.diet.dietMealWeeks.map((dmw, index) => (
+                              <div key={index} className="grid grid-cols-1 mt-4">
+                                {dmw.dietMealTimes.map((dmt, index) => (
+                                  <div key={index} className="grid grid-cols-3 border p-2">
+                                    {/* Meal time */}
+                                    <div className="col-span-3 font-bold">{dmt.mealTime}</div>
+                                    {/* Meal name */}
+                                    <div className="col-span-3">{dmt.dietIngredient.meal.name}</div>
+                                    {/* Instructions */}
+                                    <div className="col-span-3 text-sm">{dmt.dietIngredient.instructions}</div>
+                                  </div>
+                                ))}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      }
+                    </>
                   </CollapsibleSection>
                 ))}
 

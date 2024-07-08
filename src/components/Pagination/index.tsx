@@ -5,8 +5,8 @@ type Props = {
   userColors: UserColors
   totalPages: number
   currentPage: number
-  prevPage: number
-  nextPage: number
+  prevPage: number | null
+  nextPage: number | null
   setPage: React.Dispatch<React.SetStateAction<number>>
 }
 

@@ -34,7 +34,6 @@ export const Entries: React.FC<Props> = ({asignCLientForUploadImage}: Props) => 
     const isList: boolean = selectedEntry == null
 
     const openAside = (value: boolean) => {
-      console.log('abre aside', value)
       setIsOpenAside(value)
 
       if (value) {

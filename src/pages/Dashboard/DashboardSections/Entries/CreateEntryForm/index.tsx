@@ -40,7 +40,6 @@ export const CreateEntryForm: React.FC<Props> = ({refetch, isOpenAside, setIsOpe
 
     try {
       const result = await CreateEntry(formData);
-      console.log('result', result)
       refetch()
       setIsOpenAside(false)
 
@@ -58,23 +57,6 @@ export const CreateEntryForm: React.FC<Props> = ({refetch, isOpenAside, setIsOpe
       setLoading(false)
       // Manejar el error
     }
-
-    // const { data } = await CreateEntry({ variables: formData }) || {};
-    // if (error) {
-    //   console.log(error)
-    // }
-    // else if (data && data.createEntry) {
-    //   setIsOpenAside(false)
-    //   const descriptionField = document.getElementById('description') as HTMLInputElement;
-    //   descriptionField.value=''
-
-    //   const myDiv = document.getElementById('entry-list-scroller')
-    //   if (myDiv) {
-    //     setTimeout(() => {
-    //       myDiv.scrollTop = myDiv.scrollHeight;
-    //     }, 2);
-    //   }
-    // }
   };
 
   const onImageChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -92,7 +74,6 @@ export const CreateEntryForm: React.FC<Props> = ({refetch, isOpenAside, setIsOpe
     reader.readAsDataURL(file);
 
     const values = getValues()
-    console.log('values', values)
   };
 
   return(

@@ -1,11 +1,11 @@
-import { GeneralOptions, UserColors } from '@/types'
+import { GeneralOptions, UserColors, AppointmentType } from '@/types'
 import './style.css'
 type Props = {
   options: Array<GeneralOptions>
   userColors: UserColors
   filterSelected: string;
   klass?: string;
-  setFilterBy: React.Dispatch<React.SetStateAction<string>>
+  setFilterBy: React.Dispatch<React.SetStateAction<AppointmentType['status']>>
   isMobile?: boolean
 };
 
@@ -25,7 +25,7 @@ export const GeneralFilter: React.FC<Props> = ({
       { isMobile &&
         <select onChange={(e) => setFilterBy(e.target.value)}
         className={`w-full px-3 py-1 cursor h-auto rounded-md ${userColors?.collapsible.primaryBgColor} ${userColors?.general.border} text-white-01`}>
-          { options.map((opt: any, index: number) => (
+          { options.map((opt: GeneralOptions, index: number) => (
             <option
               key={`filter-select-${opt.value}-${index}`}
               value={opt.value}
@@ -39,7 +39,7 @@ export const GeneralFilter: React.FC<Props> = ({
 
       { !isMobile &&
         <nav className={`ntv-filter-tab inline-flex h-auto rounded-md ${userColors?.general.borderL} ${userColors?.filter.primaryBgColor}`}>
-          { options.map((opt: any, index: number) => (
+          { options.map((opt: GeneralOptions, index: number) => (
             <button
               key={index}
               className={`

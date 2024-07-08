@@ -1,19 +1,21 @@
 import { useQuery } from '@apollo/client';
 import { GET_CURRENT_APPOINTMENTS, GET_APPOINTMENTS } from '@/graphql/queries';
+import { mockUseGetAppointments } from '@/graphql/mocks/mockAppointments';
+const USE_MOCK_DATA = import.meta.env.VITE_APP_USE_MOCK_DATA === 'true'
 
 // types
 import { AppointmentType, PaginatedAppointmentType } from "@/types";
 
-// export function useGetAppointments (filter?: object) {
-//   return useQuery(GET_APPOINTMENTS, {
-//     variables: { filter },
-//   });
-// }
+export function useGetAppointments (filter: { status: AppointmentType['status']  }, page?: number, limit?: number) {
+  if (USE_MOCK_DATA) {
+    return mockUseGetAppointments(filter, page, 4);
+  }
 
-export function useGetAppointments (filter?: object, page?: number, limit?: number) {
   const { loading, data: result, refetch } = useQuery(GET_APPOINTMENTS, {
     variables: { filter, page, limit},
   });
+
+  console.log('usando USE_MOCK_DATA', USE_MOCK_DATA)
 
   const data: PaginatedAppointmentType = result?.appointments
   const appointments: AppointmentType[] = data?.paginated

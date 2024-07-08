@@ -3,12 +3,10 @@ import { UserType } from "@/types";
 
 export function useStorage (key: string, initialValue: null){
   const getStorage = (): UserType | null => {
-    // console.log('buscando token del storage')
     let val = null;
     try {
       const item = window.localStorage.getItem(key);
       val = item !== null ? JSON.parse(item) : initialValue;
-      // console.log('retornar encontrado  del storage', val)
       return val;
     } catch (e) {
       val = null;

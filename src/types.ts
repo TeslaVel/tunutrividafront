@@ -54,8 +54,9 @@ export interface UserColors {
 export interface User {
   id: string
   firstName: string
+  lastName: string
   fullName: string
-  firstNameInitial: string
+  firstNameInitial?: string
   initials: string
 }
 
@@ -178,7 +179,7 @@ export interface AppointmentType {
   timeEnd: string
   createdAt: string
   appointmentType: string
-  status: 'pending' | 'ocurred' | 'happening' | 'cancelled'
+  status: 'pending' | 'ocurred' | 'happening' | 'cancelled' | string
   dietitian: User
 }
 
@@ -197,26 +198,58 @@ export interface SessionType {
   age: string
   height: string
   weight: string
-  waist: string
-  hip: string
-  highAbdomen: string
-  lowAbdomen: string
-  imc: string
-  idealWeight: string
-  bodyGrease: string
-  visceralGrease: string
-  muscleMass: string
-  boneMass: string,
-  waterPercentage: string,
-  bmr: string
-  metabolicAge: string
-  physicalComplexion: string
+  waist: string | null
+  hip: string | null
+  highAbdomen: string | null
+  lowAbdomen: string | null
+  imc: string | null
+  idealWeight: string | null
+  bodyGrease: string | null
+  visceralGrease: string | null
+  muscleMass: string | null
+  boneMass: string | null
+  waterPercentage: string | null
+  bmr: string | null
+  metabolicAge: string | null
+  physicalComplexion: string | null
   date: string
   activityFactor: {
     id: string
     name: string
     description: string
   }
+  diet: {
+    id: string,
+    name: string,
+    description: string
+    dietMealWeeks: [{
+      id: string
+      dietId: string
+      dayOfWeek: string,
+      createdAt: string,
+      dietMealTimes: [{
+        id: string,
+        dietMealWeekId: string
+        mealTime: string,
+        createdAt: string
+        dietIngredient: {
+          id: string,
+          dietMealTimeId: string,
+          mealId: string,
+          instructions: string
+          createdAt: string,
+          meal: {
+            id: string,
+            name: string
+          }
+        }
+      }]
+    }]
+  }
+}
+
+export interface DietType {
+  diet: SessionType['diet']
 }
 
 export interface PaginatedSessionType {

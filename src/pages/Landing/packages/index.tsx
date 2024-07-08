@@ -4,10 +4,9 @@ import { motion } from "framer-motion";
 import package_1 from "@/assets/ntv/package-1.png";
 import package_2 from "@/assets/ntv/package-2.png";
 import package_3 from "@/assets/ntv/package-3.png";
+import Package from "@/components/Package/Package";
 
-import Package from "./Package";
-
-const packages: Array<ClassType> = [
+const pks: Array<ClassType> = [
   {
     name: "Paquete 1",
     url: package_1,
@@ -33,7 +32,7 @@ type Props = {
   setSelectedPage: (value: SelectedPage) => void;
 };
 
-export const Packages: React.FC<Props> = ({ setSelectedPage }: Props) => {
+const Packages: React.FC<Props> = ({ setSelectedPage }: Props) => {
   return (
     <section id="packages" className="
       xxxs:h-full xxs:h-full xs:h-full sm:h-full
@@ -72,7 +71,7 @@ export const Packages: React.FC<Props> = ({ setSelectedPage }: Props) => {
           viewport={{ once: true, amount: 0.5 }}
           variants={container}
         >
-          {packages.map((pack: ClassType) => (
+          {pks.map((pack: ClassType) => (
             <Package
               classes=""
               key={pack.name}

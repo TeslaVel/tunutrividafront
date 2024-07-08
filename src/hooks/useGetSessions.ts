@@ -1,13 +1,15 @@
 import { useQuery } from '@apollo/client';
 import { GET_SESSIONS } from '@/graphql/queries';
+import { mockUseGetSessions } from '@/graphql/mocks/mockSessions';
+const USE_MOCK_DATA = import.meta.env.VITE_APP_USE_MOCK_DATA === 'true';
 
 // types
 import { SessionType, PaginatedSessionType } from "@/types";
 
 export function useGetSessions (page?: number, limit?: number) {
-  // return useQuery(GET_SESSIONS, {
-  //   variables: { page, limit},
-  // });
+   if (USE_MOCK_DATA) {
+    return mockUseGetSessions(page, 7);
+  }
 
   const { loading, data: result, refetch } = useQuery(GET_SESSIONS, {
     variables: { page, limit},

@@ -14,18 +14,17 @@ type Props = {
 
 const LoginModal: React.FC<Props> = ({ formId, isOpen, closeAction}: Props) => {
   const { storeUser } = useContext(AuthContext);
-  const { Login, data, loading, error, reset } = useMutationLogin();
+  const { Login, data } = useMutationLogin();
 
-  useEffect(() =>{
-    if ( data && data?.createAuth ) {
-      console.log('createAuth si hay data', data.createAuth.token);
-      if (data.createAuth.token !== null) {
-        storeUser(data.createAuth);
-      } else {
-        alert('credentials invalid')
-      }
-    }
-  }, [data?.createAuth]);
+  // useEffect(() =>{
+  //   if ( data && data?.createAuth ) {
+  //     if (data.createAuth.token !== null) {
+  //       storeUser(data.createAuth);
+  //     } else {
+  //       alert('credentials invalid')
+  //     }
+  //   }
+  // }, [data?.createAuth]);
 
   const inputStyles =`
   bg-secondly-female-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600
@@ -45,8 +44,16 @@ const LoginModal: React.FC<Props> = ({ formId, isOpen, closeAction}: Props) => {
   } = useForm();
 
   const handleAction = async () => {
-    const values = getValues()
-    Login({variables: values });
+    const values = getValues();
+    try {
+      const response = await Login(values);
+      if (response.data?.createAuth.token) {
+        storeUser(response.data.createAuth);
+      }
+    } catch (error) {
+      console.error(error);
+      alert('credentials invalid');
+    }
   };
 
   const handleClose = () => {

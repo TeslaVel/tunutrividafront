@@ -1,6 +1,5 @@
 import { useEffect, useState, useContext } from "react";
 import { useLocation } from 'react-router-dom';
-import { AuthContext } from '@/AuthProviderManager';
 import { useGetAppointments } from '@/hooks/useGetAppointments'
 import Scroller from '@/components/Scroller/Scroller'
 import CollapsibleSection from '@/components/CollapsibleSection'
@@ -36,18 +35,15 @@ export const Appointments: React.FC<Props> = ({
   setSelectedPage, userColors
 }: Props) => {
   // const { userStored } = useContext(AuthContext);
-  const [filterBy, setFilterBy] = useState<string>('pending')
+  const [filterBy, setFilterBy] = useState<AppointmentType['status'] | string>('pending')
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const statusParam = params.get('status');
   const isAboveMediumScreens = useMediaQuery("(max-width: 450px)");
-  // console.log('filterParam', statusParam)
-  // const history = useHistory();
   const [perPage] =  useState<number>(7)
   const [page, setPage] =  useState<number>(1)
 
-  const { loading, appointments, pagination, refetch } = useGetAppointments({status: filterBy},page, perPage)
-  // const { loading, data, refetch } = useGetAppointments({status: filterBy})
+  const { loading, appointments, pagination, refetch } = useGetAppointments({status: filterBy}, page, perPage)
 
   useEffect(() => {
     setSelectedPage(SelectedPage.Appointments)
@@ -62,10 +58,19 @@ export const Appointments: React.FC<Props> = ({
     refetch()
   }, [page]);
 
-  const getStatusName = (status_name: 'pending' | 'ocurred' | 'happening' | 'cancelled' = 'pending') => {
+  const getStatusName = (status_name: AppointmentType['status'] = 'pending') => {
     if (!status_name) return ''
 
-    return statusName[status_name]
+    switch (status_name) {
+      case 'cancelled':
+        return statusName['cancelled']
+      case 'ocurred':
+        return statusName['ocurred']
+      case 'happening':
+        return statusName['happening']
+      default:
+        return statusName['pending']
+    }
   }
 
   return (

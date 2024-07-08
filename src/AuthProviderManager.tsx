@@ -49,7 +49,7 @@ export const AuthProvider: React.FC<Props> = ({children, updateMainStatusLogin}:
     deleteUserStored: () => deleteUserToken(),
     userColors: userColors
   };
-  // console.log('AuthProvider recover token', value);
+
   return <AuthContext.Provider value={value}>
     {children}
   </AuthContext.Provider>

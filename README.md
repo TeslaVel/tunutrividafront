@@ -12,8 +12,9 @@ npm install
 npm run dev
 ```
 
-# Credentials
+# Mocked Site
+https://tunutrivida.netlify.app/
 
-Test: https://tunutrivida.netlify.app/
-User: user@example.com
-pass: password
+### Credentials
+- User: user@example.com
+- pass: password

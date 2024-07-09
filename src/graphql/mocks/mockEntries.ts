@@ -11,8 +11,8 @@ export const mockEntries = {
         createdAt: "2024-07-03 10:10 am",
         user: {
           id: "13",
-          fullName: "Francis Berrios",
-          initials: "F.B",
+          fullName: "John Doe",
+          initials: "J.D",
           __typename: "User"
         },
         comments: [],
@@ -26,8 +26,8 @@ export const mockEntries = {
         createdAt: "2024-06-18 09:09 am",
         user: {
           id: "13",
-          fullName: "Francis Berrios",
-          initials: "F.B",
+          fullName: "John Doe",
+          initials: "J.D",
           __typename: "User"
         },
         comments: [
@@ -37,8 +37,8 @@ export const mockEntries = {
             createdAt: "Jun 19 at 09:09 am",
             user: {
               id: "2",
-              fullName: "Lic Laura Berrios",
-              initials: "L.B",
+              fullName: "Dr Mary Watson",
+              initials: "M.W",
               __typename: "User"
             },
             __typename: "Comment"

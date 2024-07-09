@@ -27,8 +27,8 @@ const LoginModal: React.FC<Props> = ({ formId, isOpen, closeAction}: Props) => {
   // }, [data?.createAuth]);
 
   const inputStyles =`
-  bg-secondly-female-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600
-  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
+  bg-secondly-female-50 border border-gray-300 text-white sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600
+  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 placeholder-white dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
 `;
 
   const buttonStyles = `
@@ -78,7 +78,7 @@ const LoginModal: React.FC<Props> = ({ formId, isOpen, closeAction}: Props) => {
       >
         <>
           <div>
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+            <label className="block mb-2 text-sm font-medium text-white dark:text-white">Email</label>
             <input
               type="email"
               id="email"
@@ -99,7 +99,7 @@ const LoginModal: React.FC<Props> = ({ formId, isOpen, closeAction}: Props) => {
             )}
           </div>
           <div>
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contraseña</label>
+            <label className="block mb-2 text-sm font-medium text-white dark:text-white">Contraseña</label>
             <input
               type="password"
               id="password"
@@ -126,10 +126,10 @@ const LoginModal: React.FC<Props> = ({ formId, isOpen, closeAction}: Props) => {
                 className="w-4 h-4 border border-primary-female-300 rounded bg-primary-female-50 focus:ring-1 focus:ring-purpl-100 dark:focus:ring-primary-female-600 dark:ring-offset-secondly-female-100" required={true} />
               </div>
               <div className="ml-3 text-sm">
-                <label  className="text-gray-500 dark:text-gray-300">Remember me</label>
+                <label  className="text-secondly-female-200 dark:text-gray-300">Remember me</label>
               </div>
             </div>
-            <a href="#" className="text-sm font-medium text-secondly-female-600 hover:underline dark:text-secondly-female-50">Olvidó su contraseña?</a>
+            <a href="#" className="text-sm font-medium text-secondly-female-200 hover:underline dark:text-secondly-female-50">Olvidó su contraseña?</a>
           </div>
           <button
             type="submit"

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Home from "@/pages/Landing/Home";
 import Treatments from "@/pages/Landing/Treatments";
-import Packages from "@/pages/Landing/Packages";
+import Packages from "@/pages/Landing/AllPackages";
 import ContactUs from "@/pages/Landing/ContactUs/ContactUs";
 import Footer from "@/pages/Landing/Footer";
 import Terms from '@/pages/Landing/TermsAndPolicies/Terms';

@@ -3,10 +3,10 @@ export const mockCreateAuth = {
     createAuth: {
       id: "13",
       token: "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxM30.BmexhSjdZLSW06Yj0Z_BPIsKGQ_TNMij9SbgrxNUMEM",
-      email: "testuser@example.com",
+      email: "user@example.com",
       gender: "male",
-      firstName: "Test",
-      lastName: "User",
+      firstName: "John",
+      lastName: "Doe",
       dietitianId: "2",
       height: "1.58",
       weight: "78.0",

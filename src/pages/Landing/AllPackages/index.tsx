@@ -32,7 +32,7 @@ type Props = {
   setSelectedPage: (value: SelectedPage) => void;
 };
 
-const Packages: React.FC<Props> = ({ setSelectedPage }: Props) => {
+const AllPackages: React.FC<Props> = ({ setSelectedPage }: Props) => {
   return (
     <section id="packages" className="
       xxxs:h-full xxs:h-full xs:h-full sm:h-full
@@ -86,4 +86,4 @@ const Packages: React.FC<Props> = ({ setSelectedPage }: Props) => {
   );
 };
 
-export default Packages;
+export default AllPackages;

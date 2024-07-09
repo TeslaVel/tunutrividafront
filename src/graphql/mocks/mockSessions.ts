@@ -61,7 +61,7 @@ export const mockSessions = {
           },
           diet: {
             id: "3",
-            name: "Dieta para Francis",
+            name: "John's Diet",
             description: "Descripcion de la dieta",
             dietMealWeeks: [
               {

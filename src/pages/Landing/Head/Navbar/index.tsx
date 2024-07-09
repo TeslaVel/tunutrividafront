@@ -21,7 +21,7 @@ const Navbar: React.FC<Props> = ({ isTopOfPage, selectedPage, setSelectedPage }:
   const [isMenuToggled, setIsMenuToggled] = useState<boolean>(false);
   const [isLoginModalOpen, setLoginModalOpen] = useState<boolean>(false)
   const isAboveMediumScreens = useMediaQuery("(min-width: 930px)");
-  const sameColor = 'bg-primary-female-700'
+  const sameColor = 'bg-primary-female-700 opacity-80'
 
   const termAndPolicies = ['terms', 'policies'].includes(selectedPage)
   const navbarBackground = !isTopOfPage || termAndPolicies ? `${sameColor}` : '';

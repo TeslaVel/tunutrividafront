@@ -4,7 +4,7 @@ export const AppPaginated = {
   paginated: [
     {
       id: "39",
-      title: "(Francis B)",
+      title: "(Peter P)",
       createdAt: "2024-07-03 09:09 am",
       timeEnd: "2000-01-01 09:09 am",
       timeStart: "2000-01-01 08:08 am",
@@ -13,17 +13,17 @@ export const AppPaginated = {
       status: 'ocurred',
       dietitian: {
         id: "2",
-        firstName: "Lic Laura",
-        lastName: "Berrios",
-        fullName: "Lic Laura Berrios",
-        initials: "L.B",
+        firstName: "Dr Mary",
+        lastName: "Watson",
+        fullName: "Dr Mary Watson",
+        initials: "M.W",
         __typename: "User"
       },
       __typename: "Appointment"
     },
     {
       id: "40",
-      title: "(Francis B)",
+      title: "(Peter P)",
       createdAt: "2024-07-03 09:09 am",
       timeEnd: "2000-01-01 09:09 am",
       timeStart: "2000-01-01 08:08 am",
@@ -32,17 +32,17 @@ export const AppPaginated = {
       status: 'pending',
       dietitian: {
         id: "2",
-        firstName: "Lic Laura",
-        lastName: "Berrios",
-        fullName: "Lic Laura Berrios",
-        initials: "L.B",
+        firstName: "Dr Mary",
+        lastName: "Watson",
+        fullName: "Dr Mary Watson",
+        initials: "M.W",
         __typename: "User"
       },
       __typename: "Appointment"
     },
     {
       id: "41",
-      title: "(Francis B)",
+      title: "(Peter P)",
       createdAt: "2024-07-03 09:09 am",
       timeEnd: "2000-01-01 09:09 am",
       timeStart: "2000-01-01 09:09 am",
@@ -51,10 +51,10 @@ export const AppPaginated = {
       status: 'cancelled',
       dietitian: {
         id: "2",
-        firstName: "Lic Laura",
-        lastName: "Berrios",
-        fullName: "Lic Laura Berrios",
-        initials: "L.B",
+        firstName: "Dr Mary",
+        lastName: "Watson",
+        fullName: "Dr Mary Watson",
+        initials: "M.W",
         __typename: "User"
       },
       __typename: "Appointment"
@@ -70,10 +70,10 @@ export const AppPaginated = {
       status: 'ocurred',
       dietitian: {
         id: "4",
-        firstName: "Dra Sofia",
-        lastName: "Garcia",
-        fullName: "Dra Sofia Garcia",
-        initials: "S.G",
+        firstName: "Dra Sophie",
+        lastName: "Heinz",
+        fullName: "Dra Sophie Heinz",
+        initials: "S.H",
         __typename: "User"
       },
       __typename: "Appointment"
@@ -89,10 +89,10 @@ export const AppPaginated = {
       status: 'pending',
       dietitian: {
         id: "2",
-        firstName: "Lic Laura",
-        lastName: "Berrios",
-        fullName: "Lic Laura Berrios",
-        initials: "L.B",
+        firstName: "Dr Mary",
+        lastName: "Watson",
+        fullName: "Dr Mary Watson",
+        initials: "M.W",
         __typename: "User"
       },
       __typename: "Appointment"
@@ -108,10 +108,10 @@ export const AppPaginated = {
       status: 'cancelled',
       dietitian: {
         id: "3",
-        firstName: "Dr Carlos",
+        firstName: "Dr Morgan",
         lastName: "Mendez",
-        fullName: "Dr Carlos Mendez",
-        initials: "C.M",
+        fullName: "Dr Morgan Freeman",
+        initials: "M.F",
         __typename: "User"
       },
       __typename: "Appointment"
@@ -127,10 +127,10 @@ export const AppPaginated = {
       status: 'pending',
       dietitian: {
         id: "4",
-        firstName: "Dra Sofia",
-        lastName: "Garcia",
-        fullName: "Dra Sofia Garcia",
-        initials: "S.G",
+        firstName: "Dra Sophie",
+        lastName: "Heinz",
+        fullName: "Dra Sophie Heinz",
+        initials: "S.H",
         __typename: "User"
       },
       __typename: "Appointment"

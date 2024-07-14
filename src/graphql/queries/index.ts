@@ -76,28 +76,28 @@ export const CONVERSATION_MUTATION = gql`
 `;
 
 
-// export const ENTRY_MUTATION = gql`
-//   mutation CreateEntry(
-//     $entry_type: String!,
-//     $description: String!,
-//     $image: Upload
-//   ) {
-//     createEntry(input: {
-//       entryType: $entry_type,
-//       description: $description,
-//       image: $image
-//     }) {
-//       id
-//       description
-//       createdAt
-//       user {
-//         id
-//         fullName
-//         initials
-//       }
-//     }
-//   }
-// `;
+export const ENTRY_MUTATION = gql`
+  mutation CreateEntry(
+    $entry_type: String!,
+    $description: String!,
+    $image: Upload
+  ) {
+    createEntry(input: {
+      entryType: $entry_type,
+      description: $description,
+      image: $image
+    }) {
+      id
+      description
+      createdAt
+      user {
+        id
+        fullName
+        initials
+      }
+    }
+  }
+`;
 
 
 export const LOGIN_MUTATION = gql`

@@ -1,7 +1,6 @@
 import { ChangeEvent, useState } from 'react'
 import { useForm } from "react-hook-form"
 import Aside from '@/components/Aside'
-// import { useMutationCreateEntry } from '@/hooks/graph/useMutationCreateEntry'
 import { CreateEntry } from '@/api/actions'
 
 // types
@@ -17,7 +16,6 @@ type Props = {
 
 export const CreateEntryForm: React.FC<Props> = ({refetch, isOpenAside, setIsOpenAside, theme}: Props) => {
   const [loading, setLoading] = useState<boolean>(false)
-  // const { CreateEntry, data, loading, error, reset } = useMutationCreateEntry();
 
   const {
     register,

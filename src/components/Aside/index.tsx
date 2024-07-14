@@ -1,16 +1,19 @@
 import { useState, useEffect } from 'react'
+import useMediaQuery from "@/hooks/useMediaQuery";
+import useDeviceType from "@/hooks/useDeviceType";
 // types
-import { Colors, UserColors } from "@/types";
+import { ThemeType } from "@/types";
 
 type Props = {
   children: JSX.Element
-  userColors: UserColors
+  theme: ThemeType
   title: string
   isOpen?: boolean
   close: () => void
 }
 
-const Aside: React.FC<Props> = ({children, isOpen, close, title, userColors}: Props) => {
+const Aside: React.FC<Props> = ({children, isOpen, close, title, theme}: Props) => {
+  const { isMobile } = useDeviceType();
   const [asideOpen, setAsideOpen] = useState<boolean>(false)
 
   useEffect(() => {
@@ -26,11 +29,13 @@ const Aside: React.FC<Props> = ({children, isOpen, close, title, userColors}: Pr
   }
 
   const injectedStyle = {
-    background: userColors?.sideBar.styleBgGradient
+    background: theme?.sideBar.styleBgGradient
   }
 
+  const width = isMobile ? 'w-[250px]' : 'w-[380px]'
+
   return (
-    <div  className="absolute min-h-screen top-0 right-0 w-[250px]">
+    <aside className={`absolute min-h-screen top-0 right-0 ${width}`}>
       <div  className="p-3 min-h-screen text-white-01" style={injectedStyle}>
         <div className="flex items-center justify-between">
           <span className="">{title}</span>
@@ -41,7 +46,7 @@ const Aside: React.FC<Props> = ({children, isOpen, close, title, userColors}: Pr
           {children}
         </div>
       </div>
-    </div>
+    </aside>
   )
 }
 

@@ -1,18 +1,18 @@
 import { useForm } from "react-hook-form";
 
 // types
-import { UserType, CommentType, UserColors } from '@/types'
+import { UserType, CommentType, ThemeType } from '@/types'
 
 type Props = {
   userStored: UserType
-  userColors: UserColors
+  theme: ThemeType
   entry_id: string
   comments: CommentType[]
   sentComments: (values: any) => Promise<void>
   loading: boolean
 }
 
-export const Comments: React.FC<Props> = ({sentComments, entry_id, comments, userStored, userColors, loading}: Props) => {
+export const Comments: React.FC<Props> = ({sentComments, entry_id, comments, userStored, theme, loading}: Props) => {
     const inserEmoji = (emoji: string) => {
       const inputField = document.getElementById('messageInput') as HTMLInputElement;
 
@@ -36,7 +36,7 @@ export const Comments: React.FC<Props> = ({sentComments, entry_id, comments, use
 
     return (
       <div id='content-comments' className="flex flex-col w-full overflow-hidden xxxs:h-[250px] sm:h-[320px]" style={{borderRadius: '0 0 20px 20px'}}>
-        <div id='content-comments-scroll'  className={`overflow-y-scroll ${userColors?.entry.thirdBgColor} border border-gray-20 px-2`}>
+        <div id='content-comments-scroll'  className={`overflow-y-scroll ${theme?.entry.thirdBgColor} border border-gray-20 px-2`}>
           {comments?.map((comment: CommentType, index: number) => (
             (comment.user.id === userStored.id
               ? <div className="w-full flex items-center justify-end py-2 " key={`comment_${comment.id}-${index}`}>
@@ -65,7 +65,7 @@ export const Comments: React.FC<Props> = ({sentComments, entry_id, comments, use
            <div id='comment-form-content'
               className={`
               min-w-[100px] flex md:flex-row sm:flex-row xxxs:flex-col xxs:flex-col justify-between items-center gap-3 py-3 px-3
-              ${userColors?.entry.secondaryBgColor}`}
+              ${theme?.entry.secondaryBgColor}`}
               style={{borderRadius: '0 0 20px 20px'}}
             >
               <div className="flex flex-grow flex-col xxxs:w-full xxs:w-full " >
@@ -108,7 +108,7 @@ export const Comments: React.FC<Props> = ({sentComments, entry_id, comments, use
                 className={`
                 xxxs:w-full xxs:w-full md:w-auto lg:w-auto px-4 py-1
                 text-white-01 rounded-lg
-                ${userColors?.general.primaryBgColor} ${userColors?.general.primaryBgColorHover}
+                ${theme?.general.primaryBgColor} ${theme?.general.primaryBgColorHover}
                 `}
                 style={{alignSelf: 'end'}}>
                   Enviar

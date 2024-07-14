@@ -11,10 +11,10 @@ import useMediaQuery from "@/hooks/useMediaQuery";
 import { Pagination } from '@/components/Pagination'
 
 // types
-import { SelectedPage, AppointmentType, UserColors} from '@/types'
+import { SelectedPage, AppointmentType, ThemeType} from '@/types'
 
 interface Props {
-  userColors: UserColors
+  theme: ThemeType
   setSelectedPage: (value: SelectedPage) => void;
 };
 
@@ -32,13 +32,12 @@ const statusName = {
   'cancelled': 'Cancelado',
 }
 export const Appointments: React.FC<Props> = ({
-  setSelectedPage, userColors
+  setSelectedPage, theme
 }: Props) => {
-  // const { userStored } = useContext(AuthContext);
   const [filterBy, setFilterBy] = useState<AppointmentType['status'] | string>('pending')
   const location = useLocation();
-  const params = new URLSearchParams(location.search);
-  const statusParam = params.get('status');
+  // const params = new URLSearchParams(location.search);
+  // const statusParam = params.get('status');
   const isAboveMediumScreens = useMediaQuery("(max-width: 450px)");
   const [perPage] =  useState<number>(7)
   const [page, setPage] =  useState<number>(1)
@@ -87,7 +86,7 @@ export const Appointments: React.FC<Props> = ({
           options={optionFilter}
           filterSelected={filterBy}
           setFilterBy={setFilterBy}
-          userColors={userColors}
+          theme={theme}
           isMobile={isAboveMediumScreens}
         />
 
@@ -96,7 +95,7 @@ export const Appointments: React.FC<Props> = ({
             <Loading
               width={45}
               height={45}
-              fillColor={userColors.general.fillSvgColorPrimary}
+              fillColor={theme.general.fillSvgColorPrimary}
             />
           }
 
@@ -111,7 +110,7 @@ export const Appointments: React.FC<Props> = ({
               { appointments?.length > 0 && appointments.map((apt: AppointmentType, index: number) => (
                 <CollapsibleSection
                   key={`appointment_${index}_${apt.id}`}
-                  userColors={userColors}
+                  theme={theme}
                   headerName={
                     <>
                       <IconHandler name={apt.appointmentType}/>&nbsp;[{getStatusName(apt.status)}] { !isAboveMediumScreens && <span>Fecha:</span>} {customDateFormat(apt.startDate, 'DD/MM/YY')}
@@ -128,7 +127,7 @@ export const Appointments: React.FC<Props> = ({
                 currentPage={pagination?.currentPage}
                 prevPage={pagination?.prevPage}
                 nextPage={pagination?.nextPage}
-                userColors={userColors}
+                theme={theme}
                 setPage={setPage}
               />
             </>

@@ -7,15 +7,17 @@ import ChatIcon from "@/components/icons/chatIcon"
 import Logout from "@/components/icons/logout"
 import ArrowRight from "@/components/icons/arrowright"
 import ArrowLeft from "@/components/icons/arrowleft"
-import { NavLink } from "react-router-dom";
+import UserIcon from '@/components/icons/userIcon'
+import { Colors } from '@/types'
+import { NavLink, Link } from "react-router-dom";
 import useMediaQuery from "@/hooks/useMediaQuery";
 
 // types
-import { SelectedPage, UserType, Colors, UserColors } from "@/types";
+import { SelectedPage, UserType, ThemeType } from "@/types";
 
 type Props = {
   selectedPage: SelectedPage;
-  userColors: UserColors
+  theme: ThemeType
   userStored: UserType | null;
   deleteUserStored: () => void;
 }
@@ -42,7 +44,7 @@ const showIcon = (value: string) => {
   }
 };
 
-const Sidebar: React.FC<Props> = ( {selectedPage, userStored, deleteUserStored, userColors}: Props) => {
+const Sidebar: React.FC<Props> = ( {selectedPage, userStored, deleteUserStored, theme}: Props) => {
   const isAboveMediumScreens = useMediaQuery("(max-width: 600px)");
   const [expanded, setExpanded] = useState<boolean>(true);
   const [elementVisible, setElementVisible] = useState<boolean>(true);
@@ -58,7 +60,7 @@ const Sidebar: React.FC<Props> = ( {selectedPage, userStored, deleteUserStored, 
   }, [isAboveMediumScreens]);
 
 
-  if(userColors === null) return null
+  if(theme === null) return null
 
   const toggleExpand = () => {
     setExpanded(!expanded);
@@ -70,7 +72,7 @@ const Sidebar: React.FC<Props> = ( {selectedPage, userStored, deleteUserStored, 
   }
 
   const injectedStyle = {
-    background: userColors.sideBar.styleBgGradient
+    background: theme.sideBar.styleBgGradient
   }
 
   return (
@@ -87,8 +89,13 @@ const Sidebar: React.FC<Props> = ( {selectedPage, userStored, deleteUserStored, 
           { expanded &&
             <>
               <div className="flex flex-col items-center pb-3">
-                <img src={NoImage} alt="Logo" className="h-[6rem] w-[6rem]" />
-                <h1 className="text-lg font-bold mt-2">{userStored?.firstName} {userStored?.lastName}</h1>
+                { userStored?.imageUrl
+                  ? <img src={userStored?.imageUrl} alt="Logo" className="w-[200px] h-[150px]" />
+                  : <img src={NoImage} alt="Logo" className="w-[200px] h-[150px]" />
+                }
+                <Link to='/profile'>
+                  <h1 className="text-lg font-bold mt-2 flex items-center gap-2"><UserIcon width={15} height={15} color={Colors.WHITE01}/> {userStored?.firstName} {userStored?.lastName}</h1>
+                </Link>
               </div>
               <div>
                 <div className="flex flex-col items-center">
@@ -115,14 +122,14 @@ const Sidebar: React.FC<Props> = ( {selectedPage, userStored, deleteUserStored, 
             <NavLink
               key={`sidebar-option-${index}`}
               to={`/${opt.value}`}
-              className={`h-8 mt-3 flex items-center rounded-lg ${userColors.sideBar.sidebarLinkHover} ${expanded ? 'px-4' : 'px-1'} ${selectedPage === opt.value ? `${userColors.sideBar.sidebarLink}` : ''}`}
+              className={`h-8 mt-3 flex items-center rounded-lg ${theme.sideBar.sidebarLinkHover} ${expanded ? 'px-4' : 'px-1'} ${selectedPage === opt.value ? `${theme.sideBar.sidebarLink}` : ''}`}
             >
               {showIcon(opt.icon)}
               {elementVisible && <span className="ml-2">{opt.label}</span>}
             </NavLink>
           ))}
 
-          <span className={userColors.sideBar.sidebarLinkHover + `h-8 mt-10 flex items-center rounded-lg cursor-pointer ${expanded ? 'px-4' : 'px-1'}`}>
+          <span className={theme.sideBar.sidebarLinkHover + `h-8 mt-10 flex items-center rounded-lg cursor-pointer ${expanded ? 'px-4' : 'px-1'}`}>
             <button className="flex" onClick={() => deleteUserStored()}>
               <Logout />
               { elementVisible && <span className="ml-2">Log Out</span> }

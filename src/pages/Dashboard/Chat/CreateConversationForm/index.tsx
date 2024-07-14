@@ -3,11 +3,11 @@ import { useMutationCreateConversation } from '@/hooks/graph/useMutationCreateCo
 import Aside from '@/components/Aside'
 
 // types
-import { UserType, UserColors } from '@/types'
+import { UserType, ThemeType } from '@/types'
 
 type Props = {
   userStored: UserType | null;
-  userColors: UserColors
+  theme: ThemeType
   refetchConversation: () => void
   isOpenAside: boolean;
   setIsOpenAside: (value: boolean) => void;
@@ -18,7 +18,7 @@ export const CreateConversationForm: React.FC<Props> = ({
   isOpenAside,
   setIsOpenAside,
   userStored,
-  userColors
+  theme
 }: Props) => {
   const { CreateConversation, data, loading, error } = useMutationCreateConversation();
 
@@ -69,7 +69,7 @@ export const CreateConversationForm: React.FC<Props> = ({
   return(
     <Aside
       isOpen={isOpenAside}
-      userColors={userColors}
+      theme={theme}
       close={() => closeAside()}
       title="Nueva Conversación"
     >
@@ -93,7 +93,7 @@ export const CreateConversationForm: React.FC<Props> = ({
             <label htmlFor="message">
               <textarea
                 id="message"
-                className={`w-full px-2 ${userColors?.general.baseTextColor}`} autoComplete='off'
+                className={`w-full px-2 ${theme?.general.baseTextColor}`} autoComplete='off'
                 placeholder="Dile hola a tu dietista"
                 {...register("message", {
                   required: true,
@@ -106,8 +106,8 @@ export const CreateConversationForm: React.FC<Props> = ({
             <button
               type="submit"
               className={`px-3 py-1 w-full
-                ${userColors?.general.secondaryBgColor}
-                ${userColors?.general.secondaryBgColorHover}
+                ${theme?.general.secondaryBgColor}
+                ${theme?.general.secondaryBgColorHover}
                 text-white rounded-lg`}
               disabled={loading}
             >

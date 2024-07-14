@@ -1,23 +1,21 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useState, useContext } from 'react'
+import { AuthContext } from '@/AuthProviderManager'
 import { useForm } from "react-hook-form"
 import Aside from '@/components/Aside'
-// import { useMutationCreateEntry } from '@/hooks/graph/useMutationCreateEntry'
-import { CreateEntry } from '@/api/actions'
+import { UpdateProfile } from '@/api/actions'
 
 // types
 import { ThemeType } from "@/types";
 
 type Props = {
-  refetch: () => void
   theme: ThemeType
-  asignCLientForUploadImage: () => void;
   isOpenAside: boolean;
   setIsOpenAside: (value: boolean) => void;
 };
 
-export const CreateEntryForm: React.FC<Props> = ({refetch, isOpenAside, setIsOpenAside, theme}: Props) => {
+export const ProfileForm: React.FC<Props> = ({isOpenAside, setIsOpenAside, theme}: Props) => {
+  const { userStored, storeUser } = useContext(AuthContext);
   const [loading, setLoading] = useState<boolean>(false)
-  // const { CreateEntry, data, loading, error, reset } = useMutationCreateEntry();
 
   const {
     register,
@@ -29,28 +27,22 @@ export const CreateEntryForm: React.FC<Props> = ({refetch, isOpenAside, setIsOpe
 
   const watchImage: HTMLImageElement = watch('image');
 
-  const createAction = async (e: React.SyntheticEvent): Promise<void> => {
+  const updateProfile = async (e: React.SyntheticEvent): Promise<void> => {
     setLoading(true)
     e.preventDefault();
 
     const formData = new FormData();
     formData.append('image', watch('image')); // Agrega el archivo de imagen al FormData
-    formData.append('description', watch('description'));
-    formData.append('entry_type', watch('entry_type'));
+    formData.append('first_name', watch('first_name'));
+    formData.append('last_name', watch('last_name'));
 
     try {
-      const result = await CreateEntry(formData);
-      refetch()
       setIsOpenAside(false)
+      const result = await UpdateProfile(formData);
 
-      if (result) setLoading(false)
-      const descriptionField = document.getElementById('description') as HTMLInputElement;
-      descriptionField.value=''
-      const myDiv = document.getElementById('entry-list-scroller')
-      if (myDiv) {
-        setTimeout(() => {
-          myDiv.scrollTop = myDiv.scrollHeight;
-        }, 2);
+      if (result.user) {
+        setLoading(false)
+        storeUser(result.user)
       }
     } catch (error) {
       console.log('error', error)
@@ -81,18 +73,18 @@ export const CreateEntryForm: React.FC<Props> = ({refetch, isOpenAside, setIsOpe
       isOpen={isOpenAside}
       theme={theme}
       close={() => setIsOpenAside(false)}
-      title="Nueva Entrada"
+      title="Update Profile"
     >
       <>
         <form
           target="_blank"
-          onSubmit={createAction}
+          onSubmit={updateProfile}
           method="POST"
-          id="form-create-entry"
+          id="form-update-profile"
           encType="multipart/form-data"
         >
           <div className="py-2">
-            <label htmlFor="image">Imagen:</label>
+            <label htmlFor="image">Image:</label>
             <input
               type="file"
               name='image'
@@ -100,51 +92,51 @@ export const CreateEntryForm: React.FC<Props> = ({refetch, isOpenAside, setIsOpe
               onChange={onImageChange}
             />
           </div>
-          {watchImage && (
+          { (watchImage || userStored?.imageUrl) && (
             <div className='flex justify-center py-2'>
-              <img id='image-preview' className='w-48 h-90'/>
+              <img id='image-preview' className="w-[200px] h-[150px]" src={ userStored?.imageUrl ? userStored.imageUrl : ''} />
             </div>
           )}
           <div className="py-2">
-            <label htmlFor="description">
-              Descripcion
-              <textarea
-                id="description"
+            <label htmlFor="first_name">
+              First Name
+              <input
+                id="first_name"
                 className={`w-full p-1 ${theme?.general.baseTextColor}`}
                 autoComplete='off'
-                placeholder="Agregue una descripcion"
-                {...register("description", {
+                placeholder="Add first name"
+                defaultValue={userStored?.firstName}
+                {...register("first_name", {
                   required: true,
                   minLength: 1,
                 })}
               />
             </label>
           </div>
-          <div className="py-4">
-            <label htmlFor="entry_type">
-              Tipo de entrada
-              <select
-                id="entry_type"
-                className="w-full px-2 py-1 text-black"
-                placeholder="Seleccione un tipo"
-                {...register("entry_type", {
+
+          <div className="py-2">
+            <label htmlFor="last_name">
+              Last Name
+              <input
+                id="last_name"
+                className={`w-full p-1 ${theme?.general.baseTextColor}`}
+                autoComplete='off'
+                placeholder="Add last name"
+                defaultValue={userStored?.lastName}
+                {...register("last_name", {
                   required: true,
+                  minLength: 1,
                 })}
-              >
-                <option value="FoodEntry">Comida</option>
-                <option value="MetricEntry">Metricas</option>
-                <option value="WorkoutEntry">Ejercicio </option>
-                <option value="NoteEntry">Notas</option>
-                <option value="OtherEntry">Otros</option>
-              </select>
+              />
             </label>
           </div>
+
           <div className="pt-4">
             <button type="submit"
               className={`px-3 py-1 w-full ${theme?.general.secondaryBgColor} ${theme?.general.secondaryBgColorHover} text-white rounded-lg`}
               disabled={loading}
             >
-              Crear
+              Update
             </button>
           </div>
         </form>
@@ -153,4 +145,4 @@ export const CreateEntryForm: React.FC<Props> = ({refetch, isOpenAside, setIsOpe
   )
 };
 
-export default CreateEntryForm;
+export default ProfileForm;

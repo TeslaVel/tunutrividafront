@@ -1,12 +1,12 @@
 import { useContext, useState, useEffect, Suspense, useRef } from 'react';
-import Head from "@/pages/Landing/Head";
+import Head from "@/pages/Head";
 import ProtectedRoute from '@/ProtectedRoute';
 import Dashboard from '@/pages/Dashboard';
 import Sessions from '@/pages/Dashboard/Sessions';
 import Appointments from '@/pages/Dashboard/Appointments';
+import Profile from '@/pages/Dashboard/Profile';
 import Chat from '@/pages/Dashboard/Chat';
 import NotFound from '@/pages/NotFound';
-// import { colorByGender } from '@/components/utils/GeneralUtils'
 
 import {
   Route,
@@ -28,7 +28,7 @@ type Props = {
 export const AppRoutes: React.FC<Props> = ({ asignCLientForUploadImage}: Props) => {
   const [selectedPage, setSelectedPage] = useState<SelectedPage>(SelectedPage.Landing);
   const scrollRef = useRef<number | null>(null);
-  const { userStored, userColors } = useContext(AuthContext);
+  const { userStored, theme } = useContext(AuthContext);
   const [isTopOfPage, setIsTopOfPage] = useState<boolean>(true);
 
   useEffect(() => {
@@ -73,14 +73,14 @@ export const AppRoutes: React.FC<Props> = ({ asignCLientForUploadImage}: Props) 
         <BrowserRouter>
           <div className={`${isLogged ? 'flex min-h-screen' : ''}`}>
             <Head
-              userColors={userColors}
+              theme={theme}
               isLogged={isLogged}
               isTopOfPage={isTopOfPage}
               selectedPage={selectedPage}
               setSelectedPage={selectAndCenterPage}
             />
 
-            <div className={`${isLogged ? `flex-1 h-[100%] ${userColors?.general.baseBgColor} ${userColors?.general.baseTextColor}` : ''}`} id='routes-content'>
+            <div className={`${isLogged ? `flex-1 h-[100%] ${theme?.general.baseBgColor} ${theme?.general.baseTextColor}` : ''}`} id='routes-content'>
               <Routes>
                 <Route element={<ProtectedRoute isNotLogged={isLogged} redirectPath="/dashboard" />}>
                   <Route index path="/" element={
@@ -92,30 +92,37 @@ export const AppRoutes: React.FC<Props> = ({ asignCLientForUploadImage}: Props) 
                 </Route>
 
 
-                { isLogged && userColors &&
+                { isLogged && theme &&
                   <Route element={<ProtectedRoute isNotLogged={!isLogged} redirectPath="/" />}>
                     <Route path="/dashboard" element={
                       <Dashboard
                         asignCLientForUploadImage={asignCLientForUploadImage}
                         selectedPage={selectedPage}
-                        userColors={userColors}
+                        theme={theme}
                         setSelectedPage={selectAndCenterPage}/>
                     }/>
 
                     <Route path="/sessions" element={
                       <Sessions
-                        userColors={userColors}
+                        theme={theme}
                         setSelectedPage={selectAndCenterPage}/>
                     }/>
                     <Route path="/chat" element={
                       <Chat
-                        userColors={userColors}
+                        theme={theme}
                         setSelectedPage={selectAndCenterPage}/>
                     }/>
 
                     <Route path="/appointments" element={
                       <Appointments
-                        userColors={userColors}
+                        theme={theme}
+                        setSelectedPage={selectAndCenterPage}
+                      />
+                    }/>
+
+                    <Route path="/profile" element={
+                      <Profile
+                        theme={theme}
                         setSelectedPage={selectAndCenterPage}
                       />
                     }/>

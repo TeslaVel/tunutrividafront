@@ -8,16 +8,16 @@ import { Loading } from '@/components/Loading'
 import { CreateConversationForm } from './CreateConversationForm'
 
 // types
-import { SelectedPage, UserColors } from "@/types"
+import { SelectedPage, ThemeType } from "@/types"
 
 type Props = {
-  userColors: UserColors
+  theme: ThemeType
   setSelectedPage: (value: SelectedPage) => void;
 };
 const VITE_SOCKET_SERVER = import.meta.env.VITE_APP_WEB_SOCKET
 const cable: any = actioncable.createConsumer(VITE_SOCKET_SERVER)
 
-export const Chat: React.FC<Props> = ({setSelectedPage, userColors }: Props) => {
+export const Chat: React.FC<Props> = ({setSelectedPage, theme }: Props) => {
   const { userStored } = useContext(AuthContext)
   const { loading, data, refetch } = UseGetConversation()
   const [isOpenAside, setIsOpenAside] = useState<boolean>(false)
@@ -67,7 +67,7 @@ export const Chat: React.FC<Props> = ({setSelectedPage, userColors }: Props) => 
             <Loading
               width={45}
               height={45}
-              fillColor={userColors.general.fillSvgColorPrimary}
+              fillColor={theme.general.fillSvgColorPrimary}
             />
           }
           { !loading &&
@@ -77,14 +77,14 @@ export const Chat: React.FC<Props> = ({setSelectedPage, userColors }: Props) => 
                   refetchConversation={refetchConversation}
                   conversation={conversation}
                   userStored={userStored}
-                  userColors={userColors}
+                  theme={theme}
                   handleCableAction={handleCableAction}
                 />
               }
 
               { !conversation &&
                 <div className="flex justify-center p-[70px]">
-                  <button onClick={() => setIsOpenAside(true)} className={`px-3 py-1 ${userColors?.general.primaryBgColor} ${userColors?.general.primaryBgColorHover} text-white rounded-lg`}>
+                  <button onClick={() => setIsOpenAside(true)} className={`px-3 py-1 ${theme?.general.primaryBgColor} ${theme?.general.primaryBgColorHover} text-white rounded-lg`}>
                     Crear Nueva Conversación
                   </button>
                 </div>
@@ -96,7 +96,7 @@ export const Chat: React.FC<Props> = ({setSelectedPage, userColors }: Props) => 
       </Scroller>
       <CreateConversationForm
         userStored={userStored}
-        userColors={userColors}
+        theme={theme}
         isOpenAside={isOpenAside}
         setIsOpenAside={setIsOpenAside}
         refetchConversation={refetchConversation}

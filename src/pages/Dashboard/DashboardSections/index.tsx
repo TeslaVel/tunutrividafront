@@ -3,16 +3,16 @@ import UserHome from './Home/UserHome'
 import Palette from '@/components/Palette'
 
 // types
-import { UserType, UserColors } from "@/types";
+import { UserType, ThemeType } from "@/types";
 
 type Props = {
   userStored: UserType | null
-  userColors: UserColors
+  theme: ThemeType
   optionSelected: string
   asignCLientForUploadImage: () => void
 };
 
-const DashboardSections = ({optionSelected, userStored, userColors, asignCLientForUploadImage}: Props) => {
+const DashboardSections = ({optionSelected, userStored, theme, asignCLientForUploadImage}: Props) => {
   if (optionSelected === 'entries') {
     return (
       <Entries asignCLientForUploadImage={asignCLientForUploadImage}/>
@@ -31,7 +31,7 @@ const DashboardSections = ({optionSelected, userStored, userColors, asignCLientF
     return (
       <UserHome
         userStored={userStored}
-        userColors={userColors}
+        theme={theme}
       />
     )
   }

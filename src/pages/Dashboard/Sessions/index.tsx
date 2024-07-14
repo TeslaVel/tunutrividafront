@@ -7,14 +7,14 @@ import { customDateFormat } from '@/components/utils/TimeUtils'
 import { Loading } from '@/components/Loading'
 import { Pagination } from '@/components/Pagination'
 // types
-import { SelectedPage, SessionType, PaginatedSessionType, UserColors } from "@/types";
+import { SelectedPage, SessionType, PaginatedSessionType, ThemeType } from "@/types";
 
 type Props = {
-  userColors: UserColors
+  theme: ThemeType
   setSelectedPage: (value: SelectedPage) => void;
 };
 
-export const Sessions: React.FC<Props> = ({setSelectedPage, userColors}: Props) => {
+export const Sessions: React.FC<Props> = ({setSelectedPage, theme}: Props) => {
   const [perPage] =  useState<number>(7)
   const [page, setPage] =  useState<number>(1)
 
@@ -43,7 +43,7 @@ export const Sessions: React.FC<Props> = ({setSelectedPage, userColors}: Props) 
             <Loading
               width={45}
               height={45}
-              fillColor={userColors.general.fillSvgColorPrimary}/>
+              fillColor={theme.general.fillSvgColorPrimary}/>
         }
 
         { !loading &&
@@ -60,7 +60,7 @@ export const Sessions: React.FC<Props> = ({setSelectedPage, userColors}: Props) 
                   <CollapsibleSection
                     key={`session_${index}_${session.id}`}
                     headerName={customDateFormat(session.date, 'DD/MM/YY')}
-                    userColors={userColors}
+                    theme={theme}
                   >
                     <>
                       <div className="flex flex-row gap-10">
@@ -97,7 +97,7 @@ export const Sessions: React.FC<Props> = ({setSelectedPage, userColors}: Props) 
                             {session.diet.dietMealWeeks.map((dmw, index) => (
                               <div
                                 key={index}
-                                className={`text-white ${userColors.general.primaryBgColor} border font-bold`}
+                                className={`text-white ${theme.general.primaryBgColor} border font-bold`}
                               >
                                 {dmw.dayOfWeek}
                               </div>
@@ -129,7 +129,7 @@ export const Sessions: React.FC<Props> = ({setSelectedPage, userColors}: Props) 
                   currentPage={pagination?.currentPage}
                   prevPage={pagination?.prevPage}
                   nextPage={pagination?.nextPage}
-                  userColors={userColors}
+                  theme={theme}
                   setPage={setPage}
                 />
               </>

@@ -13,15 +13,15 @@ import BmMaleRange3 from "@/assets/ntv/bmi/bm_male_range_3.png"
 import BmMaleRange4 from "@/assets/ntv/bmi/bm_male_range_4.png"
 import BmMaleRange5 from "@/assets/ntv/bmi/bm_male_range_5.png"
 
-import { UserColors } from "@/types";
+import { ThemeType } from "@/types";
 
 type Props = {
   gender: 'female' | 'male' | null
   bmi?: string
-  userColors: UserColors
+  theme: ThemeType
 }
 
-const BmiRanges: React.FC<Props> = ({ bmi, gender = 'female', userColors}: Props) => {
+const BmiRanges: React.FC<Props> = ({ bmi, gender = 'female', theme}: Props) => {
   if (!bmi) return null
   if (!gender) return null
 
@@ -56,13 +56,13 @@ const BmiRanges: React.FC<Props> = ({ bmi, gender = 'female', userColors}: Props
       {ranges[gender].map((range, index) => (
         <div key={index}
           className={` flex flex-col items-center justify-between px-3 py-3 h-auto
-          ${ (bmiFloat > range.min && bmiFloat <= range.max) ? `${userColors?.bmi.itemSelected} rounded-lg` : ''}
+          ${ (bmiFloat > range.min && bmiFloat <= range.max) ? `${theme?.bmi.itemSelected} rounded-lg` : ''}
           `}
         >
           <img src={range.image} alt={`Imagen ${index}`} style={imgStyle} className=" flex-1"/>
           <div className="flex flex-col gap-3 ">
-            <span className={`text-center ${userColors?.general.baseTextColor}`}> {`<= ${range.max}`}</span>
-            <span className={`text-center ${userColors?.general.baseTextColor}`}>{range.title}</span>
+            <span className={`text-center ${theme?.general.baseTextColor}`}> {`<= ${range.max}`}</span>
+            <span className={`text-center ${theme?.general.baseTextColor}`}>{range.title}</span>
           </div>
         </div>
       ))}

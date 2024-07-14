@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { useForm } from "react-hook-form";
-import { SelectedPage } from "@/types";
+// import { SelectedPage } from "@/types";
 import { AuthContext } from '@/AuthProviderManager';
 import { useMutationLogin } from '@/hooks/graph/useMutationLogin';
 import Modal from "@/components/Modal/Modal";
@@ -14,17 +14,7 @@ type Props = {
 
 const LoginModal: React.FC<Props> = ({ formId, isOpen, closeAction}: Props) => {
   const { storeUser } = useContext(AuthContext);
-  const { Login, data } = useMutationLogin();
-
-  // useEffect(() =>{
-  //   if ( data && data?.createAuth ) {
-  //     if (data.createAuth.token !== null) {
-  //       storeUser(data.createAuth);
-  //     } else {
-  //       alert('credentials invalid')
-  //     }
-  //   }
-  // }, [data?.createAuth]);
+  const { Login } = useMutationLogin();
 
   const inputStyles =`
   bg-secondly-female-50 border border-gray-300 text-white sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600
@@ -37,7 +27,6 @@ const LoginModal: React.FC<Props> = ({ formId, isOpen, closeAction}: Props) => {
 
   const {
     register,
-    trigger,
     getValues,
     handleSubmit,
     formState: { errors },

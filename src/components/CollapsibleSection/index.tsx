@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import IconHandler from '@/components/icons/IconHandler'
-import { Colors, UserColors } from '@/types'
+import { Colors, ThemeType } from '@/types'
 
 type Props = {
   headerName: JSX.Element | string
-  userColors: UserColors
+  theme: ThemeType
   label?: JSX.Element
   children: JSX.Element
   collapsedByDefault?: boolean
@@ -25,7 +25,7 @@ const CollapsibleSection: React.FC<Props> = ({
   children,
   label,
   headerName,
-  userColors
+  theme
 }: Props ) => {
   const [collapsed, setCollapsed] = useState(collapsedByDefault)
 
@@ -34,7 +34,7 @@ const CollapsibleSection: React.FC<Props> = ({
   return (
     <div className="flex flex-col w-full  mb-2 cursor-pointer">
       <div
-        className={`flex items-center justify-between h-[30px] px-3 text-white-01 ${userColors.collapsible.primaryBgColor}`}
+        className={`flex items-center justify-between h-[30px] px-3 text-white-01 ${theme.collapsible.primaryBgColor}`}
         onClick={() => toggleChildrenVisibility()}
         style={ collapsed ? {borderRadius: '20px'} : {borderRadius: '15px 15px 0 0'}}
       >
@@ -53,7 +53,7 @@ const CollapsibleSection: React.FC<Props> = ({
         </div>
       </div>
       { !collapsed &&
-        <div className={`${userColors?.collapsible.secondaryBgColor}`} style={sectionBody}>
+        <div className={`${theme?.collapsible.secondaryBgColor}`} style={sectionBody}>
           {children}
         </div>
       }

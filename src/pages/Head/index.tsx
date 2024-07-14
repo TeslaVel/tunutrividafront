@@ -4,23 +4,23 @@ import Navbar from "./Navbar";
 import { AuthContext } from '@/AuthProviderManager';
 
 // types
-import { SelectedPage, UserColors } from "@/types";
+import { SelectedPage, ThemeType } from "@/types";
 
 type Props = {
   isLogged: boolean;
-  userColors: UserColors | null
+  theme: ThemeType | null
   isTopOfPage: boolean;
   selectedPage: SelectedPage;
   setSelectedPage: (value: SelectedPage, center?: boolean) => void;
 }
 
-const Head: React.FC<Props> = ({isLogged, isTopOfPage, selectedPage, setSelectedPage, userColors}: Props) => {
-  if (!userColors) return null
+const Head: React.FC<Props> = ({isLogged, isTopOfPage, selectedPage, setSelectedPage, theme}: Props) => {
+  if (!theme) return null
   const { userStored, deleteUserStored} = useContext(AuthContext);
   return (
     isLogged
     ? <Sidebar
-      userColors={userColors}
+      theme={theme}
       userStored={userStored}
       deleteUserStored={deleteUserStored}
       selectedPage={selectedPage} />

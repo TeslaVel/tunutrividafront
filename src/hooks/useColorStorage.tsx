@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { UserColors } from "@/types";
+import { ThemeType } from "@/types";
 
-export function useColorStorage (key: string, initialValue: UserColors){
-  const getLocalStorage = (): UserColors => {
+export function useColorStorage (key: string, initialValue: ThemeType){
+  const getLocalStorage = (): ThemeType => {
     let val = null;
     try {
       const item = window.localStorage.getItem(key);
@@ -14,9 +14,9 @@ export function useColorStorage (key: string, initialValue: UserColors){
     }
     return initialValue
   }
-  const [localData, setLocalData] = useState<UserColors >(() => getLocalStorage());
+  const [localData, setLocalData] = useState<ThemeType >(() => getLocalStorage());
 
-  const setLocalStorage = (newValue: UserColors): void => {
+  const setLocalStorage = (newValue: ThemeType): void => {
     try {
       window.localStorage.setItem(key, JSON.stringify(newValue))
       setLocalData(newValue);

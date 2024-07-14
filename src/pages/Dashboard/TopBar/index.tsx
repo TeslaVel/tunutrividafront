@@ -1,11 +1,11 @@
 import React from 'react';
 
 // types
-import { UserColors } from "@/types";
+import { ThemeType } from "@/types";
 
 type Props = {
   setOptionSelected: (value: string) => void;
-  userColors: UserColors
+  theme: ThemeType
   optionSelected: string;
 };
 
@@ -17,11 +17,11 @@ interface TopBarOption {
 
 const tapOptions: TopBarOption[] = [
   { label: 'Dashboard', value: 'dashboard', visible: true},
-  { label: 'Entradas', value: 'entries', visible: true},
-  { label: 'Metas', value: 'goals', visible: false}
+  { label: 'Entries', value: 'entries', visible: true},
+  { label: 'Goals', value: 'goals', visible: false}
 ];
 
-const TopBar: React.FC<Props> = ({ setOptionSelected, optionSelected, userColors}: Props) => {
+const TopBar: React.FC<Props> = ({ setOptionSelected, optionSelected, theme}: Props) => {
   return (
     <>
       {
@@ -29,8 +29,8 @@ const TopBar: React.FC<Props> = ({ setOptionSelected, optionSelected, userColors
           if (!opt.visible) return
 
           return <span key={`${index}-${opt}`}
-                    className={`h-[30px] cursor-pointer p-2  ${userColors?.topBar.optionHover}
-                    ${opt.value === optionSelected ? `${userColors?.topBar.optionSelected}` : `${userColors?.topBar.option}` } `}
+                    className={`h-[30px] cursor-pointer p-2  ${theme?.topBar.optionHover}
+                    ${opt.value === optionSelected ? `${theme?.topBar.optionSelected}` : `${theme?.topBar.option}` } `}
                     onClick={() => setOptionSelected(opt.value)}
                   >
                     {opt.label}

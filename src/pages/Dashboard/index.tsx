@@ -5,11 +5,11 @@ import { AuthContext } from '@/AuthProviderManager';
 import Scroller from '@/components/Scroller/Scroller'
 
 // types
-import { SelectedPage, UserColors } from "@/types";
+import { SelectedPage, ThemeType } from "@/types";
 
 type Props = {
   selectedPage: SelectedPage
-  userColors: UserColors
+  theme: ThemeType
   setSelectedPage: (value: SelectedPage) => void;
   asignCLientForUploadImage: () => void;
 };
@@ -17,7 +17,7 @@ type Props = {
 // const VITE_SOCKET_SERVER = import.meta.env.VITE_APP_WEB_SOCKET
 // const cable = actioncable.createConsumer(VITE_SOCKET_SERVER);
 
-export const Dashboard: React.FC<Props> = ({setSelectedPage, userColors, asignCLientForUploadImage}: Props) => {
+export const Dashboard: React.FC<Props> = ({setSelectedPage, theme, asignCLientForUploadImage}: Props) => {
   const { userStored } = useContext(AuthContext);
   const [optionSelected, setOptionSelected] = useState<string>('dashboard')
 
@@ -33,7 +33,7 @@ export const Dashboard: React.FC<Props> = ({setSelectedPage, userColors, asignCL
           <TopBar
             optionSelected={optionSelected}
             setOptionSelected={setOptionSelected}
-            userColors={userColors}
+            theme={theme}
             />
         }
       >
@@ -44,7 +44,7 @@ export const Dashboard: React.FC<Props> = ({setSelectedPage, userColors, asignCL
           <DashboardSections
             asignCLientForUploadImage={asignCLientForUploadImage}
             userStored={userStored}
-            userColors={userColors}
+            theme={theme}
             optionSelected={optionSelected}
           />
         </section>

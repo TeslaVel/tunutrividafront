@@ -1,8 +1,8 @@
 // types
-import { UserColors } from "@/types";
+import { ThemeType } from "@/types";
 
 type Props = {
-  userColors: UserColors
+  theme: ThemeType
   totalPages: number
   currentPage: number
   prevPage: number | null
@@ -10,7 +10,7 @@ type Props = {
   setPage: React.Dispatch<React.SetStateAction<number>>
 }
 
-export const Pagination: React.FC<Props> = ({totalPages, currentPage = 1, prevPage, nextPage, userColors, setPage} : Props) => {
+export const Pagination: React.FC<Props> = ({totalPages, currentPage = 1, prevPage, nextPage, theme, setPage} : Props) => {
   if (prevPage === null && nextPage === null ) return null
   const distance = 5
   const rangeStart = ((totalPages - currentPage) < (distance - 1))
@@ -40,7 +40,7 @@ export const Pagination: React.FC<Props> = ({totalPages, currentPage = 1, prevPa
             <li key={`pagination-item-total-${totalPages}`}>
               <span
                 onClick={() => setPage(1)}
-                className={`flex items-center cursor-pointer justify-center px-3 h-8 text-lg leading-tight ${userColors.general.baseTextColor}`}>
+                className={`flex items-center cursor-pointer justify-center px-3 h-8 text-lg leading-tight ${theme.general.baseTextColor}`}>
                 ({1})
               </span>
             </li>
@@ -50,7 +50,7 @@ export const Pagination: React.FC<Props> = ({totalPages, currentPage = 1, prevPa
                 onClick={() => setPage(prevPage)}
                 className={`flex items-center justify-center px-3 h-8 ml-0 leading-tight
                   text-white-01 rounded-l-lg hover:bg-gray-100
-                  ${userColors.general.primaryBgColor} ${userColors.general.primaryBgColorHover}
+                  ${theme.general.primaryBgColor} ${theme.general.primaryBgColorHover}
                   disabled:bg-gray-20
                 `}>
                 <span className="sr-only">Previous</span>
@@ -68,8 +68,8 @@ export const Pagination: React.FC<Props> = ({totalPages, currentPage = 1, prevPa
               onClick={() => setPage(element)}
               className={`flex items-center justify-center px-3 h-8 leading-tight
               text-white-01 ${getClassRounded(element)}
-              ${ element === currentPage ? userColors.general.secondaryBgColor : userColors.general.primaryBgColor }
-              ${ element === currentPage ? '' : userColors.general.primaryBgColorHover }`}>
+              ${ element === currentPage ? theme.general.secondaryBgColor : theme.general.primaryBgColor }
+              ${ element === currentPage ? '' : theme.general.primaryBgColorHover }`}>
                 {element}
             </button>
           </li>
@@ -81,7 +81,7 @@ export const Pagination: React.FC<Props> = ({totalPages, currentPage = 1, prevPa
               onClick={() => setPage(nextPage)}
               className={`flex items-center justify-center px-3 h-8 leading-tight
                 text-white-01 rounded-r-lg
-                ${userColors.general.primaryBgColor} ${userColors.general.primaryBgColorHover}
+                ${theme.general.primaryBgColor} ${theme.general.primaryBgColorHover}
                 disabled:bg-gray-20
               `}>
               <span className="sr-only">Next</span>
@@ -95,7 +95,7 @@ export const Pagination: React.FC<Props> = ({totalPages, currentPage = 1, prevPa
           <li key={`pagination-item-total-${totalPages}`}>
             <span
               onClick={() => setPage(totalPages)}
-              className={`flex items-center cursor-pointer justify-center px-3 h-8 text-lg leading-tight ${userColors.general.baseTextColor}`}>
+              className={`flex items-center cursor-pointer justify-center px-3 h-8 text-lg leading-tight ${theme.general.baseTextColor}`}>
               ({totalPages})
             </span>
           </li>

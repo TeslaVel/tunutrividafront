@@ -39,13 +39,14 @@ export interface UserType {
   firstName: string
   lastName: string
   dietitianId: string
+  imageUrl: string;
   height: string
   weight: string
   imc: string
   age: string
 }
 
-export interface UserColors {
+export interface ThemeType {
   [key: string]: {
     [key: string]: string
   },

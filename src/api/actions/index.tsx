@@ -31,6 +31,26 @@ export async function CreateEntry(data: any) {
   }
 }
 
+export async function UpdateProfile(data: any) {
+  const userStored = getUserStored()
+
+  if (userStored?.token) {
+    try {
+      const response = await axios.post(`${VITE_API_SERVER}/profiles`, data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${userStored.token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error sending data:', error);
+      throw error;
+    }
+  } else {
+    throw 'Undefined token'
+  }
+}
 
 // export async function fetchData() {
 //   try {

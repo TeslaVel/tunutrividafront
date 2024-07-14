@@ -4,21 +4,21 @@ import { useMutationCreateComment } from '@/hooks/graph/useMutationCreateComment
 import { customDateFormat } from '@/components/utils/TimeUtils'
 
 //
-import { EntryType, UserType, CommentType, UserColors } from '@/types'
+import { EntryType, UserType, CommentType, ThemeType } from '@/types'
 
 type Props = {
   userStored: UserType
-  userColors: UserColors
+  theme: ThemeType
   entry: EntryType
   showComments: Boolean
   isList: Boolean
   setAction?: (entry: EntryType) => void
 }
 
-export const Entry: React.FC<Props> = ({ entry, isList, setAction, showComments, userStored, userColors }: Props) => {
+export const Entry: React.FC<Props> = ({ entry, isList, setAction, showComments, userStored, theme }: Props) => {
     const entryClasses = `
     entries relative flex flex-col flex-wrap
-    ${userColors?.general.baseBgColor} ${userColors?.entry.border} ${isList ? 'w-full' : 'w-full'}`;
+    ${theme?.general.baseBgColor} ${theme?.entry.border} ${isList ? 'w-full' : 'w-full'}`;
 
     const [commentList, setCommentList] = useState<CommentType[]>(entry.comments);
     const { CreateComment, data, loading, error, reset } = useMutationCreateComment();
@@ -63,9 +63,9 @@ export const Entry: React.FC<Props> = ({ entry, isList, setAction, showComments,
           className={entryClasses}
           style={injectdStyles}
         >
-        <div className={`flex items-center p-4 ${userColors?.entry.secondaryBgColor} text-white-01`} style={{borderRadius: '20px 20px 0 0'}}>
+        <div className={`flex items-center p-4 ${theme?.entry.secondaryBgColor} text-white-01`} style={{borderRadius: '20px 20px 0 0'}}>
           <div>
-            <span className={`w-[3rem] h-[3rem] ${userColors?.entry.primaryBgColor} rounded-full mr-4 flex items-center justify-center`}></span>
+            <span className={`w-[3rem] h-[3rem] ${theme?.entry.primaryBgColor} rounded-full mr-4 flex items-center justify-center`}></span>
           </div>
           <div>
             <p className="text-lg font-bold">{entry.user.fullName }</p>
@@ -88,7 +88,7 @@ export const Entry: React.FC<Props> = ({ entry, isList, setAction, showComments,
         {showComments && commentList.length > 0 &&
           <Comments
             sentComments={sentComments}
-            userColors={userColors}
+            theme={theme}
             loading={loading}
             userStored={userStored}
             entry_id={entry.id}

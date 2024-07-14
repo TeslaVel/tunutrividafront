@@ -1,7 +1,7 @@
 
-import { UserType, Colors, UserColors} from "@/types";
+import { UserType, Colors, ThemeType} from "@/types";
 
-export const colorByGender = (gender: UserType[`gender`] = 'male'): UserColors => {
+export const colorByGender = (gender: UserType[`gender`] = 'male'): ThemeType => {
   const gradient1 =  gender === 'male' ? Colors.PRIMARYMALE500 : Colors.PRIMARYFEMALE500
   const gradient2 =  gender === 'male' ? Colors.PRIMARYMALE700 : Colors.PRIMARYFEMALE700
 

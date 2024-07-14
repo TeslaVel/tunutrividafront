@@ -1,8 +1,8 @@
-import { GeneralOptions, UserColors, AppointmentType } from '@/types'
+import { GeneralOptions, ThemeType, AppointmentType } from '@/types'
 import './style.css'
 type Props = {
   options: Array<GeneralOptions>
-  userColors: UserColors
+  theme: ThemeType
   filterSelected: string;
   klass?: string;
   setFilterBy: React.Dispatch<React.SetStateAction<AppointmentType['status']>>
@@ -13,7 +13,7 @@ export const GeneralFilter: React.FC<Props> = ({
   options,
   filterSelected,
   setFilterBy,
-  userColors,
+  theme,
   isMobile=false
 }: Props) => {
   if(!setFilterBy) return null
@@ -21,10 +21,10 @@ export const GeneralFilter: React.FC<Props> = ({
   if(options.length < 1) return null
 
   return (
-    <>
+    <div className='flex justify-center'>
       { isMobile &&
         <select onChange={(e) => setFilterBy(e.target.value)}
-        className={`w-full px-3 py-1 cursor h-auto rounded-md ${userColors?.collapsible.primaryBgColor} ${userColors?.general.border} text-white-01`}>
+        className={`w-full px-3 py-1 cursor h-auto rounded-md ${theme?.collapsible.primaryBgColor} ${theme?.general.border} text-white-01`}>
           { options.map((opt: GeneralOptions, index: number) => (
             <option
               key={`filter-select-${opt.value}-${index}`}
@@ -38,14 +38,14 @@ export const GeneralFilter: React.FC<Props> = ({
       }
 
       { !isMobile &&
-        <nav className={`ntv-filter-tab inline-flex h-auto rounded-md ${userColors?.general.borderL} ${userColors?.filter.primaryBgColor}`}>
+        <nav className={`ntv-filter-tab inline-flex h-auto rounded-md ${theme?.general.borderL} ${theme?.filter.primaryBgColor}`}>
           { options.map((opt: GeneralOptions, index: number) => (
             <button
               key={index}
               className={`
                 ntv-filter-tab-button
-                ${userColors?.filter.borderR} ${userColors?.general.primaryBgColorHover} p-2 hover:text-white-01  hover:border-none
-                ${opt.value === filterSelected ? `${userColors?.general.primaryBgColor} text-white-01` : `${userColors?.general.baseTextColor}`}`}
+                ${theme?.filter.borderR} ${theme?.general.primaryBgColorHover} p-2 hover:text-white-01  hover:border-none
+                ${opt.value === filterSelected ? `${theme?.general.primaryBgColor} text-white-01` : `${theme?.general.baseTextColor}`}`}
               onClick={() => setFilterBy(opt.value)}
             >
               {opt.label}
@@ -53,7 +53,7 @@ export const GeneralFilter: React.FC<Props> = ({
           ))}
         </nav>
         }
-    </>
+    </div>
   )
 }
 

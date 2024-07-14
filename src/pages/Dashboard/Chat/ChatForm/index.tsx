@@ -4,17 +4,17 @@ import { useForm } from "react-hook-form"
 import { customDateFormat } from '@/components/utils/TimeUtils'
 
 // types
-import { UserType, ConversationType, CommentType, UserColors} from "@/types";
+import { UserType, ConversationType, CommentType, ThemeType} from "@/types";
 
 interface Props {
   refetchConversation: () => void
   conversation: ConversationType
   userStored: UserType | null;
-  userColors: UserColors
+  theme: ThemeType
   handleCableAction: (id: string) => void
 }
 
-export const ChatForm: React.FC<Props> = ({userStored, conversation, refetchConversation, userColors, handleCableAction}: Props) => {
+export const ChatForm: React.FC<Props> = ({userStored, conversation, refetchConversation, theme, handleCableAction}: Props) => {
   const notes = conversation?.notes
 
   useEffect(() => {
@@ -79,7 +79,7 @@ export const ChatForm: React.FC<Props> = ({userStored, conversation, refetchConv
   return (
     <div>
       <div
-        className={`flex flex-col w-auto overflow-hidden xxxs:h-[35vh] xxs:h-[35vh] xs:h-[40vh] sm:h-[50vh] md:h-[50vh] border ${userColors?.entry.border} bg-white`}
+        className={`flex flex-col w-auto overflow-hidden xxxs:h-[35vh] xxs:h-[35vh] xs:h-[40vh] sm:h-[50vh] md:h-[50vh] border ${theme?.entry.border} bg-white`}
         style={{borderRadius: '20px 20px 0 0 '}}>
         <div id='content-note-scroll' className="overflow-y-scroll px-2">
           {notes?.map((comment: CommentType, index: number) => (
@@ -117,7 +117,7 @@ export const ChatForm: React.FC<Props> = ({userStored, conversation, refetchConv
       >
         <div className={`
           min-w-[100px] flex md:flex-row sm:flex-row xxxs:flex-col xxs:flex-col justify-between items-center gap-3 pb-3 pt-8 px-3
-          ${userColors?.entry.secondaryBgColor}
+          ${theme?.entry.secondaryBgColor}
         `}
         style={{borderRadius: '0 0 20px 20px'}}>
           <div className="flex flex-grow flex-col xxxs:w-full xxs:w-full " >
@@ -142,7 +142,7 @@ export const ChatForm: React.FC<Props> = ({userStored, conversation, refetchConv
           <button className={`
           xxxs:w-full xxs:w-full md:w-auto lg:w-auto px-4 py-1
           text-white-01 rounded-lg
-          ${userColors?.general.primaryBgColor} ${userColors?.general.primaryBgColorHover} `}
+          ${theme?.general.primaryBgColor} ${theme?.general.primaryBgColorHover} `}
           style={{alignSelf: 'end'}}
           disabled={loading}
           >

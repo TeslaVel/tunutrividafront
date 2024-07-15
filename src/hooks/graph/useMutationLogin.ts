@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client';
 import { LOGIN_MUTATION } from '@/graphql/queries';
-import { mockCreateAuth,  } from "@/graphql/mocks/mockCreateAuth";
+import { mockCreateAuth } from "@/graphql/mocks/mockCreateAuth";
 
 const USE_MOCK_DATA = import.meta.env.VITE_APP_USE_MOCK_DATA === 'true';
 

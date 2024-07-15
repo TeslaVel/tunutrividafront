@@ -1,15 +1,15 @@
 import { useEffect } from "react";
 import { useMutationCreateNote } from '@/hooks/graph/useMutationCreateNote'
 import { useForm } from "react-hook-form"
-import { customDateFormat } from '@/components/utils/TimeUtils'
+import { customDateFormat } from '@/libs/utils/TimeUtils'
 
 // types
-import { UserType, ConversationType, CommentType, ThemeType} from "@/types";
+import { FullUserType, ConversationType, CommentType, ThemeType} from "@/types";
 
 interface Props {
   refetchConversation: () => void
   conversation: ConversationType
-  userStored: UserType | null;
+  userStored: FullUserType | null;
   theme: ThemeType
   handleCableAction: (id: string) => void
 }

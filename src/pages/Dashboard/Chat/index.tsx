@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react"
 import { AuthContext } from '@/AuthProviderManager'
-import { UseGetConversation } from '@/hooks/useGetConversation'
+import { useGetConversation } from '@/hooks/useGetConversation'
 import Scroller from '@/components/Scroller/Scroller'
 import actioncable from 'actioncable'
 import ChatForm from './ChatForm'
@@ -19,7 +19,7 @@ const cable: any = actioncable.createConsumer(VITE_SOCKET_SERVER)
 
 export const Chat: React.FC<Props> = ({setSelectedPage, theme }: Props) => {
   const { userStored } = useContext(AuthContext)
-  const { loading, data, refetch } = UseGetConversation()
+  const { loading, data, refetch } = useGetConversation()
   const [isOpenAside, setIsOpenAside] = useState<boolean>(false)
 
   if (!userStored) return null

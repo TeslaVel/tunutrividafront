@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from 'react'
 import { useForm } from "react-hook-form"
 import Aside from '@/components/Aside'
-import { CreateEntry } from '@/api/actions'
+import { CreateEntry } from '@/api/actions/createEntry'
 
 // types
 import { ThemeType } from "@/types";

@@ -15,8 +15,6 @@ export function useGetAppointments (filter: { status: AppointmentType['status'] 
     variables: { filter, page, limit},
   });
 
-  console.log('usando USE_MOCK_DATA', USE_MOCK_DATA)
-
   const data: PaginatedAppointmentType = result?.appointments
   const appointments: AppointmentType[] = data?.paginated
   const pagination = {

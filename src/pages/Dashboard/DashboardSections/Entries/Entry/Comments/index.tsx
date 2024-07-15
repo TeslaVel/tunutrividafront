@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form";
 
 // types
-import { UserType, CommentType, ThemeType } from '@/types'
+import { FullUserType, CommentType, ThemeType } from '@/types'
 
 type Props = {
-  userStored: UserType
+  userStored: FullUserType
   theme: ThemeType
   entry_id: string
   comments: CommentType[]

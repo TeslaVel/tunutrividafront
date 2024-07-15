@@ -1,7 +1,7 @@
 
-import { UserType, Colors, ThemeType} from "@/types";
+import { FullUserType, Colors, ThemeType} from "@/types";
 
-export const colorByGender = (gender: UserType[`gender`] = 'male'): ThemeType => {
+export const colorByGender = (gender: FullUserType[`gender`] = 'male'): ThemeType => {
   const gradient1 =  gender === 'male' ? Colors.PRIMARYMALE500 : Colors.PRIMARYFEMALE500
   const gradient2 =  gender === 'male' ? Colors.PRIMARYMALE700 : Colors.PRIMARYFEMALE700
 
@@ -108,4 +108,11 @@ export const colorByGender = (gender: UserType[`gender`] = 'male'): ThemeType =>
       sidebarLinkHover: `hover:bg-secondly-female-200`
     }
   }
+}
+
+export function getUserStored () {
+  const dataStored = window.localStorage.getItem('pgus-tk');
+  const userStored = dataStored !== null ? JSON.parse(dataStored) : null;
+
+  return userStored;
 }

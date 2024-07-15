@@ -2,7 +2,7 @@ import { ChangeEvent, useState, useContext } from 'react'
 import { AuthContext } from '@/AuthProviderManager'
 import { useForm } from "react-hook-form"
 import Aside from '@/components/Aside'
-import { UpdateProfile } from '@/api/actions'
+import { UpdateProfile } from '@/api/actions/updateProfile'
 
 // types
 import { ThemeType } from "@/types";
@@ -13,10 +13,15 @@ type Props = {
   setIsOpenAside: (value: boolean) => void;
 };
 
+const GENDERS = [
+  { value: 'male', label: 'Male' },
+  { value: 'female', label: 'Female' },
+  { value: 'other', label: 'Other' },
+];
+
 export const ProfileForm: React.FC<Props> = ({isOpenAside, setIsOpenAside, theme}: Props) => {
   const { userStored, storeUser } = useContext(AuthContext);
   const [loading, setLoading] = useState<boolean>(false)
-
   const {
     register,
     getValues,
@@ -25,6 +30,7 @@ export const ProfileForm: React.FC<Props> = ({isOpenAside, setIsOpenAside, theme
     formState: { errors },
   } = useForm();
 
+  const inputStyles = `w-full p-2 border rounded-md ${theme?.general.baseTextColor}`
   const watchImage: HTMLImageElement = watch('image');
 
   const updateProfile = async (e: React.SyntheticEvent): Promise<void> => {
@@ -32,7 +38,7 @@ export const ProfileForm: React.FC<Props> = ({isOpenAside, setIsOpenAside, theme
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append('image', watch('image')); // Agrega el archivo de imagen al FormData
+    formData.append('image', watch('image'));
     formData.append('first_name', watch('first_name'));
     formData.append('last_name', watch('last_name'));
 
@@ -42,17 +48,23 @@ export const ProfileForm: React.FC<Props> = ({isOpenAside, setIsOpenAside, theme
 
       if (result.user) {
         setLoading(false)
-        storeUser(result.user)
+
+        const newData = {
+          ...userStored,
+          ...result.user
+        }
+
+        storeUser(newData)
       }
     } catch (error) {
       console.log('error', error)
       setLoading(false)
-      // Manejar el error
     }
   };
 
   const onImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if(!e?.target?.files) return
+
     const file = e.target.files[0];
     setValue('image', file, { shouldDirty: true })
 
@@ -102,7 +114,7 @@ export const ProfileForm: React.FC<Props> = ({isOpenAside, setIsOpenAside, theme
               First Name
               <input
                 id="first_name"
-                className={`w-full p-1 ${theme?.general.baseTextColor}`}
+                className={inputStyles}
                 autoComplete='off'
                 placeholder="Add first name"
                 defaultValue={userStored?.firstName}
@@ -119,7 +131,7 @@ export const ProfileForm: React.FC<Props> = ({isOpenAside, setIsOpenAside, theme
               Last Name
               <input
                 id="last_name"
-                className={`w-full p-1 ${theme?.general.baseTextColor}`}
+                className={inputStyles}
                 autoComplete='off'
                 placeholder="Add last name"
                 defaultValue={userStored?.lastName}
@@ -129,6 +141,21 @@ export const ProfileForm: React.FC<Props> = ({isOpenAside, setIsOpenAside, theme
                 })}
               />
             </label>
+          </div>
+
+          <div className="py-2">
+            <label htmlFor="gender">Gender</label>
+            <select
+              id="gender"
+              className={inputStyles}
+              {...register("gender")}
+            >
+              {GENDERS.map(({ value, label }) => (
+                <option key={value} value={value}>
+                  {label}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="pt-4">

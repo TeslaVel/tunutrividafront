@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react"
-import { AuthContext } from '@/AuthProviderManager'
+import NoImage from "@/assets/ntv/noimage.png";
 import Scroller from '@/components/Scroller/Scroller'
+import { useGetUserProfile } from '@/hooks/useGetUserProfile'
 import { Loading } from '@/components/Loading'
 import { ProfileForm } from './ProfileForm'
 
@@ -13,15 +14,20 @@ type Props = {
 };
 
 const Profile: React.FC<Props> = ({setSelectedPage, theme }: Props) => {
+  const { loading, data, refetch } = useGetUserProfile()
   const [isOpenAside, setIsOpenAside] = useState<boolean>(false)
-  const { userStored } = useContext(AuthContext);
-  const loading = false
 
-  if (!userStored) return null
+  const inputStyles = 'w-full py-2 px-3 border rounded-m'
+  const labelStyles = 'font-medium mb-1'
 
   useEffect(() => {
-    setSelectedPage(SelectedPage.Chat)
+    setSelectedPage(SelectedPage.Profile)
+    refetch();
   }, []);
+
+
+  const profile = data?.profile
+
   return (
     <Scroller scrollerName='profile'>
       <>
@@ -39,50 +45,63 @@ const Profile: React.FC<Props> = ({setSelectedPage, theme }: Props) => {
             />
           }
           { !loading &&
-            <div className="flex flex-col">
-            <label htmlFor='firstName' className="text-gray-700 font-medium mb-1">First Name:</label>
-            <span
-              id="firstName"
-              className="input appearance-none w-full py-2 px-3 border rounded-md"
-            >
-              {userStored.firstName}
-            </span>
+            <>
+              <div className="flex flex-col gap-3">
+                <div className="flex flex-col items-center">
+                  { profile?.imageUrl
+                    ? <img src={profile?.imageUrl} alt="Logo" className="w-[350px] h-[250px]" />
+                    : <img src={NoImage} alt="Logo" className="w-[350px] h-[250px]" />
+                  }
+                </div>
+                <div className="flex flex-col">
+                  <label htmlFor='firstName' className={labelStyles}>First Name:</label>
+                  <span
+                    id="firstName"
+                    className={inputStyles}
+                  >
+                    {profile.firstName}
+                  </span>
+                </div>
 
-            <label htmlFor='lastName' className="text-gray-700 font-medium mb-1">Last Name:</label>
-            <span
-              id="lastName"
-              className="input appearance-none w-full py-2 px-3 border rounded-md"
-            >
-              {userStored.lastName}
-            </span>
+                <div className="flex flex-col">
+                  <label htmlFor='lastName' className={labelStyles}>Last Name:</label>
+                  <span
+                    id="lastName"
+                    className={inputStyles}
+                  >
+                    {profile.lastName}
+                  </span>
+                </div>
 
-            <label htmlFor='lastName' className="text-gray-700 font-medium mb-1">Age</label>
-            <span
-              id="age"
-              className="input appearance-none w-full py-2 px-3 border rounded-md"
-            >
-              {userStored.age}
-            </span>
+                <div className="flex flex-col">
+                  <label htmlFor='lastName' className={labelStyles}>Age</label>
+                  <span
+                    id="age"
+                    className={inputStyles}
+                  >
+                    {profile.age}
+                  </span>
+                </div>
 
-            <label htmlFor='gender' className="text-gray-700 font-medium mb-1">Gender</label>
-            <select
-              id="gender"
-              className="input appearance-none w-full py-2 px-3 border rounded-md"
-            >
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="other">Other</option>
-            </select>
-
-            <div className="flex mt-4">
-              <button
-                className={`${theme.general.primaryBgColor} ${theme.general.primaryBgColorHover} text-white font-bold py-2 px-4 rounded`}
-                onClick={() => setIsOpenAside(!isOpenAside)}
-              >
-                Edit
-              </button>
-            </div>
-          </div>
+                <div className="flex flex-col">
+                  <label htmlFor='gender' className={labelStyles}>Gender</label>
+                  <span
+                    id="gender"
+                    className={inputStyles}
+                  >
+                    {profile.gender}
+                  </span>
+                </div>
+              </div>
+              <div className="flex mt-4">
+                <button
+                  className={`${theme.general.primaryBgColor} ${theme.general.primaryBgColorHover} text-white font-bold py-2 px-4 rounded`}
+                  onClick={() => setIsOpenAside(!isOpenAside)}
+                >
+                  Edit
+                </button>
+              </div>
+            </>
           }
           </>
         </section>

@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client'
+import { PROFILE_FIELDS, SHORT_USER_FIELDS, AUTH_USER_FIELDS, DIETITIAN_FIELDS } from './fragments';
 
 // MUTATIONS
 export const CONTACT_US_MUTATION = gql`
@@ -32,12 +33,11 @@ export const COMMENT_MUTATION = gql`
       message
       createdAt
       user {
-        id
-        fullName
-        initials
+        ...ShortUserFields
       }
     }
   }
+  ${SHORT_USER_FIELDS}
 `;
 
 export const NOTE_MUTATION = gql`
@@ -53,12 +53,11 @@ export const NOTE_MUTATION = gql`
       message
       createdAt
       user {
-        id
-        fullName
-        initials
+        ...ShortUserFields
       }
     }
   }
+  ${SHORT_USER_FIELDS}
 `;
 
 export const CONVERSATION_MUTATION = gql`
@@ -71,8 +70,17 @@ export const CONVERSATION_MUTATION = gql`
        message: $message
     }) {
       id
+      createdAt
+      dietitian {
+        ...DietitianFields
+      }
+      patient {
+        ...ShortUserFields
+      }
     }
   }
+  ${SHORT_USER_FIELDS}
+  ${DIETITIAN_FIELDS}
 `;
 
 
@@ -91,12 +99,11 @@ export const ENTRY_MUTATION = gql`
       description
       createdAt
       user {
-        id
-        fullName
-        initials
+        ...ShortUserFields
       }
     }
   }
+  ${SHORT_USER_FIELDS}
 `;
 
 
@@ -109,20 +116,10 @@ export const LOGIN_MUTATION = gql`
        email: $email,
        password: $password
     }) {
-      id
-      token
-      email
-      gender
-      firstName
-      lastName
-      imageUrl
-      dietitianId
-      height
-      weight
-      imc
-      age
+      ...AuthUserFields
     }
   }
+  ${AUTH_USER_FIELDS}
 `;
 
 export const LOGOUT_MUTATION = gql`
@@ -134,7 +131,6 @@ export const LOGOUT_MUTATION = gql`
 `;
 
 // Gets
-
 export const GET_ENTRIES = gql`
   query entries($order: String) {
     entries(order: $order) {
@@ -144,51 +140,54 @@ export const GET_ENTRIES = gql`
       imageUrl
       createdAt
       user {
-        id
-        fullName
-        initials
+        ...ShortUserFields
       }
       comments {
         id
         message
         createdAt
         user {
-        id
-        fullName
-        initials
+          ...ShortUserFields
         }
       }
     }
   }
+  ${SHORT_USER_FIELDS}
 `
+
 export const GET_CONVERSATION = gql`
   query conversation {
     conversation {
       id
       dietitian {
-            id
-            fullName
-            initials
-        }
+        ...DietitianFields
+      }
       patient {
-            id
-            fullName
-            initials
-        }
+        ...ShortUserFields
+      }
       notes {
         id
         message
         createdAt
         conversationId
         user {
-          id
-          fullName
-          initials
+          ...ShortUserFields
         }
       }
     }
   }
+  ${SHORT_USER_FIELDS}
+  ${DIETITIAN_FIELDS}
 `
+
+export const GET_USER_PROFILE = gql`
+  query profile {
+    profile {
+      ...ProfileFields
+    }
+  }
+  ${PROFILE_FIELDS}
+`;
 
 export const GET_APPOINTMENTS = gql`
   query appointments($filter: FilterInput, $page: Int, $limit: Int) {
@@ -203,11 +202,7 @@ export const GET_APPOINTMENTS = gql`
         appointmentType
         status
         dietitian {
-            id
-            firstName
-            lastName
-            fullName
-            initials
+          ...DietitianFields
         }
       }
       page
@@ -218,7 +213,9 @@ export const GET_APPOINTMENTS = gql`
       currentPage
     }
 }
+${DIETITIAN_FIELDS}
 `
+
 export const GET_CURRENT_APPOINTMENTS = gql`
   query currentAppointments {
     currentAppointments {
@@ -231,14 +228,11 @@ export const GET_CURRENT_APPOINTMENTS = gql`
       appointmentType
       status
       dietitian {
-          id
-          firstName
-          lastName
-          fullName
-          initials
+        ...DietitianFields
       }
     }
 }
+${DIETITIAN_FIELDS}
 `
 
 export const GET_SESSIONS = gql`

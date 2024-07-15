@@ -2,7 +2,7 @@ import { useEffect, useState, useContext, ChangeEvent } from 'react'
 import { AuthContext } from '@/AuthProviderManager';
 import { useGetUserEntries } from '@/hooks/useGetUserEntries'
 // import Scroller from '@/components/Scroller/Scroller'
-import { colorByGender } from '@/components/utils/GeneralUtils'
+import { colorByGender } from '@/libs/utils/GeneralUtils'
 import { Entry } from './Entry'
 import EntryWrapper from './EntryWrapper'
 import { CreateEntryForm } from './CreateEntryForm'

@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { useGetSessionDataChart } from '@/hooks/useGetSessionDataChart'
 import BmiRanges from '@/components/BmiRanges'
-import { UserType, ThemeType } from "@/types";
+import { FullUserType, ThemeType } from "@/types";
 import LineBar from "@/components/Chart/LineBar";
 import { Loading } from '@/components/Loading'
 
 // types
 
 type Props = {
-  userStored: UserType | null;
+  userStored: FullUserType | null;
   theme: ThemeType
 };
 

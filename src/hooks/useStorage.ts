@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { UserType } from "@/types";
+import { FullUserType } from "@/types";
 
 export function useStorage (key: string, initialValue: null){
-  const getStorage = (): UserType | null => {
+  const getStorage = (): FullUserType | null => {
     let val = null;
     try {
       const item = window.localStorage.getItem(key);
@@ -13,9 +13,9 @@ export function useStorage (key: string, initialValue: null){
     }
     return val
   }
-  const [userData, setUser] = useState<UserType | null>(() => getStorage());
+  const [userData, setUser] = useState<FullUserType | null>(() => getStorage());
 
-  const setStorage = (newValue: UserType | null): void => {
+  const setStorage = (newValue: FullUserType | null): void => {
     try {
       window.localStorage.setItem(key, JSON.stringify(newValue))
       setUser(newValue);

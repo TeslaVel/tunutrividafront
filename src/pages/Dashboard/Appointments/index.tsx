@@ -4,7 +4,7 @@ import { useGetAppointments } from '@/hooks/useGetAppointments'
 import Scroller from '@/components/Scroller/Scroller'
 import CollapsibleSection from '@/components/CollapsibleSection'
 import IconHandler from '@/components/icons/IconHandler'
-import { customDateFormat } from '@/components/utils/TimeUtils'
+import { customDateFormat } from '@/libs/utils/TimeUtils'
 import { GeneralFilter } from '@/components/Filter'
 import { Loading } from '@/components/Loading'
 import useMediaQuery from "@/hooks/useMediaQuery";

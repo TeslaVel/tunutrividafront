@@ -1,19 +1,19 @@
 import { createContext, useState, PropsWithChildren } from 'react';
 import { useStorage } from '@/hooks/useStorage';
 import { useColorStorage } from '@/hooks/useColorStorage';
-import { colorByGender } from '@/components/utils/GeneralUtils'
+import { colorByGender } from '@/libs/utils/GeneralUtils'
 
 // types
-import { UserType, ThemeType } from "@/types";
+import { FullUserType, ThemeType } from "@/types";
 
 const initialState: {
-  userStored: UserType | null;
-  storeUser: (value: UserType) => void;
+  userStored: FullUserType | null;
+  storeUser: (value: FullUserType) => void;
   deleteUserStored: () => void;
   theme: ThemeType | null
 } = {
   userStored: null,
-  storeUser: (value: UserType) => {},
+  storeUser: (value: FullUserType) => {},
   deleteUserStored: () => {},
   theme: null
 };
@@ -31,7 +31,7 @@ export const AuthProvider: React.FC<Props> = ({children, updateMainStatusLogin}:
   const {userData, setStorage} = useStorage('pgus-tk', null)
   const {localData: theme, setLocalStorage: setThemeColor} = useColorStorage('ntv-uc-tk', colorByGender(userData?.gender))
 
-  const setUserToken = (user: UserType) => {
+  const setUserToken = (user: FullUserType) => {
     setStorage(user)
     updateMainStatusLogin()
 
@@ -45,7 +45,7 @@ export const AuthProvider: React.FC<Props> = ({children, updateMainStatusLogin}:
 
   const value = {
     userStored: userData || null,
-    storeUser: (user: UserType) => setUserToken(user),
+    storeUser: (user: FullUserType) => setUserToken(user),
     deleteUserStored: () => deleteUserToken(),
     theme: theme
   };

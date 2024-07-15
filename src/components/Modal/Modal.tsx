@@ -38,7 +38,7 @@ const Modal: React.FC<Props> = ({children, isOpen, action, width, maxWidth, clos
 
   return (
     <div id="modal" className="fixed inset-0 flex items-center justify-center ntv-modal-overlay" style={{zIndex: '999'}}>
-       <div className="ntv-modal-custom-shadow rounded-lg dark:border md:mt-0 sm:w-[28rem] md: w-[35rem] lg:w-[35rem] xl:p-0 bg-primary-female-100 opacity-80 border-primary-female-700">
+       <div className="ntv-modal-custom-shadow rounded-lg dark:border md:mt-0 sm:w-[28rem] md: w-[35rem] lg:w-[35rem] xl:p-0 bg-primary-female-100 border-primary-female-700">
           <div className="p-8 space-y-4 md:space-y-6 sm:p-8">
             <div className="flex justify-between mb-3">
               <div></div>

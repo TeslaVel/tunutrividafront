@@ -3,10 +3,10 @@ import UserHome from './Home/UserHome'
 import Palette from '@/components/Palette'
 
 // types
-import { UserType, ThemeType } from "@/types";
+import { FullUserType, ThemeType } from "@/types";
 
 type Props = {
-  userStored: UserType | null
+  userStored: FullUserType | null
   theme: ThemeType
   optionSelected: string
   asignCLientForUploadImage: () => void

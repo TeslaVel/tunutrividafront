@@ -13,12 +13,12 @@ import { NavLink, Link } from "react-router-dom";
 import useMediaQuery from "@/hooks/useMediaQuery";
 
 // types
-import { SelectedPage, UserType, ThemeType } from "@/types";
+import { SelectedPage, FullUserType, ThemeType } from "@/types";
 
 type Props = {
   selectedPage: SelectedPage;
   theme: ThemeType
-  userStored: UserType | null;
+  userStored: FullUserType | null;
   deleteUserStored: () => void;
 }
 

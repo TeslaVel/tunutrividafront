@@ -3,10 +3,10 @@ import { useMutationCreateConversation } from '@/hooks/graph/useMutationCreateCo
 import Aside from '@/components/Aside'
 
 // types
-import { UserType, ThemeType } from '@/types'
+import { FullUserType, ThemeType } from '@/types'
 
 type Props = {
-  userStored: UserType | null;
+  userStored: FullUserType | null;
   theme: ThemeType
   refetchConversation: () => void
   isOpenAside: boolean;
@@ -20,7 +20,7 @@ export const CreateConversationForm: React.FC<Props> = ({
   userStored,
   theme
 }: Props) => {
-  const { CreateConversation, data, loading, error } = useMutationCreateConversation();
+  const { CreateConversation, loading, error } = useMutationCreateConversation();
 
   const {
     register,
@@ -34,7 +34,7 @@ export const CreateConversationForm: React.FC<Props> = ({
     e.preventDefault();
     const values = {
       ...getValues(),
-      dietitian_id: userStored?.dietitianId
+      dietitian_id: `${userStored?.dietitianId}`
     }
 
     const { data } = await CreateConversation({ variables: values }) || {};

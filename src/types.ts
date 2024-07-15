@@ -12,6 +12,7 @@ export enum SelectedPage {
   Chat = "chat",
   Terms = "terms",
   Policies = "policies",
+  Profile = "profile",
 }
 
 export interface PackageType {
@@ -31,7 +32,7 @@ export interface ClassType {
   url: string
 }
 
-export interface UserType {
+export interface FullUserType {
   id: string
   email: string
   token: string
@@ -52,13 +53,153 @@ export interface ThemeType {
   },
 }
 
-export interface User {
+export interface UserType {
   id: string
   firstName: string
   lastName: string
   fullName: string
   firstNameInitial?: string
   initials: string
+  username: string
+}
+
+export interface DietitianType extends Omit<UserType, 'username'> {}
+export interface ProfileType extends Omit<FullUserType, 'token'> {}
+
+/* FOR QUERIES */
+export interface EntryType {
+  id: string;
+  description:  string;
+  entryType: string;
+  imageUrl: string;
+  path:  string;
+  createdAt:  string;
+  comments: CommentType[]
+  user: UserType
+}
+
+export interface AppointmentType {
+  id: string
+  title: string
+  startDate: string
+  timeStart: string
+  timeEnd: string
+  createdAt: string
+  appointmentType: string
+  status: 'pending' | 'ocurred' | 'happening' | 'cancelled' | string
+  dietitian: DietitianType
+}
+
+export interface PaginatedAppointmentType {
+  paginated: AppointmentType[]
+  page: number
+  limit: number
+  nextPage: number
+  prevPage: number
+  totalPages: number
+  currentPage: number
+}
+
+export interface SessionType {
+  id: string
+  age: string
+  height: string
+  weight: string
+  waist: string | null
+  hip: string | null
+  highAbdomen: string | null
+  lowAbdomen: string | null
+  imc: string | null
+  idealWeight: string | null
+  bodyGrease: string | null
+  visceralGrease: string | null
+  muscleMass: string | null
+  boneMass: string | null
+  waterPercentage: string | null
+  bmr: string | null
+  metabolicAge: string | null
+  physicalComplexion: string | null
+  date: string
+  activityFactor: {
+    id: string
+    name: string
+    description: string
+  }
+  diet: {
+    id: string,
+    name: string,
+    description: string
+    dietMealWeeks: [{
+      id: string
+      dietId: string
+      dayOfWeek: string,
+      createdAt: string,
+      dietMealTimes: [{
+        id: string,
+        dietMealWeekId: string
+        mealTime: string,
+        createdAt: string
+        dietIngredient: {
+          id: string,
+          dietMealTimeId: string,
+          mealId: string,
+          instructions: string
+          createdAt: string,
+          meal: {
+            id: string,
+            name: string
+          }
+        }
+      }]
+    }]
+  }
+}
+
+export interface DietType {
+  diet: SessionType['diet']
+}
+export interface PaginatedSessionType {
+  paginated: SessionType[]
+  page: number
+  limit: number
+  nextPage: number
+  prevPage: number
+  totalPages: number
+  currentPage: number
+}
+
+// export interface EntriesQueryData {
+//   entries: EntryType[] | [];
+// };
+
+// export interface Entries {
+//   entries: EntryType[] | [];
+// };
+
+// export interface EntriyVariables {
+//   entryId: number | undefined | null;
+// };
+
+export interface CommentType {
+  id: string;
+  message: string;
+  createdAt: string;
+  user: UserType
+}
+
+export interface NoteType {
+  id: string;
+  message: string;
+  createdAt: string;
+  conversationId: string;
+  user: UserType
+}
+
+export interface ConversationType {
+  id: string;
+  dietitian_id: string;
+  patient_id: string;
+  notes: NoteType[]
 }
 
 
@@ -157,141 +298,4 @@ export enum Colors {
   GRAY05="rgb(225, 224, 225)",
   BURGUNDY500="#5E0000",
   NONE="none"
-}
-
-
-/* FOR QUERIES */
-export interface EntryType {
-  id: string;
-  description:  string;
-  entryType: string;
-  imageUrl: string;
-  path:  string;
-  createdAt:  string;
-  comments: CommentType[]
-  user: User
-}
-
-export interface AppointmentType {
-  id: string
-  title: string
-  startDate: string
-  timeStart: string
-  timeEnd: string
-  createdAt: string
-  appointmentType: string
-  status: 'pending' | 'ocurred' | 'happening' | 'cancelled' | string
-  dietitian: User
-}
-
-export interface PaginatedAppointmentType {
-  paginated: AppointmentType[]
-  page: number
-  limit: number
-  nextPage: number
-  prevPage: number
-  totalPages: number
-  currentPage: number
-}
-
-export interface SessionType {
-  id: string
-  age: string
-  height: string
-  weight: string
-  waist: string | null
-  hip: string | null
-  highAbdomen: string | null
-  lowAbdomen: string | null
-  imc: string | null
-  idealWeight: string | null
-  bodyGrease: string | null
-  visceralGrease: string | null
-  muscleMass: string | null
-  boneMass: string | null
-  waterPercentage: string | null
-  bmr: string | null
-  metabolicAge: string | null
-  physicalComplexion: string | null
-  date: string
-  activityFactor: {
-    id: string
-    name: string
-    description: string
-  }
-  diet: {
-    id: string,
-    name: string,
-    description: string
-    dietMealWeeks: [{
-      id: string
-      dietId: string
-      dayOfWeek: string,
-      createdAt: string,
-      dietMealTimes: [{
-        id: string,
-        dietMealWeekId: string
-        mealTime: string,
-        createdAt: string
-        dietIngredient: {
-          id: string,
-          dietMealTimeId: string,
-          mealId: string,
-          instructions: string
-          createdAt: string,
-          meal: {
-            id: string,
-            name: string
-          }
-        }
-      }]
-    }]
-  }
-}
-
-export interface DietType {
-  diet: SessionType['diet']
-}
-
-export interface PaginatedSessionType {
-  paginated: SessionType[]
-  page: number
-  limit: number
-  nextPage: number
-  prevPage: number
-  totalPages: number
-  currentPage: number
-}
-// export interface EntriesQueryData {
-//   entries: EntryType[] | [];
-// };
-
-// export interface Entries {
-//   entries: EntryType[] | [];
-// };
-
-// export interface EntriyVariables {
-//   entryId: number | undefined | null;
-// };
-
-export interface CommentType {
-  id: string;
-  message: string;
-  createdAt: string;
-  user: User
-}
-
-export interface NoteType {
-  id: string;
-  message: string;
-  createdAt: string;
-  conversationId: string;
-  user: User
-}
-
-export interface ConversationType {
-  id: string;
-  dietitian_id: string;
-  patient_id: string;
-  notes: NoteType[]
 }

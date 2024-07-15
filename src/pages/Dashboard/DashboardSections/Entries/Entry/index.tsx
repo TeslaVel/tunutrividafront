@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import { Comments } from './Comments'
 import { useMutationCreateComment } from '@/hooks/graph/useMutationCreateComment';
-import { customDateFormat } from '@/components/utils/TimeUtils'
+import { customDateFormat } from '@/libs/utils/TimeUtils'
 
 //
-import { EntryType, UserType, CommentType, ThemeType } from '@/types'
+import { EntryType, FullUserType, CommentType, ThemeType } from '@/types'
 
 type Props = {
-  userStored: UserType
+  userStored: FullUserType
   theme: ThemeType
   entry: EntryType
   showComments: Boolean

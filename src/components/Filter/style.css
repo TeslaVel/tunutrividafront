@@ -1,0 +1,13 @@
+.ntv-filter-tab .ntv-filter-tab-button:last-child {
+  border-left: 0px;
+  border-right: 0px;
+  border-radius: 0 5% 5% 0;
+}
+
+.ntv-filter-tab .ntv-filter-tab-button:first-child {
+  border-radius: 5% 0 0 5%;
+}
+
+.ntv-filter-tab .ntv-filter-tab-button:not(:last-of-type) {
+  border-left: 0px;
+}

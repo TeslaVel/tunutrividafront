@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useMutationCreateNote } from '@/hooks/graph/useMutationCreateNote'
 import { useForm } from "react-hook-form"
 import { customDateFormat } from '@/libs/utils/TimeUtils'
+import MessageBubble from '@/components/MessageBubble'
 
 // types
 import { FullUserType, ConversationType, CommentType, ThemeType} from "@/types";
@@ -43,18 +44,12 @@ export const ChatForm: React.FC<Props> = ({userStored, conversation, refetchConv
     }
   }
 
+  // Antes escribía a document.getElementById('message').value Y a
+  // setValue al mismo tiempo (dos fuentes de verdad); ahora solo pasa
+  // por react-hook-form.
   const inserEmoji = (emoji: string) => {
-    const values = getValues()
-    let message = values.message
-    const inputField = document.getElementById('message') as HTMLInputElement;
-    if (message !== null) {
-      message += ` ${emoji}`;
-    }
-    if (inputField !== null) {
-      inputField.value = message;
-    }
-
-    setValue('message', message);
+    const current = getValues('message') || ''
+    setValue('message', `${current} ${emoji}`, { shouldDirty: true, shouldValidate: true })
   }
 
 
@@ -83,28 +78,15 @@ export const ChatForm: React.FC<Props> = ({userStored, conversation, refetchConv
         style={{borderRadius: '20px 20px 0 0 '}}>
         <div id='content-note-scroll' className="overflow-y-scroll px-2">
           {notes?.map((comment: CommentType, index: number) => (
-            (userStored && userStored.id === comment.user.id
-              ? <div className="w-full flex items-center justify-end py-2 " key={`comment_${comment.id}-${index}`}>
-                  <div className="flex-grow flex flex-col items-end mr-2">
-                    <strong>{comment.user.fullName} </strong>
-                    <p className="text-gray-500 mr-2 text-lg">{comment.message}</p>
-                    <time className="text-xs">
-                      {customDateFormat(comment.createdAt, 'MMM D at HH:mm:a') }
-                    </time>
-                  </div>
-                  <div className="w-[3rem] h-[3rem] bg-gray-300 rounded-full  flex items-center justify-center">{comment.user.initials}</div>
-                </div>
-              :  <div className="flex items-center py-2 " key={`comment_${comment.id}-${index}`}>
-                  <div className="w-[3.5rem] h-[3rem] bg-gray-300 rounded-full mr-4  flex items-center justify-center">{comment.user.initials}</div>
-                  <div className='w-full flex-grow flex flex-col items-start mr-2'>
-                    <strong>{comment.user.fullName}</strong>
-                    <p className="text-gray-500 text-lg">{comment.message}</p>
-                    <time className="text-xs">
-                      {customDateFormat(comment.createdAt, 'MMM D at HH:mm:a') }
-                    </time>
-                  </div>
-                </div>
-            )
+            <MessageBubble
+              key={`comment_${comment.id}-${index}`}
+              isOwn={!!userStored && userStored.id === comment.user.id}
+              initials={comment.user.initials}
+              fullName={comment.user.fullName}
+              message={comment.message}
+              timestamp={customDateFormat(comment.createdAt, 'MMM D at HH:mm:a')}
+              theme={theme}
+            />
           ))}
         </div>
       </div>

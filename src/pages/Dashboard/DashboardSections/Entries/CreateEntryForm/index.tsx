@@ -16,12 +16,17 @@ type Props = {
 
 export const CreateEntryForm: React.FC<Props> = ({refetch, isOpenAside, setIsOpenAside, theme}: Props) => {
   const [loading, setLoading] = useState<boolean>(false)
+  // Antes el preview y la limpieza del formulario se hacían escribiendo
+  // directo al DOM (document.getElementById(...).src/.value); ahora el
+  // preview vive en estado de React y la limpieza usa reset() de
+  // react-hook-form, controlado.
+  const [imagePreview, setImagePreview] = useState<string | null>(null)
 
   const {
     register,
-    getValues,
-    setValue,
     watch,
+    setValue,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -42,8 +47,8 @@ export const CreateEntryForm: React.FC<Props> = ({refetch, isOpenAside, setIsOpe
       setIsOpenAside(false)
 
       if (result) setLoading(false)
-      const descriptionField = document.getElementById('description') as HTMLInputElement;
-      descriptionField.value=''
+      reset()
+      setImagePreview(null)
       const myDiv = document.getElementById('entry-list-scroller')
       if (myDiv) {
         setTimeout(() => {
@@ -63,15 +68,8 @@ export const CreateEntryForm: React.FC<Props> = ({refetch, isOpenAside, setIsOpe
     setValue('image', file, { shouldDirty: true })
 
     const reader = new FileReader();
-    reader.onload = () => {
-      const imagePreview = document.getElementById(
-        'image-preview'
-      ) as HTMLImageElement; // Anotación de tipo
-      imagePreview.src = reader.result as string; // Anotación de tipo
-    };
+    reader.onload = () => setImagePreview(reader.result as string);
     reader.readAsDataURL(file);
-
-    const values = getValues()
   };
 
   return(
@@ -98,9 +96,9 @@ export const CreateEntryForm: React.FC<Props> = ({refetch, isOpenAside, setIsOpe
               onChange={onImageChange}
             />
           </div>
-          {watchImage && (
+          {watchImage && imagePreview && (
             <div className='flex justify-center py-2'>
-              <img id='image-preview' className='w-48 h-90'/>
+              <img id='image-preview' src={imagePreview} alt="Preview" className='h-48 w-48 rounded-lg object-cover'/>
             </div>
           )}
           <div className="py-2">

@@ -10,7 +10,7 @@ import ArrowLeft from "@/components/icons/arrowleft"
 import UserIcon from '@/components/icons/userIcon'
 import { Colors } from '@/types'
 import { NavLink, Link } from "react-router-dom";
-import useMediaQuery from "@/hooks/useMediaQuery";
+import useDeviceType from "@/hooks/useDeviceType";
 
 // types
 import { SelectedPage, FullUserType, ThemeType } from "@/types";
@@ -26,7 +26,8 @@ const optionsForSidebar = [
   {label: 'Dashboard', value: 'dashboard', icon: 'home'},
   {label: 'Calendario', value: 'appointments', icon: 'calendar'},
   {label: 'Sessiones', value: 'sessions', icon: 'session'},
-  {label: 'Chat', value: 'chat', icon: 'chat'}
+  {label: 'Chat', value: 'chat', icon: 'chat'},
+  {label: 'Perfil', value: 'profile', icon: 'user'},
 ];
 
 const showIcon = (value: string) => {
@@ -39,13 +40,19 @@ const showIcon = (value: string) => {
       return <SessionIcon />
      case 'chat':
       return <ChatIcon />
+     case 'user':
+      return <UserIcon width={16} height={16} color={Colors.WHITE01} />
     default:
       return null;
   }
 };
 
 const Sidebar: React.FC<Props> = ( {selectedPage, userStored, deleteUserStored, theme}: Props) => {
-  const isAboveMediumScreens = useMediaQuery("(max-width: 600px)");
+  // Antes usaba su propio breakpoint (600px), distinto del que usa el
+  // resto del dashboard (Aside, etc. via useDeviceType, 767px) — con eso
+  // la sidebar y los drawers de formularios "pensaban" cosas distintas
+  // sobre el mismo ancho de pantalla.
+  const { isMobile: isAboveMediumScreens } = useDeviceType();
   const [expanded, setExpanded] = useState<boolean>(true);
   const [elementVisible, setElementVisible] = useState<boolean>(true);
 
@@ -103,13 +110,13 @@ const Sidebar: React.FC<Props> = ( {selectedPage, userStored, deleteUserStored, 
                     <span><strong>Edad </strong>{userStored?.age}</span>
                   }
                   { userStored?.height &&
-                    <span><strong>Altura </strong>{userStored?.height} kg</span>
+                    <span><strong>Altura </strong>{userStored?.height} cm</span>
                   }
                   { userStored?.weight &&
                     <span><strong>Peso </strong>{userStored?.weight} kg</span>
                   }
                   { userStored?.imc &&
-                    <span><strong>IMC </strong>{userStored?.imc} kg</span>
+                    <span><strong>IMC </strong>{userStored?.imc}</span>
                   }
                 </div>
               </div>
@@ -122,7 +129,13 @@ const Sidebar: React.FC<Props> = ( {selectedPage, userStored, deleteUserStored, 
             <NavLink
               key={`sidebar-option-${index}`}
               to={`/${opt.value}`}
-              className={`h-8 mt-3 flex items-center rounded-lg ${theme.sideBar.sidebarLinkHover} ${expanded ? 'px-4' : 'px-1'} ${selectedPage === opt.value ? `${theme.sideBar.sidebarLink}` : ''}`}
+              // Antes se resaltaba comparando `selectedPage` a mano, que
+              // depende de que cada página recuerde llamar setSelectedPage
+              // en un useEffect — usando el isActive nativo de NavLink en
+              // vez de eso, el resaltado siempre coincide con la ruta real.
+              className={({ isActive }) =>
+                `h-8 mt-3 flex items-center rounded-lg ${theme.sideBar.sidebarLinkHover} ${expanded ? 'px-4' : 'px-1'} ${isActive ? theme.sideBar.sidebarLink : ''}`
+              }
             >
               {showIcon(opt.icon)}
               {elementVisible && <span className="ml-2">{opt.label}</span>}

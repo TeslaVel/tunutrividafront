@@ -22,16 +22,18 @@ const GENDERS = [
 export const ProfileForm: React.FC<Props> = ({isOpenAside, setIsOpenAside, theme}: Props) => {
   const { userStored, storeUser } = useContext(AuthContext);
   const [loading, setLoading] = useState<boolean>(false)
+  // Antes el preview se escribía directo al DOM (document.getElementById);
+  // ahora vive en estado de React, con la foto actual del perfil como
+  // valor inicial.
+  const [imagePreview, setImagePreview] = useState<string | null>(userStored?.imageUrl ?? null)
   const {
     register,
-    getValues,
     setValue,
     watch,
     formState: { errors },
   } = useForm();
 
   const inputStyles = `w-full p-2 border rounded-md ${theme?.general.baseTextColor}`
-  const watchImage: HTMLImageElement = watch('image');
 
   const updateProfile = async (e: React.SyntheticEvent): Promise<void> => {
     setLoading(true)
@@ -69,15 +71,8 @@ export const ProfileForm: React.FC<Props> = ({isOpenAside, setIsOpenAside, theme
     setValue('image', file, { shouldDirty: true })
 
     const reader = new FileReader();
-    reader.onload = () => {
-      const imagePreview = document.getElementById(
-        'image-preview'
-      ) as HTMLImageElement; // Anotación de tipo
-      imagePreview.src = reader.result as string; // Anotación de tipo
-    };
+    reader.onload = () => setImagePreview(reader.result as string);
     reader.readAsDataURL(file);
-
-    const values = getValues()
   };
 
   return(
@@ -104,9 +99,9 @@ export const ProfileForm: React.FC<Props> = ({isOpenAside, setIsOpenAside, theme
               onChange={onImageChange}
             />
           </div>
-          { (watchImage || userStored?.imageUrl) && (
+          { imagePreview && (
             <div className='flex justify-center py-2'>
-              <img id='image-preview' className="w-[200px] h-[150px]" src={ userStored?.imageUrl ? userStored.imageUrl : ''} />
+              <img id='image-preview' className="h-[150px] w-[200px] rounded-lg object-cover" src={imagePreview} alt="Preview" />
             </div>
           )}
           <div className="py-2">

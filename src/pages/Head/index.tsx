@@ -15,8 +15,11 @@ type Props = {
 }
 
 const Head: React.FC<Props> = ({isLogged, isTopOfPage, selectedPage, setSelectedPage, theme}: Props) => {
-  if (!theme) return null
+  // El early return estaba antes del useContext, violando las Rules of
+  // Hooks (la cantidad de hooks llamados cambiaría entre renders según
+  // theme). Ahora el hook siempre se llama, y el return va después.
   const { userStored, deleteUserStored} = useContext(AuthContext);
+  if (!theme) return null
   return (
     isLogged
     ? <Sidebar

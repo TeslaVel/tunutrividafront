@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { useLocation } from 'react-router-dom';
 import { useGetAppointments } from '@/hooks/useGetAppointments'
 import Scroller from '@/components/Scroller/Scroller'
+import DashboardPageLayout from '@/components/DashboardPageLayout'
 import CollapsibleSection from '@/components/CollapsibleSection'
 import IconHandler from '@/components/icons/IconHandler'
 import { customDateFormat } from '@/libs/utils/TimeUtils'
@@ -31,6 +32,21 @@ const statusName = {
   'happening': 'En Proceso',
   'cancelled': 'Cancelado',
 }
+
+// Antes el estado se mostraba como texto plano entre corchetes
+// ([Pendiente]); ahora un badge con color real por estado.
+const getStatusBadgeColor = (status: AppointmentType['status'] = 'pending') => {
+  switch (status) {
+    case 'cancelled':
+      return 'bg-red-100 text-red-700'
+    case 'ocurred':
+      return 'bg-green-100 text-green-700'
+    case 'happening':
+      return 'bg-blue-100 text-blue-700'
+    default:
+      return 'bg-amber-100 text-amber-700'
+  }
+}
 export const Appointments: React.FC<Props> = ({
   setSelectedPage, theme
 }: Props) => {
@@ -38,7 +54,7 @@ export const Appointments: React.FC<Props> = ({
   const location = useLocation();
   // const params = new URLSearchParams(location.search);
   // const statusParam = params.get('status');
-  const isAboveMediumScreens = useMediaQuery("(max-width: 450px)");
+  const isSmallScreen = useMediaQuery("(max-width: 450px)");
   const [perPage] =  useState<number>(7)
   const [page, setPage] =  useState<number>(1)
 
@@ -72,12 +88,15 @@ export const Appointments: React.FC<Props> = ({
     }
   }
 
+  const StatusBadge = ({ status }: { status: AppointmentType['status'] }) => (
+    <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${getStatusBadgeColor(status)}`}>
+      {getStatusName(status)}
+    </span>
+  )
+
   return (
     <Scroller scrollerName='appointments'>
-      <section id="appointments" className="py-3
-        xxxs:px-1 xxs:px-1 xs:px-4 sm:px-4 md:px-5 lg:px-5
-        xxxs:w-full xxs:w-full xs:w-full sm:w-full md:w-5/6 lg:w-5/6 mx-auto
-        ">
+      <DashboardPageLayout id="appointments">
         <div className="text-center my-5">
           <h2>Citas</h2>
         </div>
@@ -87,7 +106,7 @@ export const Appointments: React.FC<Props> = ({
           filterSelected={filterBy}
           setFilterBy={setFilterBy}
           theme={theme}
-          isMobile={isAboveMediumScreens}
+          isMobile={isSmallScreen}
         />
 
         <div className="pt-10">
@@ -102,8 +121,9 @@ export const Appointments: React.FC<Props> = ({
           { !loading &&
             <>
               { appointments?.length < 1 &&
-                <div>
-                  No hay Citas
+                <div className="flex flex-col items-center gap-2 py-16 text-gray-400">
+                  <IconHandler name="in_person" />
+                  <p>No hay citas para mostrar.</p>
                 </div>
               }
 
@@ -112,9 +132,11 @@ export const Appointments: React.FC<Props> = ({
                   key={`appointment_${index}_${apt.id}`}
                   theme={theme}
                   headerName={
-                    <>
-                      <IconHandler name={apt.appointmentType}/>&nbsp;[{getStatusName(apt.status)}] { !isAboveMediumScreens && <span>Fecha:</span>} {customDateFormat(apt.startDate, 'DD/MM/YY')}
-                    </>
+                    <span className="flex items-center gap-2">
+                      <IconHandler name={apt.appointmentType}/>
+                      <StatusBadge status={apt.status} />
+                      { !isSmallScreen && <span>Fecha:</span>} {customDateFormat(apt.startDate, 'DD/MM/YY')}
+                    </span>
                   }>
                     <div>
                       <div><strong>Cita con:</strong> {apt.dietitian.fullName}</div>
@@ -133,7 +155,7 @@ export const Appointments: React.FC<Props> = ({
             </>
           }
         </div>
-      </section>
+      </DashboardPageLayout>
     </Scroller>
   );
 }

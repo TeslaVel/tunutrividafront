@@ -1,10 +1,8 @@
-import { useState, useEffect, useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
-// import { SelectedPage } from "@/types";
 import { AuthContext } from '@/AuthProviderManager';
 import { useMutationLogin } from '@/hooks/graph/useMutationLogin';
 import Modal from "@/components/Modal/Modal";
-import '@/components/Compound/Buttons/ActionButton.css'
 
 type Props = {
   formId: string
@@ -14,15 +12,20 @@ type Props = {
 
 const LoginModal: React.FC<Props> = ({ formId, isOpen, closeAction}: Props) => {
   const { storeUser } = useContext(AuthContext);
-  const { Login } = useMutationLogin();
+  const { Login, loading, error, reset } = useMutationLogin();
+  // `error` de Apollo solo se llena en el flujo real; en modo mock
+  // (VITE_APP_USE_MOCK_DATA) el hook tira un Error sincrónico que no pasa
+  // por Apollo, así que se cubre acá también.
+  const [loginFailed, setLoginFailed] = useState(false);
 
-  const inputStyles =`
-  bg-secondly-female-50 border border-gray-300 text-white sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600
-  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 placeholder-white dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
-`;
+  const inputStyles = `
+    w-full rounded-lg border border-landing-primary/20 bg-white px-3 py-2.5 text-sm text-landing-ink
+    placeholder-landing-muted/60 focus:border-landing-primary focus:outline-none focus:ring-1 focus:ring-landing-primary
+  `;
 
   const buttonStyles = `
-  ntv-custom-button-shadow w-full text-white bg-primary-female-500 hover:bg-primary-female-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center
+    w-full rounded-lg bg-landing-primary px-5 py-2.5 text-center text-sm font-semibold text-white
+    transition duration-300 hover:bg-landing-primary-dark disabled:cursor-not-allowed disabled:opacity-60
   `
 
   const {
@@ -33,97 +36,70 @@ const LoginModal: React.FC<Props> = ({ formId, isOpen, closeAction}: Props) => {
   } = useForm();
 
   const handleAction = async () => {
+    reset?.();
+    setLoginFailed(false);
     const values = getValues();
     try {
       const response = await Login(values);
       if (response.data?.createAuth.token) {
         storeUser(response.data.createAuth);
+        closeAction();
+      } else {
+        setLoginFailed(true);
       }
-    } catch (error) {
-      console.error(error);
-      alert('credentials invalid');
+    } catch (err) {
+      console.error(err);
+      setLoginFailed(true);
     }
   };
 
-  const handleClose = () => {
-    closeAction()
-  }
+  const handleClose = () => { closeAction() }
 
   if (!isOpen) return null
 
   return (
-    <form
-      id={formId}
-      target="_self"
-      method="POST"
-      onSubmit={handleSubmit(handleAction)}
-    >
-      <Modal
-        title='Iniciar Session'
-        isOpen={isOpen}
-        width="w-[30rem]"
-        close={() => handleClose()}
-        buttonTitle='Logear'
-      >
+    <form id={formId} target="_self" method="POST" onSubmit={handleSubmit(handleAction)}>
+      <Modal title='Iniciar sesión' isOpen={isOpen} width="w-full sm:w-[26rem]" close={() => handleClose()}>
         <>
-          <div>
-            <label className="block mb-2 text-sm font-medium text-white dark:text-white">Email</label>
-            <input
-              type="email"
-              id="email"
-              className={inputStyles}
-              placeholder="name@company.com"
-              required={true}
-              {...register("email", {
-                required: true,
-                pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              })}
+          {(error || loginFailed) && (
+            <div className="mb-4 rounded-lg border border-landing-primary/30 bg-landing-cream px-3 py-2 text-sm text-landing-primary">
+              Email o contraseña incorrectos. Intentá de nuevo.
+            </div>
+          )}
+          <div className="mb-4">
+            <label className="mb-1 block text-sm font-medium text-landing-ink">Email</label>
+            <input type="email" id="email" className={inputStyles} placeholder="nombre@correo.com" required={true}
+              {...register("email", { required: true, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i })}
             />
             {errors.email && (
-              <p className="mt-1 text-primary-500">
-                {errors.email.type === "required" &&
-                  "This field is required."}
-                {errors.email.type === "pattern" && "Invalid email address."}
+              <p className="mt-1 text-sm text-landing-primary">
+                {errors.email.type === "required" && "Este campo es obligatorio."}
+                {errors.email.type === "pattern" && "Correo electrónico inválido."}
               </p>
             )}
           </div>
-          <div>
-            <label className="block mb-2 text-sm font-medium text-white dark:text-white">Contraseña</label>
-            <input
-              type="password"
-              id="password"
-              placeholder="••••••••"
-              className={inputStyles}
-              required={true}
-              {...register("password", {
-                required: true,
-                maxLength: 100,
-              })}
+          <div className="mb-4">
+            <label className="mb-1 block text-sm font-medium text-landing-ink">Contraseña</label>
+            <input type="password" id="password" placeholder="••••••••" className={inputStyles} required={true}
+              {...register("password", { required: true, maxLength: 100 })}
             />
              {errors.password && (
-                <p className="mt-1 text-primary-500">
-                  {errors.password.type === "required" && "This field is required."}
-                  {errors.password.type === "maxLength" &&
-                    "Max length is 100 char."}
+                <p className="mt-1 text-sm text-landing-primary">
+                  {errors.password.type === "required" && "Este campo es obligatorio."}
+                  {errors.password.type === "maxLength" && "El máximo son 100 caracteres."}
                 </p>
               )}
           </div>
-          <div className="flex items-center justify-between">
-            <div className="flex items-start">
-              <div className="flex items-center h-5">
-                <input id="remember" aria-describedby="remember" type="checkbox"
-                className="w-4 h-4 border border-primary-female-300 rounded bg-primary-female-50 focus:ring-1 focus:ring-purpl-100 dark:focus:ring-primary-female-600 dark:ring-offset-secondly-female-100" required={true} />
-              </div>
-              <div className="ml-3 text-sm">
-                <label  className="text-secondly-female-200 dark:text-gray-300">Remember me</label>
-              </div>
-            </div>
-            <a href="#" className="text-sm font-medium text-secondly-female-200 hover:underline dark:text-secondly-female-50">Olvidó su contraseña?</a>
+          <div className="mb-5 flex items-center justify-between">
+            <label className="flex items-center gap-2 text-sm text-landing-muted">
+              <input id="remember" type="checkbox"
+                className="h-4 w-4 rounded border-landing-primary/30 text-landing-primary focus:ring-landing-primary" />
+              Recordarme
+            </label>
+            <a href="#" className="text-sm font-medium text-landing-primary hover:underline">¿Olvidó su contraseña?</a>
           </div>
-          <button
-            type="submit"
-            className={buttonStyles}>
-             Logear
+          <button type="submit" className={buttonStyles} disabled={loading}>
+             {loading ? 'Ingresando…' : 'Ingresar'}
           </button>
         </>
       </Modal>

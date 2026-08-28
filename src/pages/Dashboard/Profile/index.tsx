@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react"
 import NoImage from "@/assets/ntv/noimage.png";
 import Scroller from '@/components/Scroller/Scroller'
+import DashboardPageLayout from '@/components/DashboardPageLayout'
 import { useGetUserProfile } from '@/hooks/useGetUserProfile'
 import { Loading } from '@/components/Loading'
 import { ProfileForm } from './ProfileForm'
@@ -17,8 +18,8 @@ const Profile: React.FC<Props> = ({setSelectedPage, theme }: Props) => {
   const { loading, data, refetch } = useGetUserProfile()
   const [isOpenAside, setIsOpenAside] = useState<boolean>(false)
 
-  const inputStyles = 'w-full py-2 px-3 border rounded-m'
-  const labelStyles = 'font-medium mb-1'
+  const labelStyles = 'text-xs font-semibold uppercase tracking-wide text-gray-400'
+  const valueStyles = 'text-base text-gray-800'
 
   useEffect(() => {
     setSelectedPage(SelectedPage.Profile)
@@ -31,11 +32,7 @@ const Profile: React.FC<Props> = ({setSelectedPage, theme }: Props) => {
   return (
     <Scroller scrollerName='profile'>
       <>
-        <section id="chat" className="
-          xxxs:pt-5 xxs:pt-5 lg:pt-[5rem] md:pt-[5rem] w-full
-          xxxs:px-2 xxs:px-2 xs:px-4 sm:px-4 md:px-5 lg:px-5
-          xxxs:w-full xxs:w-full xs:w-full sm:w-full md:w-5/6 lg:w-5/6 mx-auto
-          ">
+        <DashboardPageLayout id="profile" className="pt-5 md:pt-[5rem]">
           <>
           { loading &&
             <Loading
@@ -46,51 +43,30 @@ const Profile: React.FC<Props> = ({setSelectedPage, theme }: Props) => {
           }
           { !loading &&
             <>
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-6 rounded-xl bg-white p-6 shadow-sm sm:flex-row sm:items-start">
                 <div className="flex flex-col items-center">
                   { profile?.imageUrl
-                    ? <img src={profile?.imageUrl} alt="Logo" className="w-[350px] h-[250px]" />
-                    : <img src={NoImage} alt="Logo" className="w-[350px] h-[250px]" />
+                    ? <img src={profile?.imageUrl} alt="Foto de perfil" className="h-32 w-32 rounded-full object-cover" />
+                    : <img src={NoImage} alt="Foto de perfil" className="h-32 w-32 rounded-full object-cover" />
                   }
                 </div>
-                <div className="flex flex-col">
-                  <label htmlFor='firstName' className={labelStyles}>First Name:</label>
-                  <span
-                    id="firstName"
-                    className={inputStyles}
-                  >
-                    {profile.firstName}
-                  </span>
-                </div>
-
-                <div className="flex flex-col">
-                  <label htmlFor='lastName' className={labelStyles}>Last Name:</label>
-                  <span
-                    id="lastName"
-                    className={inputStyles}
-                  >
-                    {profile.lastName}
-                  </span>
-                </div>
-
-                <div className="flex flex-col">
-                  <label htmlFor='lastName' className={labelStyles}>Age</label>
-                  <span
-                    id="age"
-                    className={inputStyles}
-                  >
-                    {profile.age}
-                  </span>
-                </div>
-
-                <div className="flex flex-col">
-                  <label htmlFor='gender' className={labelStyles}>Gender</label>
-                  <span
-                    id="gender"
-                    className={inputStyles}
-                  >
-                    {profile.gender}
-                  </span>
+                <div className="grid flex-1 grid-cols-1 gap-4 sm:grid-cols-2">
+                  <div className="flex flex-col gap-1">
+                    <span className={labelStyles}>Nombre</span>
+                    <span id="firstName" className={valueStyles}>{profile.firstName}</span>
+                  </div>
+                  <div className="flex flex-col gap-1">
+                    <span className={labelStyles}>Apellido</span>
+                    <span id="lastName" className={valueStyles}>{profile.lastName}</span>
+                  </div>
+                  <div className="flex flex-col gap-1">
+                    <span className={labelStyles}>Edad</span>
+                    <span id="age" className={valueStyles}>{profile.age}</span>
+                  </div>
+                  <div className="flex flex-col gap-1">
+                    <span className={labelStyles}>Género</span>
+                    <span id="gender" className={valueStyles}>{profile.gender}</span>
+                  </div>
                 </div>
               </div>
               <div className="flex mt-4">
@@ -98,13 +74,13 @@ const Profile: React.FC<Props> = ({setSelectedPage, theme }: Props) => {
                   className={`${theme.general.primaryBgColor} ${theme.general.primaryBgColorHover} text-white font-bold py-2 px-4 rounded`}
                   onClick={() => setIsOpenAside(!isOpenAside)}
                 >
-                  Edit
+                  Editar
                 </button>
               </div>
             </>
           }
           </>
-        </section>
+        </DashboardPageLayout>
 
         <ProfileForm
           isOpenAside={isOpenAside}

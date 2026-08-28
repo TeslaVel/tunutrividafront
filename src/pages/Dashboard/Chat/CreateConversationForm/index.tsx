@@ -47,18 +47,12 @@ export const CreateConversationForm: React.FC<Props> = ({
     }
   };
 
+  // Antes escribía a document.getElementById('message').value Y a
+  // setValue al mismo tiempo (dos fuentes de verdad); ahora solo pasa
+  // por react-hook-form.
   const inserEmoji = (emoji: string) => {
-    const values = getValues()
-    let message = values.message
-    const inputField = document.getElementById('message') as HTMLInputElement;
-    if (message !== null) {
-      message += ` ${emoji}`;
-    }
-    if (inputField !== null) {
-      inputField.value = message;
-    }
-
-    setValue('message', message);
+    const current = getValues('message') || ''
+    setValue('message', `${current} ${emoji}`, { shouldDirty: true, shouldValidate: true })
   }
 
   const closeAside = () => {

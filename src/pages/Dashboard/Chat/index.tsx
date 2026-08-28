@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from "react"
 import { AuthContext } from '@/AuthProviderManager'
 import { useGetConversation } from '@/hooks/useGetConversation'
 import Scroller from '@/components/Scroller/Scroller'
+import DashboardPageLayout from '@/components/DashboardPageLayout'
 import actioncable from 'actioncable'
 import ChatForm from './ChatForm'
 import { Loading } from '@/components/Loading'
@@ -22,9 +23,13 @@ export const Chat: React.FC<Props> = ({setSelectedPage, theme }: Props) => {
   const { loading, data, refetch } = useGetConversation()
   const [isOpenAside, setIsOpenAside] = useState<boolean>(false)
 
-  if (!userStored) return null
-
+  // Antes había un `if (!userStored) return null` ACÁ, antes de este
+  // useEffect — eso viola las Rules of Hooks (la cantidad de hooks
+  // llamados cambiaría entre renders según userStored). El early return
+  // ahora va después de todos los hooks, justo antes del JSX.
   useEffect(() => {
+    if (!userStored) return
+
     setSelectedPage(SelectedPage.Chat)
     refetch()
 
@@ -40,7 +45,7 @@ export const Chat: React.FC<Props> = ({setSelectedPage, theme }: Props) => {
     return () => {
       channel.unsubscribe();
     };
-  }, []);
+  }, [userStored]);
 
   const handleCableAction = (conversation_id: string | null = null) => {
     if (conversation_id ===  null || conversation_id === undefined) return
@@ -54,14 +59,12 @@ export const Chat: React.FC<Props> = ({setSelectedPage, theme }: Props) => {
 
   const conversation = data?.conversation
 
+  if (!userStored) return null
+
   return (
     <>
       <Scroller scrollerName='sessions'>
-        <section id="chat" className="
-          xxxs:pt-5 xxs:pt-5 lg:pt-[5rem] md:pt-[5rem] w-full
-          xxxs:px-2 xxs:px-2 xs:px-4 sm:px-4 md:px-5 lg:px-5
-          xxxs:w-full xxs:w-full xs:w-full sm:w-full md:w-5/6 lg:w-5/6 mx-auto
-          ">
+        <DashboardPageLayout id="chat" className="pt-5 md:pt-[5rem]">
           <>
           { loading &&
             <Loading
@@ -83,16 +86,17 @@ export const Chat: React.FC<Props> = ({setSelectedPage, theme }: Props) => {
               }
 
               { !conversation &&
-                <div className="flex justify-center p-[70px]">
-                  <button onClick={() => setIsOpenAside(true)} className={`px-3 py-1 ${theme?.general.primaryBgColor} ${theme?.general.primaryBgColorHover} text-white rounded-lg`}>
-                    Crear Nueva Conversación
+                <div className="flex flex-col items-center gap-4 py-16">
+                  <p className="text-gray-400">Todavía no tenés ninguna conversación.</p>
+                  <button onClick={() => setIsOpenAside(true)} className={`px-4 py-2 ${theme?.general.primaryBgColor} ${theme?.general.primaryBgColorHover} text-white rounded-lg`}>
+                    Crear nueva conversación
                   </button>
                 </div>
               }
             </>
           }
           </>
-        </section>
+        </DashboardPageLayout>
       </Scroller>
       <CreateConversationForm
         userStored={userStored}

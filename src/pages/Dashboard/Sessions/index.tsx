@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 // import { AuthContext } from '@/AuthProviderManager';
 import { useGetSessions } from '@/hooks/useGetSessions'
 import Scroller from '@/components/Scroller/Scroller'
+import DashboardPageLayout from '@/components/DashboardPageLayout'
 import CollapsibleSection from '@/components/CollapsibleSection'
 import { customDateFormat } from '@/libs/utils/TimeUtils'
 import { Loading } from '@/components/Loading'
@@ -31,10 +32,7 @@ export const Sessions: React.FC<Props> = ({setSelectedPage, theme}: Props) => {
 
   return (
     <Scroller scrollerName='sessions'>
-      <section id="sessions" className="
-        xxxs:px-1 xxs:px-1 xs:px-4 sm:px-4 md:px-5 lg:px-5
-        xxxs:w-full xxs:w-full xs:w-full sm:w-full md:w-5/6 lg:w-5/6 mx-auto
-      ">
+      <DashboardPageLayout id="sessions">
         <div className="text-center my-5">
           <h2>Sesiónes</h2>
         </div>
@@ -49,8 +47,8 @@ export const Sessions: React.FC<Props> = ({setSelectedPage, theme}: Props) => {
         { !loading &&
           <>
             { sessions?.length < 1 &&
-              <div>
-                No hay Sesiónes
+              <div className="flex flex-col items-center gap-2 py-16 text-gray-400">
+                <p>No hay sesiones registradas todavía.</p>
               </div>
             }
 
@@ -63,31 +61,29 @@ export const Sessions: React.FC<Props> = ({setSelectedPage, theme}: Props) => {
                     theme={theme}
                   >
                     <>
-                      <div className="flex flex-row gap-10">
-                        <div className="flex flex-col">
-                          <span><strong>Edad</strong>: {session.age} </span>
-                          <span><strong>Altura</strong>: {session.height} </span>
-                          <span><strong>Peso</strong>: {session.weight} </span>
-                          <span><strong>IMC</strong>: {session.imc} </span>
-                        </div>
-                        <div className="flex flex-col">
-                          { session.hip && <span><strong>Cadera</strong>: {session.hip}</span>}
-                          { session.waist && <span><strong>Cintura</strong>: {session.waist}</span>}
-                          { session.highAbdomen && <span><strong>Abdomen Alto</strong>: {session.highAbdomen}</span>}
-                          { session.lowAbdomen && <span><strong>Abdomen Bajo</strong>: {session.lowAbdomen}</span>}
-                        </div>
-                        <div className="flex flex-col">
-                          { session.bodyGrease && <span><strong>Grasa Corporal</strong>: {session.bodyGrease}</span>}
-                          { session.visceralGrease && <span><strong>Grasa Visceral</strong>: {session.visceralGrease}</span>}
-                          { session.idealWeight && <span><strong>Peso Ideal Muscular</strong>: {session.idealWeight}</span>}
-                          { session.muscleMass && <span><strong>Masa Muscular</strong>: {session.muscleMass}</span>}
-                        </div>
-
-                        <div className="flex flex-col">
-                          { session.boneMass && <span><strong>Masa Osea</strong>: {session.boneMass}</span>}
-                          { session.physicalComplexion && <span><strong>Complexion Fisica</strong>: {session.physicalComplexion}</span>}
-                          { session.activityFactor && <span><strong>Factor Actvidad</strong>: {session.activityFactor.name}</span>}
-                        </div>
+                      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+                        {[
+                          { label: 'Edad', value: session.age },
+                          { label: 'Altura', value: session.height },
+                          { label: 'Peso', value: session.weight },
+                          { label: 'IMC', value: session.imc },
+                          { label: 'Cadera', value: session.hip },
+                          { label: 'Cintura', value: session.waist },
+                          { label: 'Abdomen Alto', value: session.highAbdomen },
+                          { label: 'Abdomen Bajo', value: session.lowAbdomen },
+                          { label: 'Grasa Corporal', value: session.bodyGrease },
+                          { label: 'Grasa Visceral', value: session.visceralGrease },
+                          { label: 'Peso Ideal Muscular', value: session.idealWeight },
+                          { label: 'Masa Muscular', value: session.muscleMass },
+                          { label: 'Masa Osea', value: session.boneMass },
+                          { label: 'Complexión Física', value: session.physicalComplexion },
+                          { label: 'Factor Actividad', value: session.activityFactor?.name },
+                        ].filter((stat) => stat.value !== undefined && stat.value !== null && stat.value !== '').map((stat) => (
+                          <div key={stat.label} className="rounded-lg bg-gray-50 p-3">
+                            <div className="text-xs font-semibold uppercase tracking-wide text-gray-400">{stat.label}</div>
+                            <div className="text-base text-gray-800">{stat.value}</div>
+                          </div>
+                        ))}
                       </div>
 
                       { session?.diet?.dietMealWeeks &&
@@ -136,7 +132,7 @@ export const Sessions: React.FC<Props> = ({setSelectedPage, theme}: Props) => {
             }
           </>
         }
-      </section>
+      </DashboardPageLayout>
     </Scroller>
   );
 }

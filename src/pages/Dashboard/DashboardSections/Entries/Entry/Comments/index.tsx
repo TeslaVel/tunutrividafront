@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import MessageBubble from '@/components/MessageBubble'
 
 // types
 import { FullUserType, CommentType, ThemeType } from '@/types'
@@ -13,19 +14,20 @@ type Props = {
 }
 
 export const Comments: React.FC<Props> = ({sentComments, entry_id, comments, userStored, theme, loading}: Props) => {
-    const inserEmoji = (emoji: string) => {
-      const inputField = document.getElementById('messageInput') as HTMLInputElement;
-
-      if (inputField !== null) {
-        inputField.value += ` ${emoji}`;
-      }
-    }
-
     const {
       register,
       getValues,
+      setValue,
       formState: { errors },
     } = useForm();
+
+    // Antes escribía directo a document.getElementById('messageInput').value;
+    // ahora pasa por setValue de react-hook-form, que es la fuente de
+    // verdad real del campo.
+    const inserEmoji = (emoji: string) => {
+      const current = getValues('message') || '';
+      setValue('message', `${current} ${emoji}`, { shouldDirty: true, shouldValidate: true });
+    }
 
     const onSubmit = async (e: React.SyntheticEvent): Promise<void> => {
       e.preventDefault();
@@ -38,22 +40,14 @@ export const Comments: React.FC<Props> = ({sentComments, entry_id, comments, use
       <div id='content-comments' className="flex flex-col w-full overflow-hidden xxxs:h-[250px] sm:h-[320px]" style={{borderRadius: '0 0 20px 20px'}}>
         <div id='content-comments-scroll'  className={`overflow-y-scroll ${theme?.entry.thirdBgColor} border border-gray-20 px-2`}>
           {comments?.map((comment: CommentType, index: number) => (
-            (comment.user.id === userStored.id
-              ? <div className="w-full flex items-center justify-end py-2 " key={`comment_${comment.id}-${index}`}>
-                  <div className="flex-grow flex flex-col items-end mr-2">
-                    <strong>{comment.user.fullName}</strong>
-                    <p className="text-gray-500 mr-2">{comment.message}</p>
-                  </div>
-                  <div className="w-[3rem] h-[3rem] bg-gray-300 rounded-full  flex items-center justify-center">{comment.user.initials}</div>
-                </div>
-              :  <div className="flex items-center py-2 " key={`comment_${comment.id}-${index}`}>
-                  <div className="w-[3.5rem] h-[3rem] bg-gray-300 rounded-full mr-4  flex items-center justify-center">{comment.user.initials}</div>
-                  <div className='w-full flex-grow flex flex-col items-start mr-2'>
-                    <strong>{comment.user.fullName}</strong>
-                    <p className="text-gray-500">{comment.message}</p>
-                  </div>
-                </div>
-            )
+            <MessageBubble
+              key={`comment_${comment.id}-${index}`}
+              isOwn={comment.user.id === userStored.id}
+              initials={comment.user.initials}
+              fullName={comment.user.fullName}
+              message={comment.message}
+              theme={theme}
+            />
           ))}
         </div>
           <form

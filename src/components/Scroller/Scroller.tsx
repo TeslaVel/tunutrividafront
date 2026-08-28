@@ -16,18 +16,20 @@ const Scroller: React.FC<Props> = ({
   const headerHeight = scrollerHeight ?? '40'
   const withHeader = header !== null
   const ztyle = withHeader
-    ? {
-      height: `calc(100vh - ${headerHeight}px)`,
-      marginTop: `${headerHeight}px`
-    }
-    : {
-      height: '100vh'
-    }
+    ? { height: `calc(100vh - ${headerHeight}px)` }
+    : { height: '100vh' }
 
   return (
     <>
       { header &&
-        <div className="topbar topbar gap-5 flex mx-5 fixed" style={{height: `${headerHeight}px`}}>
+        // Antes usaba `fixed`, que saca el topbar del flujo del flex layout
+        // y no respeta el ancho variable de la sidebar (55px/250px) — con
+        // `sticky` se queda en su posición normal (ya corregida por el
+        // flex padre) y además se pega arriba al hacer scroll.
+        <div
+          className="topbar sticky top-0 z-20 flex w-full items-center gap-5 border-b border-gray-200 bg-white px-5 shadow-sm"
+          style={{height: `${headerHeight}px`}}
+        >
           {header}
         </div>
       }

@@ -17,6 +17,10 @@ dist-ssr
 .env.*
 !.env.example
 
+# pids/logs de .start.sh / .stop.sh
+/.pids
+/log
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

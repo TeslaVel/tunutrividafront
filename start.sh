@@ -17,7 +17,9 @@ if ! command -v node >/dev/null 2>&1 && [ -s "$HOME/.nvm/nvm.sh" ]; then
 fi
 
 echo "--> Iniciando Vite (log: log/vite.log)"
-nohup npm run dev > log/vite.log 2>&1 &
+# setsid + PID negativo en stop.sh: npm lanza un proceso hijo (vite) y
+# matar solo el PID de npm lo dejaba huérfano corriendo en el puerto.
+setsid nohup npm run dev > log/vite.log 2>&1 &
 echo $! > .pids/vite.pid
 
 sleep 2

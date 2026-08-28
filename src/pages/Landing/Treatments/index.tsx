@@ -1,21 +1,20 @@
-import { SelectedPage, ClassType, Colors } from "@/types";
-import cavitation from "@/assets/ntv/cavitation1.png";
-import radiofrecuencia from "@/assets/ntv/radiofrecuencia1.png";
-import vacumterapia from "@/assets/ntv/vacumterapia1.png";
-import lipolaser from "@/assets/ntv/lipolaser1.png";
-import auriculoterapia from "@/assets/ntv/auriculoterapia.png";
-import ondasrusas from "@/assets/ntv/ondasrusas.png";
-import masajereductor from "@/assets/ntv/masajereductor.png";
+import { SelectedPage, ClassType } from "@/types";
+import cavitation from "@/assets/ntv/cavitation1.webp";
+import radiofrecuencia from "@/assets/ntv/radiofrecuencia1.webp";
+import vacumterapia from "@/assets/ntv/vacumterapia1.webp";
+import lipolaser from "@/assets/ntv/lipolaser1.webp";
+import auriculoterapia from "@/assets/ntv/auriculoterapia.webp";
+import ondasrusas from "@/assets/ntv/ondasrusas.webp";
+import masajereductor from "@/assets/ntv/masajereductor.webp";
 import { motion } from "framer-motion";
 import HText from "@/components/Compound/Title/HText";
-// import Class from "./Class";
 import Carousel from "@/components/Carousel";
 
 const images: Array<ClassType> = [
   {
     name: "Auriculoterapia",
     description:
-      "",
+      "Técnica que estimula puntos específicos del oído para apoyar el control del apetito y el equilibrio general del cuerpo.",
     url: auriculoterapia,
   },
   {
@@ -61,19 +60,15 @@ type Props = {
 
 export const Treatments: React.FC<Props> = ({ setSelectedPage }: Props) => {
   return (
-    <section id="treatments" className="
-      xxxs:h-full xxs:h-full xs:h-full sm:h-full
-      xxxs:py-[7rem] xxs:py-[7rem] xs:py-[7rem] sm:py-[7rem]
-      md::min-h-[800px] lg:min-h-[800px]
-      md::h-[100vh] lg:h-[100vh]
-      flex flex-col justify-center "
-    style={{background:`linear-gradient(30deg, ${Colors.PRIMARYFEMALE20} 0%, ${Colors.PRIMARYFEMALE100} 100%)`}}
+    <section
+      id="treatments"
+      className="bg-gradient-to-br from-landing-primary to-landing-primary-dark py-20 md:py-28"
     >
       <motion.div
         onViewportEnter={() => setSelectedPage(SelectedPage.Treatments)}
       >
         <motion.div
-          className="mx-auto w-5/6"
+          className="mx-auto w-5/6 max-w-6xl"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.5 }}
@@ -83,14 +78,14 @@ export const Treatments: React.FC<Props> = ({ setSelectedPage }: Props) => {
             visible: { opacity: 1, x: 0 },
           }}
         >
-          <div className="md:w-3/5 text-white-01">
-            <HText>Nuestros Tratamientos</HText>
-            <p className="py-5 text-[20px]">
+          <div className="text-white md:w-3/5">
+            <HText size={2} classes="text-white">Nuestros Tratamientos</HText>
+            <p className="py-5 text-lg text-white/90">
               Ofrecemos los mejores tratamientos de la vanguardia.
             </p>
           </div>
         </motion.div>
-        <div className="mt-10 h-[400px] mx-auto w-5/6">
+        <div className="mx-auto mt-10 w-5/6 max-w-6xl">
           <Carousel
             withDescription
             withTitle

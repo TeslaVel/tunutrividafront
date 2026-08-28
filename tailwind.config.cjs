@@ -67,8 +67,8 @@ module.exports = {
             "40": "rgb(233, 178, 233)",
             "30": "rgb(244, 188, 244)",
             "20": "rgb(255, 198, 255)",
-            "10": "rgb(266, 208, 266)",
-            "05": "rgb(277, 218, 277)",
+            "10": "rgb(255, 208, 255)",
+            "05": "rgb(255, 218, 255)",
             "01": "rgb(245, 233, 245)",
           }
         },
@@ -95,17 +95,29 @@ module.exports = {
           "300": "rgb(144, 50, 106)",
           "200": "rgb(160, 59, 115)",
           "100": "rgb(176, 68, 124)",
-          "50": "rgb(192, 77, 133)",
           "50": "rgb(208, 86, 142)",
           "40": "rgb(224, 95, 151)",
           "30": "rgb(240, 104, 160)",
-          "20": "rgb(256, 113, 169)",
-          "10": "rgb(272, 122, 178)",
-          "05": "rgb(288, 131, 187)"
+          "20": "rgb(255, 113, 169)",
+          "10": "rgb(255, 122, 178)",
+          "05": "rgb(255, 131, 187)"
         },
         "white-01": "#EEE",
         'rgba-82': 'rgba(243, 189, 229, 0.82)',
-        "gray-purple-10": "rgb(203, 181, 209)"
+        "gray-purple-10": "rgb(203, 181, 209)",
+        // Paleta propia del landing público (no depende del tema por
+        // género, que solo aplica post-login). Misma familia magenta/ciruela
+        // del logo, con valores RGB válidos.
+        "landing": {
+          "primary": "#7A1656",
+          "primary-dark": "#5C0F40",
+          "primary-light": "#C6499A",
+          "accent": "#F2A6C7",
+          "ink": "#2B1220",
+          "muted": "#6B5563",
+          "cream": "#FBF3F8",
+          "overlay": "rgba(43, 18, 32, 0.62)",
+        },
       },
       backgroundImage: (theme) => ({
         "gradient-yellowred":
@@ -126,23 +138,15 @@ module.exports = {
       zIndex: {
       '999': 999,
       },
+      // Extiende (no reemplaza) los breakpoints por defecto de Tailwind:
+      // antes esto vivía como `theme.screens` (hermano de `extend`), lo que
+      // pisaba sm/md/lg/xl/2xl por defecto y eliminaba `2xl` de toda la app.
+      screens: {
+        xxxs: "260px",
+        xxs: "360px",
+        xs: "480px",
+      },
     },
-    screens: {
-      xxxs: "260px",
-      xxs: "360px",
-      xs: "480px",
-      sm: "640px",
-      md: "768px",
-      lg: "1024px",
-      xl: '1280px'
-    },
-  },
-  variants: {
-    extend: {
-      '@layer utilities': ['responsive', 'hover', 'focus'],
-    },
-    background: ['responsive', 'hover', 'focus'],
-    text: ['responsive', 'hover', 'focus'],
   },
 
   plugins: [],

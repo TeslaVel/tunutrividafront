@@ -4,11 +4,8 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import DynamicLogo from './DynamicLogo'
 import LinkAnchor from "@/components/Compound/Links/LinkAnchor";
 import { SelectedPage } from "@/types";
-import useMediaQuery from "@/hooks/useMediaQuery";
 import ActionButton from "@/components/Compound/Buttons/ActionButton";
 import LoginM from "@/pages/Landing/LoginModal";
-
-import { Link } from "react-router-dom";
 
 type Props = {
   isTopOfPage: boolean;
@@ -20,18 +17,21 @@ const Navbar: React.FC<Props> = ({ isTopOfPage, selectedPage, setSelectedPage }:
   const flexBetween = "flex items-center justify-between";
   const [isMenuToggled, setIsMenuToggled] = useState<boolean>(false);
   const [isLoginModalOpen, setLoginModalOpen] = useState<boolean>(false)
-  const isAboveMediumScreens = useMediaQuery("(min-width: 930px)");
-  const sameColor = 'bg-primary-female-700 opacity-80'
+  // Antes esto se decidía con useMediaQuery("(min-width: 930px)"), un
+  // breakpoint que no coincidía con ningún valor de Tailwind. Ahora que
+  // `lg` (1024px) volvió a ser el breakpoint real, se resuelve con clases
+  // responsive puras (hidden lg:flex / lg:hidden) más abajo.
+  const sameColor = 'bg-landing-primary-dark/90'
 
   const termAndPolicies = ['terms', 'policies'].includes(selectedPage)
   const navbarBackground = !isTopOfPage || termAndPolicies ? `${sameColor}` : '';
 
   const buttonBaseColor = `h-[36px] f-size-[14px] ${isTopOfPage
-    ?`${sameColor} hover:bg-primary-female-400 text-white-01`
-    :'bg-primary-female-400 hover:bg-primary-female-700 text-white-01'
+    ?`${sameColor} hover:bg-landing-primary-light text-white`
+    :'bg-landing-primary-light hover:bg-landing-primary-dark text-white'
   }`
-  const anchorBaseColor = `text-[18px] ${isTopOfPage ? 'text-pink-10 hover:text-pink-50' : 'text-white-01 hover:text-pink-30'}`
-  const selectePageColor ='text-[18px] text-pink-50 hover:pink-50'
+  const anchorBaseColor = 'text-[18px] text-white hover:text-landing-accent'
+  const selectePageColor ='text-[18px] font-bold text-landing-accent'
 
   const landingOptions = () => {
     return (
@@ -134,29 +134,26 @@ const Navbar: React.FC<Props> = ({ isTopOfPage, selectedPage, setSelectedPage }:
             <div className={`${flexBetween} w-full gap-10`}>
               {/* LEFT SIDE */}
               <span onClick={() => setSelectedPage(SelectedPage.Home, true)} className="cursor-pointer">
-                <DynamicLogo isTopOfPage={isTopOfPage && !termAndPolicies}/>
+                <DynamicLogo />
               </span>
 
               {/* RIGHT SIDE */}
-              {isAboveMediumScreens ? (
-                <div className={`${flexBetween} w-full`}>
-                  { landingMenu() }
-                </div>
-              ) : (
-                <button
-                  className="rounded-full bg-secondly-female-20 p-2"
-                  onClick={() => setIsMenuToggled(!isMenuToggled)}
-                >
-                  <Bars3Icon className="h-6 w-6 text-white" />
-                </button>
-              )}
+              <div className="hidden w-full items-center justify-between lg:flex">
+                { landingMenu() }
+              </div>
+              <button
+                className="rounded-full bg-landing-primary-light p-2 lg:hidden"
+                onClick={() => setIsMenuToggled(!isMenuToggled)}
+              >
+                <Bars3Icon className="h-6 w-6 text-white" />
+              </button>
             </div>
           </div>
         </div>
 
         {/* MOBILE MENU MODAL */}
-        {!isAboveMediumScreens && isMenuToggled &&
-          <div className={`${sameColor} fixed right-0 bottom-0 z-40 h-full w-[300px] drop-shadow-xl`}>
+        {isMenuToggled &&
+          <div className={`${sameColor} fixed right-0 bottom-0 z-40 h-full w-[300px] drop-shadow-xl lg:hidden`}>
             {/* CLOSE ICON */}
             <div className="flex justify-end p-12">
               <button onClick={() => setIsMenuToggled(!isMenuToggled)}>

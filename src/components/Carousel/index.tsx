@@ -1,12 +1,8 @@
-import React, { useState, useEffect } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import RectangleIcon from '@/components/icons/rectangleIcon'
-
 
 // types
-import { ClassType, Colors } from "@/types";
-import { HexbinSeries } from "react-vis";
+import { ClassType } from "@/types";
 
 interface CarouselProps {
   images: ClassType[];
@@ -90,35 +86,27 @@ const CarouselMulti: React.FC<CarouselProps> = ({
         renderDotsOutside
       >
         {images.map((image, index) => (
-          <div key={index} className="hover:scale-105 hover:rounded-xl transition-transform">
-            <div className="
-              w-full h-full flex flex-col h-[350px] h-min-[250px]
-              rounded-md border-2"
-              style={{
-                backgroundImage: `url(${image.url})`,
-                backgroundSize: 'cover'
-              }}>
-              { withDescription &&
-                <div
-                className="absolute p-5 rounded-lg opacity-0 w-full h-full hover:opacity-[0.8] hover:bg-rgba-82"
-                style={{
-                  height: 'inherit',
-                  width: '',//calc(100% - 1em)
-                  transition: 'all .2s linear'
-                }}>
-                  <p className="text-primary-female-600"
-                  style={{
-                    fontSize: '17px',
-                    textAlign: 'justify',
-                    textJustify: 'inter-word'
-                  }}
-                  >{image.description}</p>
-                </div>
+          // Antes la descripción solo aparecía en :hover (invisible en
+          // touch/mobile). Ahora va siempre visible en un panel debajo de
+          // la imagen, en vez de un overlay oculto.
+          <div
+            key={index}
+            className="flex h-full flex-col overflow-hidden rounded-xl bg-white shadow-md transition-shadow hover:shadow-xl"
+          >
+            <div
+              className="h-48 w-full bg-cover bg-center"
+              style={{ backgroundImage: `url(${image.url})` }}
+            />
+            <div className="flex flex-1 flex-col p-4">
+              { withTitle &&
+                <h3 className="text-center text-lg font-semibold text-landing-ink">{image.name}</h3>
+              }
+              { withDescription && image.description &&
+                <p className="mt-2 max-h-[4.5rem] overflow-hidden text-sm text-landing-muted">
+                  {image.description}
+                </p>
               }
             </div>
-            { withTitle &&
-              <div className="px-2 pt-1 text-white-01"><h3 className="text-lg text-center font-semibold" >{image.name}</h3></div>
-            }
           </div>
         ))}
       </Carousel>

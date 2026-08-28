@@ -8,8 +8,11 @@ for pidfile in .pids/*.pid; do
   pid="$(cat "$pidfile")"
   name="$(basename "$pidfile" .pid)"
   if kill -0 "$pid" 2>/dev/null; then
-    echo "--> Deteniendo $name (pid $pid)"
-    kill "$pid"
+    echo "--> Deteniendo $name (pid $pid, y su grupo de procesos)"
+    # start.sh usa setsid, así que $pid es el líder del grupo: -$pid mata
+    # también a los hijos (ej. el proceso vite que npm lanza) en vez de
+    # dejarlos huérfanos corriendo en el puerto.
+    kill -- "-$pid" 2>/dev/null || kill "$pid"
     stopped_any=true
   else
     echo "--> $name (pid $pid) ya no estaba corriendo"

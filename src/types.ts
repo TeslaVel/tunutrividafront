@@ -29,7 +29,10 @@ export interface GeneralOptions {
 export interface ClassType {
   name: string
   description?: string
-  url: string
+  url?: string
+  price?: string
+  features?: string[]
+  highlighted?: boolean
 }
 
 export interface FullUserType {

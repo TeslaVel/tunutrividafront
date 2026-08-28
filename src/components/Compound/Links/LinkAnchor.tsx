@@ -19,13 +19,15 @@ const LinkAnchor: React.FC<Props> = ({
   selectedPage,
   // toSelect,
   // setSelectedPage,
-  baseColor='',
-  selectePageColor='text-secondly-female-200 hover:text-secondly-female-300',
+  baseColor='text-landing-ink hover:text-landing-primary',
+  selectePageColor='text-landing-primary',
   isAnchor=false,
   action
 }: Props) => {
   const lowerCasePage = url.toLowerCase().replace(/ /g, "") as SelectedPage;
-  const klazz = `cursor-pointer transition duration-500 hover:text-secondly-female-300 ${selectedPage === lowerCasePage ? `${selectePageColor} font-bold` : baseColor} `
+  // El hover ya lo define baseColor/selectePageColor de cada caller; antes
+  // esta clase base pisaba cualquier color que el caller pasara.
+  const klazz = `cursor-pointer transition duration-500 ${selectedPage === lowerCasePage ? `${selectePageColor} font-bold` : baseColor} `
 
   if (!isAnchor) {
     return (

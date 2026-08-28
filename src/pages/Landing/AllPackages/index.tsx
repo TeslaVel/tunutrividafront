@@ -1,24 +1,39 @@
 import HText from "@/components/Compound/Title/HText";
 import { SelectedPage, ClassType } from "@/types";
 import { motion } from "framer-motion";
-import package_1 from "@/assets/ntv/package-1.png";
-import package_2 from "@/assets/ntv/package-2.png";
-import package_3 from "@/assets/ntv/package-3.png";
 import Package from "@/components/Package/Package";
 
+// Datos reales tomados de los flyers promocionales existentes
+// (src/assets/ntv/package-1/2/3.png) — se muestran acá como tarjetas de
+// texto en vez de las imágenes, para que combinen con la paleta nueva del
+// sitio en vez del diseño tipo flyer (corazones/rosa) de esos archivos.
 const pks: Array<ClassType> = [
   {
     name: "Paquete 1",
-    url: package_1,
+    price: "10",
+    features: ["1 sesión de aparatología", "1 sesión de drenaje"],
   },
   {
     name: "Paquete 2",
-    url: package_2,
+    price: "15",
+    features: [
+      "1 sesión de aparatología",
+      "1 sesión de drenaje",
+      "1 sesión de auriculoterapia",
+    ],
   },
   {
     name: "Paquete 3",
-    url: package_3,
-  }
+    price: "20",
+    features: [
+      "1 sesión de aparatología",
+      "1 sesión de drenaje",
+      "1 sesión de auriculoterapia",
+      "Consulta nutricional",
+      "Plan de alimentación",
+    ],
+    highlighted: true,
+  },
 ]
 
 const container = {
@@ -34,19 +49,14 @@ type Props = {
 
 const AllPackages: React.FC<Props> = ({ setSelectedPage }: Props) => {
   return (
-    <section id="packages" className="
-      xxxs:h-full xxs:h-full xs:h-full sm:h-full
-      xxxs:py-[7rem] xxs:py-[7rem] xs:py-[7rem] sm:py-[7rem]
-      md:min-h-[800px] lg:min-h-[800px]
-      lg:h-[100vh] md:h-[100vh]
-      flex flex-col justify-center">
+    <section id="packages" className="bg-white py-20 md:py-28">
       <motion.div
         onViewportEnter={() => setSelectedPage(SelectedPage.Packages)}
-        className="mx-auto w-5/6"
+        className="mx-auto w-5/6 max-w-6xl"
       >
         {/* HEADER */}
         <motion.div
-          className="md:my-5 md:w-3/5"
+          className="md:w-3/5"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.5 }}
@@ -56,16 +66,15 @@ const AllPackages: React.FC<Props> = ({ setSelectedPage }: Props) => {
             visible: { opacity: 1, x: 0 },
           }}
         >
-          <HText classes='text-pink-500'>Más que una dieta</HText>
-          <p className="px-1 my-5 text-[20px] text-pink-500">
-            Proveemos un tratamiento nutricional adecuado a tu metabolismo y antecedentes y gustos
+          <HText size={2} classes="text-landing-ink">Más que una dieta</HText>
+          <p className="mt-4 text-lg text-landing-muted">
+            Proveemos un tratamiento nutricional adecuado a tu metabolismo, antecedentes y gustos.
           </p>
         </motion.div>
 
-        {/* BENEFITS */}
+        {/* PAQUETES */}
         <motion.div
-          className="mt-5 items-center justify-between gap-5 md:flex-row flex
-          xxxs:flex-col xxs:flex-col xs:flex-col"
+          className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 md:gap-8"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.5 }}
@@ -73,10 +82,12 @@ const AllPackages: React.FC<Props> = ({ setSelectedPage }: Props) => {
         >
           {pks.map((pack: ClassType) => (
             <Package
-              classes=""
               key={pack.name}
               name={pack.name}
-              url={pack.url}
+              description={pack.description}
+              price={pack.price}
+              features={pack.features}
+              highlighted={pack.highlighted}
               setSelectedPage={setSelectedPage}
             />
           ))}
